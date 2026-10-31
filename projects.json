@@ -1,0 +1,33 @@
+{
+  "title": "SeeCode 分析档案",
+  "description": "用 SeeCode 的 45 种交互图表，为开源项目建立可浏览的结构解剖档案。每份分析是一个独立子项目，可随时增补。",
+  "projects": [
+    {
+      "id": "deepseek-harness-analysis",
+      "name": "DeepSeek Harness",
+      "upstream": "deepseek-ai/deepseek-harness",
+      "upstreamUrl": "https://github.com/deepseek-ai/deepseek-harness",
+      "repoUrl": "https://github.com/ruijh/deepseek-harness-analysis",
+      "description": "对 deepseek-ai/deepseek-harness 的全景解读，覆盖架构、部署、依赖与 UML 类结构。",
+      "added": "2026-10-31"
+    },
+    {
+      "id": "deer-flow-analysis",
+      "name": "DeerFlow",
+      "upstream": "bytedance/deer-flow",
+      "upstreamUrl": "https://github.com/bytedance/deer-flow",
+      "repoUrl": "https://github.com/ruijh/deer-flow-analysis",
+      "description": "对 bytedance/deer-flow 深度研究框架的全景解读，45 种图表类型逐一覆盖。",
+      "added": "2026-10-31"
+    },
+    {
+      "id": "cubesandbox-analysis",
+      "name": "CubeSandbox",
+      "upstream": "TencentCloud/CubeSandbox",
+      "upstreamUrl": "https://github.com/TencentCloud/CubeSandbox",
+      "repoUrl": "https://github.com/ruijh/cubesandbox-analysis",
+      "description": "对 TencentCloud/CubeSandbox 的全景解读，45 种核心图表类型加变体。",
+      "added": "2026-11-01"
+    }
+  ]
+}

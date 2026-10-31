@@ -1,0 +1,9 @@
+[submodule "projects/deepseek-harness-analysis"]
+	path = projects/deepseek-harness-analysis
+	url = https://github.com/ruijh/deepseek-harness-analysis
+[submodule "projects/deer-flow-analysis"]
+	path = projects/deer-flow-analysis
+	url = https://github.com/ruijh/deer-flow-analysis
+[submodule "projects/cubesandbox-analysis"]
+	path = projects/cubesandbox-analysis
+	url = https://github.com/ruijh/cubesandbox-analysis
