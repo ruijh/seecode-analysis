@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>dsh-superagent · 一个仓库的超级代理 · SeeCode 分析演示</title>
+<style>
+:root{--cy:#22d3ee;--cy2:#60a5fa;--bl:#3b82f6;--bg:#050b20;--ink:#dbeafe;--muted:#8aa4d8}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);overflow:hidden;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif}
+#cv{position:fixed;inset:0;width:100%;height:100%;display:block}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;
+  padding:16px 22px 16px;background:linear-gradient(180deg,transparent,rgba(3,8,24,.9));transition:opacity .35s}
+body.idle #bar{opacity:0}
+body.idle{cursor:none}
+body.noui #bar{display:none}
+.btn{appearance:none;border:1px solid rgba(147,197,253,.25);background:rgba(34,211,238,.08);color:#e0f2fe;border-radius:10px;
+  height:36px;min-width:36px;padding:0 10px;font:600 13px/1 inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none}
+.btn:hover,.btn:focus-visible{background:rgba(34,211,238,.22);border-color:rgba(34,211,238,.75);outline:none}
+.btn svg{width:18px;height:18px;fill:currentColor}
+#time{font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#bae6fd;min-width:100px;text-align:center;flex:none}
+#chap{font-size:13px;color:#a5f3fc;min-width:190px;white-space:nowrap;flex:none}
+#track{position:relative;flex:1;height:30px;cursor:pointer;touch-action:none;min-width:60px}
+#track .rail{position:absolute;left:0;right:0;top:13px;height:4px;border-radius:4px;background:rgba(147,197,253,.18)}
+#track .fill{position:absolute;left:0;top:13px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--bl),var(--cy))}
+#track .knob{position:absolute;top:8px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(34,211,238,.35)}
+#track .tick{position:absolute;top:9px;width:2px;height:12px;margin-left:-1px;background:rgba(186,230,253,.45);border-radius:2px}
+#tip{position:absolute;bottom:32px;transform:translateX(-50%);background:rgba(8,18,42,.96);border:1px solid rgba(96,165,250,.35);
+  padding:4px 9px;border-radius:7px;font-size:12px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s}
+#track:hover #tip{opacity:1}
+#start{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  text-align:center;padding:16px;background:radial-gradient(960px 560px at 50% 42%,rgba(29,78,216,.45),rgba(3,7,20,.95) 72%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#start.hide{display:none}
+#start h1{margin:0;font-size:clamp(28px,5vw,58px);letter-spacing:.05em;color:#fff;line-height:1.18}
+#start h1 span{color:var(--cy)}
+#start p{margin:0;color:#c7ddf8;font-size:clamp(14px,1.7vw,19px);max-width:860px;line-height:1.7}
+#go{appearance:none;border:0;cursor:pointer;margin-top:8px;padding:15px 32px;border-radius:999px;font:700 clamp(16px,1.8vw,19px)/1 inherit;color:#04222e;
+  background:linear-gradient(135deg,#a5f3fc,#22d3ee 50%,#3b82f6);box-shadow:0 10px 44px -8px rgba(34,211,238,.7),inset 0 1px 0 rgba(255,255,255,.6)}
+#go:hover{filter:brightness(1.08)}
+#go:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#start small{color:#7d9bd4;font-size:13px;line-height:1.9}
+#start kbd{font:600 11px ui-monospace,Menlo,monospace;border:1px solid rgba(147,197,253,.35);border-radius:5px;padding:1px 5px;color:#bae6fd}
+@media (max-width:760px){#chap{display:none}#bar{gap:8px;padding:10px 12px}#time{min-width:84px;font-size:12px}}
+</style>
+</head>
+<body>
+<canvas id="cv" aria-label="dsh-superagent SeeCode 分析演示动画"></canvas>
+
+<div id="start">
+  <h1><span>dsh-superagent</span><br>一个仓库的超级代理 · SeeCode 分析演示</h1>
+  <p>监听 GitHub / 飞书 → 策略授权 → 开 Ticket → Agent 会话执行 → 回复原对话。基于 SeeCode 49 张分析图（结构 / 流程 / 数据 / 组织 / 度量），每张图：先动画讲结论，再放大看原树。</p>
+  <button id="go" type="button">▶ 开始播放（含配乐与音效）</button>
+  <small><span id="durLen"></span> · 画面与声音由代码实时生成（Canvas 2D + Web Audio）· 图表以官方导出 PNG 截图嵌入<br>
+    需与 <code>docs/</code> 目录同部署 · 在线交互版：<code>ruijh.github.io/dsh-superagent-prototype-analysis</code><br>
+    <kbd>空格</kbd> 暂停 · <kbd>←</kbd><kbd>→</kbd> 快退/快进 5 秒 · <kbd>[</kbd><kbd>]</kbd> 切换章节 · <kbd>F</kbd> 全屏 · <kbd>M</kbd> 静音</small>
+</div>
+
+<div id="bar">
+  <button class="btn" id="bPlay" type="button" aria-label="播放/暂停"><svg viewBox="0 0 24 24" id="icoPlay"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+  <button class="btn" id="bRestart" type="button" aria-label="从头播放"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+  <span id="time">00:00 / 00:00</span>
+  <div id="track"><div class="rail"></div><div class="fill"></div><div class="knob"></div><div id="tip"></div></div>
+  <span id="chap"></span>
+  <button class="btn" id="bMute" type="button" aria-label="静音"><svg viewBox="0 0 24 24" id="icoVol"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
+  <button class="btn" id="bFull" type="button" aria-label="全屏"><svg viewBox="0 0 24 24"><path d="M4 9V4h5v2H6v3H4zm10-5h6v5h-2V6h-4V4zM4 15h2v3h3v2H4v-5zm14 3v-3h2v5h-6v-2h4z"/></svg></button>
+</div>
+
+<script>
+(()=>{
+'use strict';
+/* =====================================================================
+   dsh-superagent · SeeCode 分析演示影片
+   每张重点分析图一个场景：先用 Canvas 动画讲结论，再用窗框放大展示官方导出 PNG。
+   画面：Canvas 2D 时间纯函数；声音：Web Audio 实时合成。
+   ===================================================================== */
+const W=1920,H=1080,BPM=100,BEAT=60/BPM,BAR=BEAT*4,STEP=BEAT/4,TAU=Math.PI*2;
+const clamp=(v,a=0,b=1)=>v<a?a:v>b?b:v;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const inv=(a,b,v)=>clamp((v-a)/(b-a));
+const fract=x=>x-Math.floor(x);
+const hash=n=>fract(Math.sin(n*127.1+311.7)*43758.5453123);
+const E={
+  io:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,
+  o:t=>1-Math.pow(1-t,3),
+  o5:t=>1-Math.pow(1-t,5),
+  i:t=>t*t*t,
+  back:t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);},
+  el:t=>t<=0?0:t>=1?1:Math.pow(2,-10*t)*Math.sin((t*10-.75)*TAU/3)+1,
+};
+const pulse=(t,a,d)=>t<a?0:Math.exp(-(t-a)/d);
+const win=(t,a,b,f=.35)=>Math.min(inv(a,a+f,t),1-inv(b-f,b,t));
+function rgba(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+const fmtN=n=>Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+function ssmooth(q){return q*q*(3-2*q);}
+
+/* ---------------- canvas ---------------- */
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const buf=document.createElement('canvas'),bctx=buf.getContext('2d');
+let DPR=1,SC=1,OX=0,OY=0;
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  cv.width=buf.width=Math.max(2,Math.round(innerWidth*DPR));
+  cv.height=buf.height=Math.max(2,Math.round(innerHeight*DPR));
+  SC=Math.min(cv.width/W,cv.height/H);OX=(cv.width-W*SC)/2;OY=(cv.height-H*SC)/2;dirty=true;
+}
+
+/* ---------------- text & shapes ---------------- */
+const FCN='"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC",sans-serif';
+const FM='"JetBrains Mono","SFMono-Regular",Menlo,Consolas,"Noto Sans Mono CJK SC","Noto Sans CJK SC",monospace';
+function font(g,size,w=600,mono=false){g.font=`${w} ${size}px ${mono?FM:FCN}`;}
+function text(g,s,x,y,o={}){
+  font(g,o.size||36,o.w||600,o.mono);
+  g.save();
+  g.textAlign=o.align||'center';g.textBaseline=o.base||'middle';
+  if(o.a!=null)g.globalAlpha*=clamp(o.a);
+  if(o.glow){g.shadowColor=o.gc||o.c||'#fff';g.shadowBlur=o.glow;}
+  if(o.stroke){g.lineJoin='round';g.lineWidth=o.stroke;g.strokeStyle=o.sc||'rgba(0,0,0,.6)';g.strokeText(s,x,y);}
+  g.fillStyle=o.c||'#fff';g.fillText(s,x,y);
+  g.restore();
+}
+function rr(g,x,y,w,h,r){
+  g.beginPath();
+  if(g.roundRect)g.roundRect(x,y,w,h,Math.min(r,w/2,h/2));
+  else{g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+}
+function panel(g,x,y,w,h,o={}){
+  g.save();if(o.a!=null)g.globalAlpha*=clamp(o.a);
+  rr(g,x,y,w,h,o.r??16);
+  if(o.shadow!==false){g.shadowColor='rgba(0,0,0,.5)';g.shadowBlur=26;g.shadowOffsetY=8;}
+  const fill=o.fill||(o.light?'rgba(238,246,255,.97)':'rgba(9,20,48,.86)');
+  if(o.grad){const gr=g.createLinearGradient(x,y,x,y+h);gr.addColorStop(0,o.grad[0]);gr.addColorStop(1,o.grad[1]);g.fillStyle=gr;}
+  else g.fillStyle=fill;g.fill();
+  g.shadowColor='transparent';g.shadowBlur=0;g.shadowOffsetY=0;
+  if(o.stroke!==false){g.lineWidth=o.lw||2;g.strokeStyle=o.stroke||'rgba(96,165,250,.34)';g.stroke();}
+  g.restore();
+}
+function brackets(g,x,y,w,h,c='rgba(34,211,238,.75)',lw=3,L=20){
+  g.save();g.strokeStyle=c;g.lineWidth=lw;g.lineCap='round';
+  g.beginPath();
+  g.moveTo(x+L,y);g.lineTo(x,y);g.lineTo(x,y+L);
+  g.moveTo(x+w-L,y);g.lineTo(x+w,y);g.lineTo(x+w,y+L);
+  g.moveTo(x+L,y+h);g.lineTo(x,y+h);g.lineTo(x,y+h-L);
+  g.moveTo(x+w-L,y+h);g.lineTo(x+w,y+h);g.lineTo(x+w,y+h-L);
+  g.stroke();g.restore();
+}
+function pill(g,s,x,y,o={}){
+  const size=o.size||24;font(g,size,o.w||700,o.mono);
+  const tw=g.measureText(s).width,ph=size*1.62,pw=tw+size*1.2;
+  const x0=o.align==='left'?x:o.align==='right'?x-pw:x-pw/2;
+  g.save();if(o.a!=null)g.globalAlpha*=clamp(o.a);
+  rr(g,x0,y-ph/2,pw,ph,ph/2);g.fillStyle=o.bg||'rgba(34,211,238,.15)';g.fill();
+  if(o.bd){g.lineWidth=2;g.strokeStyle=o.bd;g.stroke();}
+  g.fillStyle=o.c||'#a5f3fc';g.textAlign='center';g.textBaseline='middle';g.fillText(s,x0+pw/2,y+size*.05);
+  g.restore();return pw;
+}
+function wrapText(g,s,maxW){const out=[];let line='';for(const ch of s){if(line&&g.measureText(line+ch).width>maxW){out.push(line);line=ch;}else line+=ch;}if(line)out.push(line);return out;}
+const GLC=new Map();
+function glowImg(c){
+  let im=GLC.get(c);if(im)return im;
+  im=document.createElement('canvas');im.width=im.height=128;const x=im.getContext('2d');
+  const gr=x.createRadialGradient(64,64,0,64,64,64);
+  gr.addColorStop(0,rgba(c,1));gr.addColorStop(.2,rgba(c,.55));gr.addColorStop(.5,rgba(c,.16));gr.addColorStop(1,rgba(c,0));
+  x.fillStyle=gr;x.fillRect(0,0,128,128);GLC.set(c,im);return im;
+}
+function glow(g,x,y,r,c,a=1){if(a<=.003||r<=0)return;g.save();g.globalCompositeOperation='lighter';g.globalAlpha*=Math.min(a,1);g.drawImage(glowImg(c),x-r,y-r,r*2,r*2);g.restore();}
+function ring(g,x,y,t,t0,dur,R,c,lw=6){const p=inv(t0,t0+dur,t);if(p<=0||p>=1)return;g.save();g.globalAlpha*=(1-p);g.strokeStyle=c;g.lineWidth=lw*(1-p)+1;g.beginPath();g.arc(x,y,R*E.o(p),0,TAU);g.stroke();g.restore();}
+function burst(g,x,y,t,t0,n,sp,cols,o={}){
+  const age=t-t0,life=o.life||1.2;if(age<0||age>life)return;const ba=g.globalAlpha;
+  for(let i=0;i<n;i++){
+    const a=hash(i*3.7+t0)*TAU,v=sp*(.3+.7*hash(i*1.3+t0)),k=1-Math.exp(-age*3.2);
+    const px=x+Math.cos(a)*v*k,py=y+Math.sin(a)*v*k+(o.grav||0)*age*age,s=(o.size||8)*(1-age/life*.5);
+    g.globalAlpha=ba*(1-age/life);g.fillStyle=cols[i%cols.length];
+    if(o.rect){g.save();g.translate(px,py);g.rotate(age*7+i);g.fillRect(-s/2,-s/4,s,s/2);g.restore();}
+    else g.fillRect(px-s/2,py-s/2,s,s);
+  }
+  g.globalAlpha=ba;
+}
+function charsIn(g,str,x,y,t,t0,o={}){
+  const size=o.size||80;font(g,size,o.w||900);
+  const chars=[...str],ws=chars.map(c=>g.measureText(c).width),sp=o.sp||0;
+  const total=ws.reduce((a,b)=>a+b,0)+sp*(chars.length-1);let cx=x-total/2;
+  chars.forEach((c,i)=>{
+    const st=t0+i*(o.st||.07),p=inv(st,st+(o.d||.5),t);
+    if(p>0){
+      const k=E.back(p);g.save();g.translate(cx+ws[i]/2,y+(1-E.o(p))*(o.dy??-60));g.scale(k,k);g.globalAlpha*=clamp(p*2);
+      if(o.grad){const gr=g.createLinearGradient(0,-size/2,0,size/2);gr.addColorStop(0,o.grad[0]);gr.addColorStop(1,o.grad[1]);g.fillStyle=gr;}else g.fillStyle=o.c||'#fff';
+      if(o.glow){g.shadowColor=o.gc;g.shadowBlur=o.glow;}
+      g.textAlign='center';g.textBaseline='middle';g.fillText(c,0,0);g.restore();
+    }
+    cx+=ws[i]+sp;
+  });
+}
+function check(g,x,y,s,c,p=1){g.save();g.strokeStyle=c;g.lineWidth=s*.18;g.lineCap='round';g.lineJoin='round';g.beginPath();const pts=[[-.42,0],[-.12,.3],[.45,-.35]];const n=p*2;g.moveTo(x+pts[0][0]*s,y+pts[0][1]*s);for(let i=1;i<=2;i++){const q=clamp(n-(i-1));if(q<=0)break;const a=pts[i-1],b=pts[i];g.lineTo(x+lerp(a[0],b[0],q)*s,y+lerp(a[1],b[1],q)*s);}g.stroke();g.restore();}
+function cross(g,x,y,s,c){g.save();g.strokeStyle=c;g.lineWidth=s*.18;g.lineCap='round';g.beginPath();g.moveTo(x-s*.35,y-s*.35);g.lineTo(x+s*.35,y+s*.35);g.moveTo(x+s*.35,y-s*.35);g.lineTo(x-s*.35,y+s*.35);g.stroke();g.restore();}
+function arrow(g,x1,y1,x2,y2,c,w=4,o={}){
+  g.save();g.strokeStyle=c;g.fillStyle=c;g.lineWidth=w;g.lineCap='round';g.lineJoin='round';
+  if(o.a!=null)g.globalAlpha*=clamp(o.a);
+  if(o.dash)g.setLineDash(o.dash);g.lineDashOffset=o.off||0;
+  g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();g.setLineDash([]);
+  if(o.head!==false){const a=Math.atan2(y2-y1,x2-x1),hs=o.hs||16;
+    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-Math.cos(a-.45)*hs,y2-Math.sin(a-.45)*hs);g.lineTo(x2-Math.cos(a+.45)*hs,y2-Math.sin(a+.45)*hs);g.closePath();g.fill();}
+  g.restore();
+}
+function cubic(g,p0,p1,p2,p3,c,w,o={}){
+  g.save();g.strokeStyle=c;g.lineWidth=w;g.lineCap='round';if(o.a!=null)g.globalAlpha*=clamp(o.a);if(o.dash)g.setLineDash(o.dash);g.lineDashOffset=o.off||0;
+  g.beginPath();g.moveTo(p0[0],p0[1]);g.bezierCurveTo(p1[0],p1[1],p2[0],p2[1],p3[0],p3[1]);g.stroke();g.restore();
+}
+function cubicPt(p0,p1,p2,p3,q){const u=1-q;return [u*u*u*p0[0]+3*u*u*q*p1[0]+3*u*q*q*p2[0]+q*q*q*p3[0],u*u*u*p0[1]+3*u*u*q*p1[1]+3*u*q*q*p2[1]+q*q*q*p3[1]];}
+function flow(g,p0,p1,p2,p3,t,period,n,o={}){
+  const col=o.c||'#7dd3fc';
+  for(let i=0;i<n;i++){
+    let q=fract(t/period+(o.rev?1:0)+i/n+(o.seed||0));if(o.rev)q=1-q;
+    const P=cubicPt(p0,p1,p2,p3,q),P2=cubicPt(p0,p1,p2,p3,clamp(q+.01)),a=Math.atan2(P2[1]-P[1],P2[0]-P[0]);
+    const s=(o.size||13)*(o.grow?.3+.7*Math.sin(q*Math.PI):1);
+    g.save();g.translate(P[0],P[1]);g.rotate(a);
+    if(o.kind==='packet'){glow(g,0,0,s*2.2,col,.8);rr(g,-s*.7,-s*.6,s*1.4,s*1.2,3);g.fillStyle='#e0f7ff';g.fill();g.fillStyle=col;g.fillRect(-s*.35,-s*.25,s*.7,s*.16);g.fillRect(-s*.35,s*.05,s*.5,s*.16);}
+    else{glow(g,0,0,s*2,col,.8);g.fillStyle='#04142e';rr(g,-s*.45,-s*.5,s*.9,s*.82,2.5);g.fill();g.fillStyle=col;g.fillRect(-s*.22,-s*.22,s*.44,s*.13);g.beginPath();g.moveTo(s*.45,-s*.5);g.lineTo(s*.75,0);g.lineTo(s*.45,s*.5);g.closePath();g.fill();}
+    g.restore();
+  }
+}
+
+/* ---------------- icons（40 单位网格，线性矢量） ---------------- */
+function icon(g,k,x,y,s,c){
+  g.save();g.translate(x,y);g.scale(s/40,s/40);g.strokeStyle=c;g.fillStyle=c;g.lineWidth=3;g.lineCap='round';g.lineJoin='round';
+  switch(k){
+    case 'db':g.beginPath();g.ellipse(0,-12,14,5,0,0,TAU);g.stroke();g.beginPath();g.moveTo(-14,-12);g.lineTo(-14,12);g.ellipse(0,12,14,5,0,Math.PI,0,true);g.lineTo(14,-12);g.stroke();g.beginPath();g.ellipse(0,0,14,5,0,0,Math.PI);g.stroke();break;
+    case 'code':g.beginPath();g.moveTo(-6,-11);g.lineTo(-16,0);g.lineTo(-6,11);g.moveTo(6,-11);g.lineTo(16,0);g.lineTo(6,11);g.moveTo(3,-14);g.lineTo(-3,14);g.stroke();break;
+    case 'chip':g.strokeRect(-10,-10,20,20);g.beginPath();for(const d of [-5,0,5]){g.moveTo(d,-10);g.lineTo(d,-15);g.moveTo(d,10);g.lineTo(d,15);g.moveTo(-10,d);g.lineTo(-15,d);g.moveTo(10,d);g.lineTo(15,d);}g.stroke();g.fillRect(-4,-4,8,8);break;
+    case 'doc':g.beginPath();g.moveTo(-12,-16);g.lineTo(5,-16);g.lineTo(13,-8);g.lineTo(13,16);g.lineTo(-12,16);g.closePath();g.stroke();g.beginPath();g.moveTo(-6,-3);g.lineTo(7,-3);g.moveTo(-6,4);g.lineTo(7,4);g.moveTo(-6,11);g.lineTo(3,11);g.stroke();break;
+    case 'cloud':g.beginPath();g.moveTo(-14,10);g.arc(-12,3,7,Math.PI*.5,Math.PI*1.5);g.arc(-2,-5,10,Math.PI*1.1,Math.PI*1.9);g.arc(11,2,8,Math.PI*1.4,Math.PI*.5);g.closePath();g.stroke();break;
+    case 'shield':g.beginPath();g.moveTo(0,-17);g.lineTo(14,-11);g.lineTo(14,0);g.quadraticCurveTo(13,12,0,18);g.quadraticCurveTo(-13,12,-14,0);g.lineTo(-14,-11);g.closePath();g.stroke();break;
+    case 'shieldCheck':g.beginPath();g.moveTo(0,-17);g.lineTo(14,-11);g.lineTo(14,0);g.quadraticCurveTo(13,12,0,18);g.quadraticCurveTo(-13,12,-14,0);g.lineTo(-14,-11);g.closePath();g.stroke();g.beginPath();g.moveTo(-6,-1);g.lineTo(-2,4);g.lineTo(7,-6);g.stroke();break;
+    case 'laptop':g.strokeRect(-13,-13,26,17,2);g.beginPath();g.moveTo(-17,8);g.lineTo(17,8);g.lineTo(14,13);g.lineTo(-14,13);g.closePath();g.stroke();g.beginPath();g.moveTo(-4,10.5);g.lineTo(4,10.5);g.stroke();break;
+    case 'server':rr(g,-15,-15,30,13,2.5);g.stroke();rr(g,-15,2,30,13,2.5);g.stroke();g.beginPath();g.arc(-9,-8.5,1.8,0,TAU);g.arc(-9,8.5,1.8,0,TAU);g.fill();g.beginPath();g.moveTo(-3,-8.5);g.lineTo(9,-8.5);g.moveTo(-3,8.5);g.lineTo(9,8.5);g.stroke();break;
+    case 'lock':g.strokeRect(-11,-2,22,18,3);g.beginPath();g.moveTo(-7,-2);g.lineTo(-7,-9);g.quadraticCurveTo(-7,-16,0,-16);g.quadraticCurveTo(7,-16,7,-9);g.lineTo(7,-2);g.stroke();g.beginPath();g.arc(0,6,2.4,0,TAU);g.fill();g.fillRect(-1,6,2,5);break;
+    case 'book':g.beginPath();g.moveTo(0,-13);g.quadraticCurveTo(-8,-17,-14,-14);g.lineTo(-14,13);g.quadraticCurveTo(-8,10,0,13);g.quadraticCurveTo(8,10,14,13);g.lineTo(14,-14);g.quadraticCurveTo(8,-17,0,-13);g.closePath();g.stroke();g.beginPath();g.moveTo(0,-13);g.lineTo(0,13);g.stroke();break;
+    case 'gear':g.beginPath();for(let i=0;i<8;i++){const a=i/8*TAU;g.moveTo(Math.cos(a)*13,Math.sin(a)*13);g.lineTo(Math.cos(a)*16.5,Math.sin(a)*16.5);}g.stroke();g.beginPath();g.arc(0,0,10.5,0,TAU);g.stroke();g.beginPath();g.arc(0,0,3.5,0,TAU);g.fill();break;
+    case 'radar':g.beginPath();g.arc(0,0,16,0,TAU);g.stroke();g.beginPath();g.arc(0,0,9,0,TAU);g.moveTo(-16,0);g.lineTo(16,0);g.moveTo(0,-16);g.lineTo(0,16);g.stroke();break;
+    case 'bell':g.beginPath();g.moveTo(-11,7);g.quadraticCurveTo(-13,-2,-8,-7);g.quadraticCurveTo(-8,-15,0,-15);g.quadraticCurveTo(8,-15,8,-7);g.quadraticCurveTo(13,-2,11,7);g.closePath();g.stroke();g.beginPath();g.moveTo(-3,11);g.quadraticCurveTo(0,14,3,11);g.stroke();break;
+    case 'pkg':g.beginPath();g.moveTo(0,-16);g.lineTo(14,-8);g.lineTo(14,9);g.lineTo(0,17);g.lineTo(-14,9);g.lineTo(-14,-8);g.closePath();g.stroke();g.beginPath();g.moveTo(-14,-8);g.lineTo(0,0);g.lineTo(14,-8);g.moveTo(0,0);g.lineTo(0,17);g.stroke();break;
+    case 'users':g.beginPath();g.arc(-5,-4,5,0,TAU);g.moveTo(-14,13);g.quadraticCurveTo(-14,3,-5,3);g.quadraticCurveTo(4,3,4,13);g.stroke();g.beginPath();g.arc(8,-5,4.2,0,TAU);g.moveTo(11,-1.5);g.quadraticCurveTo(16,2,15.5,9);g.stroke();break;
+    case 'chart':g.beginPath();g.moveTo(-15,14);g.lineTo(15,14);g.stroke();[-10,-2,6].forEach((x,i)=>{g.fillRect(x,4-i*7,7,10+i*7);});break;
+    case 'refresh':g.beginPath();g.arc(0,0,13,Math.PI*.7,Math.PI*1.9);g.stroke();g.beginPath();g.moveTo(10,-12);g.lineTo(15,-14);g.lineTo(14,-8);g.stroke();break;
+    case 'key':g.beginPath();g.arc(-6,-2,6,0,TAU);g.stroke();g.beginPath();g.moveTo(-1.5,2.5);g.lineTo(12,16);g.moveTo(7,11);g.lineTo(12,6);g.moveTo(11,15);g.lineTo(16,10);g.stroke();break;
+    case 'send':g.beginPath();g.moveTo(16,-14);g.lineTo(-13,-2);g.lineTo(-4,2);g.lineTo(-1,13);g.closePath();g.stroke();g.beginPath();g.moveTo(-4,2);g.lineTo(16,-14);g.stroke();break;
+    case 'branch':g.beginPath();g.moveTo(-8,-10);g.lineTo(-8,10);g.moveTo(-8,4);g.bezierCurveTo(-8,-4,9,0,9,-6);g.stroke();for(const [a,b] of [[-8,-13],[-8,13],[9,-9]]){g.beginPath();g.arc(a,b,4,0,TAU);g.stroke();}break;
+    case 'eye':g.beginPath();g.arc(0,0,16,Math.PI,0);g.quadraticCurveTo(0,14,0,14);g.closePath();g.stroke();g.beginPath();g.arc(0,0,5,0,TAU);g.stroke();break;
+    case 'grad':g.beginPath();g.moveTo(0,-15);g.lineTo(16,-8);g.lineTo(0,-1);g.lineTo(-16,-8);g.closePath();g.stroke();g.beginPath();g.moveTo(8,-4.5);g.lineTo(8,6);g.quadraticCurveTo(4,10,0,8);g.moveTo(-16,-8);g.lineTo(-16,5);g.stroke();break;
+    case 'terminal':g.strokeRect(-15,-12,30,24,2.5);g.beginPath();g.moveTo(-9,-4);g.lineTo(-4,1);g.lineTo(-9,6);g.moveTo(-1,6);g.lineTo(7,6);g.stroke();break;
+    case 'up':g.beginPath();g.arc(0,0,15,0,TAU);g.stroke();g.beginPath();g.moveTo(-7,2);g.lineTo(0,-6);g.lineTo(7,2);g.moveTo(0,-6);g.lineTo(0,11);g.stroke();break;
+    case 'flag':g.beginPath();g.moveTo(-8,-15);g.lineTo(-8,15);g.moveTo(-8,-13);g.lineTo(11,-13);g.quadraticCurveTo(7,-9,11,-5);g.lineTo(-8,-5);g.stroke();break;
+    case 'gate':g.beginPath();g.moveTo(-16,16);g.lineTo(-16,-12);g.quadraticCurveTo(0,-20,16,-12);g.lineTo(16,16);g.stroke();for(const y of [-5,3,11]){g.beginPath();g.moveTo(-9,y);g.lineTo(9,y);g.stroke();}break;
+    case 'search':g.beginPath();g.arc(-4,-4,9,0,TAU);g.moveTo(3,3);g.lineTo(13,13);g.stroke();break;
+    case 'network':for(const [a,b] of [[-12,-10],[12,-10],[0,12]]){g.beginPath();g.moveTo(0,0);g.lineTo(a,b);g.stroke();g.beginPath();g.arc(a,b,4,0,TAU);g.stroke();}g.beginPath();g.arc(0,0,5,0,TAU);g.stroke();break;
+    case 'bolt':g.beginPath();g.moveTo(4,-17);g.lineTo(-8,3);g.lineTo(-1,3);g.lineTo(-4,17);g.lineTo(9,-4);g.lineTo(2,-4);g.closePath();g.stroke();break;
+    case 'clip':g.strokeRect(-10,-6,20,22,2.5);g.beginPath();g.moveTo(-5,-6);g.lineTo(-5,-12);g.lineTo(5,-12);g.lineTo(5,-6);g.stroke();g.beginPath();g.moveTo(-5,2);g.lineTo(5,2);g.moveTo(-5,9);g.lineTo(3,9);g.stroke();break;
+    case 'flow':g.beginPath();g.moveTo(-15,-8);g.lineTo(-7,-8);g.moveTo(-11,-12);g.lineTo(-7,-8);g.lineTo(-11,-4);g.moveTo(-3,-8);g.lineTo(5,-8);g.moveTo(1,-12);g.lineTo(5,-8);g.lineTo(1,-4);g.moveTo(9,-8);g.lineTo(15,-8);g.moveTo(11,-12);g.lineTo(15,-8);g.lineTo(11,-4);g.moveTo(-15,6);g.lineTo(15,6);g.stroke();break;
+    case 'wrench':g.save();g.rotate(-.5);g.strokeRect(-4,-16,8,18,2);g.beginPath();g.arc(0,-16,6.5,0,TAU);g.stroke();g.restore();g.beginPath();g.moveTo(-10,10);g.lineTo(10,-6);g.stroke();break;
+    case 'stamp':g.beginPath();g.moveTo(-13,8);g.lineTo(13,8);g.moveTo(-8,8);g.lineTo(-8,-4);g.quadraticCurveTo(-8,-12,0,-12);g.quadraticCurveTo(8,-12,8,-4);g.lineTo(8,8);g.stroke();g.fillRect(-14,12,28,4);break;
+  }
+  g.restore();
+}
+function hexBrain(g,x,y,r,t,o={}){
+  // 超级代理中央大脑：双层六边形核心
+  g.save();g.translate(x,y);
+  const pts=[];for(let i=0;i<6;i++){const a=-Math.PI/2+i*TAU/6;pts.push([Math.cos(a)*r,Math.sin(a)*r]);}
+  const gr=g.createRadialGradient(0,-r*.3,r*.2,0,0,r*1.3);gr.addColorStop(0,'#60a5fa');gr.addColorStop(.55,'#1d4ed8');gr.addColorStop(1,'#0b1d4d');
+  g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.closePath();g.shadowColor='rgba(59,130,246,.8)';g.shadowBlur=36;g.fillStyle=gr;g.fill();g.shadowBlur=0;
+  g.lineWidth=3;g.strokeStyle='rgba(165,243,252,.85)';g.stroke();
+  g.save();g.rotate(t*.25);g.globalAlpha=.5;g.strokeStyle='rgba(34,211,238,.6)';g.lineWidth=1.6;
+  g.beginPath();for(let i=0;i<6;i++){const a=-Math.PI/2+i*TAU/6;const p1=[Math.cos(a)*r*.72,Math.sin(a)*r*.72],p2=[Math.cos(a+TAU/6)*r*.72,Math.sin(a+TAU/6)*r*.72];i?g.lineTo(p2[0],p2[1]):g.moveTo(p1[0],p1[1]);}g.closePath();g.stroke();g.restore();
+  for(let i=0;i<6;i++){const a=t*.5+i*TAU/6;glow(g,Math.cos(a)*r*.55,Math.sin(a)*r*.55,10,'#22d3ee',.8);g.fillStyle='#a5f3fc';g.beginPath();g.arc(Math.cos(a)*r*.55,Math.sin(a)*r*.55,2.6,0,TAU);g.fill();}
+  text(g,o.t1||'Agent',0,-r*.12,{size:r*.42,w:900,c:'#f0f9ff',glow:14,gc:'rgba(34,211,238,.8)'});
+  text(g,o.t2||'',0,r*.32,{size:r*.17,w:600,c:'#bae6fd'});
+  g.restore();
+}
+
+/* ---------------- backgrounds ---------------- */
+function bg(g,c1,c2){const gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,c1);gr.addColorStop(1,c2);g.fillStyle=gr;g.fillRect(-100,-100,W+200,H+200);}
+function dotGrid(g,t,a=1){
+  if(a<=0)return;g.save();
+  for(let j=0;j<H/48+1;j++)for(let i=0;i<W/48+1;i++){
+    const x=i*48,y=j*48,d=Math.hypot(x-960,y-480),pu=.25+.75*Math.max(0,Math.sin(t*1.2-d/180));
+    g.globalAlpha=a*.10*pu;g.fillStyle='#7dd3fc';g.fillRect(x,y,2,2);}
+  g.restore();
+}
+function stars(g,t,n=150,sp=4,seed=1,a=1){
+  if(a<=0)return;
+  for(let i=0;i<n;i++){
+    const x=hash(i*3.17+seed)*W,y=fract(hash(i*7.31+seed)+t*sp*(.2+hash(i*1.7+seed))/H)*H,s=1+hash(i*9.1+seed)*2.4;
+    const tw=.45+.55*Math.sin(t*(1.2+hash(i)*3)+i);
+    g.fillStyle=`rgba(186,230,253,${clamp(tw)*a*.7})`;g.fillRect(x,y,s,s);
+  }
+}
+function rays(g,x,y,t,n,c,a,spin=.2){
+  if(a<=0)return;g.save();g.translate(x,y);g.rotate(t*spin);g.globalCompositeOperation='lighter';
+  for(let i=0;i<n;i++){const a0=i/n*TAU,w=TAU/n*.38;const gr=g.createRadialGradient(0,0,0,0,0,1400);gr.addColorStop(0,rgba(c,a*.5));gr.addColorStop(1,rgba(c,0));g.fillStyle=gr;g.beginPath();g.moveTo(0,0);g.arc(0,0,1400,a0,a0+w);g.closePath();g.fill();}
+  g.restore();
+}
+function scanline(g,t,y,h,c='rgba(34,211,238,.55)'){
+  g.save();g.globalCompositeOperation='lighter';const gr=g.createLinearGradient(0,y-h,0,y+h);gr.addColorStop(0,'rgba(34,211,238,0)');gr.addColorStop(.5,c);gr.addColorStop(1,'rgba(34,211,238,0)');g.fillStyle=gr;g.fillRect(-100,y-h,W+200,h*2);g.restore();
+}
+
+/* ---------------- subtitles ---------------- */
+function drawSubs(g,s,t){
+  if(!s.subs)return;let cur=null,end=0;
+  const T0=s.tt0||s.dur;
+  s.subs.forEach((sb,i)=>{const e=sb.at+(sb.dur||((s.subs[i+1]?s.subs[i+1].at:T0)-sb.at));if(t>=sb.at&&t<e){cur=sb;end=e;}});
+  if(!cur)return;const a=inv(cur.at,cur.at+.35,t)*(1-inv(end-.35,end,t));if(a<=0)return;
+  const lines=cur.text.split('\n'),size=34,lh=42,bh=lines.length>1?92:60,cy=1006;
+  font(g,size,500);const tw=Math.max(...lines.map(l=>g.measureText(l).width));
+  g.save();g.globalAlpha*=a;rr(g,W/2-tw/2-34,cy-bh/2,tw+68,bh,bh/2);g.fillStyle='rgba(3,9,26,.72)';g.fill();
+  g.lineWidth=1.5;g.strokeStyle='rgba(34,211,238,.3)';g.stroke();
+  g.fillStyle='#e6f4ff';g.textAlign='center';g.textBaseline='middle';
+  const y0=cy-(lines.length-1)*lh/2;lines.forEach((l,i)=>g.fillText(l,W/2,y0+i*lh));
+  g.restore();
+}
+
+/* =====================================================================
+   图表注册表：49 张 seecode 图（官方导出 PNG，相对 docs/ 引用）
+   ===================================================================== */
+const DG={};
+[
+ ['01-architecture','总体架构：一个仓库的超级代理',2064,1238],
+ ['02-high-level','dsh-superagent 是什么',1440,1266],
+ ['03-deployment','跑在哪里：单进程 tmux',1756,1868],
+ ['04-dependency','模块依赖（自上而下）',2008,1560],
+ ['05-architecture-delta','架构增量：挂进 DSH 宿主',1536,1350],
+ ['06-it-state','子系统健康度',1440,1266],
+ ['07-uml-class','核心接口：Engine 与端口',1646,2254],
+ ['08-er','领域模型：从 Trigger 到 Assignment',2329,1888],
+ ['09-db-schema','orchestrator.sqlite 真实表结构',1536,2391],
+ ['10-flowchart','一条消息的准入决策流',1784,1832],
+ ['11-sequence','一次请求的时序',2236,1654],
+ ['12-state','Ticket 生命周期',1568,1208],
+ ['13-swimlane','一次工单的全流程（跨职能）',3396,1646],
+ ['14-process','五步装起来',1875,917],
+ ['15-data-flow','运行数据的数据流',1880,1236],
+ ['16-journey','运营者旅程',2608,1218],
+ ['17-timeline','从内部原型到公开发布',1680,928],
+ ['18-gantt','发布阶段甘特图',1996,975],
+ ['19-kanban','执行阶段看板',2359,1017],
+ ['20-story-map','产品故事图',2372,1054],
+ ['21-loop','Policy 调优飞轮',1440,1344],
+ ['22-medallion','事件数据的分层加工',1838,1568],
+ ['23-dp-integration','多源事件集成',2085,1292],
+ ['24-dp-security-matrix','访问矩阵：四个主体碰什么',1440,986],
+ ['25-tree','仓库目录结构',3120,1168],
+ ['26-org-chart','会话「组织架构」',1720,1144],
+ ['27-nested','执行隔离嵌套',1440,1258],
+ ['28-layers','分层架构',1440,1228],
+ ['29-isometric','一台超级代理工作站',1954,1390],
+ ['30-exploded','拆开 bundle 发布物',1634,2700],
+ ['31-isometric-plan','代码平面图',3202,2074],
+ ['32-venn','什么消息会被理',1440,1270],
+ ['33-pyramid','提示词效力金字塔',1560,1190],
+ ['34-quadrant','面板导航矩阵：使用频率 × 决策影响',1440,1498],
+ ['35-fishbone','根因分析：什么会浪费团队注意力',2160,1246],
+ ['36-wardley','Wardley 演进图',1568,1450],
+ ['37-bar','各目录代码量 Top 10',1488,1194],
+ ['38-line','文档厚度曲线',1560,1148],
+ ['39-scatter','各目录：文件数 × 代码量',1440,1306],
+ ['40-waterfall','3.3 万行是怎么堆出来的',1584,1150],
+ ['41-treemap','24 个 peer 依赖的构成',1504,1298],
+ ['42-heatmap','准入强度矩阵',1440,882],
+ ['43-radar','工程化画像',1440,1312],
+ ['44-polar','文档阅读罗盘',1440,1354],
+ ['45-sankey','3.3 万行去哪了',1440,1280],
+ ['46-high-level-vertical','dsh-superagent 是什么（纵向）',1440,1522],
+ ['47-sequence-oauth','授权裁决时序',1944,1382],
+ ['48-state-lifecycle','Worker 会话生命周期',1440,932],
+ ['49-funnel','消息 → 工单的筛选漏斗',1560,1232],
+].forEach(([k,t,w,h],i)=>{
+  DG[k]={no:String(i+1).padStart(2,'0'),key:k,t,w,h,f:'docs/'+k+'.png',u:'docs/'+k+'.html',img:null};
+});
+let loadDone=0;const loadTotal=Object.keys(DG).length;
+const ldl=document.getElementById('start').querySelector('small');
+function preload(){
+  for(const k in DG){
+    const d=DG[k],im=new Image();
+    im.onload=()=>{loadDone++;};im.onerror=()=>{loadDone++;};
+    im.src=d.f;d.img=im;
+  }
+}
+
+/* ---------------- 浏览器窗框：嵌 seecode 图截图（drawReplicaWin 的图片版） ---------------- */
+function drawWin(g,o){
+  const {x,y,w,h,t,st,dg}=o;
+  const p=E.back(inv(st,st+.6,t));if(p<=0)return;
+  const slide=(1-E.o(inv(st,st+.7,t)))*-28;
+  g.save();g.translate(x+w/2,y+h/2);g.scale(p,p);g.translate(-(x+w/2),-(y+h/2));g.translate(0,slide);
+  panel(g,x,y,w,h,{fill:'#0b1226',stroke:'rgba(125,211,252,.55)',lw:2,r:16});
+  glow(g,x+w/2,y+h/2,w*.55,'#1d4ed8',.08*p);
+  const chH=Math.max(30,h*.07);
+  rr(g,x+1,y+1,w-2,chH,15);g.fillStyle='#122043';g.fill();rr(g,x+1,y+chH-14,w-2,15,0);g.fillStyle='#122043';
+  ['#f87171','#fbbf24','#34d399'].forEach((c,i)=>{g.fillStyle=c;g.beginPath();g.arc(x+22+i*19,y+chH/2,4.6,0,TAU);g.fill();});
+  text(g,dg.no+' · '+dg.t,x+78,y+chH/2+1,{size:Math.min(14,chH*.42),w:800,align:'left',c:'#e0f2fe'});
+  const upw=Math.min(430,w*.34);rr(g,x+(w-upw)/2,y+7,upw,chH-14,(chH-14)/2);g.fillStyle='rgba(255,255,255,.07)';g.fill();
+  g.fillStyle='rgba(125,211,252,.8)';g.beginPath();g.arc(x+(w-upw)/2+14,y+chH/2,3.4,0,TAU);g.fill();
+  text(g,'seecode · '+dg.u,x+(w-upw)/2+24,y+chH/2+1,{size:11,w:500,align:'left',mono:true,c:'#93c5fd'});
+  pill(g,'可交互',x+w-14,y+chH/2+1,{size:11,align:'right',bg:'rgba(34,211,238,.12)',bd:'rgba(34,211,238,.4)',c:'#67e8f9'});
+  // 内容区：纸色底 + 截图。竖长图按宽铺满并缓慢下移浏览；横图 contain 居中。
+  const ix=x+6,iy=y+chH+3,iw=w-12,ih=h-chH-9;
+  g.save();rr(g,ix,iy,iw,ih,8);g.clip();
+  g.fillStyle='#fafaf8';g.fillRect(ix,iy,iw,ih);
+  const im=dg.img;
+  if(im&&im.complete&&im.naturalWidth){
+    const IW=im.naturalWidth,IH=im.naturalHeight;
+    g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';
+    if(IH/IW>ih/iw+.02){
+      const s=iw/IW,dh=IH*s;
+      const e=ssmooth(clamp((t-(st+.7))/9));
+      g.drawImage(im,ix,iy-e*Math.max(0,dh-ih),iw,dh);
+      if(dh-ih>40){g.fillStyle='rgba(148,163,184,.5)';rr(g,ix+iw-14,iy+ih*.3,5,ih*.4,2.5);g.fill();}
+    }else{
+      const s=Math.min(iw/IW,ih/IH),dw=IW*s,dh=IH*s;
+      g.drawImage(im,ix+(iw-dw)/2,iy+(ih-dh)/2,dw,dh);
+    }
+  }else{
+    text(g,'图表截图加载中 …',ix+iw/2,iy+ih/2-12,{size:22,w:700,c:'#64748b'});
+    const lw2=iw*.4;rr(g,ix+(iw-lw2)/2,iy+ih/2+22,lw2,6,3);g.fillStyle='rgba(148,163,184,.25)';g.fill();
+    rr(g,ix+(iw-lw2)/2,iy+ih/2+22,lw2*clamp(loadDone/loadTotal),6,3);g.fillStyle='#22d3ee';g.fill();
+  }
+  g.restore();g.restore();
+}
+
+/* ---------------- 通用节点 / 连线 ---------------- */
+function nd(g,x,y,w,h,o={}){
+  const t=o.t||0,st=o.st??0;
+  const p=o.pop===false?1:E.back(inv(st,st+.5,t));if(p<=0)return;
+  g.save();g.translate(x+w/2,y+h/2);g.scale(p,p);g.translate(-(x+w/2),-(y+h/2));
+  if(o.glow)glow(g,x+w/2,y+h/2,Math.max(w,h)*.75,o.gc||'#22d3ee',.22);
+  panel(g,x,y,w,h,{fill:o.fill||'rgba(10,22,52,.92)',stroke:o.sc||'rgba(96,165,250,.4)',lw:o.lw||1.5,r:o.r??12,shadow:false});
+  if(o.ac){g.fillStyle=o.ac;g.fillRect(x+16,y+8,44,3);}
+  if(o.ico)icon(g,o.ico,x+(o.icoBox?30:28),y+h/2,26,o.ic||'#7dd3fc');
+  const tx=o.ico?x+50:x+16;
+  text(g,o.l1,tx,y+(o.l2?h/2-11:h/2),{size:o.s1||18,w:800,align:'left',c:o.c1||'#f0f9ff'});
+  if(o.l2)text(g,o.l2,tx,y+h/2+15,{size:o.s2||12.5,w:500,align:'left',c:'#8aa4d8'});
+  if(o.tr)pill(g,o.tr,x+w-14,y+h/2-(o.l2?14:0),{size:11,align:'right',bg:rgba(o.ac||'#22d3ee',.14),bd:rgba(o.ac||'#22d3ee',.55),c:'#e0f2fe'});
+  g.restore();
+}
+function edge(g,P,t,t0,o={}){
+  const p=inv(t0,t0+.5,t);if(p<=0)return;
+  const col=o.c||'rgba(125,211,252,.5)';
+  g.save();g.globalAlpha*=p;
+  cubic(g,P[0],P[1],P[2],P[3],col,o.w||2.5,o.dash?{dash:o.dash,off:-(t*30)}:{});
+  if(o.lbl){const M=cubicPt(P[0],P[1],P[2],P[3],.5);text(g,o.lbl,M[0],M[1]-14,{size:12,w:700,mono:true,c:o.lc||'#7dd3fc',a:p});}
+  if(o.fk!==false&&p>=1)flow(g,P[0],P[1],P[2],P[3],t+(o.seed||0),o.fp||2.6,1,{c:o.fc||'#22d3ee',size:o.fs||9,seed:o.seed||0});
+  g.restore();
+}
+function countUp(g,v,t0,t,dur,suf=''){const p=E.o(inv(t0,t0+dur,t));return fmtN(v*p)+suf;}
+
+/* =====================================================================
+   SCENES
+   ===================================================================== */
+const SCN=[];const S=d=>SCN.push(d);
+function hex2a(hex,a){return rgba(hex,a);}
+const DIMS=['系统结构','流程过程','数据平台','结构组织','数据图表'];
+const FINDS=[
+ ['概念最少化','Ticket 宏观两态，终态五值','12-state','#22d3ee'],
+ ['默认保守','名单外 @：默认 ignore','10-flowchart','#34d399'],
+ ['双会话隔离','常驻主脑 + 按单雇工','26-org-chart','#60a5fa'],
+ ['测试即规格','tests ≈ src，1:1','45-sankey','#fbbf24'],
+];
+function dimOverlay(g,t,st){const q=inv(st-.25,st+.35,t);if(q>0){g.fillStyle=`rgba(3,8,24,${.7*q})`;g.fillRect(-100,-100,W+200,H+200);}}
+
+/* ---------- 00 序章 ---------- */
+S({ch:'00 · 序章',title:'序章 · 给仓库发条消息，它把活干完',trans:['iris',.9],
+  music:[['intro','Cmaj7'],['intro','Am7'],['lift','F'],['groove','G'],['anthem','C']],
+  subs:[{at:.3,text:'给仓库发条消息：Issue、评论、群里 @ 一下。'},{at:4.0,text:'被允许的请求，它接单开工——自己的会话、自己的 worktree。'},{at:7.6,text:'交付 PR，结果回到你原来的对话。'},{at:10.6,text:'这是 DeepSeek 开源的超级代理原型：dsh-superagent。'}],
+  sfx:[[.3,'whoosh'],[.8,'pop',520],[2.0,'pop',640],[3.2,'pop',760],[4.4,'chime'],[7.2,'whoosh'],[7.5,'pop',520],[11.2,'sparkle']],
+  draw(g,t,s){
+    bg(g,'#070d24','#0a1440');dotGrid(g,t,.8);stars(g,t,90,2,3,.5);
+    text(g,'dsh-superagent · 一个仓库的超级代理',960,150,{size:44,w:900,c:'#e0f2fe',a:inv(.2,.8,t),glow:16,gc:'rgba(34,211,238,.5)'});
+    text(g,'SeeCode 49 图分析 · 演示影片',960,206,{size:19,w:600,c:'#8aa4d8',a:inv(.6,1.2,t)});
+    const chain=[['你 · 团队成员','Issue / 评论 / 群聊','users','#60a5fa'],['消息 Source','GitHub · 飞书','branch','#22d3ee'],['Agent 开工','自己的会话 + worktree','terminal','#818cf8'],['PR 交付','出现在原对话','send','#34d399']];
+    const xs=[240,700,1160,1620],y=470;
+    xs.forEach((x,i)=>{
+      nd(g,x-130,y-56,260,112,{t,st:.6+i*.8,ico:chain[i][2],l1:chain[i][0],l2:chain[i][1],ac:chain[i][3],s1:20});
+      if(i<3)edge(g,[[x+134,y],[x+220,y],[xs[i+1]-240,y],[xs[i+1]-134,y]],t,1.0+i*.8,{fk:true,fp:2.2});
+    });
+    if(t>4.6){const a=inv(4.6,5.2,t);arrow(g,xs[3],y-120,xs[0],y-120,`rgba(52,211,153,${.55*a})`,3,{a,dash:[10,8],off:-t*30});text(g,'通知你',930,y-140,{size:15,w:700,c:'#6ee7b7',a});}
+    const kpis=[['32,714','行代码（不含锁文件）','#22d3ee'],['≈ 1:1','测试 14,960 / 源码 15,043','#34d399'],['2 个','第三方直接依赖','#60a5fa'],['1 次','上游 squash 提交','#fbbf24']];
+    kpis.forEach(([v,l,c],i)=>{
+      const st=2.2+i*.3,p=E.back(inv(st,st+.5,t)),x=280+i*460,y2=760;
+      g.save();g.translate(x,y2);g.scale(p,p);
+      panel(g,-190,-46,380,92,{fill:'rgba(12,28,64,.92)',stroke:hex2a(c,.45),shadow:false,r:12});
+      text(g,v,0,-8,{size:30,w:900,c,mono:true});
+      text(g,l,0,26,{size:13,w:600,c:'#8aa4d8'});
+      g.restore();
+    });
+    dimOverlay(g,t,7.2);
+    drawWin(g,{x:380,y:170,w:1160,h:660,t,st:7.2,dg:DG['02-high-level']});
+  }});
+
+/* ---------- 通用图表场景包装：先动画讲结论 → 窗框放大 ---------- */
+function winScene(cfg){
+  S({ch:cfg.ch,title:cfg.title,trans:cfg.trans||['wipe',.9],music:cfg.music,subs:cfg.subs,sfx:cfg.sfx,
+    draw(g,t,s){
+      bg(g,'#071026','#0b1742');dotGrid(g,t,.55);
+      text(g,cfg.head,960,84,{size:34,w:900,c:'#e0f2fe',a:inv(.2,.7,t),glow:12,gc:'rgba(34,211,238,.4)'});
+      if(cfg.head2)text(g,cfg.head2,960,126,{size:17,w:600,c:'#8aa4d8',a:inv(.5,1,t)});
+      cfg.anim(g,t);
+      dimOverlay(g,t,cfg.st);
+      drawWin(g,{x:cfg.wx??380,y:cfg.wy??170,w:cfg.ww??1160,h:cfg.wh??660,t,st:cfg.st,dg:DG[cfg.dg]});
+    }});
+}
+
+/* ---------- 01 总体架构 ---------- */
+winScene({ch:'01 · 系统结构',title:'第一章 · 总体架构：五部件与双会话',dg:'01-architecture',st:4.2,
+  head:'总体架构 · GitHub / 飞书 → Engine 五部件 → 双会话执行 → 回复原对话',
+  music:[['think','C'],['think','Am'],['lift','F'],['groove','G'],['drive','C'],['lift','Am']],
+  subs:[{at:.3,text:'GitHub 与飞书两个 Source：gh cli 轮询、lark-cli 事件。'},{at:3.2,text:'Engine 五个部件，经端口与适配器相连——src/core 零外部依赖。'},{at:6.2,text:'状态全在 SQLite：JSON 文档 + Effects 持久队列，原子事务。'},{at:9.2,text:'主会话评估路由，worker 每 Ticket 一个。'},{at:12.0,text:'Outbox 幂等外发——回复回到原对话。'}],
+  sfx:[[.2,'whoosh'],[.6,'pop',520],[1.0,'pop',640],[1.6,'chime'],[4.2,'whoosh'],[4.4,'pop',600],[9.0,'ding'],[13.4,'sparkle']],
+  anim(g,t){
+    const y=560;
+    nd(g,150,y-64,300,112,{t,st:.4,ico:'branch',l1:'GitHub Source',l2:'gh cli 轮询',ac:'#22d3ee'});
+    nd(g,150,y+96,300,112,{t,st:.7,ico:'cloud',l1:'飞书 Source',l2:'lark-cli 事件',ac:'#60a5fa'});
+    nd(g,620,y-40,380,160,{t,st:1.2,ico:'chip',l1:'Engine',l2:'5 个 EnginePart · 端口 + 适配器',ac:'#22d3ee',glow:true,gc:'#22d3ee',lw:2.5,s1:26});
+    nd(g,1130,y-180,330,100,{t,st:2.2,ico:'users',l1:'主会话',l2:'评估 · 路由 · 回复',ac:'#818cf8'});
+    nd(g,1130,y-30,330,100,{t,st:2.6,ico:'db',l1:'SQLite',l2:'JSON 文档 + Effects',ac:'#34d399'});
+    nd(g,1130,y+120,330,100,{t,st:3.0,ico:'terminal',l1:'Worker 会话',l2:'每 Ticket 一个',ac:'#fbbf24'});
+    nd(g,1580,y-40,260,160,{t,st:3.4,ico:'send',l1:'Outbox',l2:'幂等回复',ac:'#34d399'});
+    edge(g,[[454,y-8],[540,y-8],[560,y-30],[616,y-8]],t,.9,{lbl:'TRIGGER',fk:true,c:'rgba(34,211,238,.55)'});
+    edge(g,[[454,y+152],[540,y+152],[560,y+130],[616,y+120]],t,1.1,{lbl:'TRIGGER',fk:true,c:'rgba(96,165,250,.55)'});
+    edge(g,[[1004,y+20],[1070,y+20],[1090,y+20],[1126,y+20]],t,1.8,{lbl:'原子事务',fk:true,rev:true,fc:'#34d399'});
+    edge(g,[[830,y-44],[900,y-120],[1080,y-130],[1126,y-130]],t,2.5,{lbl:'评估卡片',fk:true,fc:'#818cf8'});
+    edge(g,[[1126,y-152],[1000,y-160],[860,y-90],[830,y-60]],t,2.9,{lbl:'Decision',fk:true,fc:'#818cf8',dash:[8,7]});
+    edge(g,[[830,y+90],[920,y+160],[1080,y+170],[1126,y+170]],t,3.3,{lbl:'ASSIGNMENT',fk:true,fc:'#fbbf24'});
+    edge(g,[[1126,y+148],[1000,y+120],[870,y+70],[830,y+50]],t,3.7,{lbl:'Report',fk:true,fc:'#fbbf24',dash:[8,7]});
+    edge(g,[[1004,y],[1090,y],[1520,y],[1576,y]],t,4.0,{lbl:'REPLIES',fk:true,fc:'#34d399'});
+    edge(g,[[1580,y+120],[1660,y+240],[300,y+260],[190,y+200]],t,4.4,{lbl:'回到原对话',fk:true,fc:'#60a5fa',dash:[12,10]});
+    pill(g,'Passes 每 2s 泵一次 Effects 队列',1280,y+270,{size:15,a:inv(4.4,5,t),bg:'rgba(29,78,216,.4)',bd:'rgba(125,211,252,.5)',c:'#bfdbfe'});
+  }});
+
+/* ---------- 02 挂进宿主 ---------- */
+winScene({ch:'01 · 系统结构',title:'架构增量 · 一份 patch 挂进 DSH 宿主',dg:'05-architecture-delta',st:3.2,trans:['blinds',.9],
+  head:'架构增量 · cordis.patch.yml：insert 挂载，不改宿主一行代码',
+  music:[['tick','Am'],['tick','F'],['tick','C'],['tick','G']],
+  subs:[{at:.3,text:'不改宿主一行代码。'},{at:1.8,text:'一份 cordis.patch.yml：insert 挂进 dsh 宿主。'},{at:4.4,text:'github-watch 上线，feishu-watch 默认关。'},{at:6.8,text:'worker、router 两个 agent 预设一并注册。'}],
+  sfx:[[.2,'whoosh'],[.6,'pop',520],[1.2,'pop',640],[1.8,'blip',900],[3.2,'whoosh'],[3.4,'pop',700]],
+  anim(g,t){
+    nd(g,180,300,380,130,{t,st:.4,ico:'doc',l1:'cordis.patch.yml',l2:'insert: dsh-superagent / github-watch',ac:'#fbbf24',s1:20});
+    nd(g,760,560,700,140,{t,st:.8,ico:'server',l1:'DSH 宿主',l2:'dsh ^0.2.1-alpha.2 · bundle patch 注入',ac:'#60a5fa',s1:24});
+    edge(g,[[560,360],[660,420],[760,480],[820,556]],t,1.2,{lbl:'patch 挂载',fk:true,fc:'#fbbf24'});
+    nd(g,760,220,700,140,{t,st:1.6,ico:'chip',l1:'dsh-superagent',l2:'Engine + Web 面板',ac:'#22d3ee',glow:true,gc:'#22d3ee',s1:24});
+    edge(g,[[900,556],[900,480],[900,440],[900,364]],t,2.0,{fk:true});
+    const chips=[['github-watch','启用 · gh cli 轮询','#22d3ee',540,440],['feishu-watch','默认 disabled','#94a3b8',1080,440],['worker / router','agent 预设','#fbbf24',660,392],['kv store','sqlite 状态','#34d399',960,392]];
+    chips.forEach(([a,b,c,x,y2],i)=>{
+      const st=2.4+i*.35,p=E.back(inv(st,st+.45,t));if(p<=0)return;
+      g.save();g.translate(x,y2);g.scale(p,p);
+      pill(g,a+' · '+b,0,0,{size:15,bg:hex2a(c,.14),bd:hex2a(c,.6),c:'#e0f2fe'});
+      g.restore();
+    });
+  }});
+
+/* ---------- 03 跑在哪里 ---------- */
+winScene({ch:'01 · 系统结构',title:'部署 · 单进程 tmux，无 Docker 无 systemd',dg:'03-deployment',st:3.2,trans:['pixel',.9],
+  head:'跑在哪里 · 部署要求只有一个：一个 tmux 会话',
+  music:[['groove','C'],['groove','Am'],['groove','F'],['groove','G']],
+  subs:[{at:.3,text:'部署要求只有一个：一个 tmux 会话。'},{at:1.9,text:'没有 Docker，也没有 systemd。'},{at:4.1,text:'sqlite 与 worktrees 都在 stateDir。'},{at:6.5,text:'gh、lark 是普通子进程，退出码有巡检。'}],
+  sfx:[[.2,'whoosh'],[1.4,'stamp'],[1.8,'stamp'],[3.2,'whoosh'],[3.4,'pop',600]],
+  anim(g,t){
+    nd(g,120,470,330,140,{t,st:.4,ico:'users',l1:'运营者',l2:'浏览器 · 同源 API',ac:'#60a5fa'});
+    // tmux 终端
+    const tp=E.back(inv(.8,1.3,t));
+    if(tp>0){g.save();g.translate(870,540);g.scale(tp,tp);
+      panel(g,-330,-190,660,380,{fill:'#081026',stroke:'rgba(125,211,252,.5)',lw:2,r:14});
+      rr(g,-330,-190,660,44,14);g.fillStyle='#122043';g.fill();rr(g,-330,-158,660,12,0);g.fillStyle='#122043';
+      ['#f87171','#fbbf24','#34d399'].forEach((c,i)=>{g.fillStyle=c;g.beginPath();g.arc(-302+i*20,-168,4.4,0,TAU);g.fill();});
+      text(g,'tmux · dsh-superagent（常驻）',-280,-168,{size:13,w:800,align:'left',mono:true,c:'#a5f3fc'});
+      icon(g,'terminal',0,10,52,'#67e8f9');
+      text(g,'orchestrator 进程',0,66,{size:18,w:800,c:'#e0f2fe'});
+      ['gh cli 子进程 · 轮询通知','lark cli 子进程 · 实时事件'].forEach((l,i)=>text(g,l,-140+i*290,124,{size:12.5,w:600,mono:true,c:'#7dd3fc'}));
+      g.restore();}
+    edge(g,[[454,540],[520,540],[500,540],[536,540]],t,.9,{fk:true});
+    nd(g,1430,330,340,130,{t,st:1.8,ico:'db',l1:'stateDir',l2:'sqlite + worktrees/',ac:'#34d399'});
+    nd(g,1430,520,340,130,{t,st:2.1,ico:'gear',l1:'webserver 配置',l2:'面板路由 · HTTP',ac:'#818cf8'});
+    edge(g,[[1204,470],[1300,420],[1380,400],[1426,395]],t,2.0,{fk:true});
+    edge(g,[[1204,560],[1300,560],[1380,570],[1426,580]],t,2.3,{fk:true});
+    [['无 Docker',1.4],['无 systemd',1.8]].forEach(([l,st],i)=>{
+      const p=E.back(inv(st,st+.4,t));if(p<=0)return;
+      g.save();g.translate(300+i*260,760);g.rotate(-.06);g.scale(p,p);
+      rr(g,-110,-34,220,68,10);g.lineWidth=5;g.strokeStyle='#f87171';g.stroke();
+      text(g,l,0,0,{size:26,w:900,c:'#fca5a5'});
+      g.restore();});
+  }});
+
+/* ---------- 04 模块依赖 ---------- */
+winScene({ch:'01 · 系统结构',title:'模块依赖 · core 零外部依赖',dg:'04-dependency',st:3.6,trans:['wipe',.9],
+  head:'模块依赖（自上而下） · 第三方只有 proper-lockfile 与 zod',
+  music:[['think','Am'],['think','F'],['drive','C'],['drive','G'],['lift','Am']],
+  subs:[{at:.3,text:'面板 26 个文件、编排 38 个，自上而下。'},{at:2.4,text:'src/core 十五个文件：零外部依赖，端口向内、适配器向外。'},{at:4.8,text:'第三方直接依赖只有两个：proper-lockfile 和 zod。'},{at:7.2,text:'其余 24 个 peer 包，全部来自 @deepseek-ai。'},{at:9.6,text:'tests 六十五个文件，与 app 并排侧挂。'}],
+  sfx:[[.2,'whoosh'],[.7,'pop',540],[1.4,'pop',620],[2.4,'chime'],[3.6,'whoosh'],[3.8,'pop',600],[8.8,'ding']],
+  anim(g,t){
+    const rows=[
+      {y:190,l1:'panel',l2:'26 文件 · Web 面板',ico:'laptop',ac:'#818cf8',x:330,w:420},
+      {y:308,l1:'app',l2:'38 文件 · 编排',ico:'flow',ac:'#60a5fa',x:330,w:420},
+    ];
+    rows.forEach((r,i)=>nd(g,r.x,r.y,r.w,92,{t,st:.3+i*.4,ico:r.ico,l1:r.l1,l2:r.l2,ac:r.ac}));
+    [['core','15 文件 · 零外部依赖','#22d3ee',60,436],['sources','16 文件 · 接入','#60a5fa',520,436],['executor','DSH 执行','#a78bfa',980,436]].forEach(([a,b,c,x,y2],i)=>
+      nd(g,x,y2,400,92,{t,st:1.1+i*.3,ico:'chip',l1:a,l2:b,ac:c,sc:i===0?'rgba(34,211,238,.75)':undefined,glow:i===0,gc:'#22d3ee'}));
+    nd(g,330,564,420,92,{t,st:2.0,ico:'wrench',l1:'infra',l2:'gh / lark / git 封装',ac:'#34d399'});
+    nd(g,1250,308,420,130,{t,st:2.6,ico:'clip',l1:'tests',l2:'65 文件 · 与 app 侧挂',ac:'#fbbf24',dashLike:true});
+    edge(g,[[540,282],[540,300],[540,300],[540,304]],t,.7,{fk:false});
+    edge(g,[[540,396],[540,420],[540,420],[540,432]],t,1.0,{fk:true});
+    edge(g,[[270,524],[270,548],[270,548],[270,560]],t,1.9,{lbl:'仅端口',fk:true,fc:'#22d3ee',c:'rgba(34,211,238,.6)'});
+    edge(g,[[750,524],[750,548],[750,548],[750,560]],t,2.1,{fk:true});
+    edge(g,[[1180,524],[1180,548],[1180,548],[1180,560]],t,2.3,{fk:true});
+    edge(g,[[1160,540],[1230,480],[1420,460],[1446,440]],t,2.5,{dash:[8,7]});
+    const pp=E.back(inv(3.0,3.4,t));
+    if(pp>0){g.save();g.translate(1430,690);g.scale(pp,pp);
+      panel(g,-330,-56,660,112,{fill:'rgba(10,22,52,.92)',stroke:'rgba(148,163,184,.4)',shadow:false,r:12});
+      text(g,'peerDependencies · 24 × @deepseek-ai/*',0,-16,{size:17,w:800,mono:true,c:'#cbd5e1'});
+      pill(g,'proper-lockfile',-150,22,{size:14,bg:'rgba(52,211,153,.14)',bd:'rgba(52,211,153,.6)',c:'#6ee7b7'});
+      pill(g,'zod',-20,22,{size:14,bg:'rgba(52,211,153,.14)',bd:'rgba(52,211,153,.6)',c:'#6ee7b7'});
+      pill(g,'其余：零',130,22,{size:14,bg:'rgba(148,163,184,.12)',bd:'rgba(148,163,184,.4)',c:'#94a3b8'});
+      g.restore();}
+  }});
+
+/* ---------- 05 六道准入闸 ---------- */
+winScene({ch:'02 · 准入与授权',title:'第二章 · 一条消息的准入决策流',dg:'10-flowchart',st:4.4,trans:['iris',.9],
+  head:'一条消息的准入决策流 · 去重 → scope → 订阅/Eval → admission → LLM',
+  music:[['tense','Dm'],['tense','G'],['build','Am'],['build','F'],['drive','C'],['drive','G']],
+  subs:[{at:.3,text:'不是每条消息都配得到回应。'},{at:2.6,text:'去重 → scope → 订阅直达 / Eval 排队 → admission 表 → LLM 评估。'},{at:5.8,text:'名单外的人 @ 它：默认被无视——admission 表默认 unlistedAddressed: ignore。'},{at:9.6,text:'显式规则放行的消息，才变成 Trigger 事件。'}],
+  sfx:[[.2,'whoosh'],[.9,'ding',72],[1.7,'ding',76],[2.5,'ding',80],[3.3,'ding',84],[5.4,'err'],[6.4,'chime'],[9.0,'ding',90],[13.4,'sparkle']],
+  anim(g,t){
+    const gates=['去重','scope 过滤','订阅直达 · Eval 排队','admission 表','LLM 评估'];
+    gates.forEach((nm,i)=>{
+      const x=110+i*356,st=.4+i*.5,active=t>1+i*1.0;
+      nd(g,x,380,280,340,{t,st,ico:['clip','search','flow','gate','chip'][i],l1:nm,l2:['重复消息丢弃','不相关领域不入','无订阅走候选卡','名单 × addressed','主会话评估'][i],ac:['#22d3ee','#60a5fa','#818cf8','#f59e0b','#34d399'][i],s1:20});
+      if(active){const y2=330,yy=y2+fract((t-(1+i*1.0))*.6)*0;glow(g,x+140,y2+ -0+0,16,'#22d3ee',.5);}
+      if(i<4)arrow(g,x+284,550,x+348,550,'rgba(125,211,252,.55)',3,{a:inv(.9+i*.5,1.2+i*.5,t),dash:[8,8],off:-t*30});
+    });
+    // 消息票穿过
+    const q=clamp((t-.8)/4.2),di=Math.min(4,Math.floor(q*4.999)),dq=clamp(q*5-di);
+    const gx=i=>110+i*356+140;
+    const mx=lerp(gx(di)-70,gx(Math.min(4,di+1))-70,E.io(dq)),my=550-Math.sin(dq*Math.PI)*30;
+    if(q<1){panel(g,mx-60,my-26,120,52,{fill:'rgba(238,246,255,.97)',stroke:'#93c5fd',shadow:false,r:10});
+      text(g,'消息',mx,my-4,{size:14,w:800,c:'#1e3a8a'});text(g,'#msg',mx,my+13,{size:12,w:600,mono:true,c:'#3b82f6'});}
+    // 两类结局
+    const gp=E.back(inv(3.2,3.6,t));
+    if(gp>0){g.save();g.translate(560,830);g.scale(gp,gp);
+      panel(g,-260,-44,520,88,{fill:'rgba(6,60,44,.9)',stroke:'rgba(52,211,153,.6)',shadow:false,r:12});
+      check(g,-216,0,26,'#34d399');
+      text(g,'名单内 + addressed → explicit · 直通建单',6,-2,{size:18,w:800,align:'left',c:'#a7f3d0'});
+      g.restore();}
+    const rp=E.back(inv(4.0,4.4,t));
+    if(rp>0){g.save();g.translate(1400,830);g.scale(rp,rp);
+      panel(g,-300,-44,600,88,{fill:'rgba(60,16,24,.9)',stroke:'rgba(248,113,113,.6)',shadow:false,r:12});
+      cross(g,-256,0,26,'#f87171');
+      text(g,'名单外 @ → ignore · 默认无视（可配置）',6,-2,{size:18,w:800,align:'left',c:'#fecaca'});
+      g.restore();}
+    pill(g,'admission.ts 默认：unlistedAddressed → ignore',960,760,{size:16,mono:true,a:inv(4.8,5.4,t),bg:'rgba(8,20,48,.92)',bd:'rgba(248,113,113,.5)',c:'#fca5a5'});
+  }});
+
+/* ---------- 06 授权裁决时序 ---------- */
+winScene({ch:'02 · 准入与授权',title:'授权裁决 · explicit 直通 / inferred 走 LLM',dg:'47-sequence-oauth',st:3.6,trans:['wipe',.9],
+  head:'授权裁决时序 · explicit 不经 LLM 直接签发 Mandate',
+  music:[['think','C'],['think','Am'],['tense','Dm'],['drive','G'],['lift','C']],
+  subs:[{at:.3,text:'explicit 裁决不经 LLM，直接签发 Mandate。'},{at:2.8,text:'inferred 只有 auto 模式能 accept，否则只送候选卡。'},{at:5.4,text:'observe 模式：先只记录 would-accept，不真放行。'},{at:8.2,text:'ignore 会记下原因，但不回复。'}],
+  sfx:[[.2,'whoosh'],[.9,'blip',700],[1.8,'blip',800],[2.7,'ding',84],[3.6,'blip',900],[4.6,'blip',1000],[5.6,'tick'],[6.4,'tick'],[10.6,'sparkle']],
+  anim(g,t){
+    const lanes=[['Source',240,'#60a5fa'],['Engine',660,'#22d3ee'],['admission 门',1080,'#f59e0b'],['主会话',1440,'#818cf8'],['Tickets',1780,'#34d399']];
+    lanes.forEach(([nm,x,c],i)=>{
+      const st=.3+i*.15,p=inv(st,st+.4,t);
+      nd(g,x-110,180,220,74,{t,st,ico:null,l1:nm,l2:null,ac:c,pop:true,s1:18});
+      g.strokeStyle='rgba(125,211,252,.22)';g.lineWidth=2;g.setLineDash([6,8]);
+      g.beginPath();g.moveTo(x,254);g.lineTo(x,900);g.stroke();g.setLineDash([]);
+      if(i===2)glow(g,x,217,120,'#f59e0b',.25+.1*Math.sin(t*3));
+    });
+    const msgs=[
+      [0,1,'Trigger（actor / human / addressed）',.8,'#60a5fa'],
+      [1,2,'名单内？addressed？表格？',1.7,'#22d3ee'],
+      [2,1,'explicit → 直接签 Mandate',2.6,'#34d399'],
+      [1,4,'创建 Ticket + 确认回复',3.5,'#34d399'],
+      [2,3,'inferred + auto → 送候选卡',4.6,'#fbbf24'],
+      [3,1,'eval_decide: accept / reopen / ignore',5.5,'#818cf8'],
+    ];
+    msgs.forEach(([a,b,l,at,c],i)=>{
+      const p=inv(at,at+.35,t);if(p<=0)return;
+      const x1=lanes[a][1],x2=lanes[b][1],y=310+i*88;
+      const xa=lerp(x1,x2,Math.min(1,p*1.4));
+      arrow(g,x1,y,xa,y,hex2a(c,.85),2.5,{head:p>=.98});
+      text(g,l,(x1+x2)/2,y-16,{size:14,w:700,mono:true,c,a:p});
+    });
+    // ignore 自环
+    const ip=inv(6.4,6.8,t);
+    if(ip>0){const y=310+6*88;
+      g.save();g.globalAlpha*=ip;
+      cubic(g,[660,y],[560,y-60],[760,y-60],[660,y],'rgba(148,163,184,.6)',2,{dash:[6,6]});
+      text(g,'ignore 记录原因，不回复',660,y-78,{size:13.5,w:700,mono:true,c:'#94a3b8'});
+      g.restore();}
+    const op=inv(5.0,5.5,t);
+    if(op>0){g.save();g.globalAlpha*=op*.9;
+      rr(g,1180,300,560,420,14);g.lineWidth=2;g.strokeStyle='rgba(251,191,36,.55)';g.setLineDash([10,8]);g.stroke();g.setLineDash([]);
+      text(g,'opt · observe 模式：只记 would-accept',1460,288,{size:14.5,w:800,c:'#fcd34d'});
+      g.restore();}
+  }});
+
+/* ---------- 07 Ticket 生命周期 ---------- */
+winScene({ch:'02 · 准入与授权',title:'Ticket 生命周期 · 两态五终值 · 可唤醒',dg:'12-state',st:3.6,trans:['pixel',.9],
+  head:'Ticket 生命周期 · 宏观 open / ended 两态，可被人的消息唤醒',
+  music:[['lift','F'],['lift','G'],['groove','Am'],['groove','F'],['anthem','C']],
+  subs:[{at:.3,text:'宏观只有 open、ended 两个状态——阶段是派生视图，不是存储。'},{at:2.9,text:'终态五值：completed、merged、closed、dropped、stopped。'},{at:5.7,text:'最特别的是 wake：人在原线程追问，删除 ended。'},{at:8.5,text:'已结束的工单当场复活，复用原 Mandate 再校验。'}],
+  sfx:[[.2,'whoosh'],[.8,'chime'],[2.9,'ding',80],[3.4,'whoosh'],[3.6,'pop',600],[5.7,'bell',88],[6.6,'sparkle']],
+  anim(g,t){
+    g.fillStyle='#34d399';g.beginPath();g.arc(190,320,12,0,TAU);g.fill();
+    text(g,'accept 建单',300,296,{size:14,w:700,mono:true,c:'#6ee7b7',a:inv(.4,.8,t)});
+    nd(g,360,260,360,120,{t,st:.4,ico:'up',l1:'open（live）',l2:'assignments 推进',ac:'#22d3ee',glow:true,gc:'#22d3ee',lw:2.5,s1:23});
+    nd(g,950,180,360,110,{t,st:1.2,l1:'endBy executor',l2:'report ready / dropped',ac:'#818cf8'});
+    nd(g,950,420,360,110,{t,st:1.6,l1:'endBy human',l2:'stop 工具',ac:'#fbbf24'});
+    edge(g,[[724,300],[840,250],[920,235],[946,235]],t,1.0,{lbl:'',fk:true,fc:'#818cf8'});
+    edge(g,[[724,340],[840,420],[920,455],[946,465]],t,1.4,{fk:true,fc:'#fbbf24'});
+    // ended panel
+    const ep=E.back(inv(2.0,2.4,t));
+    if(ep>0){g.save();g.translate(1540,290);g.scale(ep,ep);
+      panel(g,-190,-110,380,220,{fill:'rgba(8,30,26,.92)',stroke:'rgba(52,211,153,.55)',shadow:false,r:14});
+      text(g,'ended（终态五值）',0,-72,{size:19,w:900,c:'#a7f3d0'});
+      ['completed','merged','closed','dropped','stopped'].forEach((o2,i)=>{
+        const y2=-34+Math.floor(i/2)*44,x2=(i%2?90:-90)+(i===4?0:0);
+        pill(g,o2,i===4?0:x2,i===4?58:y2,{size:13.5,mono:true,bg:'rgba(16,185,129,.12)',bd:'rgba(52,211,153,.45)',c:'#6ee7b7',a:inv(2.4+i*.14,2.7+i*.14,t)});
+      });
+      g.restore();}
+    edge(g,[[1314,235],[1380,260],[1400,270],[1348,290]],t,2.2,{fk:true,fc:'#34d399'});
+    edge(g,[[1314,475],[1380,470],[1400,420],[1392,352]],t,2.5,{fk:true,fc:'#fbbf24'});
+    // wake 回路
+    const wp=E.back(inv(3.4,3.9,t));
+    if(wp>0){g.save();g.translate(700,700);g.scale(wp,wp);
+      panel(g,-240,-52,480,104,{fill:'rgba(60,40,8,.92)',stroke:'rgba(251,191,36,.6)',shadow:false,r:12});
+      icon(g,'refresh',-186,0,34,'#fbbf24');
+      text(g,'wake：删除 ended',30,-14,{size:20,w:900,c:'#fde68a'});
+      text(g,'explicit 消息 + revalidate',30,18,{size:13,w:600,c:'#fcd34d'});
+      g.restore();}
+    edge(g,[[1360,400],[1200,620],[980,690],[944,700]],t,3.6,{lbl:'人在原线程追问',fk:true,fc:'#fbbf24',dash:[10,8]});
+    edge(g,[[470,700],[420,640],[420,500],[430,384]],t,4.0,{lbl:'复活',fk:true,fc:'#fbbf24',dash:[10,8]});
+    if(t>4.4)glow(g,540,320,60,'#fbbf24',.3+.2*Math.sin(t*4));
+  }});
+
+/* ---------- 08 会话组织架构 ---------- */
+winScene({ch:'02 · 准入与授权',title:'会话「组织架构」· 一个主脑，按单雇工',dg:'26-org-chart',st:3.6,trans:['blinds',.9],
+  head:'会话「组织架构」 · 主会话常驻，worker 每单一个、随单存亡',
+  music:[['think','Am'],['think','F'],['groove','C'],['drive','G'],['lift','Am']],
+  subs:[{at:.3,text:'一个主脑，按单雇工。'},{at:2.2,text:'主会话常驻：评估、路由、回复。'},{at:4.4,text:'每个 Ticket 雇一个 worker，随单结束退役。'},{at:6.8,text:'worktree 隔离，后台 30 分钟强制上限。'}],
+  sfx:[[.2,'whoosh'],[.7,'pop',520],[1.5,'pop',640],[2.3,'pop',760],[3.2,'chime'],[3.6,'whoosh'],[3.8,'pop',600],[7.4,'ding']],
+  anim(g,t){
+    nd(g,760,170,400,110,{t,st:.3,ico:'server',l1:'DSH 宿主',l2:'profile: superagent',ac:'#60a5fa',s1:22});
+    edge(g,[[900,284],[880,330],[880,340],[880,344]],t,.7,{fk:true});
+    nd(g,560,348,640,130,{t,st:.8,ico:'chip',l1:'主会话 orchestrator',l2:'评估 · 路由 · 回复',ac:'#22d3ee',glow:true,gc:'#22d3ee',lw:2.5,s1:25});
+    [['worker-<ticketId>','每 Ticket 一个',400,600,'#fbbf24'],['worker-<ticketId>','随单结束退役',700,600,'#fbbf24'],['子代理','随回合起止',1000,600,'#818cf8']].forEach(([a,b,x,y2,c],i)=>{
+      nd(g,x-150,y2,300,96,{t,st:1.6+i*.3,ico:'terminal',l1:a,l2:b,ac:c});
+      edge(g,[[x,y2-4],[x,y2-30],[880,520],[880,482]],t,1.9+i*.3,{fk:true,fc:c});
+    });
+    nd(g,1400,348,380,110,{t,st:2.6,ico:'branch',l1:'Source 插件',l2:'github / feishu watch',ac:'#34d399'});
+    edge(g,[[1400,400],[1330,410],[1240,413],[1204,413]],t,2.9,{fk:true,fc:'#34d399'});
+    nd(g,1400,540,380,110,{t,st:2.9,ico:'gear',l1:'Passes 泵',l2:'每 2s 扫 Effects',ac:'#818cf8'});
+    edge(g,[[1400,560],[1330,560],[1240,540],[1204,500]],t,3.1,{fk:true,fc:'#818cf8'});
+    pill(g,'worktree 隔离',560,780,{size:16,a:inv(3.4,3.9,t),bg:'rgba(34,211,238,.12)',bd:'rgba(34,211,238,.55)',c:'#a5f3fc'});
+    pill(g,'后台 30 分钟强制上限',780,780,{size:16,a:inv(3.6,4.1,t),bg:'rgba(251,191,36,.12)',bd:'rgba(251,191,36,.55)',c:'#fde68a'});
+    pill(g,'槽位并发',1000,780,{size:16,a:inv(3.8,4.3,t),bg:'rgba(129,140,248,.12)',bd:'rgba(129,140,248,.55)',c:'#c7d2fe'});
+  }});
+
+/* ---------- 09 Policy 调优飞轮 ---------- */
+winScene({ch:'02 · 准入与授权',title:'Policy 调优飞轮 · observe 先行',dg:'21-loop',st:3.6,trans:['iris',.9],
+  head:'Policy 调优飞轮 · 先只记录 would-accept，人工复核后再放行',
+  music:[['tick','Am'],['lift','F'],['drive','C'],['drive','G'],['anthem','C']],
+  subs:[{at:.3,text:'授权策略不是一次定死的。'},{at:2.2,text:'observe 先行：只记录 would-accept，不真放行。'},{at:4.6,text:'面板复盘、调整规则、再 auto 放行。'},{at:7.2,text:'一个飞轮转下来，误伤越来越少。'}],
+  sfx:[[.2,'whoosh'],[.8,'ding',76],[1.6,'ding',80],[2.4,'ding',84],[3.2,'chime'],[3.6,'whoosh'],[3.8,'pop',620],[8.4,'sparkle']],
+  anim(g,t){
+    const cx=960,cy=540,R=270;
+    g.save();g.translate(cx,cy);g.rotate(t*.2);
+    g.strokeStyle='rgba(34,211,238,.55)';g.lineWidth=4;g.setLineDash([26,34]);g.lineCap='round';
+    g.beginPath();g.arc(0,0,R,0,TAU);g.stroke();g.setLineDash([]);g.restore();
+    const steps=[['observe 记录','would-accept','#22d3ee'],['面板复盘','Evaluation 列表','#60a5fa'],['调整规则','policy_sync / settings','#818cf8'],['auto 放行','inferred 可 accept','#34d399'],['结果回流','rejected 原因','#fbbf24']];
+    steps.forEach(([a,b,c],i)=>{
+      const ang=-Math.PI/2+i*TAU/5+t*.2,x=cx+Math.cos(ang)*R,y=cy+Math.sin(ang)*R;
+      const st=.4+i*.35,p=E.back(inv(st,st+.5,t));if(p<=0)return;
+      g.save();g.translate(x,y);g.scale(p,p);
+      g.beginPath();g.arc(0,0,52,0,TAU);g.fillStyle='#0d2c5e';g.fill();g.lineWidth=3;g.strokeStyle=c;g.stroke();
+      text(g,''+(i+1),0,-6,{size:22,w:900,c});
+      text(g,a,0,22,{size:13.5,w:800,c:'#e0f2fe'});
+      text(g,b,0,86,{size:13,w:600,c:'#8aa4d8'});
+      g.restore();
+      for(let k=0;k<2;k++){const q=fract(t/3+i*.2+k/2);
+        const a0=-Math.PI/2+i*TAU/5,a1=a0+TAU/5;
+        const aa=lerp(a0,a1,q);
+        glow(g,cx+Math.cos(aa)*R,cy+Math.sin(aa)*R,10,c,.7*Math.sin(q*Math.PI));}
+    });
+    hexBrain(g,cx,cy,66,t,{t1:'Policy',t2:'调优飞轮'});
+  }});
+
+/* ---------- 10 orchestrator.sqlite ---------- */
+winScene({ch:'03 · 数据与持久化',title:'第三章 · orchestrator.sqlite：JSON 文档仓储',dg:'09-db-schema',st:3.6,trans:['wipe',.9],
+  head:'orchestrator.sqlite · 九张表全是 key/value，单写者事务',
+  music:[['think','F'],['think','Am'],['tick','C'],['groove','G'],['lift','Am']],
+  subs:[{at:.3,text:'全部状态只有一个 sqlite 文件。'},{at:2.2,text:'九张表全是 key/value，业务字段整体存 JSON。'},{at:4.6,text:'WAL 加 synchronous=FULL，单写者事务保证一致性。'},{at:7.2,text:'Effects 是持久队列，Passes 每 2 秒泵一次。'}],
+  sfx:[[.2,'whoosh'],[.7,'type'],[1.0,'type'],[1.3,'type'],[2.2,'chime'],[3.6,'whoosh'],[3.8,'pop',600],[8.2,'ding']],
+  anim(g,t){
+    hexBrain(g,300,520,84,t,{t1:'SQLite',t2:'orchestrator.db'});
+    const tabs=['kv','trigger','disposition','thread','ticket','decision','outbox','trigger_thread','effect'];
+    tabs.forEach((nm,i)=>{
+      const col=i%3,row=Math.floor(i/3),x=560+col*330,y=270+row*160,st=.6+i*.18,p=E.back(inv(st,st+.45,t));
+      if(p<=0)return;
+      g.save();g.translate(x,y);g.scale(p,p);
+      panel(g,-140,-56,280,112,{fill:'rgba(9,22,50,.94)',stroke:i===8?'rgba(52,211,153,.6)':'rgba(96,165,250,.4)',lw:i===8?2.2:1.5,r:12,shadow:false});
+      text(g,nm,0,-18,{size:19,w:800,mono:true,c:i===8?'#6ee7b7':'#e0f2fe'});
+      pill(g,'value TEXT (JSON)',0,16,{size:11.5,mono:true,bg:'rgba(34,211,238,.1)',bd:'rgba(34,211,238,.35)',c:'#7dd3fc'});
+      g.restore();
+    });
+    pill(g,'WAL · synchronous=FULL',620,760,{size:15,mono:true,a:inv(2.6,3.1,t),bg:'rgba(52,211,153,.12)',bd:'rgba(52,211,153,.5)',c:'#6ee7b7'});
+    pill(g,'单写者事务',880,760,{size:15,mono:true,a:inv(2.8,3.3,t),bg:'rgba(96,165,250,.12)',bd:'rgba(96,165,250,.5)',c:'#93c5fd'});
+    pill(g,'effect.due → Passes 每 2s 泵扫描',1240,760,{size:15,mono:true,a:inv(3.0,3.5,t),bg:'rgba(251,191,36,.12)',bd:'rgba(251,191,36,.5)',c:'#fde68a'});
+  }});
+
+/* ---------- 11 访问矩阵 ---------- */
+winScene({ch:'03 · 数据与持久化',title:'访问矩阵 · 四个主体碰什么',dg:'24-dp-security-matrix',st:3.6,trans:['pixel',.9],
+  head:'访问矩阵 · none < read < write，worker 的凭据是 none',
+  music:[['tick','C'],['tick','F'],['think','Am'],['tense','Dm'],['lift','G']],
+  subs:[{at:.3,text:'四个主体，各自能碰什么，写在一张矩阵里。'},{at:2.6,text:'worker 的 read 只限本 Ticket——sessions.ts 限流。'},{at:5.0,text:'凭据一列，几乎全员 none。'},{at:7.4,text:'面板读者就是同源运营者，可写设置。'}],
+  sfx:[[.2,'whoosh'],[.9,'blip',600],[1.1,'blip',700],[1.3,'blip',800],[1.5,'blip',900],[2.6,'chime'],[3.6,'whoosh'],[3.8,'pop',600],[8.6,'sparkle']],
+  anim(g,t){
+    const rows=['主会话','worker 会话','面板读者','Source 插件'],cols=['Trigger 原文','Thread 上下文','SQLite 状态','Policy / 设置','凭据'];
+    const cells=[['read','read','write','write','none'],['none','read','none','none','none'],['read','read','read','write','none'],['write','read','none','read','none']];
+    const x0=560,y0=250,cw=180,chh=104;
+    cols.forEach((c,j)=>text(g,c,x0+j*cw+cw/2,y0-38,{size:14.5,w:700,c:'#9fb3d9'}));
+    rows.forEach((r,i)=>{
+      text(g,r,x0-24,y0+i*chh+chh/2,{size:16,w:800,align:'right',c:'#dbeafe'});
+      cells[i].forEach((v,j)=>{
+        const st=.5+(i*5+j)*.05,p=E.back(inv(st,st+.35,t));if(p<=0)return;
+        const x=x0+j*cw+4,y=y0+i*chh+4;
+        g.save();g.globalAlpha*=p;
+        const fill=v==='write'?'rgba(16,185,129,.2)':v==='read'?'rgba(34,211,238,.16)':'rgba(51,65,85,.35)';
+        const bd=v==='write'?'rgba(52,211,153,.7)':v==='read'?'rgba(34,211,238,.6)':'rgba(100,116,139,.4)';
+        rr(g,x,y,cw-8,chh-8,10);g.fillStyle=fill;g.fill();g.lineWidth=2;g.strokeStyle=bd;g.stroke();
+        text(g,v,x+(cw-8)/2,y+(chh-8)/2,{size:16,w:800,mono:true,c:v==='write'?'#6ee7b7':v==='read'?'#a5f3fc':'#64748b'});
+        g.restore();
+      });
+    });
+    // 高亮：worker × 凭据
+    const hp=inv(2.8,3.3,t);if(hp>0){ring(g,x0+4*cw+(cw-8)/2,y0+1*chh+(chh-8)/2,t,2.8,1.2,90,'#fbbf24',4);text(g,'worker 只能读本 Ticket',x0+4*cw+(cw-8)/2,y0+1*chh-30,{size:14,w:700,c:'#fcd34d',a:hp});}
+    const hp2=inv(3.4,3.9,t);if(hp2>0){ring(g,x0+4*cw+(cw-8)/2,y0+3*chh+(chh-8)/2,t,3.4,1.2,90,'#fbbf24',4);text(g,'Source 拿不到凭据',x0+4*cw+(cw-8)/2,y0+3*chh-30,{size:14,w:700,c:'#fcd34d',a:hp2});}
+    pill(g,'等级：none < read < write',x0+2.5*cw,y0+4.6*chh,{size:15,mono:true,a:inv(4.2,4.7,t),bg:'rgba(29,78,216,.4)',bd:'rgba(125,211,252,.5)',c:'#bfdbfe'});
+  }});
+
+/* ---------- 12 3.3 万行去哪了（sankey） ---------- */
+winScene({ch:'04 · 代码与测试',title:'第四章 · 3.3 万行去哪了',dg:'45-sankey',st:3.6,trans:['wipe',.9],
+  head:'3.3 万行去哪了 · 源码 / 测试 / 文档的构成（wc -l 实测）',
+  music:[['intro','Am'],['groove','F'],['drive','C'],['build','G'],['anthem','C']],
+  subs:[{at:.3,text:'全项目 32,714 行，不含锁文件。'},{at:2.2,text:'源码 15,043，测试 14,960——几乎 1:1。'},{at:4.8,text:'app 编排最大，core 内核两千行。'},{at:7.6,text:'438 行提示词、15 个可版本化部件。'}],
+  sfx:[[.2,'whoosh'],[.7,'pop',520],[1.2,'pop',640],[2.2,'chime'],[3.6,'whoosh'],[3.8,'pop',600],[8.6,'sparkle']],
+  anim(g,t){
+    const parts=[['源码',15043,'#22d3ee'],['测试',14960,'#34d399'],['文档',1973,'#60a5fa'],['提示词',438,'#fbbf24'],['脚手架',300,'#a78bfa']];
+    const bx=380,by=300,bh=430,tot=32714;
+    nd(g,bx-160,by+bh/2-40,240,80,{t,st:.4,l1:'全部',l2:'32,714 行',ac:'#e2e8f0',s1:22});
+    let yy=by;
+    parts.forEach(([nm,v,c],i)=>{
+      const h2=bh*v/tot,st=.8+i*.35,p=E.o(inv(st,st+.6,t));if(p<=0)return;
+      const hh=h2*p;
+      rr(g,bx+150,yy,260,hh,4);g.fillStyle=hex2a(c,.8);g.fill();
+      text(g,nm,bx+410,yy+hh/2-(h2<40?18:0),{size:17,w:800,align:'left',c});
+      text(g,countUp(g,v,st,t,.9),bx+410,yy+hh/2+(h2<40?18:0)+ (h2<40?-8:10),{size:14,w:600,align:'left',mono:true,c});
+      cubic(g,[bx+152,yy+hh/2],[bx+90,yy+hh/2],[bx+80,by+bh/2],[bx+82,by+bh/2],hex2a(c,.25),h2,{a:.6});
+      yy+=h2+6;
+    });
+    // 源码细分
+    const subs2=[['app 编排',5292],['client 面板',4419],['core 内核',2088],['sources 接入',2059],['executor',838],['infra',347]];
+    const sy0=250,sh2=300,stot=15043;let sy=sy0;
+    const sp2=E.o(inv(2.6,3.2,t));
+    if(sp2>0){
+      subs2.forEach(([nm,v],i)=>{
+        const h2=sh2*v/stot*sp2;
+        rr(g,1150,sy,220,Math.max(4,h2),4);g.fillStyle=hex2a('#22d3ee',.5);g.fill();
+        text(g,nm,1390,sy+Math.max(4,h2)/2-8,{size:13.5,w:700,align:'left',c:'#a5f3fc'});
+        text(g,fmtN(v),1390,sy+Math.max(4,h2)/2+12,{size:12,align:'left',mono:true,c:'#7dd3fc'});
+        sy+=h2+4;
+      });
+      edge(g,[[796,430],[920,380],[1080,380],[1146,380]],t,2.6,{fk:true});
+      pill(g,'源码 15,043 拆分',1150,200,{size:15,align:'left',a:sp2,bg:'rgba(34,211,238,.12)',bd:'rgba(34,211,238,.5)',c:'#a5f3fc'});
+    }
+    pill(g,'wc -l 实测 · 不含锁文件',480,830,{size:15,a:inv(1.6,2.1,t),bg:'rgba(29,78,216,.4)',bd:'rgba(125,211,252,.5)',c:'#bfdbfe'});
+  }});
+
+/* ---------- 13 测试即规格 ---------- */
+winScene({ch:'04 · 代码与测试',title:'测试即规格 · tests ≈ src 1:1',dg:'37-bar',st:3.0,trans:['blinds',.9],
+  head:'测试即规格 · tests 14,960 行 ≈ src 15,043 行',
+  music:[['drive','F'],['drive','G'],['lift','Am'],['anthem','C']],
+  subs:[{at:.3,text:'测试目录 65 个文件、1.5 万行，是全仓库最大的单一目录。'},{at:2.4,text:'和业务源码几乎 1:1——测试即规格。'},{at:4.8,text:'docs.spec 连文档与实现的一致性都校验。'},{at:7.0,text:'改实现不改文档，测试直接红。'}],
+  sfx:[[.2,'whoosh'],[.9,'pop',600],[1.6,'chime'],[3.0,'whoosh'],[3.2,'pop',600],[7.6,'sparkle']],
+  anim(g,t){
+    // 1:1 双柱
+    const h1=380,x1=420,x2=620,by=820;
+    const p1=E.o(inv(.5,1.2,t)),p2=E.o(inv(.8,1.5,t));
+    rr(g,x1-70,by-h1*p1,140,h1*p1,10);g.fillStyle=hex2a('#22d3ee',.75);g.fill();
+    rr(g,x2-70,by-h1*p2,140,h1*p2,10);g.fillStyle=hex2a('#34d399',.75);g.fill();
+    text(g,'src',x1,by+30,{size:19,w:800,c:'#a5f3fc'});
+    text(g,'15,043',x1,by-h1*p1-24,{size:19,w:900,mono:true,c:'#a5f3fc',a:p1});
+    text(g,'tests',x2,by+30,{size:19,w:800,c:'#6ee7b7'});
+    text(g,'14,960',x2,by-h1*p2-24,{size:19,w:900,mono:true,c:'#6ee7b7',a:p2});
+    if(t>1.8){const k=E.back(inv(1.8,2.3,t));g.save();g.translate(520,by-h1-90);g.scale(k,k);
+      pill(g,'≈ 1:1',0,0,{size:26,bg:'rgba(251,191,36,.16)',bd:'rgba(251,191,36,.7)',c:'#fde68a'});g.restore();}
+    // top bars
+    const bars=[['tests/',15],['src/app',5.3],['src/client',4.4],['src/core',2.1],['src/sources',2.1],['docs/',2.0]];
+    bars.forEach(([nm,v],i)=>{
+      const st=1.0+i*.25,p=E.o(inv(st,st+.5,t));if(p<=0)return;
+      const y=300+i*84;
+      text(g,nm,880,y,{size:16,w:700,align:'left',mono:true,c:i===0?'#6ee7b7':'#bfdbfe'});
+      rr(g,1060,y-11,640,22,6);g.fillStyle='rgba(59,130,246,.15)';g.fill();
+      rr(g,1060,y-11,640*p*(v/15),22,6);g.fillStyle=i===0?'#34d399':'#3b82f6';g.fill();
+      text(g,v.toFixed(1)+' k',1720,y,{size:14,w:700,align:'left',mono:true,c:'#7dd3fc'});
+    });
+    pill(g,'tests · 65 个文件 · 最大单一目录',880,820,{size:15,align:'left',a:inv(2.2,2.7,t),bg:'rgba(52,211,153,.12)',bd:'rgba(52,211,153,.5)',c:'#6ee7b7'});
+  }});
+
+/* ---------- 14 提示词效力金字塔 ---------- */
+winScene({ch:'04 · 代码与测试',title:'提示词效力金字塔 · 工具事实最高',dg:'33-pyramid',st:3.6,trans:['iris',.9],
+  head:'提示词效力金字塔 · 越靠近运行时事实，效力越高',
+  music:[['intro','Am'],['think','F'],['lift','C'],['lift','G'],['anthem','C']],
+  subs:[{at:.3,text:'十五个提示词部件，效力分五级。'},{at:2.4,text:'越靠近运行时事实，效力越高。'},{at:4.8,text:'工具事实压过一切：模型先信工具。'},{at:7.4,text:'policy 段随每次模型请求重新生成。'}],
+  sfx:[[.2,'whoosh'],[1.0,'ding',72],[1.7,'ding',76],[2.4,'ding',80],[3.1,'ding',84],[3.8,'chime'],[3.6,'whoosh'],[3.8,'pop',600]],
+  anim(g,t){
+    const lv=[['外部文本','最低 · 依赖外部信任','#64748b'],['团队段','communication / delivery / scope','#60a5fa'],['matched rules','按需注入','#818cf8'],['内置段','随提示词版本化','#22d3ee'],['工具事实','最高效力 · 模型先信工具','#34d399']];
+    const cx=760,cy=660,w0=760,dh=96;
+    lv.forEach(([a,b,c],i)=>{
+      const k=4-i,w2=w0*(.3+.175*k),y=cy-k*dh,st=.5+i*.35,p=E.back(inv(st,st+.5,t));if(p<=0)return;
+      g.save();g.globalAlpha*=p;
+      g.beginPath();g.moveTo(cx-w2/2,y-dh+8);g.lineTo(cx+w2/2,y-dh+8);g.lineTo(cx+w2/2*0+w2/2*.78,y);g.lineTo(cx-w2/2*.78,y);g.closePath();
+      g.fillStyle=hex2a(c,.16);g.fill();g.lineWidth=2.5;g.strokeStyle=hex2a(c,.8);g.stroke();
+      if(i===4){glow(g,cx,y-dh/2,180,'#34d399',.3+.1*Math.sin(t*3));}
+      text(g,a,cx,y-dh/2-8,{size:21,w:900,c:'#f0f9ff'});
+      text(g,b,cx,y-dh/2+18,{size:12.5,w:600,c});
+      g.restore();
+    });
+    pill(g,'15 个可版本化部件',1360,430,{size:16,a:inv(2.8,3.3,t),bg:'rgba(34,211,238,.12)',bd:'rgba(34,211,238,.55)',c:'#a5f3fc'});
+    pill(g,'policy 段 · 每次模型请求重新生成',1360,510,{size:16,a:inv(3.4,3.9,t),bg:'rgba(251,191,36,.12)',bd:'rgba(251,191,36,.55)',c:'#fde68a'});
+    text(g,'效力 ↑',cx,cy+70,{size:16,w:800,c:'#7d9bd4',a:inv(.6,1.1,t)});
+  }});
+
+/* ---------- 15 五维度 · 49 图全景 ---------- */
+S({ch:'05 · 全景',title:'五个维度 · 四十九张图',trans:['wipe',.9],
+  music:[['groove','C'],['groove','Am'],['drive','F'],['drive','G'],['build','Am'],['build','F']],
+  subs:[{at:.3,text:'系统结构、流程过程、数据平台、结构组织、数据图表。'},{at:3.0,text:'五个维度，四十九张图。'},{at:5.6,text:'每张都是可交互 HTML：悬停、动画回放、镜头追踪。'},{at:9.0,text:'在线目录：ruijh.github.io/dsh-superagent-prototype-analysis。'}],
+  sfx:[[.2,'whoosh'],[3.0,'chime'],[6.2,'whoosh'],[12.6,'sparkle']],
+  draw(g,t,s){
+    bg(g,'#071026','#0b1742');dotGrid(g,t,.4);
+    const keys=Object.keys(DG);
+    const COLS=3,CW=520,CHH=322,GX=30,GY=30;
+    const gridW=COLS*CW+(COLS-1)*GX,startX=(W-gridW)/2;
+    const rows=Math.ceil(keys.length/COLS),totalH=rows*(CHH+GY);
+    const pan=ssmooth(inv(.8,13.2,t));
+    const y0=150-pan*Math.max(0,totalH-860);
+    const imOK=loadDone>=loadTotal;
+    for(let i=0;i<keys.length;i++){
+      const d=DG[keys[i]],r=Math.floor(i/COLS),c2=i%COLS;
+      const x=startX+c2*(CW+GX),y=60+r*(CHH+GY)+y0;
+      if(y>H+40||y+CHH<-40)continue;
+      miniWin(g,x,y,CW,CHH,d);
+    }
+    // 顶部维条
+    g.save();g.globalAlpha*=.94;
+    panel(g,40,40,1840,74,{fill:'rgba(5,12,32,.92)',stroke:'rgba(96,165,250,.4)',shadow:false,r:14});
+    text(g,'五个维度 · 49 张 SeeCode 分析图',76,77,{size:26,w:900,align:'left',c:'#e0f2fe'});
+    DIMS.forEach((d2,i)=>pill(g,d2,700+i*236,77,{size:16,bg:'rgba(29,78,216,.35)',bd:'rgba(125,211,252,.45)',c:'#bfdbfe'}));
+    g.restore();
+    if(!imOK)text(g,'截图加载中 '+loadDone+'/'+loadTotal,960,972,{size:15,w:600,c:'#fcd34d'});
+  }});
+function miniWin(g,x,y,w,h,d){
+  panel(g,x,y,w,h,{fill:'#0b1226',stroke:'rgba(125,211,252,.3)',lw:1.5,r:12,shadow:false});
+  const ch=28;
+  rr(g,x+1,y+1,w-2,ch,11);g.fillStyle='#122043';g.fill();rr(g,x+1,y+ch-10,w-2,10,0);g.fillStyle='#122043';
+  ['#f87171','#fbbf24','#34d399'].forEach((c,i)=>{g.fillStyle=c;g.beginPath();g.arc(x+16+i*14,y+ch/2,3.4,0,TAU);g.fill();});
+  text(g,d.no+' · '+d.t,x+62,y+ch/2+1,{size:11.5,w:700,align:'left',c:'#bae6fd'});
+  const ix=x+5,iy=y+ch+4,iw=w-10,ih=h-ch-9;
+  g.save();rr(g,ix,iy,iw,ih,8);g.clip();
+  g.fillStyle='#fafaf8';g.fillRect(ix,iy,iw,ih);
+  const im=d.img;
+  if(im&&im.complete&&im.naturalWidth){
+    const s=Math.min(iw/im.naturalWidth,ih/im.naturalHeight);
+    g.imageSmoothingQuality='high';
+    g.drawImage(im,ix+(iw-im.naturalWidth*s)/2,iy+(ih-im.naturalHeight*s)/2,im.naturalWidth*s,im.naturalHeight*s);
+  }else{text(g,d.no,ix+iw/2,iy+ih/2,{size:40,w:900,c:'#cbd5e1'});}
+  g.restore();
+}
+
+/* ---------- 16 终章 ---------- */
+S({ch:'终章',title:'一个仓库，装下一支队伍',tb:0,trans:['iris',.9],
+  music:[['build','Am'],['build','F'],['anthem','C'],['anthem','G'],['end','C'],['end','C']],
+  subs:[{at:.8,text:'四个关键发现，贯穿全片。'},{at:4.4,text:'两态工单 · 保守准入 · 双会话隔离 · 测试即规格。'},{at:8.8,text:'49 张可交互图表：悬停、回放、镜头追踪。'},{at:12.0,text:'SeeCode —— 把仓库读成一张图。'}],
+  sfx:[[.6,'riser'],[2,'impact'],[4.4,'ding',80],[6.0,'ding',84],[7.6,'ding',88],[9.2,'ding',92],[11.2,'firework'],[11.8,'firework'],[12.6,'confetti'],[13.4,'firework']],
+  draw(g,t,s){
+    bg(g,'#040a1e','#0a1740');stars(g,t,220,5,3,.9);rays(g,960,560,t,24,'#22d3ee',.16+.05*Math.sin(t*.8),.08);
+    glow(g,960,430,480,'#1d4ed8',.4+.15*Math.sin(t*2));
+    hexBrain(g,960,270,72,t,{t1:'Agent',t2:'dsh-superagent'});
+    charsIn(g,'一个仓库，装下一支队伍',960,450,t,1.4,{size:60,w:900,c:'#f0f9ff',glow:30,gc:'rgba(34,211,238,.9)',st:.06,d:.6});
+    FINDS.forEach(([a,b,dgk,c],i)=>{
+      const st=4.2+i*1.3,p=E.back(inv(st,st+.5,t)),x=490+(i%2)*940,y=620+Math.floor(i/2)*180;
+      g.save();g.translate(x,y);g.scale(p,p);
+      panel(g,-430,-74,860,148,{fill:'rgba(10,30,66,.92)',stroke:hex2a(c,.55),lw:2});
+      icon(g,['up','gate','users','clip'][i],-360,0,50,c);
+      text(g,a,-290,-26,{size:30,w:900,align:'left',c:'#f0f9ff'});
+      text(g,b,-290,20,{size:17,w:500,align:'left',c:'#9db8e8'});
+      pill(g,'图 '+DG[dgk].no,x+330,0,{size:14,bg:hex2a(c,.14),bd:hex2a(c,.6),c:'#e0f2fe'});
+      g.restore();
+    });
+    if(t>8.8){
+      const a=inv(8.8,9.4,t);
+      pill(g,'上游 github.com/deepseek-ai/dsh-superagent-prototype',560,940,{size:16,a,bg:'rgba(8,20,48,.92)',bd:'rgba(125,211,252,.5)',c:'#bae6fd'});
+      pill(g,'在线 49 图 · ruijh.github.io/dsh-superagent-prototype-analysis',1360,940,{size:16,a,bg:'rgba(8,40,60,.92)',bd:'rgba(34,211,238,.55)',c:'#a5f3fc'});
+    }
+    [[11.2,300,260,['#22d3ee','#60a5fa','#fff']],[11.8,1620,240,['#34d399','#22d3ee','#fff']],[12.6,360,760,['#fbbf24','#67e8f9','#fff']],[13.4,1560,720,['#818cf8','#22d3ee','#fff']]].forEach(([t0,x,y,cols])=>burst(g,x,y,t,t0,26,240,cols,{life:2.4,size:9}));
+    const T0=s.tt0||s.dur;if(t>T0-1){g.fillStyle=`rgba(4,10,30,${inv(T0-1,T0,t)})`;g.fillRect(0,0,W,H);}
+  }});
+
+/* =====================================================================
+   timeline compile
+   ===================================================================== */
+let acc=0;const SHAKES=[],GLITCH=[];
+SCN.forEach((s,i)=>{s.i=i;s.bar0=acc;s.start=acc*BAR;s.dur=s.music.length*BAR;acc+=s.music.length;s.end=s.start+s.dur;
+  s.tt=s.tb?s.tb/s.music.length:1;s.tt0=s.tb?s.tb*BAR:s.dur;
+  (s.fx?.shake||[]).forEach(([a,amp,d])=>SHAKES.push([s.start+a/s.tt,amp,d]));(s.fx?.glitch||[]).forEach(([a,d,k])=>GLITCH.push([s.start+a/s.tt,d,k]));});
+const DUR=acc*BAR;
+function sceneAt(T){for(let i=SCN.length-1;i>=0;i--)if(T>=SCN[i].start)return i;return 0;}
+function shakeAt(T){let x=0,y=0;for(const [a,amp,d]of SHAKES){if(T>=a&&T<a+d){const k=Math.pow(1-(T-a)/d,2);x+=amp*k*Math.sin(T*93+a);y+=amp*k*Math.cos(T*71+a*3);}}return {x,y};}
+function glitchAt(T){let v=0;for(const [a,d,k]of GLITCH)if(T>=a&&T<a+d)v=Math.max(v,k*(1-(T-a)/d));return v>0&&hash(Math.floor(T*30))>.25?v:0;}
+
+/* =====================================================================
+   render
+   ===================================================================== */
+let LEVEL=0;
+function stage(g,sh){g.setTransform(SC,0,0,SC,OX+sh.x*SC,OY+sh.y*SC);g.globalAlpha=1;g.globalCompositeOperation='source-over';}
+function drawScene(g,s,lt){g.save();try{s.draw(g,lt*(s.tt||1),s);}catch(e){reportErr(e);}g.restore();g.globalAlpha=1;g.globalCompositeOperation='source-over';}
+function mask(g,type,p){
+  const X=OX,Y=OY,SW=W*SC,SH=H*SC;g.beginPath();
+  if(type==='iris')g.arc(X+SW/2,Y+SH/2,E.io(p)*Math.hypot(SW,SH)/2+1,0,TAU);
+  else if(type==='wipe'){const e=E.io(p)*(SW+SH*.5);g.moveTo(X-SH*.5-10,Y-10);g.lineTo(X+e,Y-10);g.lineTo(X+e-SH*.5,Y+SH+10);g.lineTo(X-SH*.5-10,Y+SH+10);g.closePath();}
+  else if(type==='pixel'){const cols=32,rows=18,cw=SW/cols,ch=SH/rows;for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){if(hash(i*31.7+j*7.3)*.8+(i/cols)*.2<p*1.05)g.rect(X+i*cw-.5,Y+j*ch-.5,cw+1,ch+1);}}
+  else if(type==='blinds'){const n=14,sh2=SH/n;for(let j=0;j<n;j++){const q=clamp(p*1.6-j/n*.6);g.rect(X,Y+j*sh2,SW,sh2*E.io(q)+.5);}}
+  else g.rect(X,Y,SW*p,SH);
+  g.clip();
+}
+function hud(g,s,lt,T){
+  if(s.hud===false)return;const a=.9*inv(0,.6,lt);if(a<=0)return;
+  g.save();g.globalAlpha=a;g.fillStyle='#22d3ee';g.fillRect(48,44,6,34);
+  text(g,s.ch,68,61,{size:24,w:800,align:'left',c:'#a5f3fc'});
+  text(g,'dsh-superagent · SeeCode 分析',W-48,61,{size:18,w:600,align:'right',c:'rgba(186,230,253,.55)'});
+  const bins=getBins();for(let i=0;i<12;i++){const h=4+bins[i]*26;g.fillStyle=rgba('#22d3ee',.65);g.fillRect(W-430+i*9,72-h,5,h);}
+  g.fillStyle='rgba(255,255,255,.12)';g.fillRect(48,H-18,W-96,3);g.fillStyle='#22d3ee';g.fillRect(48,H-18,(W-96)*(T/DUR),3);
+  g.restore();
+}
+let GRAIN=null,SCANP=null;
+function makeFx(){
+  GRAIN=[];for(let k=0;k<4;k++){const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d');const id=x.createImageData(256,256);for(let i=0;i<id.data.length;i+=4){const v=Math.random()*255;id.data[i]=id.data[i+1]=id.data[i+2]=v;id.data[i+3]=16;}x.putImageData(id,0,0);GRAIN.push(c);}
+  SCANP=document.createElement('canvas');SCANP.width=2;SCANP.height=4;const sx=SCANP.getContext('2d');sx.fillStyle='rgba(0,0,0,.18)';sx.fillRect(0,0,2,1);
+}
+function post(g,T){
+  g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;g.globalCompositeOperation='source-over';
+  const gi=glitchAt(T);
+  if(gi>0){const fr=Math.floor(T*24);for(let k=0;k<10;k++){const y=hash(k*13.1+fr)*cv.height,h=(6+hash(k*7.7+fr)*60)*DPR,dx=(hash(k*3.3+fr)-.5)*150*gi*DPR*SC;g.drawImage(cv,0,y,cv.width,h,dx,y,cv.width,h);}
+    g.globalCompositeOperation='lighter';g.globalAlpha=.22*gi;g.drawImage(cv,10*gi*DPR,0);g.globalAlpha=1;g.globalCompositeOperation='source-over';
+    for(let k=0;k<4;k++){g.fillStyle=k%2?`rgba(34,211,238,${.18*gi})`:`rgba(59,130,246,${.18*gi})`;g.fillRect(0,hash(k*5+fr)*cv.height,cv.width,(3+hash(k+fr)*20)*DPR);}}
+  const X=OX,Y=OY,SW=W*SC,SH=H*SC;
+  const vg=g.createRadialGradient(X+SW/2,Y+SH/2,SH*.35,X+SW/2,Y+SH/2,Math.hypot(SW,SH)*.62);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.5)');g.fillStyle=vg;g.fillRect(X,Y,SW,SH);
+  if(SCANP){g.fillStyle=g.createPattern(SCANP,'repeat');g.globalAlpha=.5;g.fillRect(X,Y,SW,SH);g.globalAlpha=1;}
+  if(GRAIN){const pt=g.createPattern(GRAIN[Math.floor(T*24)%4],'repeat');g.fillStyle=pt;g.fillRect(X,Y,SW,SH);}
+  g.fillStyle='#000';if(X>0){g.fillRect(0,0,X,cv.height);g.fillRect(X+SW,0,cv.width-X-SW+1,cv.height);}if(Y>0){g.fillRect(0,0,cv.width,Y);g.fillRect(0,Y+SH,cv.width,cv.height-Y-SH+1);}
+}
+function render(T){
+  const g=ctx;g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;g.globalCompositeOperation='source-over';g.fillStyle='#000';g.fillRect(0,0,cv.width,cv.height);
+  const i=sceneAt(T),s=SCN[i],lt=T-s.start,sh=shakeAt(T);
+  stage(g,sh);g.save();g.beginPath();g.rect(0,0,W,H);g.clip();
+  if(i>0&&s.trans&&lt<s.trans[1]){
+    const pv=SCN[i-1];drawScene(g,pv,T-pv.start);
+    const b=bctx;b.setTransform(1,0,0,1,0,0);b.clearRect(0,0,buf.width,buf.height);stage(b,sh);b.save();b.beginPath();b.rect(0,0,W,H);b.clip();drawScene(b,s,lt);b.restore();
+    g.save();g.setTransform(1,0,0,1,0,0);mask(g,s.trans[0],lt/s.trans[1]);g.drawImage(buf,0,0);g.restore();
+  }else drawScene(g,s,lt);
+  g.restore();
+  stage(g,{x:0,y:0});drawSubs(g,s,lt);hud(g,s,lt,T);
+  post(g,T);
+}
+
+/* =====================================================================
+   AUDIO  —— 全部实时合成
+   ===================================================================== */
+let AC=null,MASTER=null,ANALYSER=null,REVERB=null,DELAY=null,NOISE=null,OUT=null,muted=false;const VOL=.85;let FBUF=null;
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+function audioInit(){
+  if(AC)return;const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+  try{AC=new C();}catch(e){AC=null;return;}
+  MASTER=AC.createGain();MASTER.gain.value=muted?0:VOL;
+  const comp=AC.createDynamicsCompressor();comp.threshold.value=-15;comp.knee.value=12;comp.ratio.value=3.5;comp.attack.value=.004;comp.release.value=.2;
+  ANALYSER=AC.createAnalyser();ANALYSER.fftSize=128;ANALYSER.smoothingTimeConstant=.75;FBUF=new Uint8Array(ANALYSER.frequencyBinCount);
+  MASTER.connect(comp);comp.connect(ANALYSER);ANALYSER.connect(AC.destination);
+  const len=Math.floor(AC.sampleRate*2.6),ir=AC.createBuffer(2,len,AC.sampleRate);
+  for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2);}
+  REVERB=AC.createConvolver();REVERB.buffer=ir;const rg=AC.createGain();rg.gain.value=.5;REVERB.connect(rg);rg.connect(MASTER);
+  DELAY=AC.createDelay(1);DELAY.delayTime.value=BEAT*.75;const fb=AC.createGain();fb.gain.value=.32;const dl=AC.createBiquadFilter();dl.type='lowpass';dl.frequency.value=2600;
+  DELAY.connect(dl);dl.connect(fb);fb.connect(DELAY);const dg2=AC.createGain();dg2.gain.value=.4;dl.connect(dg2);dg2.connect(MASTER);
+  NOISE=AC.createBuffer(1,AC.sampleRate*2,AC.sampleRate);const nd2=NOISE.getChannelData(0);for(let i=0;i<nd2.length;i++)nd2[i]=Math.random()*2-1;
+}
+function newOut(){if(!AC)return;if(OUT)killOut(OUT);const dry=AC.createGain(),wet=AC.createGain(),dly=AC.createGain();dry.connect(MASTER);wet.connect(REVERB);dly.connect(DELAY);OUT={dry,wet,dly};}
+function killOut(o){const n=AC.currentTime;for(const k of ['dry','wet','dly']){const p=o[k].gain;p.cancelScheduledValues(n);p.setValueAtTime(p.value,n);p.linearRampToValueAtTime(0,n+.05);setTimeout(()=>{try{o[k].disconnect();}catch(e){}},400);}if(OUT===o)OUT=null;}
+function route(n,o){let x=n;if(o.pan&&AC.createStereoPanner){const p=AC.createStereoPanner();p.pan.value=clamp(o.pan,-1,1);n.connect(p);x=p;}x.connect(OUT.dry);
+  if(o.wet){const gg=AC.createGain();gg.gain.value=o.wet;x.connect(gg);gg.connect(OUT.wet);}if(o.dly){const gg=AC.createGain();gg.gain.value=o.dly;x.connect(gg);gg.connect(OUT.dly);}}
+function envGain(gn,w,o,dur){const p=gn.gain,v=o.v;p.setValueAtTime(0,w);
+  if(o.ramp){p.linearRampToValueAtTime(v,w+dur);p.linearRampToValueAtTime(0,w+dur+.03);}
+  else if(o.swell){p.linearRampToValueAtTime(v,w+dur*.45);p.linearRampToValueAtTime(0,w+dur);}
+  else if(o.decay){const a=o.a||.003;p.linearRampToValueAtTime(v,w+a);p.setTargetAtTime(0,w+a,o.decay);}
+  else{const a=o.a||.005,r=o.r||.06;p.linearRampToValueAtTime(v,w+a);p.setValueAtTime(v,w+Math.max(a,dur-r));p.linearRampToValueAtTime(0,w+Math.max(a+.001,dur));}}
+function stopAt(o,w,dur){return w+(o.decay?Math.max(dur,o.decay*8):dur)+(o.ramp?.05:.02);}
+function voice(o){
+  if(!AC||!OUT)return;const w=o.when,dur=o.dur||.2,os=AC.createOscillator();os.type=o.type||'sine';os.frequency.setValueAtTime(o.f,w);
+  if(o.glide)os.frequency.exponentialRampToValueAtTime(Math.max(1,o.glide.f),w+o.glide.t);if(o.detune)os.detune.value=o.detune;
+  if(o.vib){const l=AC.createOscillator(),lg=AC.createGain();l.frequency.value=o.vib.r||5.5;lg.gain.setValueAtTime(0,w);lg.gain.linearRampToValueAtTime(o.vib.d||5,w+(o.vib.delay||.15));l.connect(lg);lg.connect(os.frequency);l.start(w);l.stop(w+dur+.1);}
+  let n=os;if(o.filt){const b=AC.createBiquadFilter();b.type=o.filt.type||'lowpass';b.frequency.setValueAtTime(o.filt.f,w);b.Q.value=o.filt.q||.7;if(o.filt.to)b.frequency.exponentialRampToValueAtTime(o.filt.to,w+(o.filt.t||dur));n.connect(b);n=b;}
+  const gn=AC.createGain();envGain(gn,w,o,dur);n.connect(gn);route(gn,o);os.start(w);os.stop(stopAt(o,w,dur));
+}
+function noise(o){
+  if(!AC||!OUT)return;const w=o.when,dur=o.dur||.2,s=AC.createBufferSource();s.buffer=NOISE;s.loop=true;
+  const b=AC.createBiquadFilter();b.type=o.type||'bandpass';b.frequency.setValueAtTime(o.filt||1000,w);b.Q.value=o.q||.8;if(o.to)b.frequency.exponentialRampToValueAtTime(o.to,w+dur);
+  const gn=AC.createGain();envGain(gn,w,o,dur);s.connect(b);b.connect(gn);route(gn,o);s.start(w,Math.random()*1.5);s.stop(stopAt(o,w,dur));
+}
+function kick(w,v=.9){voice({type:'sine',f:155,when:w,dur:.45,v,decay:.12,glide:{f:42,t:.12}});noise({when:w,dur:.02,v:v*.12,decay:.004,filt:3500,type:'highpass'});}
+function snare(w,v=.35){noise({when:w,dur:.25,v,decay:.06,filt:1900,q:.7,wet:.18});voice({type:'triangle',f:210,when:w,dur:.12,v:v*.5,decay:.04,glide:{f:130,t:.08}});}
+function clap(w,v=.3){for(let i=0;i<3;i++)noise({when:w+i*.011,dur:i<2?.02:.2,v,decay:i<2?.006:.07,filt:1300,q:1.2,wet:.25});}
+function hat(w,v=.06,open=false){noise({when:w,dur:open?.35:.05,v,decay:open?.09:.016,filt:8000,type:'highpass'});}
+function crash(w,v=.22){noise({when:w,dur:2,v,decay:.6,filt:5000,type:'highpass',wet:.3});}
+function bass(w,m,dur,v=.2){voice({type:'sawtooth',f:mtof(m),when:w,dur,v,a:.004,r:.04,filt:{f:1100,to:240,t:Math.min(dur,.3),q:3}});voice({type:'sine',f:mtof(m-12),when:w,dur,v:v*.9,a:.004,r:.05});}
+function pad(w,ns,dur,v=.04,cut=1500){ns.forEach((m,i)=>{for(const d of [-9,9])voice({type:'sawtooth',f:mtof(m),detune:d,when:w,dur,v,a:.5,r:.7,filt:{f:cut,q:.4},wet:.55,pan:(i/Math.max(1,ns.length-1)-.5)*.7});});}
+function pluck(w,m,v=.05,cut=3800,pan=0){voice({type:'square',f:mtof(m),when:w,dur:.32,v,decay:.07,filt:{f:cut,to:Math.max(200,cut*.2),t:.22,q:2},wet:.28,dly:.25,pan});}
+function bell(w,m,v=.1,dec=1.4){
+  if(!AC||!OUT)return;const f=mtof(m),c=AC.createOscillator(),md=AC.createOscillator(),mg=AC.createGain(),gn=AC.createGain();
+  c.frequency.value=f;md.frequency.value=f*3.5;mg.gain.setValueAtTime(f*2.2,w);mg.gain.setTargetAtTime(0,w,dec*.25);md.connect(mg);mg.connect(c.frequency);
+  gn.gain.setValueAtTime(0,w);gn.gain.linearRampToValueAtTime(v,w+.004);gn.gain.setTargetAtTime(0,w+.004,dec*.3);c.connect(gn);route(gn,{wet:.5});
+  c.start(w);md.start(w);c.stop(w+dec*2.5);md.stop(w+dec*2.5);
+}
+const SFX={
+  impact:w=>{kick(w,1.1);noise({when:w,dur:1.2,v:.35,decay:.35,filt:900,to:80,type:'lowpass',wet:.5});crash(w,.22);},
+  chime:w=>[79,84,88,91].forEach((m,i)=>bell(w+i*.07,m,.08,1.6)),
+  bell:(w,m=88)=>{bell(w,m,.12,1.6);bell(w+.09,m+7,.07,1.3);},
+  whoosh:(w,d=.7)=>noise({when:w,dur:d,v:.2,swell:true,filt:500,to:4000,q:1.2,wet:.3}),
+  pop:(w,f=600)=>voice({type:'sine',f,when:w,dur:.12,v:.2,decay:.05,glide:{f:f*2.2,t:.07}}),
+  ding:(w,m=88)=>{bell(w,m,.12,1.3);bell(w+.09,m+7,.07,1.3);},
+  blip:(w,f=1200)=>voice({type:'square',f,when:w,dur:.06,v:.045,decay:.02,filt:{f:3500}}),
+  tick:(w,f=2400)=>voice({type:'sine',f,when:w,dur:.03,v:.07,decay:.008}),
+  type:w=>noise({when:w,dur:.03,v:.09,decay:.008,filt:3200,q:2}),
+  paper:w=>noise({when:w,dur:.08,v:.09,decay:.025,filt:2200,q:.8}),
+  zap:w=>voice({type:'sawtooth',f:2400,when:w,dur:.32,v:.06,decay:.09,glide:{f:140,t:.28},filt:{f:4000}}),
+  stamp:w=>{voice({type:'sine',f:130,when:w,dur:.35,v:.8,decay:.09,glide:{f:45,t:.2}});noise({when:w,dur:.2,v:.35,decay:.05,filt:700,type:'lowpass'});},
+  err:w=>{for(let i=0;i<3;i++){voice({type:'sawtooth',f:98,when:w+i*.17,dur:.13,v:.12,filt:{f:900}});voice({type:'square',f:104,when:w+i*.17,dur:.13,v:.05,filt:{f:900}});}},
+  alarm:w=>{for(let i=0;i<10;i++)voice({type:'triangle',f:i%2?660:880,when:w+i*.2,dur:.19,v:.08,wet:.2});},
+  sparkle:w=>{for(let i=0;i<12;i++)bell(w+i*.055,86+Math.floor(hash(i*7)*14),.035,.6);},
+  powerup:w=>{for(let i=0;i<10;i++)voice({type:'square',f:mtof(60+[0,4,7,12][i%4]+Math.floor(i/4)*12),when:w+i*.045,dur:.06,v:.04,decay:.03,filt:{f:3000}});},
+  riser:(w,d)=>{noise({when:w,dur:d,v:.16,ramp:true,filt:300,to:7000,q:3,wet:.3});voice({type:'sawtooth',f:110,when:w,dur:d,v:.035,ramp:true,glide:{f:880,t:d},filt:{f:1200,to:6000}});},
+  click:w=>{noise({when:w,dur:.03,v:.2,decay:.006,filt:4000,type:'highpass'});voice({type:'sine',f:1500,when:w,dur:.04,v:.06,decay:.01});},
+  confetti:w=>{for(let i=0;i<12;i++)voice({type:'sine',f:900+hash(i*3)*1800,when:w+hash(i)*.4,dur:.06,v:.035,decay:.02});SFX.pop(w,500);},
+  firework:w=>{noise({when:w,dur:.6,v:.04,filt:2000,to:6000,ramp:true});voice({type:'sine',f:90,when:w+.6,dur:.6,v:.45,decay:.18,glide:{f:40,t:.4}});noise({when:w+.6,dur:.8,v:.18,decay:.2,filt:800,type:'lowpass',wet:.4});
+    for(let i=0;i<14;i++)noise({when:w+.75+hash(i*5+w)*.9,dur:.02,v:.05,decay:.005,filt:5000,type:'highpass',pan:hash(i)*2-1});},
+  scan:(w,d=1.8)=>voice({type:'sine',f:500,when:w,dur:d,v:.025,glide:{f:1500,t:d},wet:.3}),
+  shield:w=>[60,67,72,79,84].forEach((m,i)=>bell(w+i*.06,m,.07,1.8)),
+};
+
+/* ---------------- music ---------------- */
+const CH={C:{r:36,n:[55,60,64,67]},Cmaj7:{r:36,n:[55,59,64,67]},Cmaj9:{r:36,n:[59,62,64,67,71]},Am:{r:45,n:[57,60,64,69]},Am7:{r:45,n:[55,57,60,64]},
+  F:{r:41,n:[53,57,60,65]},Fmaj7:{r:41,n:[52,57,60,64]},G:{r:43,n:[55,59,62,67]},G7:{r:43,n:[53,55,59,62]},Em7:{r:40,n:[55,59,62,64]},
+  Dm7:{r:38,n:[53,57,60,62]},Dm:{r:38,n:[53,57,62,65]},E:{r:40,n:[56,59,64,68]},Eo:{r:40,n:[52,55,58,64]},Bb:{r:46,n:[53,58,62,65]}};
+const EV=[];const at=(t,fn)=>EV.push({t,fn});
+function genBar(b,st,cn,li,mel){
+  const c=CH[cn]||CH.C,t0=b*BAR,N=c.n,R=c.r,A=(s2,fn)=>at(t0+s2*STEP,fn),arp=[0,1,2,3,1,2,3,2],nt=i=>N[arp[i%8]%N.length]+12;
+  switch(st){
+    case 'intro':case 'introR':
+      A(0,w=>pad(w,N,BAR+.25,.035,1100));[0,6,10].forEach((s2,i)=>A(s2,w=>bell(w,N[(i+li)%N.length]+24,.04,1.6)));
+      if(li%2)A(12,w=>bell(w,N[N.length-1]+12,.03,1.4));if(st==='introR')A(0,w=>SFX.riser(w,BAR));break;
+    case 'tick':
+      A(0,w=>pad(w,N,BAR+.2,.03,900));A(0,w=>bass(w,R,BEAT*1.5,.16));A(8,w=>bass(w,R,BEAT*1.5,.13));
+      for(let s2=0;s2<16;s2+=4)A(s2,w=>SFX.tick(w,s2%8?1800:2400));[0,3,6,10,13].forEach((s2,i)=>A(s2,w=>pluck(w,nt(i),.028,1800)));break;
+    case 'lift':
+      A(0,w=>pad(w,N,BAR+.2,.035,1800));for(let s2=0;s2<16;s2+=4)A(s2,w=>kick(w,.75));for(let s2=2;s2<16;s2+=4)A(s2,w=>hat(w,.06,true));
+      for(let s2=0;s2<16;s2+=2)A(s2,w=>bass(w,R+(s2%4?12:0),STEP*1.6,.15));for(let s2=0;s2<16;s2++)A(s2,w=>pluck(w,nt(s2),.03,2600+s2*120,s2%2?.3:-.3));break;
+    case 'groove0':case 'groove':case 'grooveF':
+      A(0,w=>pad(w,N,BAR+.2,.03,1700));A(0,w=>kick(w,.85));A(8,w=>kick(w,.8));A(10,w=>kick(w,.45));if(li%2)A(14,w=>kick(w,.4));
+      if(st!=='groove0'){A(4,w=>clap(w,.24));A(12,w=>clap(w,.24));}
+      for(let s2=2;s2<16;s2+=4)A(s2,w=>hat(w,.055,s2===14));for(let s2=0;s2<16;s2++)if(s2%4!==2)A(s2,w=>hat(w,.016));
+      [0,3,6,8,11,14].forEach(s2=>A(s2,w=>bass(w,R+(s2===6||s2===14?12:0),STEP*1.8,.16)));
+      for(let s2=0;s2<16;s2++)A(s2,w=>pluck(w,nt(s2),.028,3000,s2%2?.35:-.35));
+      if(st==='grooveF')[12,13,14,15].forEach(s2=>A(s2,w=>snare(w,.12+(s2-12)*.06)));break;
+    case 'think':
+      A(0,w=>pad(w,N,BAR+.2,.035,900));A(0,w=>kick(w,.7));A(8,w=>snare(w,.12));A(10,w=>kick(w,.4));
+      for(let s2=0;s2<16;s2++)A(s2,w=>hat(w,s2%4===0?.03:.012));[0,4,8,12].forEach((s2,i)=>A(s2,w=>pluck(w,nt(i*2),.04,900+li*250)));
+      A(0,w=>bass(w,R,BAR*.9,.13));if(li%2===0)A(6,w=>bell(w,N[2]+24,.03,1.2));break;
+    case 'drive':
+      A(0,w=>pad(w,N,BAR+.2,.03,1300));for(let s2=0;s2<16;s2+=4)A(s2,w=>kick(w,.85));A(4,w=>snare(w,.26));A(12,w=>snare(w,.26));
+      for(let s2=0;s2<16;s2++)A(s2,w=>hat(w,s2%2?.018:.04));for(let s2=0;s2<16;s2++)A(s2,w=>bass(w,R+(s2%2?12:0),STEP*.9,.12));
+      for(let s2=0;s2<16;s2+=2)A(s2,w=>pluck(w,nt(s2/2)+(s2>=8?12:0),.028,3600));break;
+    case 'hit':A(0,w=>{crash(w,.22);kick(w,1);pad(w,N,BAR+.4,.045,2400);bass(w,R,BAR*.8,.18);});break;
+    case 'tense':
+      A(0,w=>pad(w,N.map(n=>n-12),BAR+.2,.04,600));A(0,w=>kick(w,.7));A(3,w=>kick(w,.42));A(8,w=>kick(w,.7));A(11,w=>kick(w,.42));
+      for(let s2=0;s2<16;s2+=2)A(s2,w=>SFX.tick(w,s2%4?1500:2000));A(0,w=>bass(w,R,BAR,.11));break;
+    case 'build':{
+      A(0,w=>pad(w,N,BAR+.2,.035,1200+li*500));for(let s2=0;s2<16;s2+=4)A(s2,w=>kick(w,.8));
+      const div=[4,2,2,1,1][li]||1;for(let s2=0;s2<16;s2+=div)A(s2,w=>snare(w,.07+.18*(li/4)+.08*(s2/16)*(li/4)));if(li===4)for(let s2=8;s2<16;s2++)A(s2+.5,w=>snare(w,.22));
+      for(let s2=0;s2<16;s2+=2)A(s2,w=>bass(w,R+(s2%4?12:0),STEP*1.5,.14));for(let s2=0;s2<16;s2++)A(s2,w=>pluck(w,nt(s2)+(li>=3?12:0),.028,2000+li*600+s2*60));break;}
+    case 'anthem':
+      A(0,w=>pad(w,N,BAR+.2,.04,2600));if(li===0||li===4||li===16)A(0,w=>crash(w,.22));
+      for(let s2=0;s2<16;s2+=4)A(s2,w=>kick(w,.9));A(4,w=>{clap(w,.28);snare(w,.14);});A(12,w=>{clap(w,.28);snare(w,.14);});
+      for(let s2=2;s2<16;s2+=4)A(s2,w=>hat(w,.065,true));for(let s2=0;s2<16;s2++)if(s2%4!==2)A(s2,w=>hat(w,.018));
+      for(let s2=0;s2<16;s2+=2)A(s2,w=>bass(w,R+(s2%4?12:0),STEP*1.7,.16));for(let s2=0;s2<16;s2++)A(s2,w=>pluck(w,nt(s2)+12,.02,4200,s2%2?.4:-.4));break;
+    case 'end':
+      A(0,w=>{crash(w,.26);kick(w,1);pad(w,CH.Cmaj9.n,BAR*1.2,.05,2400);bass(w,36,BAR*1.1,.18);});
+      [72,76,79,83,84,88,91,96].forEach((m,i)=>A(i*2,w=>bell(w,m,.05,1.8)));
+      break;
+  }
+  if(mel)mel(t0,mel);
+}
+SCN.forEach(s=>{s.music.forEach(([st,cn,mel],li)=>genBar(s.bar0+li,st,cn,li,mel));
+  (s.sfx||[]).forEach(([a,n,arg])=>at(s.start+a/(s.tt||1),w=>{if(SFX[n])SFX[n](w,arg);}));});
+EV.sort((a,b)=>a.t-b.t);
+function lowerBound(T){let lo=0,hi=EV.length;while(lo<hi){const m=(lo+hi)>>1;if(EV[m].t<T)lo=m+1;else hi=m;}return lo;}
+function getBins(){const out=new Array(12).fill(0);if(!ANALYSER||!playing)return out;ANALYSER.getByteFrequencyData(FBUF);for(let i=0;i<12;i++)out[i]=FBUF[2+i*3]/255;return out;}
+function updLevel(){if(!ANALYSER||!playing){LEVEL*=.9;return;}ANALYSER.getByteFrequencyData(FBUF);let s=0;for(let i=1;i<8;i++)s+=FBUF[i];LEVEL=lerp(LEVEL,s/(7*255),.35);}
+
+/* =====================================================================
+   transport & UI
+   ===================================================================== */
+let started=false,T=0,playing=false,anchorT=0,anchorAc=0,lastTs=0,evIdx=0,dirty=true,errShown=false,acPrev=-1,acStall=0;
+function reportErr(e){if(errShown)return;errShown=true;try{console.error(e);}catch(_){}document.body.dataset.err=String(e&&e.stack||e);}
+function anchor(){anchorT=T;anchorAc=AC?AC.currentTime:0;}
+function play(){
+  audioInit();if(AC&&AC.state!=='running')AC.resume();
+  if(T>=DUR-.05)T=0;newOut();anchor();evIdx=lowerBound(T);playing=true;lastTs=performance.now();ui();
+}
+function pause(){playing=false;if(OUT)killOut(OUT);ui();dirty=true;}
+function seek(x){T=clamp(x,0,DUR-.01);if(playing){newOut();anchor();}evIdx=lowerBound(T);dirty=true;ui();}
+function schedule(){
+  if(!playing||!AC||!OUT||AC.state!=='running')return;const horizon=T+.3;
+  while(evIdx<EV.length&&EV[evIdx].t<horizon){const e=EV[evIdx++];const w=anchorAc+(e.t-anchorT);if(w<AC.currentTime-.03)continue;try{e.fn(Math.max(w,AC.currentTime+.005));}catch(err){console.error(err);}}
+}
+function frame(ts){
+  if(playing){
+    const dt=Math.min(.1,Math.max(0,(ts-lastTs)/1000));
+    if(AC&&AC.state==='running'){const ac=AC.currentTime;if(ac!==acPrev){acPrev=ac;acStall=0;T=anchorT+(ac-anchorAc);}else{acStall+=dt;if(acStall>.25){T+=dt;anchor();}}}
+    else{T+=dt;anchor();}
+    if(T>=DUR){T=DUR-.001;playing=false;if(OUT)killOut(OUT);onEnd();}
+    dirty=true;
+  }
+  lastTs=ts;schedule();updLevel();
+  if(dirty){render(T);dirty=false;ui();}
+  requestAnimationFrame(frame);
+}
+const $=id=>document.getElementById(id);
+const fmt=x=>{x=Math.max(0,x);const m=Math.floor(x/60),s=Math.floor(x%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');};
+const PLAY='<path d="M7 4.5v15l13-7.5z"/>',PAUSE='<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+const VOLON='<path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/>',VOLOFF='<path d="M4 9v6h4l5 4V5L8 9H4zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z"/>';
+function ui(){
+  $('icoPlay').innerHTML=playing?PAUSE:PLAY;$('time').textContent=fmt(T)+' / '+fmt(DUR);
+  const p=T/DUR*100;document.querySelector('#track .fill').style.width=p+'%';document.querySelector('#track .knob').style.left=p+'%';
+  $('chap').textContent=SCN[sceneAt(T)].title;
+}
+function onEnd(){const st=$('start');st.querySelector('h1').innerHTML='<span>两态工单 · 保守准入 · 双会话隔离 · 测试即规格</span>';st.querySelector('p').textContent='dsh-superagent —— SeeCode 49 图分析 · 每张图都可交互回放。';$('go').textContent='↻ 再看一遍';st.classList.remove('hide');document.body.classList.remove('idle');}
+function setupUI(){
+  const tr=$('track');
+  SCN.forEach(s=>{if(!s.start)return;const d=document.createElement('div');d.className='tick';d.style.left=(s.start/DUR*100)+'%';tr.appendChild(d);});
+  const posT=e=>{const r=tr.getBoundingClientRect();return clamp((e.clientX-r.left)/r.width)*DUR;};
+  let drag=false;
+  tr.addEventListener('pointerdown',e=>{drag=true;tr.setPointerCapture(e.pointerId);seek(posT(e));});
+  tr.addEventListener('pointermove',e=>{const x=posT(e),tip=$('tip');tip.style.left=(x/DUR*100)+'%';tip.textContent=fmt(x)+' · '+SCN[sceneAt(x)].title;if(drag)seek(x);});
+  tr.addEventListener('pointerup',()=>{drag=false;});
+  $('bPlay').onclick=()=>{playing?pause():play();};
+  $('bRestart').onclick=()=>{seek(0);if(!playing)play();};
+  $('bMute').onclick=toggleMute;
+  $('bFull').onclick=toggleFull;
+  $('go').onclick=()=>{
+    if(!started||T>=DUR-.1)T=0;started=true;
+    $('start').classList.add('hide');play();
+  };
+  addEventListener('keydown',e=>{
+    if(e.target&&e.target.tagName==='BUTTON'&&(e.key===' '||e.key==='Enter'))return;
+    const k=e.key.toLowerCase();
+    if(k===' '){e.preventDefault();if(!$('start').classList.contains('hide')){$('go').click();return;}playing?pause():play();}
+    else if(k==='arrowright')seek(T+5);else if(k==='arrowleft')seek(T-5);
+    else if(k===']'){const i=sceneAt(T);if(i<SCN.length-1)seek(SCN[i+1].start+.01);}
+    else if(k==='['){const i=sceneAt(T);seek(T-SCN[i].start>1.5?SCN[i].start+.01:SCN[Math.max(0,i-1)].start+.01);}
+    else if(k==='m')toggleMute();else if(k==='f')toggleFull();
+  });
+  let idleT=null;const wake=()=>{document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(()=>{if(playing)document.body.classList.add('idle');},2600);};
+  addEventListener('pointermove',wake);addEventListener('keydown',wake);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)pause();});
+}
+function toggleMute(){muted=!muted;if(MASTER)MASTER.gain.setTargetAtTime(muted?0:VOL,AC.currentTime,.02);$('icoVol').innerHTML=muted?VOLOFF:VOLON;}
+function toggleFull(){const d=document;if(!d.fullscreenElement){(d.documentElement.requestFullscreen||function(){}).call(d.documentElement);}else d.exitFullscreen();}
+
+/* ---------------- boot ---------------- */
+window.addEventListener('error',e=>reportErr(e.error||e.message));
+addEventListener('resize',resize);resize();makeFx();preload();setupUI();
+{const el=document.getElementById('durLen'),dm=Math.floor(DUR/60),ds=String(Math.round(DUR%60)).padStart(2,'0');if(el)el.textContent='时长 '+dm+':'+ds;}
+try{globalThis.__DEMO__={SCN,DUR,seek,render,frame,imgs:()=>({done:loadDone,total:loadTotal})};}catch(_){}
+const q=new URLSearchParams(location.search);
+if(q.has('t')){started=true;T=clamp(parseFloat(q.get('t'))||0,0,DUR-.01);$('start').classList.add('hide');if(q.get('ui')==='0')document.body.classList.add('noui');}
+else T=3.2;
+evIdx=lowerBound(T);ui();render(T);
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
