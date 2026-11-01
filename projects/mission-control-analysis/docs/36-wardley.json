@@ -1,0 +1,92 @@
+{
+ "type": "wardley",
+ "title": "Wardley 演进图",
+ "subtitle": "Agent 编排的战略坐标",
+ "caption": "位置为分析性判断；evo 左=创世 右=商品化，vis 上=用户可见 下=基础设施。",
+ "components": [
+  {
+   "id": "need",
+   "label": "可靠地指挥 Agent 舰队",
+   "evo": 0.5,
+   "vis": 0.95,
+   "anchor": true
+  },
+  {
+   "id": "panel",
+   "label": "控制面板",
+   "evo": 0.55,
+   "vis": 0.85,
+   "focal": true
+  },
+  {
+   "id": "aegis",
+   "label": "Aegis 自动质检",
+   "evo": 0.4,
+   "vis": 0.6
+  },
+  {
+   "id": "mcpgw",
+   "label": "MCP 工具面",
+   "evo": 0.62,
+   "vis": 0.45
+  },
+  {
+   "id": "orch",
+   "label": "拉模式调度",
+   "evo": 0.45,
+   "vis": 0.35
+  },
+  {
+   "id": "gw2",
+   "label": "OpenClaw 网关",
+   "evo": 0.35,
+   "vis": 0.25
+  },
+  {
+   "id": "llmapi",
+   "label": "LLM API",
+   "evo": 0.8,
+   "vis": 0.2
+  },
+  {
+   "id": "next",
+   "label": "Next.js / SQLite",
+   "evo": 0.9,
+   "vis": 0.08
+  }
+ ],
+ "links": [
+  [
+   "need",
+   "panel"
+  ],
+  [
+   "panel",
+   "aegis"
+  ],
+  [
+   "panel",
+   "mcpgw"
+  ],
+  [
+   "aegis",
+   "orch"
+  ],
+  [
+   "orch",
+   "gw2"
+  ],
+  [
+   "gw2",
+   "llmapi"
+  ],
+  [
+   "panel",
+   "next"
+  ],
+  [
+   "orch",
+   "llmapi"
+  ]
+ ]
+}

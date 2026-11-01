@@ -1,0 +1,119 @@
+{
+ "type": "architecture-delta",
+ "title": "架构增量：多租户与 agent-run 协议",
+ "subtitle": "从单人单机面板长出平台骨架",
+ "caption": "迁移 012/021/029 引入 tenants→workspaces 并把 workspace_id 扩散到约 20 张表；迁移 038/046 新增评测与运行事实表。",
+ "evidence": [
+  {
+   "id": "m021",
+   "file": "src/lib/migrations.ts",
+   "line": 590
+  },
+  {
+   "id": "runs",
+   "file": "src/lib/migrations.ts",
+   "line": 1329
+  }
+ ],
+ "nodes": [
+  {
+   "id": "base",
+   "label": "单机任务面板",
+   "sub": "tasks/agents",
+   "change": "changed",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "ws",
+   "label": "tenants + workspaces",
+   "sub": "迁移 012/021",
+   "change": "added",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "iso",
+   "label": "workspace 隔离",
+   "sub": "fail-closed 强制",
+   "change": "added",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "v1",
+   "label": "/api/v1 runs·evals",
+   "sub": "agent-run 协议",
+   "change": "added",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "mem",
+   "label": "memory_fts",
+   "sub": "FTS5 检索",
+   "change": "added",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "super",
+   "label": "Super Admin 面板",
+   "sub": "租户开户流水线",
+   "change": "added",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "db",
+   "label": "SQLite 48 表",
+   "kind": "store",
+   "row": 1,
+   "col": 3
+  }
+ ],
+ "edges": [
+  {
+   "from": "base",
+   "to": "ws",
+   "label": "长出",
+   "change": "added",
+   "kind": "primary"
+  },
+  {
+   "from": "ws",
+   "to": "iso",
+   "change": "added"
+  },
+  {
+   "from": "ws",
+   "to": "super",
+   "change": "added"
+  },
+  {
+   "from": "ws",
+   "to": "v1",
+   "change": "added"
+  },
+  [
+   "base",
+   "mem",
+   "检索增强"
+  ],
+  {
+   "from": "ws",
+   "to": "db",
+   "label": "约 20 表加 workspace_id"
+  },
+  {
+   "from": "v1",
+   "to": "db",
+   "label": "runs ≈40 列"
+  },
+  [
+   "iso",
+   "db"
+  ]
+ ]
+}

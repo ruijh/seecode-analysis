@@ -1,0 +1,151 @@
+{
+ "type": "er",
+ "title": "领域模型：租户到质检",
+ "subtitle": "显式外键少，workspace_id 逻辑隔离是主旋律",
+ "caption": "依据 src/lib/schema.sql 与 migrations.ts；tasks.assigned_to 按 agents.name 弱关联（非外键）。",
+ "evidence": [
+  {
+   "id": "wk",
+   "file": "src/lib/task-dispatch.ts",
+   "line": 1736
+  }
+ ],
+ "nodes": [
+  {
+   "id": "tenant",
+   "label": "Tenant",
+   "fields": [
+    "id PK",
+    "plan_tier",
+    "openclaw_home"
+   ],
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "ws",
+   "label": "Workspace",
+   "fields": [
+    "id PK",
+    "tenant_id FK",
+    "isolation_mode"
+   ],
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "user",
+   "label": "User",
+   "fields": [
+    "id PK",
+    "role",
+    "password_hash"
+   ],
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "task",
+   "label": "Task",
+   "fields": [
+    "id PK",
+    "workspace_id",
+    "status",
+    "assigned_to*",
+    "dispatch_attempts"
+   ],
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "agent",
+   "label": "Agent",
+   "fields": [
+    "name*",
+    "workspace_id*",
+    "status",
+    "runtime_type"
+   ],
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "cmt",
+   "label": "Comment",
+   "fields": [
+    "id PK",
+    "task_id FK"
+   ],
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "qr",
+   "label": "QualityReview",
+   "fields": [
+    "id PK",
+    "task_id FK",
+    "verdict"
+   ],
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "run",
+   "label": "Run",
+   "fields": [
+    "id PK",
+    "cost",
+    "signature",
+    "lineage"
+   ],
+   "row": 1,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "tenant",
+   "ws",
+   "拥有",
+   "many-one"
+  ],
+  [
+   "ws",
+   "task",
+   "隔离",
+   "many-one"
+  ],
+  {
+   "from": "task",
+   "to": "cmt",
+   "label": "讨论",
+   "kind": "primary"
+  },
+  {
+   "from": "task",
+   "to": "qr",
+   "label": "Aegis 裁决",
+   "kind": "primary"
+  },
+  {
+   "from": "task",
+   "to": "agent",
+   "label": "按名字弱关联",
+   "kind": "primary"
+  },
+  [
+   "user",
+   "task",
+   "创建",
+   "many-one"
+  ],
+  [
+   "run",
+   "task",
+   "执行事实",
+   "many-one"
+  ]
+ ]
+}

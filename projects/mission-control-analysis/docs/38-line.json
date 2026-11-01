@@ -1,0 +1,38 @@
+{
+ "type": "line",
+ "title": "每月提交数",
+ "subtitle": "2026-02 至 2026-10（git log 按月）",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；3 月与 7 月两次冲刺贡献全部提交的 84%。",
+ "unit": "提交",
+ "smooth": false,
+ "area": true,
+ "zero": false,
+ "x": [
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10"
+ ],
+ "series": [
+  {
+   "name": "提交数",
+   "values": [
+    31,
+    295,
+    22,
+    18,
+    2,
+    159,
+    9,
+    2,
+    4
+   ],
+   "focal": true
+  }
+ ]
+}

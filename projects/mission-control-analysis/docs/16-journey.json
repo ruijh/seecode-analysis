@@ -1,0 +1,86 @@
+{
+ "type": "journey",
+ "title": "新操作者旅程",
+ "subtitle": "从克隆仓库到放心放手",
+ "caption": "情绪得分为分析性推断；步骤均对应仓库真实入口（README、/setup、panels/*）。",
+ "stages": [
+  {
+   "label": "部署",
+   "steps": [
+    {
+     "label": "docker compose up 或 install.sh",
+     "score": 1
+    },
+    {
+     "label": "健康检查通过",
+     "score": 1
+    }
+   ]
+  },
+  {
+   "label": "建号",
+   "steps": [
+    {
+     "label": "/setup 创建首个 admin",
+     "score": 0
+    },
+    {
+     "label": "自动生成的凭据入 .data",
+     "score": 0
+    }
+   ]
+  },
+  {
+   "label": "接入",
+   "steps": [
+    {
+     "label": "探测五个 runtime",
+     "score": 0
+    },
+    {
+     "label": "装 OpenClaw 网关 + token",
+     "score": -1
+    }
+   ]
+  },
+  {
+   "label": "派发",
+   "steps": [
+    {
+     "label": "写任务卡（角色/优先级）",
+     "score": 1
+    },
+    {
+     "label": "看它被自动路由、抢占、执行",
+     "score": 2
+    }
+   ]
+  },
+  {
+   "label": "观察",
+   "steps": [
+    {
+     "label": "SSE 实时活动流 + PTY 终端",
+     "score": 2
+    },
+    {
+     "label": "成本与 token 报表",
+     "score": 1
+    }
+   ]
+  },
+  {
+   "label": "复盘",
+   "steps": [
+    {
+     "label": "Aegis 驳回意见读一遍",
+     "score": -1
+    },
+    {
+     "label": "安全审计面板跑一遍",
+     "score": 1
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "type": "scatter",
+ "title": "各目录：文件数 × 代码量",
+ "subtitle": "一个点一个顶层目录",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；lib 以 310 个文件承载最多逻辑，messages 用 11 个文件装下 2.4 万行文案。",
+ "xLabel": "文件数",
+ "yLabel": "代码行数（千行）",
+ "zero": false,
+ "points": [
+  {
+   "label": "src/lib",
+   "x": 310,
+   "y": 46.3,
+   "focal": true
+  },
+  {
+   "label": "src/app",
+   "x": 163,
+   "y": 29.7
+  },
+  {
+   "label": "src/components",
+   "x": 90,
+   "y": 43.3
+  },
+  {
+   "label": "messages",
+   "x": 11,
+   "y": 24.3
+  },
+  {
+   "label": "tests",
+   "x": 79,
+   "y": 8.1
+  },
+  {
+   "label": "scripts",
+   "x": 15,
+   "y": 3.9
+  },
+  {
+   "label": "ops",
+   "x": 2,
+   "y": 0.4
+  }
+ ]
+}

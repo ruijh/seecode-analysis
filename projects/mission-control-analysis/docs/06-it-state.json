@@ -1,0 +1,104 @@
+{
+ "type": "it-state",
+ "title": "子系统健康度",
+ "subtitle": "alpha 软件的成熟度地图",
+ "caption": "状态为分析性判断：ok=有测试与迁移护航；risk=README 明示可能破坏性变更；legacy=附属工具。",
+ "budget": "faithful",
+ "nodes": [
+  {
+   "id": "core",
+   "label": "任务派发管线",
+   "sub": "2247 行 · 89 个安全单测",
+   "status": "ok",
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "api",
+   "label": "API 契约",
+   "sub": "253 端点 · parity 门禁",
+   "status": "ok",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "ui",
+   "label": "前端面板",
+   "sub": "36 面板 · 11 语言",
+   "status": "ok",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "secp",
+   "label": "安全工程",
+   "sub": "CSP/限速/设备身份",
+   "status": "ok",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "gw",
+   "label": "OpenClaw 对接",
+   "sub": "协议 v3 · 可选依赖",
+   "status": "risk",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "rt",
+   "label": "runtime 探测/安装",
+   "sub": "脚本下载 + AI 审计",
+   "status": "risk",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "ops",
+   "label": "ops 配置守护",
+   "sub": "多租户专用 · 384 行",
+   "status": "legacy",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "alpha",
+   "label": "整体版本",
+   "sub": "v2.3.0 · alpha 警示",
+   "status": "risk",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "core",
+   "api"
+  ],
+  [
+   "api",
+   "ui"
+  ],
+  [
+   "secp",
+   "api"
+  ],
+  [
+   "gw",
+   "core"
+  ],
+  [
+   "rt",
+   "gw"
+  ],
+  [
+   "ops",
+   "secp"
+  ],
+  [
+   "alpha",
+   "core"
+  ]
+ ]
+}

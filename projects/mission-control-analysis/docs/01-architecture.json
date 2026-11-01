@@ -1,0 +1,139 @@
+{
+ "type": "architecture",
+ "title": "总体架构：本地 Agent 控制平面",
+ "subtitle": "浏览器 → 边缘网关 → API/调度 → SQLite + OpenClaw 网关 → Agent",
+ "caption": "拉模式调度：scheduler 每 60s 扫 SQLite 派发，无消息队列；事件经唯一 SSE 通道推回前端。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "sched",
+   "file": "src/lib/scheduler.ts",
+   "line": 301
+  },
+  {
+   "id": "bus",
+   "file": "src/lib/event-bus.ts",
+   "line": 69
+  }
+ ],
+ "nodes": [
+  {
+   "id": "user",
+   "label": "操作者",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "ui",
+   "label": "控制面板",
+   "sub": "Next.js 16 · 36 面板",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "bus",
+   "label": "事件总线",
+   "sub": "SSE /api/events",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "api",
+   "label": "API 路由",
+   "sub": "253 端点 · 边缘网关",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "db",
+   "label": "SQLite",
+   "sub": "48 表 · WAL",
+   "kind": "store",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "sched",
+   "label": "调度器",
+   "sub": "12 任务 · 60s tick",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "disp",
+   "label": "任务派发",
+   "sub": "task-dispatch",
+   "focal": true,
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "gw",
+   "label": "OpenClaw 网关",
+   "sub": "WS RPC 协议 v3",
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "rt",
+   "label": "Agent 运行时",
+   "sub": "claude/codex/…",
+   "row": 3,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "user",
+   "ui",
+   "浏览器"
+  ],
+  {
+   "from": "ui",
+   "to": "api",
+   "label": "fetch + cookie"
+  },
+  {
+   "from": "api",
+   "to": "bus",
+   "label": "广播事件"
+  },
+  {
+   "from": "bus",
+   "to": "ui",
+   "label": "SSE 实时推送",
+   "kind": "primary"
+  },
+  [
+   "api",
+   "db"
+  ],
+  [
+   "sched",
+   "disp",
+   "60s tick"
+  ],
+  [
+   "disp",
+   "db",
+   "抢占任务"
+  ],
+  {
+   "from": "disp",
+   "to": "gw",
+   "label": "异步派发",
+   "kind": "primary"
+  },
+  {
+   "from": "gw",
+   "to": "rt",
+   "label": "驱动会话"
+  },
+  [
+   "api",
+   "sched",
+   "手动触发"
+  ]
+ ]
+}

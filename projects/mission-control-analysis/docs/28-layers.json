@@ -1,0 +1,65 @@
+{
+ "type": "layers",
+ "title": "纵深防御七层",
+ "subtitle": "一次请求要穿过的防线",
+ "caption": "全部为仓库真实机制：proxy.ts、auth.ts、rate-limit.ts（20 个限速器）、csp.ts、审计三件套。",
+ "layers": [
+  {
+   "label": "边缘",
+   "sub": "Host 白名单 / HSTS",
+   "items": [
+    "MC_ALLOWED_HOSTS",
+    "CSRF Origin 校验"
+   ]
+  },
+  {
+   "label": "认证",
+   "sub": "三种凭据",
+   "items": [
+    "__Host-mc-session",
+    "全局 API key",
+    "agent key mca_"
+   ]
+  },
+  {
+   "label": "授权",
+   "sub": "角色层级",
+   "items": [
+    "requireRole 401/403"
+   ]
+  },
+  {
+   "label": "隔离",
+   "sub": "多租户",
+   "items": [
+    "workspace_id fail-closed",
+    "strict isolation 模式"
+   ]
+  },
+  {
+   "label": "限速",
+   "sub": "进程内 LRU",
+   "items": [
+    "login 5/min",
+    "mutation 60/min …"
+   ]
+  },
+  {
+   "label": "内容安全",
+   "sub": "CSP",
+   "items": [
+    "nonce + strict-dynamic",
+    "frame-ancestors none"
+   ]
+  },
+  {
+   "label": "审计",
+   "sub": "事后追溯",
+   "items": [
+    "security_events",
+    "agent_trust_scores",
+    "mcp_call_log（签名）"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "type": "dp-integration",
+ "title": "运行时数据集成",
+ "subtitle": "两个来源域汇入一个 SQLite + SSE 平台",
+ "caption": "依据 scheduler 的 gateway_agent_sync / claude_session_scan 与 /api/events。",
+ "evidence": [
+  {
+   "id": "ev",
+   "file": "src/app/api/events/route.ts",
+   "line": 12
+  }
+ ],
+ "stages": [
+  {
+   "label": "来源",
+   "plain": true,
+   "kind": "external",
+   "items": [
+    {
+     "id": "oc",
+     "label": "OpenClaw 网关"
+    },
+    {
+     "id": "cc",
+     "label": "Claude Code 本地会话"
+    },
+    {
+     "id": "gh",
+     "label": "GitHub 同步"
+    }
+   ]
+  },
+  {
+   "label": "接入",
+   "items": [
+    {
+     "id": "sync",
+     "label": "60s 扫描器"
+    },
+    {
+     "id": "sse2",
+     "label": "eventBus"
+    }
+   ]
+  },
+  {
+   "label": "平台",
+   "items": [
+    {
+     "id": "sqlite",
+     "label": "SQLite WAL"
+    },
+    {
+     "id": "idx",
+     "label": "workspace 过滤"
+    }
+   ]
+  },
+  {
+   "label": "消费",
+   "items": [
+    {
+     "id": "push",
+     "label": "SSE 推送"
+    },
+    {
+     "id": "api3",
+     "label": "REST/v1 拉取"
+    },
+    {
+     "id": "exp",
+     "label": "导出/备份"
+    }
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "oc",
+   "sync"
+  ],
+  [
+   "cc",
+   "sync"
+  ],
+  [
+   "gh",
+   "sync"
+  ],
+  {
+   "from": "sync",
+   "to": "sqlite",
+   "kind": "primary"
+  },
+  [
+   "sync",
+   "sse2"
+  ],
+  [
+   "sse2",
+   "sqlite"
+  ],
+  [
+   "sqlite",
+   "push"
+  ],
+  [
+   "sqlite",
+   "api3"
+  ],
+  [
+   "sqlite",
+   "exp"
+  ],
+  {
+   "from": "push",
+   "to": "idx",
+   "kind": "primary"
+  }
+ ]
+}

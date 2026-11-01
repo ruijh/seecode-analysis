@@ -1,0 +1,122 @@
+{
+ "type": "deployment",
+ "title": "跑在哪里：三种官方形态",
+ "subtitle": "Docker / hardened overlay / standalone + systemd",
+ "caption": "依据 Dockerfile、docker-compose(.hardened).yml、install.sh 与 scripts/deploy-standalone.sh。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "dk",
+   "file": "Dockerfile",
+   "line": 53
+  },
+  {
+   "id": "hn",
+   "file": "docker-compose.hardened.yml",
+   "line": 15
+  }
+ ],
+ "groups": [
+  {
+   "id": "host",
+   "label": "宿主机",
+   "style": "dashed"
+  },
+  {
+   "id": "ctr",
+   "label": "容器（read_only · 非 root）"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "br",
+   "label": "操作者浏览器",
+   "kind": "external",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "mc",
+   "label": "mission-control 容器",
+   "sub": "node:24-slim · :3000",
+   "group": "ctr",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "vol",
+   "label": "mc-data 卷",
+   "sub": "/app/.data",
+   "kind": "store",
+   "group": "ctr",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "net",
+   "label": "mc-internal",
+   "sub": "hardened：internal 出网禁止",
+   "group": "ctr",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "gw",
+   "label": "OpenClaw 网关",
+   "sub": "127.0.0.1:18789",
+   "group": "host",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "std",
+   "label": "standalone + systemd",
+   "sub": "免 Docker 形态",
+   "group": "host",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "img",
+   "label": "GHCR 多架构镜像",
+   "sub": "amd64/arm64 · SBOM",
+   "kind": "external",
+   "row": 3,
+   "col": 3
+  }
+ ],
+ "edges": [
+  {
+   "from": "br",
+   "to": "mc",
+   "label": "HTTP :3000",
+   "kind": "primary"
+  },
+  [
+   "mc",
+   "vol",
+   "WAL 落盘"
+  ],
+  [
+   "mc",
+   "gw",
+   "host.docker.internal"
+  ],
+  [
+   "net",
+   "mc",
+   "收紧边界"
+  ],
+  [
+   "std",
+   "gw",
+   "直连本机"
+  ],
+  [
+   "img",
+   "mc",
+   "docker run"
+  ]
+ ]
+}

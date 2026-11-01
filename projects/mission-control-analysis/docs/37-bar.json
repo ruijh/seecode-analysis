@@ -1,0 +1,37 @@
+{
+ "type": "bar",
+ "orientation": "horizontal",
+ "title": "各模块代码量",
+ "subtitle": "wc -l 全量统计（含 ts/tsx/json/mjs/cjs）",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；messages 为 11 种语言的翻译 JSON 行数。",
+ "unit": "千行",
+ "sort": "desc",
+ "focal": "src/lib",
+ "axis": "代码行数（千行）",
+ "data": [
+  [
+   "src/lib",
+   46.3
+  ],
+  [
+   "src/components",
+   43.3
+  ],
+  [
+   "src/app",
+   29.7
+  ],
+  [
+   "messages/",
+   24.3
+  ],
+  [
+   "tests/",
+   8.1
+  ],
+  [
+   "scripts/",
+   3.9
+  ]
+ ]
+}

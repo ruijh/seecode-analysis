@@ -1,0 +1,54 @@
+{
+ "type": "venn",
+ "title": "三种执行通道的重叠",
+ "subtitle": "同一个任务状态机的三张面孔",
+ "caption": "划分依据 dispatchAssignedTasks 的决策树与 pickProvider 的 provider 清单。",
+ "sets": [
+  {
+   "id": "gw",
+   "label": "网关通道",
+   "sub": "WS RPC · 异步"
+  },
+  {
+   "id": "api",
+   "label": "API 直连",
+   "sub": "anthropic/openai/minimax/local"
+  },
+  {
+   "id": "cli",
+   "label": "CLI 直连",
+   "sub": "claude/codex 进程"
+  }
+ ],
+ "overlaps": [
+  {
+   "sets": [
+    "gw",
+    "api"
+   ],
+   "label": "agent.wait 对账"
+  },
+  {
+   "sets": [
+    "gw",
+    "cli"
+   ],
+   "label": "宿主机工具链"
+  },
+  {
+   "sets": [
+    "api",
+    "cli"
+   ],
+   "label": "模型分级 Opus/Haiku/Sonnet"
+  },
+  {
+   "sets": [
+    "gw",
+    "api",
+    "cli"
+   ],
+   "label": "统一状态机 + Aegis + 事件广播"
+  }
+ ]
+}

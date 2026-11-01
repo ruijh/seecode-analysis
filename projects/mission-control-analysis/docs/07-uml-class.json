@@ -1,0 +1,116 @@
+{
+ "type": "uml-class",
+ "dir": "TB",
+ "title": "核心接口：派发与适配",
+ "subtitle": "调度器、派发器、网关客户端与框架适配器",
+ "caption": "依据 src/lib/task-dispatch.ts、scheduler.ts、openclaw-gateway.ts、adapters/adapter.ts。",
+ "evidence": [
+  {
+   "id": "ad",
+   "file": "src/lib/adapters/adapter.ts",
+   "line": 60
+  }
+ ],
+ "nodes": [
+  {
+   "id": "sched",
+   "label": "Scheduler",
+   "tag": "«60s tick»",
+   "methods": [
+    "initScheduler()",
+    "tick()",
+    "triggerTask(id)"
+   ],
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "disp",
+   "label": "TaskDispatch",
+   "tag": "«2247 行»",
+   "focal": true,
+   "methods": [
+    "autoRouteInboxTasks()",
+    "dispatchAssignedTasks()",
+    "runAegisReviews()",
+    "reconcile…()"
+   ],
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "gw",
+   "label": "GatewayClient",
+   "methods": [
+    "callOpenClawGateway(method)",
+    "connect.challenge 握手"
+   ],
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "adp",
+   "label": "FrameworkAdapter",
+   "tag": "«interface»",
+   "methods": [
+    "register()",
+    "heartbeat()",
+    "reportTask()",
+    "getAssignments()"
+   ],
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "bus",
+   "label": "EventBus",
+   "methods": [
+    "broadcast(type, data)",
+    "on('server-event')"
+   ],
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "impl",
+   "label": "6 个适配器",
+   "tag": "六种框架",
+   "row": 3,
+   "col": 0
+  }
+ ],
+ "edges": [
+  [
+   "sched",
+   "disp",
+   "触发"
+  ],
+  {
+   "from": "disp",
+   "to": "gw",
+   "label": "WS RPC",
+   "kind": "primary"
+  },
+  [
+   "disp",
+   "bus",
+   "状态广播"
+  ],
+  [
+   "adp",
+   "bus",
+   "转事件"
+  ],
+  [
+   "impl",
+   "adp",
+   "",
+   "implements"
+  ],
+  [
+   "disp",
+   "sched",
+   "被调度"
+  ]
+ ]
+}

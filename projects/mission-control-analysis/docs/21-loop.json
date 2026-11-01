@@ -1,0 +1,30 @@
+{
+ "type": "loop",
+ "title": "调度飞轮",
+ "subtitle": "60 秒一圈的自我强化循环",
+ "caption": "机制依据 scheduler.ts 的 12 个内建任务；每圈 tick 串联路由→派发→对账→质检→孵化。",
+ "center": "任务管线",
+ "centerSub": "60s tick",
+ "steps": [
+  {
+   "label": "扫描 inbox",
+   "sub": "autoRouteInboxTasks"
+  },
+  {
+   "label": "派发 3 条",
+   "sub": "原子抢占"
+  },
+  {
+   "label": "对账异步结果",
+   "sub": "agent.wait"
+  },
+  {
+   "label": "Aegis 质检",
+   "sub": "通过/驳回/失败"
+  },
+  {
+   "label": "孵化周期任务",
+   "sub": "recurring spawn"
+  }
+ ]
+}

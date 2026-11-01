@@ -1,0 +1,34 @@
+{
+ "type": "medallion",
+ "title": "运行数据的分层加工",
+ "subtitle": "原始文件 → 结构化表 → 决策视图",
+ "caption": "层名为数据平台类比；物品均取自仓库真实组件（sessions.json、migrations 018/038、widgets）。",
+ "stages": [
+  {
+   "label": "原始层",
+   "plain": true,
+   "kind": "input",
+   "items": [
+    "网关 JSONL 转录",
+    "cron/runs.json",
+    "audit_log 原始事件"
+   ]
+  },
+  {
+   "label": "结构层",
+   "items": [
+    "agents/sessions 镜像",
+    "token_usage（018）",
+    "runs + eval_runs（038/046）"
+   ]
+  },
+  {
+   "label": "应用层",
+   "items": [
+    "成本报表 / fleet 状态",
+    "eval 排行榜",
+    "15 种仪表盘 widget"
+   ]
+  }
+ ]
+}

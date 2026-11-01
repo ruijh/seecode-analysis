@@ -1,0 +1,54 @@
+{
+ "type": "tree",
+ "title": "仓库目录结构",
+ "subtitle": "814 个跟踪文件的分布",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；括号内为文件数。",
+ "budget": "faithful",
+ "root": {
+  "label": "mission-control/",
+  "children": [
+   {
+    "label": "src/",
+    "sub": "应用本体",
+    "children": [
+     {
+      "label": "lib/ (310)",
+      "sub": "内核：派发/网关/安全"
+     },
+     {
+      "label": "app/ (163)",
+      "sub": "路由 + 151 个 API"
+     },
+     {
+      "label": "components/ (90)",
+      "sub": "36 面板 + 16 widget"
+     },
+     {
+      "label": "store/types/i18n",
+      "sub": "Zustand + 领域类型"
+     }
+    ]
+   },
+   {
+    "label": "tests/ (79)",
+    "sub": "Playwright/集成 spec"
+   },
+   {
+    "label": "scripts/ (15)",
+    "sub": "MCP/CLI/TUI/部署"
+   },
+   {
+    "label": "messages/ (11)",
+    "sub": "11 种语言文案"
+   },
+   {
+    "label": ".github/workflows (8)",
+    "sub": "质量与供应链门禁"
+   },
+   {
+    "label": "ops/ (2)",
+    "sub": "租户配置守护"
+   }
+  ]
+ }
+}

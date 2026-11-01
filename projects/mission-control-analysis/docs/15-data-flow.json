@@ -1,0 +1,116 @@
+{
+ "type": "data-flow",
+ "title": "运行数据的数据流",
+ "subtitle": "一次产生，三路消费",
+ "caption": "会话事实存于网关侧 JSONL 文件；MC 只做镜像与聚合，token_usage 是计费真相源。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "sess",
+   "file": "src/lib/sessions.ts",
+   "line": 68
+  },
+  {
+   "id": "tok",
+   "file": "src/lib/migrations.ts",
+   "line": 493
+  }
+ ],
+ "nodes": [
+  {
+   "id": "jsonl",
+   "label": "网关 JSONL 转录",
+   "kind": "input",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "scan",
+   "label": "gateway_agent_sync",
+   "sub": "60s · 30s 缓存",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "db",
+   "label": "SQLite",
+   "sub": "agents/sessions/token_usage",
+   "kind": "store",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "bus2",
+   "label": "eventBus",
+   "sub": "24 种事件",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "sse",
+   "label": "SSE /api/events",
+   "sub": "workspace 过滤",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "st",
+   "label": "Zustand store",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "wd",
+   "label": "15 种 widget",
+   "kind": "external",
+   "focal": true,
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "cost",
+   "label": "成本报表/导出",
+   "kind": "external",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "jsonl",
+   "to": "scan",
+   "label": "文件镜像",
+   "kind": "primary"
+  },
+  [
+   "scan",
+   "db",
+   "状态回写"
+  ],
+  [
+   "db",
+   "bus2",
+   "变更广播"
+  ],
+  {
+   "from": "bus2",
+   "to": "sse",
+   "label": "server-event",
+   "kind": "primary"
+  },
+  [
+   "sse",
+   "st",
+   "指数退避重连"
+  ],
+  [
+   "st",
+   "wd"
+  ],
+  [
+   "db",
+   "cost",
+   "token 计量"
+  ]
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "type": "state-lifecycle",
+ "title": "网关会话生命周期",
+ "subtitle": "MC 侧镜像文件的活跃度推导",
+ "caption": "依据 sessions.ts：active=60 分钟内有更新，live 状态 5 分钟内 active / 1 小时内 idle；控制操作仅 monitor/pause/terminate。",
+ "evidence": [
+  {
+   "id": "ss",
+   "file": "src/lib/sessions.ts",
+   "line": 176
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "spawn",
+   "label": "spawn",
+   "sub": "sessions_spawn",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "act",
+   "label": "active",
+   "sub": "≤60min 有更新",
+   "focal": true,
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "idle",
+   "label": "idle",
+   "sub": "≤1h 前",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "off",
+   "label": "offline",
+   "sub": "镜像仅存档",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "term",
+   "shape": "end",
+   "sub": "sessions_kill",
+   "row": 1,
+   "col": 0
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "spawn"
+  ],
+  {
+   "from": "spawn",
+   "to": "act",
+   "kind": "primary"
+  },
+  {
+   "from": "act",
+   "to": "idle",
+   "label": "静默",
+   "kind": "primary"
+  },
+  {
+   "from": "idle",
+   "to": "act",
+   "label": "新消息"
+  },
+  {
+   "from": "idle",
+   "to": "off",
+   "label": "超 1 小时"
+  },
+  {
+   "from": "act",
+   "to": "term",
+   "label": "terminate"
+  },
+  {
+   "from": "off",
+   "to": "term",
+   "label": "prune 清理"
+  }
+ ]
+}

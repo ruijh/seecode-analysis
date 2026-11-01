@@ -1,0 +1,128 @@
+{
+ "type": "flowchart",
+ "title": "派发决策树",
+ "subtitle": "一条 assigned 任务的四条出路",
+ "caption": "依据 dispatchAssignedTasks 决策顺序（task-dispatch.ts:1820 起）：claude 会话优先，永不降级回退。",
+ "evidence": [
+  {
+   "id": "dd",
+   "file": "src/lib/task-dispatch.ts",
+   "line": 1820
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "label": "取 3 条 assigned",
+   "shape": "terminal",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "d1",
+   "label": "runtime 是 claude？",
+   "shape": "decision",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "n1",
+   "label": "Claude 基础会话派发",
+   "sub": "dispatchViaClaudeSession",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "d2",
+   "label": "有 target_session？",
+   "shape": "decision",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "n2",
+   "label": "网关 chat.send 定向",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "d3",
+   "label": "直连可用？",
+   "shape": "decision",
+   "row": 3,
+   "col": 1
+  },
+  {
+   "id": "n3",
+   "label": "按模型直连 API",
+   "sub": "Opus/Haiku/Sonnet 分级",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "n4",
+   "label": "网关 agent 新会话",
+   "sub": "异步 runId",
+   "focal": true,
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "e",
+   "label": "attempts≥5 → failed，否则回 assigned",
+   "shape": "terminal",
+   "row": 4,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "d1"
+  ],
+  {
+   "from": "d1",
+   "to": "n1",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d1",
+   "to": "d2",
+   "label": "否"
+  },
+  {
+   "from": "d2",
+   "to": "n2",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d2",
+   "to": "d3",
+   "label": "否"
+  },
+  {
+   "from": "d3",
+   "to": "n3",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d3",
+   "to": "n4",
+   "label": "否",
+   "kind": "primary"
+  },
+  {
+   "from": "n1",
+   "to": "e",
+   "label": "失败"
+  },
+  {
+   "from": "n4",
+   "to": "e",
+   "label": "失败"
+  }
+ ]
+}

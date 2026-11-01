@@ -1,0 +1,58 @@
+{
+ "type": "dp-security-matrix",
+ "title": "权限矩阵：谁能碰什么",
+ "subtitle": "四级角色 + agent 作用域 key",
+ "caption": "等级：none < read < write < admin；agent key 只能访问绑定 workspace 内自己的资源（fail-closed）。",
+ "rows": [
+  "viewer",
+  "operator",
+  "admin",
+  "Super Admin",
+  "agent key (mca_)"
+ ],
+ "cols": [
+  "任务",
+  "Agent 控制",
+  "设置/凭据",
+  "租户管理",
+  "审计日志"
+ ],
+ "cells": [
+  [
+   "read",
+   "none",
+   "none",
+   "none",
+   "read"
+  ],
+  [
+   "write",
+   "read",
+   "none",
+   "none",
+   "read"
+  ],
+  [
+   "write",
+   "write",
+   "write",
+   "none",
+   "write"
+  ],
+  [
+   "admin",
+   "admin",
+   "admin",
+   "admin",
+   "admin"
+  ],
+  [
+   "write",
+   "read",
+   "none",
+   "none",
+   "none"
+  ]
+ ],
+ "focal": "agent key (mca_)"
+}

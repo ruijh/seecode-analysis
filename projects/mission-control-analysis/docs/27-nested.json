@@ -1,0 +1,46 @@
+{
+ "type": "nested",
+ "title": "信任域嵌套",
+ "subtitle": "从公网到一次 PTY 会话",
+ "caption": "边界为分析性描绘：依据 proxy.ts 的 matcher、enforcement/workspace-scope.ts 与 pty-websocket 鉴权。",
+ "budget": "faithful",
+ "root": {
+  "label": "不可信网络",
+  "children": [
+   {
+    "label": "反向代理 / Host 白名单",
+    "sub": "MC_ALLOWED_HOSTS",
+    "children": [
+     {
+      "label": "Next 中间件 proxy.ts",
+      "sub": "CSRF + CSP nonce",
+      "children": [
+       {
+        "label": "角色授权",
+        "sub": "viewer<operator<admin",
+        "children": [
+         {
+          "label": "workspace 边界",
+          "sub": "403 fail-closed",
+          "children": [
+           {
+            "label": "agent 作用域",
+            "sub": "mca_ key 只见自己",
+            "children": [
+             {
+              "label": "PTY 会话",
+              "sub": "/ws/pty 鉴权升级"
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

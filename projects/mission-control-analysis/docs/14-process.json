@@ -1,0 +1,28 @@
+{
+ "type": "process",
+ "title": "五步跑起来",
+ "subtitle": "从克隆到第一次派发",
+ "caption": "依据 README「Start locally」与 install.sh（Node 22+ / pnpm）。",
+ "steps": [
+  {
+   "label": "克隆并安装",
+   "sub": "install.sh --local 或 Docker"
+  },
+  {
+   "label": "创建管理员",
+   "sub": "首次访问 /setup 向导"
+  },
+  {
+   "label": "接入运行时",
+   "sub": "检测/安装 OpenClaw、Claude Code"
+  },
+  {
+   "label": "建 Agent",
+   "sub": "角色 + soul 提示词 + 会话"
+  },
+  {
+   "label": "派发任务",
+   "sub": "面板或 mc CLI / MCP 工具"
+  }
+ ]
+}

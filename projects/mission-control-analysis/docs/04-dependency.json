@@ -1,0 +1,129 @@
+{
+ "type": "dependency",
+ "dir": "TB",
+ "title": "模块依赖（自上而下）",
+ "subtitle": "入口 → 界面/路由 → lib 内核 → 数据与执行接缝",
+ "caption": "依赖方向依据 src/ 目录 import 关系；箭头指向被依赖方。29 个运行时依赖里 next/better-sqlite3/node-pty 是三根支柱。",
+ "budget": "faithful",
+ "nodes": [
+  {
+   "id": "panel",
+   "label": "[[...panel]]",
+   "sub": "单页 catch-all",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "rtapi",
+   "label": "app/api",
+   "sub": "151 route.ts",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "cli",
+   "label": "scripts/ 三入口",
+   "sub": "MCP · CLI · TUI",
+   "kind": "external",
+   "row": 0,
+   "col": 4
+  },
+  {
+   "id": "comp",
+   "label": "components",
+   "sub": "90 组件",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "store",
+   "label": "store",
+   "sub": "Zustand 单仓",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "lib",
+   "label": "src/lib",
+   "sub": "310 文件 · 4.6 万行",
+   "focal": true,
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "sse",
+   "label": "use-server-events",
+   "sub": "SSE 消费",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "db",
+   "label": "db.ts",
+   "sub": "better-sqlite3",
+   "kind": "store",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "gwlib",
+   "label": "openclaw-gateway",
+   "sub": "WS RPC",
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "pty",
+   "label": "pty-manager",
+   "sub": "node-pty",
+   "row": 3,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "panel",
+   "comp"
+  ],
+  [
+   "comp",
+   "store"
+  ],
+  [
+   "store",
+   "sse"
+  ],
+  [
+   "sse",
+   "rtapi",
+   "EventSource"
+  ],
+  [
+   "rtapi",
+   "lib"
+  ],
+  [
+   "panel",
+   "lib"
+  ],
+  [
+   "cli",
+   "rtapi",
+   "REST"
+  ],
+  {
+   "from": "lib",
+   "to": "db",
+   "kind": "primary"
+  },
+  {
+   "from": "lib",
+   "to": "gwlib",
+   "kind": "primary"
+  },
+  [
+   "lib",
+   "pty"
+  ]
+ ]
+}

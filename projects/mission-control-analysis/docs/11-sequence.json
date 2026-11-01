@@ -1,0 +1,102 @@
+{
+ "type": "sequence",
+ "title": "一次异步派发的时序",
+ "subtitle": "从 60s tick 到 Aegis 通过",
+ "caption": "依据 task-dispatch.ts 与 openclaw-gateway.ts：网关调用 fire-and-forget，靠 metadata.async_state 对账。",
+ "evidence": [
+  {
+   "id": "rc",
+   "file": "src/lib/task-dispatch.ts",
+   "line": 509
+  }
+ ],
+ "numbered": true,
+ "participants": [
+  {
+   "id": "sch",
+   "label": "调度器"
+  },
+  {
+   "id": "disp",
+   "label": "派发器",
+   "kind": "focal"
+  },
+  {
+   "id": "db",
+   "label": "SQLite"
+  },
+  {
+   "id": "gw",
+   "label": "OpenClaw 网关"
+  },
+  {
+   "id": "ag",
+   "label": "Agent 会话"
+  },
+  {
+   "id": "ui",
+   "label": "面板 (SSE)",
+   "kind": "external"
+  }
+ ],
+ "messages": [
+  [
+   "sch",
+   "disp",
+   "tick：task_dispatch 到期"
+  ],
+  [
+   "disp",
+   "db",
+   "UPDATE assigned→in_progress（原子抢占）"
+  ],
+  [
+   "disp",
+   "gw",
+   "WS connect.challenge 握手"
+  ],
+  [
+   "gw",
+   "ag",
+   "agent：新会话执行任务"
+  ],
+  [
+   "gw",
+   "disp",
+   "返回 runId → metadata"
+  ],
+  [
+   "disp",
+   "ui",
+   "broadcast task.updated"
+  ],
+  [
+   "disp",
+   "gw",
+   "reconcile：agent.wait 轮询"
+  ],
+  [
+   "gw",
+   "ag",
+   "等待运行结束"
+  ],
+  [
+   "ag",
+   "disp",
+   "结果 → status=review"
+  ],
+  [
+   "disp",
+   "db",
+   "Aegis 裁决 APPROVED → done"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "loop",
+   "label": "60s 一次直到完成",
+   "from": 6,
+   "to": 8
+  }
+ ]
+}

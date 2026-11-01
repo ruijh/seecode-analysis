@@ -1,0 +1,73 @@
+{
+ "type": "high-level",
+ "title": "Mission Control 是什么",
+ "subtitle": "给非工程师的 30 秒版本",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "mc",
+   "label": "Mission Control",
+   "sub": "本地仪表盘",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "fleet",
+   "label": "Agent 舰队",
+   "sub": "OpenClaw / Claude Code / Codex",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "gw",
+   "label": "网关",
+   "sub": "本机 18789",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "db",
+   "label": "账本",
+   "sub": "SQLite 单文件",
+   "kind": "store",
+   "row": 2,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "mc",
+   "派任务"
+  ],
+  {
+   "from": "mc",
+   "to": "fleet",
+   "label": "调度执行",
+   "kind": "primary"
+  },
+  [
+   "mc",
+   "gw",
+   "连接"
+  ],
+  [
+   "mc",
+   "db",
+   "记账"
+  ],
+  [
+   "fleet",
+   "mc",
+   "回传结果"
+  ]
+ ]
+}

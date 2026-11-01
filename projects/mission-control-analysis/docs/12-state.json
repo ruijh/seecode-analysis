@@ -1,0 +1,131 @@
+{
+ "type": "state",
+ "title": "任务状态机",
+ "subtitle": "九个状态、四处自动回退",
+ "caption": "依据 schema.sql:192 枚举与 task-dispatch.ts 各转换点；done 需 Aegis APPROVED 或人工豁免。",
+ "evidence": [
+  {
+   "id": "qr",
+   "file": "src/lib/task-dispatch.ts",
+   "line": 1541
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "inbox",
+   "label": "inbox",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "asg",
+   "label": "assigned",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "prog",
+   "label": "in_progress",
+   "focal": true,
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "rev",
+   "label": "review",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "qual",
+   "label": "quality_review",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "done",
+   "shape": "end",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "fail",
+   "label": "failed",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "wait",
+   "label": "awaiting_owner",
+   "row": 2,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "inbox",
+   "创建"
+  ],
+  {
+   "from": "inbox",
+   "to": "asg",
+   "label": "自动路由打分",
+   "kind": "primary"
+  },
+  {
+   "from": "asg",
+   "to": "prog",
+   "label": "原子抢占",
+   "kind": "primary"
+  },
+  {
+   "from": "prog",
+   "to": "rev",
+   "label": "结果回传",
+   "kind": "primary"
+  },
+  {
+   "from": "rev",
+   "to": "qual",
+   "label": "Aegis 接管"
+  },
+  {
+   "from": "qual",
+   "to": "done",
+   "label": "APPROVED",
+   "kind": "primary"
+  },
+  {
+   "from": "qual",
+   "to": "asg",
+   "label": "驳回 ≤3 次附反馈"
+  },
+  {
+   "from": "qual",
+   "to": "fail",
+   "label": "驳回 >3 次"
+  },
+  {
+   "from": "prog",
+   "to": "asg",
+   "label": "stale 回收（离线 10min）"
+  },
+  {
+   "from": "prog",
+   "to": "wait",
+   "label": "等待所有者"
+  },
+  {
+   "from": "asg",
+   "to": "fail",
+   "label": "attempts≥5"
+  }
+ ]
+}

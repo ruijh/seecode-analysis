@@ -1,0 +1,41 @@
+{
+ "type": "fishbone",
+ "title": "根因分析：任务为什么会派发失败",
+ "subtitle": "task-dispatch 的五类已知失败面",
+ "caption": "原因为仓库可见事实的归纳：重试上限、预算上限与 stale 回收均写死在代码里。",
+ "effect": "派发失败 / 回退重试",
+ "categories": [
+  {
+   "label": "网关",
+   "focal": true,
+   "causes": [
+    "WS 18789 不可达",
+    "connect.challenge 失败",
+    "旧协议方法降级"
+   ]
+  },
+  {
+   "label": "凭据",
+   "causes": [
+    "agent key 无 scope",
+    "OAuth 凭据过期",
+    "gateway token 未配"
+   ]
+  },
+  {
+   "label": "预算",
+   "causes": [
+    "CLI 预算上限 100 USD",
+    "attempts≥5 熔断"
+   ]
+  },
+  {
+   "label": "执行端",
+   "causes": [
+    "agent 离线 10 分钟",
+    "并发上限 3 占满",
+    "CLI 白名单拒绝工具"
+   ]
+  }
+ ]
+}

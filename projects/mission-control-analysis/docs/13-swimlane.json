@@ -1,0 +1,112 @@
+{
+ "type": "swimlane",
+ "title": "一次任务的全流程（跨职能）",
+ "subtitle": "操作者只碰两头，中间全自动",
+ "caption": "依据 api/tasks/route.ts、scheduler.ts、task-dispatch.ts 与 /api/sessions/[id]/control。",
+ "budget": "faithful",
+ "lanes": [
+  {
+   "id": "op",
+   "label": "操作者"
+  },
+  {
+   "id": "api",
+   "label": "API/网关层"
+  },
+  {
+   "id": "sch",
+   "label": "调度器"
+  },
+  {
+   "id": "ag",
+   "label": "Agent"
+  },
+  {
+   "id": "ae",
+   "label": "Aegis 质检"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "create",
+   "label": "创建任务",
+   "lane": "op",
+   "col": 0
+  },
+  {
+   "id": "valid",
+   "label": "校验落库+广播",
+   "lane": "api",
+   "col": 1
+  },
+  {
+   "id": "route",
+   "label": "自动路由打分",
+   "lane": "sch",
+   "col": 2
+  },
+  {
+   "id": "disp",
+   "label": "原子抢占派发",
+   "lane": "sch",
+   "col": 3,
+   "focal": true
+  },
+  {
+   "id": "exec",
+   "label": "会话执行",
+   "lane": "ag",
+   "col": 4
+  },
+  {
+   "id": "back",
+   "label": "结果写回 review",
+   "lane": "sch",
+   "col": 5
+  },
+  {
+   "id": "judge",
+   "label": "裁决 APPROVED/驳回",
+   "lane": "ae",
+   "col": 6
+  },
+  {
+   "id": "notify",
+   "label": "收通知/看复盘",
+   "lane": "op",
+   "col": 7
+  }
+ ],
+ "edges": [
+  [
+   "create",
+   "valid"
+  ],
+  [
+   "valid",
+   "route"
+  ],
+  {
+   "from": "route",
+   "to": "disp",
+   "kind": "primary"
+  },
+  {
+   "from": "disp",
+   "to": "exec",
+   "kind": "primary"
+  },
+  [
+   "exec",
+   "back"
+  ],
+  [
+   "back",
+   "judge"
+  ],
+  [
+   "judge",
+   "notify"
+  ]
+ ]
+}

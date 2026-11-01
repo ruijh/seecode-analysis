@@ -1,0 +1,103 @@
+{
+ "type": "treemap",
+ "title": "253 个 API 端点的构成",
+ "subtitle": "openapi.json 按 tag 统计",
+ "caption": "来源 openapi.json（v1.3.0，144 path / 253 operation），由 api:parity 门禁与路由双向对账。",
+ "unit": "端点",
+ "focal": "Admin",
+ "data": [
+  {
+   "label": "运维面",
+   "children": [
+    [
+     "Admin",
+     69
+    ],
+    [
+     "Monitoring",
+     15
+    ],
+    [
+     "System/Config/Docs",
+     5
+    ]
+   ]
+  },
+  {
+   "label": "Agent 面",
+   "children": [
+    [
+     "Agents",
+     31
+    ],
+    [
+     "API/PTY",
+     29
+    ],
+    [
+     "Connections",
+     3
+    ]
+   ]
+  },
+  {
+   "label": "业务面",
+   "children": [
+    [
+     "Projects",
+     14
+    ],
+    [
+     "Tasks",
+     13
+    ],
+    [
+     "Pipelines/Workflows",
+     10
+    ],
+    [
+     "Chat/Mentions",
+     6
+    ]
+   ]
+  },
+  {
+   "label": "平台面",
+   "children": [
+    [
+     "Auth",
+     12
+    ],
+    [
+     "Sessions",
+     10
+    ],
+    [
+     "Super Admin",
+     10
+    ],
+    [
+     "Tokens/Quality/Releases",
+     7
+    ]
+   ]
+  },
+  {
+   "label": "扩展面",
+   "children": [
+    [
+     "Webhooks",
+     8
+    ],
+    [
+     "Skills",
+     7
+    ],
+    [
+     "Alerts",
+     4
+    ]
+   ]
+  }
+ ]
+}

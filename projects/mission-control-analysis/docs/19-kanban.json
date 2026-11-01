@@ -1,0 +1,73 @@
+{
+ "type": "kanban",
+ "title": "派发管线看板",
+ "subtitle": "每一列的自动规则与容量",
+ "caption": "列名为真实状态枚举；卡片内容为 task-dispatch.ts 中的自动规则（容量数字为代码常量）。",
+ "columns": [
+  {
+   "label": "inbox",
+   "cards": [
+    {
+     "label": "自动路由每轮取 5 条",
+     "tag": "打分"
+    },
+    {
+     "label": "角色亲和 10 + 能力 15 + 空闲 5",
+     "tag": "打分"
+    }
+   ]
+  },
+  {
+   "label": "assigned",
+   "cards": [
+    {
+     "label": "每轮派发 3 条",
+     "tag": "批量"
+    },
+    {
+     "label": "条件 UPDATE 原子抢占",
+     "tag": "防双派发"
+    }
+   ]
+  },
+  {
+   "label": "in_progress",
+   "cards": [
+    {
+     "label": "单 agent 并发上限 3",
+     "tag": "容量"
+    },
+    {
+     "label": "离线 10 分钟被回收",
+     "tag": "stale"
+    }
+   ]
+  },
+  {
+   "label": "review",
+   "cards": [
+    {
+     "label": "Aegis 每 60s 取 3 条",
+     "tag": "质检"
+    },
+    {
+     "label": "先置 quality_review 防重入",
+     "tag": "幂等"
+    }
+   ]
+  },
+  {
+   "label": "done",
+   "cards": [
+    {
+     "label": "需 APPROVED 才可进入",
+     "tag": "门槛"
+    },
+    {
+     "label": "驳回 ≤3 次回 assigned",
+     "tag": "回路"
+    }
+   ]
+  }
+ ]
+}

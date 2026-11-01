@@ -1,0 +1,59 @@
+{
+ "type": "gantt",
+ "title": "开发阶段甘特图",
+ "subtitle": "按月度提交强度划分四个阶段",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；阶段边界为提交量拐点（2 月 31 → 3 月 295 → 6 月 2 → 7 月 159）。",
+ "today": "2026-11-01",
+ "tasks": [
+  {
+   "id": "a",
+   "label": "起步：面板与派发内核",
+   "section": "2026 上半年",
+   "start": "2026-02-23",
+   "end": "2026-03-31",
+   "done": true
+  },
+  {
+   "id": "b",
+   "label": "安全体系与质量门禁",
+   "section": "2026 上半年",
+   "start": "2026-03-15",
+   "end": "2026-04-30",
+   "done": true
+  },
+  {
+   "id": "c",
+   "label": "平台期修补",
+   "section": "2026 上半年",
+   "start": "2026-05-01",
+   "end": "2026-06-30",
+   "done": true
+  },
+  {
+   "id": "d",
+   "label": "二次冲刺：多租户/评测",
+   "section": "2026 下半年",
+   "start": "2026-07-01",
+   "end": "2026-07-31",
+   "done": true
+  },
+  {
+   "id": "e",
+   "label": "维护与 v2.3.0 收口",
+   "section": "2026 下半年",
+   "start": "2026-08-01",
+   "end": "2026-10-28",
+   "done": true
+  }
+ ],
+ "milestones": [
+  {
+   "label": "首次提交",
+   "date": "2026-02-23"
+  },
+  {
+   "label": "v2.3.0",
+   "date": "2026-10-28"
+  }
+ ]
+}

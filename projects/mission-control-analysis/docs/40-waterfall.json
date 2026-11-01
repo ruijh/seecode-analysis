@@ -1,0 +1,29 @@
+{
+ "type": "waterfall",
+ "title": "12.9 万行是怎么堆出来的",
+ "subtitle": "按目录累加到总量",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）；不含锁文件与 openapi.json。",
+ "unit": "千行",
+ "steps": [
+  [
+   "src/lib",
+   46.3
+  ],
+  [
+   "src/components",
+   43.3
+  ],
+  [
+   "src/app",
+   29.7
+  ],
+  [
+   "tests/",
+   8.1
+  ],
+  [
+   "store/types/i18n",
+   1.4
+  ]
+ ]
+}

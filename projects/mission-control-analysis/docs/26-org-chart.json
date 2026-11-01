@@ -1,0 +1,45 @@
+{
+ "type": "org-chart",
+ "title": "Agent 编队「组织架构」",
+ "subtitle": "把控制平面当成一家公司来看",
+ "caption": "人员无关；角色划分依据 coordinator-routing、task-dispatch 的 Aegis 与 agent 类型字段。",
+ "budget": "faithful",
+ "root": {
+  "label": "操作者（你）",
+  "sub": "唯一信任锚",
+  "children": [
+   {
+    "label": "协调员 Agent",
+    "sub": "收件箱路由中枢",
+    "children": [
+     {
+      "label": "Worker Agents",
+      "sub": "main/subagent"
+     },
+     {
+      "label": "Cron Agents",
+      "sub": "定时任务"
+     },
+     {
+      "label": "Group Agents",
+      "sub": "多 agent 群聊"
+     }
+    ]
+   },
+   {
+    "label": "Aegis 质检官",
+    "sub": "APPROVED/REJECTED"
+   },
+   {
+    "label": "OpenClaw 网关",
+    "sub": "基础设施 · 18789",
+    "children": [
+     {
+      "label": "会话注册表",
+      "sub": "sessions.json"
+     }
+    ]
+   }
+  ]
+ }
+}

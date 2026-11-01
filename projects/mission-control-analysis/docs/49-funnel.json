@@ -1,0 +1,29 @@
+{
+ "type": "funnel",
+ "title": "单轮调度容量漏斗",
+ "subtitle": "每 60 秒 tick 的真实批量常量",
+ "caption": "数值为代码常量：autoRoute 每轮 5 条、派发与 Aegis 各 3 条；容量是为单人单机设计的保守节流。",
+ "levels": [
+  {
+   "label": "inbox 扫描",
+   "value": 5
+  },
+  {
+   "label": "本轮派发",
+   "value": 3
+  },
+  {
+   "label": "并发执行",
+   "value": 3
+  },
+  {
+   "label": "Aegis 抽检",
+   "value": 3
+  },
+  {
+   "label": "APPROVED 落账",
+   "value": 1,
+   "sub": "门槛制"
+  }
+ ]
+}

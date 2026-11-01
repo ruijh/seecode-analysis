@@ -1,0 +1,101 @@
+{
+ "type": "isometric-plan",
+ "title": "代码平面图",
+ "subtitle": "如果 src 是一个园区",
+ "caption": "面积为行数的示意比例；房间名=模块（行数来自 wc -l 统计）。",
+ "plate": {
+  "w": 960,
+  "d": 480
+ },
+ "rooms": [
+  {
+   "label": "lib 车间",
+   "sub": "内核 4.6 万行 · 310 文件",
+   "x": 20,
+   "y": 20,
+   "w": 300,
+   "d": 250,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "components 展厅",
+   "sub": "4.3 万行 · 90 组件",
+   "x": 340,
+   "y": 20,
+   "w": 300,
+   "d": 200,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "app 值班大厅",
+   "sub": "3.0 万行 · 151 个 API 窗口",
+   "x": 660,
+   "y": 20,
+   "w": 270,
+   "d": 220,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "tests 演武场",
+   "sub": "8.1 千行 spec",
+   "x": 340,
+   "y": 240,
+   "w": 180,
+   "d": 130,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "scripts 门房",
+   "sub": "MCP/CLI/TUI 3.9 千行",
+   "x": 540,
+   "y": 240,
+   "w": 130,
+   "d": 130,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "messages 翻译室",
+   "sub": "11 语言 · 2.4 万行",
+   "x": 690,
+   "y": 260,
+   "w": 240,
+   "d": 110,
+   "walls": true,
+   "door": "W"
+  }
+ ],
+ "boxes": [
+  {
+   "x": 60,
+   "y": 300,
+   "w": 70,
+   "d": 40,
+   "h": 14,
+   "kind": "desk",
+   "label": "调度器"
+  },
+  {
+   "x": 160,
+   "y": 300,
+   "w": 70,
+   "d": 40,
+   "h": 14,
+   "kind": "desk",
+   "label": "派发器"
+  },
+  {
+   "x": 260,
+   "y": 300,
+   "w": 50,
+   "d": 40,
+   "h": 14,
+   "kind": "rack",
+   "label": "48 表"
+  }
+ ]
+}

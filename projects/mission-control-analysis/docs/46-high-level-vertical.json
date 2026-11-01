@@ -1,0 +1,83 @@
+{
+ "type": "high-level-vertical",
+ "title": "Mission Control 是什么（纵向）",
+ "subtitle": "窄幅布局，自上而下",
+ "caption": "数据来源：github.com/builderz-labs/mission-control（2026-11-01 本地克隆 + git/openapi 统计）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "mc",
+   "label": "Mission Control",
+   "sub": "本地控制平面",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "dispatch",
+   "label": "自动派发",
+   "sub": "60s tick",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "watch",
+   "label": "实时观察",
+   "sub": "SSE + 终端",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "audit",
+   "label": "质检与审计",
+   "sub": "Aegis + 安全面板",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "fleet",
+   "label": "Agent 舰队",
+   "sub": "OpenClaw / Claude / Codex",
+   "row": 3,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "mc",
+   "打开面板"
+  ],
+  {
+   "from": "mc",
+   "to": "dispatch",
+   "kind": "primary"
+  },
+  {
+   "from": "mc",
+   "to": "watch",
+   "kind": "primary"
+  },
+  [
+   "mc",
+   "audit"
+  ],
+  {
+   "from": "dispatch",
+   "to": "fleet",
+   "label": "派任务",
+   "kind": "primary"
+  },
+  [
+   "fleet",
+   "watch",
+   "回传状态"
+  ]
+ ]
+}

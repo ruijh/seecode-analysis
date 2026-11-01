@@ -1,0 +1,78 @@
+{
+ "type": "sequence-oauth",
+ "title": "登录与会话校验",
+ "subtitle": "密码登录 → 哈希会话 → 边缘放行",
+ "caption": "依据 auth.ts、session-cookie.ts 与 proxy.ts：token 只存 SHA-256 哈希，有效期 7 天。",
+ "evidence": [
+  {
+   "id": "ck",
+   "file": "src/lib/session-cookie.ts",
+   "line": 59
+  }
+ ],
+ "participants": [
+  {
+   "id": "br",
+   "label": "浏览器",
+   "kind": "external"
+  },
+  {
+   "id": "mw",
+   "label": "中间件 proxy.ts"
+  },
+  {
+   "id": "auth",
+   "label": "auth.ts",
+   "kind": "focal"
+  },
+  {
+   "id": "db3",
+   "label": "SQLite"
+  }
+ ],
+ "messages": [
+  [
+   "br",
+   "mw",
+   "POST /api/auth/login"
+  ],
+  [
+   "mw",
+   "auth",
+   "放行（免认证名单）"
+  ],
+  [
+   "auth",
+   "auth",
+   "loginLimiter 5/min + scrypt 校验"
+  ],
+  [
+   "auth",
+   "db3",
+   "createSession：只存 SHA-256 哈希"
+  ],
+  [
+   "auth",
+   "br",
+   "__Host-mc-session（7 天，httpOnly）"
+  ],
+  [
+   "br",
+   "mw",
+   "后续请求带 cookie"
+  ],
+  [
+   "mw",
+   "db3",
+   "形状校验 → 路由层查哈希比对"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "opt",
+   "label": "7 天过期 → 重新登录",
+   "from": 5,
+   "to": 6
+  }
+ ]
+}

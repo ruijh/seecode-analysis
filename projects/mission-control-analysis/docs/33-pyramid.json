@@ -1,0 +1,28 @@
+{
+ "type": "pyramid",
+ "title": "任务优先级金字塔",
+ "subtitle": "critical 永远先被派发",
+ "caption": "层级为 schema.sql 的 priority 枚举；派发按 critical→low 排序（task-dispatch.ts:1728）。",
+ "unit": "级",
+ "levels": [
+  {
+   "label": "critical",
+   "value": 1,
+   "sub": "最先抢占",
+   "focal": true
+  },
+  {
+   "label": "high",
+   "value": 2
+  },
+  {
+   "label": "medium",
+   "value": 3,
+   "sub": "默认"
+  },
+  {
+   "label": "low",
+   "value": 4
+  }
+ ]
+}

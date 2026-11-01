@@ -1,0 +1,54 @@
+{
+ "type": "exploded",
+ "title": "拆开 standalone 产物",
+ "subtitle": "deploy-standalone.sh 携带的全部家当",
+ "caption": "示意拆解：内容依据 scripts/prepare-standalone-artifact.mjs 的白名单与 check-standalone-artifact 边界检查。",
+ "parts": [
+  {
+   "label": "部署外壳",
+   "sub": ".next/standalone",
+   "kind": "housing",
+   "w": 190,
+   "d": 340,
+   "t": 16,
+   "r": 20
+  },
+  {
+   "label": "server.js 入口",
+   "sub": "含 /ws/pty 升级包装",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": ".next 静态资源",
+   "sub": "页面 + messages",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "精简 node_modules",
+   "sub": "白名单依赖",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "schema.sql",
+   "sub": "运行期唯一源文件",
+   "w": 150,
+   "d": 60,
+   "t": 10,
+   "kind": "plate"
+  },
+  {
+   "label": "node-pty 原生模块",
+   "sub": "单独补拷",
+   "w": 150,
+   "d": 60,
+   "t": 10,
+   "kind": "chip"
+  }
+ ]
+}

@@ -1,0 +1,229 @@
+{
+ "type": "db-schema",
+ "title": "SQLite 真实表结构（节选）",
+ "subtitle": "48 张表里最核心的六张",
+ "caption": "来源 src/lib/schema.sql 与 migrations.ts（001/040/046/048）；better-sqlite3，WAL 模式，foreign_keys=ON。",
+ "evidence": [
+  {
+   "id": "sc",
+   "file": "src/lib/schema.sql",
+   "line": 5
+  },
+  {
+   "id": "runs",
+   "file": "src/lib/migrations.ts",
+   "line": 1329
+  }
+ ],
+ "nodes": [
+  {
+   "id": "t",
+   "label": "tasks",
+   "focal": true,
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "title",
+     "TEXT",
+     ""
+    ],
+    [
+     "status",
+     "TEXT",
+     "idx"
+    ],
+    [
+     "priority",
+     "TEXT",
+     ""
+    ],
+    [
+     "assigned_to",
+     "TEXT",
+     "→agents.name"
+    ],
+    [
+     "workspace_id",
+     "TEXT",
+     "idx"
+    ],
+    [
+     "dispatch_attempts",
+     "INTEGER",
+     ""
+    ],
+    [
+     "metadata",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "a",
+   "label": "agents",
+   "fields": [
+    [
+     "name",
+     "TEXT",
+     "PK*"
+    ],
+    [
+     "workspace_id",
+     "TEXT",
+     "UNIQUE"
+    ],
+    [
+     "status",
+     "TEXT",
+     ""
+    ],
+    [
+     "runtime_type",
+     "TEXT",
+     ""
+    ],
+    [
+     "config",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "c",
+   "label": "comments",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "task_id",
+     "TEXT",
+     "FK CASCADE"
+    ],
+    [
+     "author",
+     "TEXT",
+     ""
+    ],
+    [
+     "parent_id",
+     "TEXT",
+     "FK self"
+    ]
+   ]
+  },
+  {
+   "id": "q",
+   "label": "quality_reviews",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "task_id",
+     "TEXT",
+     "FK CASCADE"
+    ],
+    [
+     "verdict",
+     "TEXT",
+     "APPROVED/…"
+    ]
+   ]
+  },
+  {
+   "id": "r",
+   "label": "runs",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "cost",
+     "REAL",
+     ""
+    ],
+    [
+     "signature",
+     "BLOB",
+     "Ed25519"
+    ],
+    [
+     "lineage",
+     "JSON",
+     ""
+    ],
+    [
+     "agent_id",
+     "TEXT",
+     "idx"
+    ]
+   ]
+  },
+  {
+   "id": "k",
+   "label": "agent_api_keys",
+   "fields": [
+    [
+     "key_hash",
+     "TEXT",
+     "mca_ 前缀"
+    ],
+    [
+     "agent_id",
+     "TEXT",
+     "FK"
+    ],
+    [
+     "scopes",
+     "JSON",
+     ""
+    ]
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "c.task_id",
+   "t.id",
+   "",
+   "many-one"
+  ],
+  {
+   "from": "q.task_id",
+   "to": "t.id",
+   "label": "Aegis",
+   "kind": "primary"
+  },
+  [
+   "k.agent_id",
+   "a.name",
+   "",
+   "many-one"
+  ],
+  [
+   "r.agent_id",
+   "a.name",
+   "",
+   "many-one"
+  ],
+  [
+   "t.assigned_to",
+   "a.name",
+   "逻辑关联",
+   "many-one"
+  ]
+ ]
+}
