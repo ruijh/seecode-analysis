@@ -170,7 +170,7 @@ for (const p of manifest.projects) {
   }
   const outBase = path.join(dist, 'projects', p.id);
   await mkdir(path.join(outBase, 'docs'), { recursive: true });
-  const files = (await readdir(srcDocs)).filter((f) => f.endsWith('.html') && f !== 'index.html').sort();
+  const files = (await readdir(srcDocs)).filter((f) => f.endsWith('.html') && f !== 'index.html' && f !== 'demo.html').sort();
   const diagrams = [];
   for (const f of files) {
     await copyFile(path.join(srcDocs, f), path.join(outBase, 'docs', f));
@@ -184,6 +184,8 @@ for (const p of manifest.projects) {
   }
   const gallery = path.join(srcDocs, 'index.html');
   if (existsSync(gallery)) await copyFile(gallery, path.join(outBase, 'docs', 'index.html'));
+  const demo = path.join(srcDocs, 'demo.html');
+  if (existsSync(demo)) await copyFile(demo, path.join(outBase, 'docs', 'demo.html'));
   await writeFile(path.join(outBase, 'index.html'), projectPage(p, diagrams, manifest));
   built.push({ ...p, count: diagrams.length });
   console.log(`✓ ${p.id}: ${diagrams.length} 张图`);
