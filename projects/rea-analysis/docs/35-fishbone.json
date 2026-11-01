@@ -1,0 +1,42 @@
+{
+ "type": "fishbone",
+ "title": "根因分析：分析为什么会受限",
+ "subtitle": "REA 如实报告失败面的四类来源",
+ "caption": "原因为仓库可见事实的归纳：启动超时环境变量、procps 前置、编解码器白名单与三层预算均写明在 docs。",
+ "effect": "分析受限 / 显式失败",
+ "categories": [
+  {
+   "label": "引擎",
+   "focal": true,
+   "causes": [
+    "provider 未安装",
+    "启动超时 REA_*_STARTUP_TIMEOUT_MS",
+    "格式/宿主不支持"
+   ]
+  },
+  {
+   "label": "环境",
+   "causes": [
+    "Linux 缺 procps ps",
+    "缺 JDK（JADX）",
+    "非 x64 宿主"
+   ]
+  },
+  {
+   "label": "格式",
+   "causes": [
+    "LLVM bitcode unsupported",
+    "旧版 YAML 元数据",
+    "压缩 codec 不识别"
+   ]
+  },
+  {
+   "label": "预算",
+   "causes": [
+    "512MiB 载荷工作量",
+    "16MiB 保留事实",
+    "单活跃 inspection"
+   ]
+  }
+ ]
+}

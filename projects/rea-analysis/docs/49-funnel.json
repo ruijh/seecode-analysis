@@ -1,0 +1,25 @@
+{
+ "type": "funnel",
+ "title": "单次 inspection 预算漏斗",
+ "subtitle": "层层收紧的资源上限（MiB）",
+ "caption": "数值为 docs/gpu-code-objects.md 声明的真实预算：超限显式拒绝，先预留后读取，绝不静默截断。",
+ "levels": [
+  {
+   "label": "载荷工作量预算",
+   "value": 512
+  },
+  {
+   "label": "单输入/输出缓冲",
+   "value": 128
+  },
+  {
+   "label": "保留事实（含 PTX）",
+   "value": 16
+  },
+  {
+   "label": "单页响应",
+   "value": 1,
+   "sub": "分页取读"
+  }
+ ]
+}

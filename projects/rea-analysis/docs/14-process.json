@@ -1,0 +1,28 @@
+{
+ "type": "process",
+ "title": "五步用起来",
+ "subtitle": "从安装到第一次带证据的分析",
+ "caption": "依据 README Quick start：npx rea-agents setup 负责注册与备份；更新用 rea update。",
+ "steps": [
+  {
+   "label": "装好 Node 22+ 后获取 REA",
+   "sub": "npx rea-agents@latest setup 或 npm i -g"
+  },
+  {
+   "label": "注册你的 Agent",
+   "sub": "setup 写入 MCP 配置+工作流说明并备份"
+  },
+  {
+   "label": "准备分析目标",
+   "sub": "本地目录 / ASAR / APK / 二进制 / 捕获文件"
+  },
+  {
+   "label": "直接提问",
+   "sub": "Agent 经 MCP 调工具，返回结构化事实"
+  },
+  {
+   "label": "读证据并复刻",
+   "sub": "export_evidence_bundle 随时可回溯"
+  }
+ ]
+}

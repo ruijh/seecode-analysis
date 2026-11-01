@@ -1,0 +1,79 @@
+{
+ "type": "sankey",
+ "title": "模块依赖流向",
+ "subtitle": "谁 import 谁：一切汇入 domain",
+ "caption": "SC scan 目录级 import 引用次数（取 top 连边）；application→domain 2269 次是最大单边。",
+ "unit": "import 引用",
+ "links": [
+  [
+   "application",
+   "domain",
+   2269
+  ],
+  [
+   "browser",
+   "domain",
+   585
+  ],
+  [
+   "native",
+   "domain",
+   374
+  ],
+  [
+   "artifacts",
+   "domain",
+   348
+  ],
+  [
+   "ghidra",
+   "domain",
+   288
+  ],
+  [
+   "cli",
+   "domain",
+   249
+  ],
+  [
+   "server",
+   "application",
+   335
+  ],
+  [
+   "cli",
+   "application",
+   94
+  ],
+  [
+   "application",
+   "artifacts",
+   124
+  ],
+  [
+   "native",
+   "artifacts",
+   118
+  ],
+  [
+   "server",
+   "contracts",
+   112
+  ],
+  [
+   "artifacts",
+   "filesystem",
+   107
+  ],
+  [
+   "application",
+   "contracts",
+   72
+  ],
+  [
+   "application",
+   "process",
+   59
+  ]
+ ]
+}

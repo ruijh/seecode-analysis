@@ -1,0 +1,113 @@
+{
+ "type": "kanban",
+ "title": "工具家族看板",
+ "subtitle": "18 个家族按分析域归并成五列",
+ "caption": "列=分析域（家族归并），卡片=真实工具名（src/contracts/*ToolContracts.ts 抽样）。",
+ "columns": [
+  {
+   "label": "内置速查",
+   "cards": [
+    {
+     "label": "inspect_pe_imports",
+     "tag": "零依赖"
+    },
+    {
+     "label": "inspect_gpu_code_objects",
+     "tag": "零依赖"
+    },
+    {
+     "label": "inspect_go_binary / inspect_rust_binary",
+     "tag": "零依赖"
+    },
+    {
+     "label": "inspect_model_artifact",
+     "tag": "模型文件"
+    }
+   ]
+  },
+  {
+   "label": "原生反编译",
+   "cards": [
+    {
+     "label": "analyze_function",
+     "tag": "摘要/完整"
+    },
+    {
+     "label": "decompile / read_bytes",
+     "tag": "provider"
+    },
+    {
+     "label": "list_procedures / list_strings",
+     "tag": "provider"
+    },
+    {
+     "label": "inspect_with_objdump",
+     "tag": "调用方工具"
+    }
+   ]
+  },
+  {
+   "label": "应用与运行时",
+   "cards": [
+    {
+     "label": "analyze_javascript_application",
+     "tag": "ASAR"
+    },
+    {
+     "label": "inspect_electron_fuses",
+     "tag": "Electron"
+    },
+    {
+     "label": "analyze_web_bundle",
+     "tag": "网站"
+    },
+    {
+     "label": "inspect_web_page",
+     "tag": "观测"
+    }
+   ]
+  },
+  {
+   "label": "移动与设备",
+   "cards": [
+    {
+     "label": "inspect_android_method",
+     "tag": "JADX"
+    },
+    {
+     "label": "inspect_apk_signature",
+     "tag": "v1–v3.1"
+    },
+    {
+     "label": "inspect_adb_device",
+     "tag": "设备"
+    },
+    {
+     "label": "list_frida_processes",
+     "tag": "插桩"
+    }
+   ]
+  },
+  {
+   "label": "证据与导出",
+   "cards": [
+    {
+     "label": "inspect_analysis_view",
+     "tag": "分页"
+    },
+    {
+     "label": "export_evidence_bundle",
+     "tag": "携带"
+    },
+    {
+     "label": "export_environment_bundle",
+     "tag": "RL"
+    },
+    {
+     "label": "read_guidance_section",
+     "tag": "向导"
+    }
+   ]
+  }
+ ]
+}

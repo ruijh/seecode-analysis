@@ -1,0 +1,113 @@
+{
+ "type": "swimlane",
+ "title": "复刻一个功能的全流程（跨职能）",
+ "subtitle": "你只负责提问，证据贯穿始终",
+ "caption": "依据 README 叙事（Understand how search works…）与 docs/cli.md 的 evidence_output 流程。",
+ "budget": "faithful",
+ "lanes": [
+  {
+   "id": "you",
+   "label": "你"
+  },
+  {
+   "id": "ag",
+   "label": "AI Agent"
+  },
+  {
+   "id": "rea",
+   "label": "REA"
+  },
+  {
+   "id": "prv",
+   "label": "引擎/适配器"
+  },
+  {
+   "id": "ev",
+   "label": "证据层"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "q",
+   "label": "这功能怎么实现的？",
+   "lane": "you",
+   "col": 0
+  },
+  {
+   "id": "plan",
+   "label": "规划工具调用",
+   "lane": "ag",
+   "col": 1
+  },
+  {
+   "id": "inv",
+   "label": "inventory 清点目标",
+   "lane": "rea",
+   "col": 2
+  },
+  {
+   "id": "deep",
+   "label": "反编译/解码",
+   "lane": "prv",
+   "col": 3,
+   "focal": true
+  },
+  {
+   "id": "cite",
+   "label": "记录 file:line 证据",
+   "lane": "ev",
+   "col": 4
+  },
+  {
+   "id": "expl",
+   "label": "解释机制+局限",
+   "lane": "ag",
+   "col": 5
+  },
+  {
+   "id": "build",
+   "label": "写实现+测试对比",
+   "lane": "ag",
+   "col": 6
+  },
+  {
+   "id": "ok",
+   "label": "验收上线",
+   "lane": "you",
+   "col": 7
+  }
+ ],
+ "edges": [
+  [
+   "q",
+   "plan"
+  ],
+  {
+   "from": "plan",
+   "to": "inv",
+   "kind": "primary"
+  },
+  {
+   "from": "inv",
+   "to": "deep",
+   "kind": "primary"
+  },
+  [
+   "deep",
+   "cite"
+  ],
+  {
+   "from": "cite",
+   "to": "expl",
+   "kind": "primary"
+  },
+  [
+   "expl",
+   "build"
+  ],
+  [
+   "build",
+   "ok"
+  ]
+ ]
+}

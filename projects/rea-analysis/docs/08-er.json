@@ -1,0 +1,110 @@
+{
+ "type": "er",
+ "title": "证据数据模型",
+ "subtitle": "Evidence 把\"结论\"钉回\"字节\"",
+ "caption": "依据 docs/mcp-contracts.md 与 docs/gpu-code-objects.md：Evidence 携带文件坐标或容器内坐标，SHA-256 变更即拒绝解析。",
+ "evidence": [
+  {
+   "id": "gpu",
+   "file": "docs/gpu-code-objects.md",
+   "line": 19
+  }
+ ],
+ "nodes": [
+  {
+   "id": "ev",
+   "label": "Evidence",
+   "fields": [
+    "id PK",
+    "kind",
+    "sha256 锚",
+    "location*"
+   ],
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "loc",
+   "label": "Location",
+   "fields": [
+    "file:line | 容器坐标",
+    "container_id*"
+   ],
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "obj",
+   "label": "Object",
+   "fields": [
+    "object_id",
+    "codec 声明",
+    "encoded/decoded 范围"
+   ],
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "txt",
+   "label": "RetainedText",
+   "fields": [
+    "UTF-16 offset/limit",
+    "SHA-256"
+   ],
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "view",
+   "label": "AnalysisView",
+   "fields": [
+    "collection",
+    "fields 选择",
+    "分页 cursor"
+   ],
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "bundle",
+   "label": "EvidenceBundle",
+   "fields": [
+    "portable 导出",
+    "离线可复读"
+   ],
+   "row": 3,
+   "col": 1
+  }
+ ],
+ "edges": [
+  {
+   "from": "ev",
+   "to": "loc",
+   "label": "钉回位置",
+   "kind": "primary"
+  },
+  {
+   "from": "ev",
+   "to": "obj",
+   "label": "引用对象",
+   "kind": "primary"
+  },
+  [
+   "obj",
+   "txt",
+   "解码文本"
+  ],
+  [
+   "ev",
+   "view",
+   "按页取读"
+  ],
+  [
+   "ev",
+   "bundle",
+   "打包外带",
+   "many-one"
+  ]
+ ]
+}

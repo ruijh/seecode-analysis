@@ -1,0 +1,29 @@
+{
+ "type": "waterfall",
+ "title": "162 万行是怎么堆出来的",
+ "subtitle": "按模块群累加到全仓总量",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；\"其余 src 模块\"含 server/cli/contracts 与 30 余个 provider/adapter 目录。",
+ "unit": "千行",
+ "steps": [
+  [
+   "src/domain",
+   301.1
+  ],
+  [
+   "src/application",
+   158.3
+  ],
+  [
+   "其余 src 模块",
+   476.6
+  ],
+  [
+   "tests",
+   583.7
+  ],
+  [
+   "scripts+bridge",
+   102.1
+  ]
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "type": "high-level-vertical",
+ "title": "REA 是什么（纵向）",
+ "subtitle": "窄幅布局，自上而下",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "sub": "看到好功能",
+   "kind": "external",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "rea",
+   "label": "REA",
+   "sub": "MCP + CLI 双入口",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "static",
+   "label": "静态格式检查",
+   "sub": "36 类目标",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "runtime",
+   "label": "运行时观测",
+   "sub": "browser/adb/frida",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "ev",
+   "label": "证据链",
+   "sub": "file:line + SHA-256",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "out",
+   "label": "解释与复刻",
+   "sub": "在你的项目里",
+   "row": 3,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "rea",
+   "提问"
+  ],
+  {
+   "from": "rea",
+   "to": "static",
+   "kind": "primary"
+  },
+  {
+   "from": "rea",
+   "to": "runtime",
+   "kind": "primary"
+  },
+  [
+   "static",
+   "ev"
+  ],
+  [
+   "runtime",
+   "ev"
+  ],
+  {
+   "from": "ev",
+   "to": "out",
+   "label": "带证据实现",
+   "kind": "primary"
+  }
+ ]
+}

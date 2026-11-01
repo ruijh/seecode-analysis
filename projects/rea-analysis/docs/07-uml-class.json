@@ -1,0 +1,124 @@
+{
+ "type": "uml-class",
+ "dir": "TB",
+ "title": "核心接口：注册、准入与证据",
+ "subtitle": "createServer 的装配骨架",
+ "caption": "依据 src/server/createServer.ts:441/715 与 src/contracts/toolFamilyIds.ts：18 个家族经 registerToolFamilies 注册，准入层控制单活跃 inspection 与预算。",
+ "evidence": [
+  {
+   "id": "sv",
+   "file": "src/server/createServer.ts",
+   "line": 715
+  },
+  {
+   "id": "fam",
+   "file": "src/contracts/toolFamilyIds.ts",
+   "line": 11
+  }
+ ],
+ "nodes": [
+  {
+   "id": "sv",
+   "label": "createServer",
+   "tag": "«441 行起»",
+   "focal": true,
+   "methods": [
+    "createServer(options)",
+    "createMcpServer()",
+    "registerToolFamilies(map)"
+   ],
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "fam",
+   "label": "TOOL_FAMILY_IDS",
+   "tag": "«18 家族»",
+   "methods": [
+    "direct/enhanced/native…",
+    "isToolFamilyId()"
+   ],
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "ctr",
+   "label": "*ToolContracts",
+   "tag": "«约 240 操作»",
+   "methods": [
+    "z.literal 操作名",
+    "compact/complete schema"
+   ],
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "adm",
+   "label": "analysisAdmission",
+   "methods": [
+    "withAdmittedAnalysis()",
+    "单活跃 inspection",
+    "512MiB/16MiB 预算"
+   ],
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "ev",
+   "label": "Evidence 记录",
+   "methods": [
+    "recordEvidence()",
+    "evidenceById()",
+    "export bundle"
+   ],
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "br",
+   "label": "ProviderBridge",
+   "tag": "«外置引擎»",
+   "methods": [
+    "启动 owned 子进程",
+    "hopper_bridge.py 等"
+   ],
+   "row": 3,
+   "col": 0
+  }
+ ],
+ "edges": [
+  {
+   "from": "sv",
+   "to": "fam",
+   "label": "逐家族注册",
+   "kind": "primary"
+  },
+  {
+   "from": "sv",
+   "to": "ctr",
+   "label": "advertise tools/list",
+   "kind": "primary"
+  },
+  [
+   "ctr",
+   "adm",
+   "调用前准入"
+  ],
+  [
+   "adm",
+   "ev",
+   "记录"
+  ],
+  [
+   "adm",
+   "br",
+   "按需启动"
+  ],
+  [
+   "fam",
+   "sv",
+   "",
+   "implements"
+  ]
+ ]
+}

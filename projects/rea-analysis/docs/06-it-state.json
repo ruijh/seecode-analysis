@@ -1,0 +1,104 @@
+{
+ "type": "it-state",
+ "title": "子系统健康度",
+ "subtitle": "内置面非常稳，外围依赖面如实标注",
+ "caption": "状态为分析性判断：ok=内置/有测试与 CI real-* 矩阵护航；risk=依赖用户自备工具或实验性（Windows Ghidra P0）。",
+ "budget": "faithful",
+ "nodes": [
+  {
+   "id": "dom",
+   "label": "Domain 核心",
+   "sub": "30.1 万行 · 近零依赖",
+   "status": "ok",
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "fmt",
+   "label": "内置静态格式",
+   "sub": "36 类目标里的零依赖项",
+   "status": "ok",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "srv",
+   "label": "server/cli 入口",
+   "sub": "同一服务层 · 契约校验",
+   "status": "ok",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "evd",
+   "label": "Evidence 管线",
+   "sub": "SHA-256 锚定 + bundle",
+   "status": "ok",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "nat",
+   "label": "原生反编译",
+   "sub": "Hopper/Ghidra/IDA/Kuna 外置",
+   "status": "risk",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "mob",
+   "label": "移动/设备面",
+   "sub": "JADX+JDK · adb 自备",
+   "status": "risk",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "web",
+   "label": "浏览器观测",
+   "sub": "需 Chrome 族浏览器",
+   "status": "risk",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "wgh",
+   "label": "Windows Ghidra",
+   "sub": "experimental P0 · DOS 分析",
+   "status": "risk",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "srv",
+   "dom"
+  ],
+  [
+   "fmt",
+   "dom"
+  ],
+  [
+   "evd",
+   "dom"
+  ],
+  [
+   "nat",
+   "dom"
+  ],
+  [
+   "mob",
+   "nat"
+  ],
+  [
+   "web",
+   "dom"
+  ],
+  [
+   "wgh",
+   "nat"
+  ]
+ ]
+}

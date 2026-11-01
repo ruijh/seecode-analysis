@@ -1,0 +1,119 @@
+{
+ "type": "treemap",
+ "title": "src 模块的文件数构成",
+ "subtitle": "SC scan 目录级统计（21 个主要模块）",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；核心域两模块即占 src 文件数的近三成。",
+ "unit": "文件",
+ "focal": "domain",
+ "data": [
+  {
+   "label": "核心域",
+   "children": [
+    [
+     "domain",
+     1190
+    ],
+    [
+     "application",
+     567
+    ]
+   ]
+  },
+  {
+   "label": "观测面",
+   "children": [
+    [
+     "browser",
+     194
+    ],
+    [
+     "artifacts",
+     188
+    ],
+    [
+     "process",
+     139
+    ]
+   ]
+  },
+  {
+   "label": "引擎面",
+   "children": [
+    [
+     "native",
+     153
+    ],
+    [
+     "ghidra",
+     97
+    ],
+    [
+     "dotnet",
+     56
+    ],
+    [
+     "hopper",
+     40
+    ],
+    [
+     "ida",
+     38
+    ],
+    [
+     "javascript",
+     33
+    ],
+    [
+     "kuna",
+     27
+    ]
+   ]
+  },
+  {
+   "label": "支撑面",
+   "children": [
+    [
+     "server",
+     142
+    ],
+    [
+     "contracts",
+     119
+    ],
+    [
+     "cli",
+     83
+    ],
+    [
+     "composition",
+     41
+    ],
+    [
+     "config",
+     40
+    ]
+   ]
+  },
+  {
+   "label": "外设面",
+   "children": [
+    [
+     "android",
+     23
+    ],
+    [
+     "adb",
+     21
+    ],
+    [
+     "gpu",
+     20
+    ],
+    [
+     "wasm",
+     19
+    ]
+   ]
+  }
+ ]
+}

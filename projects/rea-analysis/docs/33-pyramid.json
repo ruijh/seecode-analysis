@@ -1,0 +1,30 @@
+{
+ "type": "pyramid",
+ "title": "36 类目标的依赖金字塔",
+ "subtitle": "越往上越省事，越往下越深刻",
+ "caption": "数量按 README「What you can analyze」36 行归并统计；塔尖少而深，塔底大而稳。",
+ "unit": "类",
+ "levels": [
+  {
+   "label": "运行时观测",
+   "value": 4,
+   "sub": "browser · adb · frida · process",
+   "focal": true
+  },
+  {
+   "label": "反编译引擎",
+   "value": 6,
+   "sub": "Hopper/Ghidra/IDA/Kuna/JEB/Cutter"
+  },
+  {
+   "label": "调用方工具",
+   "value": 9,
+   "sub": "JADX · WABT · pwntools · tshark · binwalk…"
+  },
+  {
+   "label": "内置零依赖",
+   "value": 17,
+   "sub": "PE/ELF/GPU/IL2CPP/Go/Rust/BEAM…"
+  }
+ ]
+}

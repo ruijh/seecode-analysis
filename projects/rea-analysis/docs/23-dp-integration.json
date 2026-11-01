@@ -1,0 +1,126 @@
+{
+ "type": "dp-integration",
+ "title": "多源目标接入",
+ "subtitle": "五种来源域汇入同一证据平台",
+ "caption": "依据 README 目标表与 docs 各 guide：来源经 adapters/桥接进入 domain 规则，产出统一 Evidence。",
+ "stages": [
+  {
+   "label": "来源",
+   "plain": true,
+   "kind": "external",
+   "items": [
+    {
+     "id": "fs",
+     "label": "本地文件/ASAR"
+    },
+    {
+     "id": "dev",
+     "label": "Android 设备 (adb)"
+    },
+    {
+     "id": "br",
+     "label": "浏览器 (Chrome 族)"
+    },
+    {
+     "id": "cap",
+     "label": "网络捕获 HAR/pcap"
+    },
+    {
+     "id": "eng",
+     "label": "引擎进程 (Hopper…)"
+    }
+   ]
+  },
+  {
+   "label": "接入",
+   "items": [
+    {
+     "id": "ad",
+     "label": "target adapters"
+    },
+    {
+     "id": "bd",
+     "label": "provider bridges"
+    }
+   ]
+  },
+  {
+   "label": "平台",
+   "items": [
+    {
+     "id": "dom",
+     "label": "domain 规则"
+    },
+    {
+     "id": "adm",
+     "label": "admission 预算"
+    }
+   ]
+  },
+  {
+   "label": "消费",
+   "items": [
+    {
+     "id": "mcp",
+     "label": "MCP 结构化结果"
+    },
+    {
+     "id": "ev",
+     "label": "Evidence 工件"
+    },
+    {
+     "id": "jl",
+     "label": "JSONL 行导出"
+    }
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "fs",
+   "ad"
+  ],
+  [
+   "dev",
+   "ad"
+  ],
+  [
+   "br",
+   "ad"
+  ],
+  [
+   "cap",
+   "ad"
+  ],
+  [
+   "eng",
+   "bd"
+  ],
+  [
+   "ad",
+   "dom"
+  ],
+  {
+   "from": "bd",
+   "to": "dom",
+   "kind": "primary"
+  },
+  [
+   "dom",
+   "adm"
+  ],
+  [
+   "adm",
+   "mcp"
+  ],
+  [
+   "adm",
+   "ev"
+  ],
+  {
+   "from": "ev",
+   "to": "jl",
+   "kind": "primary"
+  }
+ ]
+}

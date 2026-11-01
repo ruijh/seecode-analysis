@@ -1,0 +1,54 @@
+{
+ "type": "venn",
+ "title": "三种入口的重叠",
+ "subtitle": "MCP、CLI 与 RL 环境共享同一个服务层",
+ "caption": "划分依据 README（CLI commands use the same workflows）与 6.8.0 的 agentenv 能力。",
+ "sets": [
+  {
+   "id": "mcp",
+   "label": "MCP",
+   "sub": "注册给 Agent"
+  },
+  {
+   "id": "cli",
+   "label": "CLI",
+   "sub": "rea 命令 · --json"
+  },
+  {
+   "id": "rl",
+   "label": "agentenv",
+   "sub": "RL 环境回放"
+  }
+ ],
+ "overlaps": [
+  {
+   "sets": [
+    "mcp",
+    "cli"
+   ],
+   "label": "同一 Application 工作流"
+  },
+  {
+   "sets": [
+    "mcp",
+    "rl"
+   ],
+   "label": "工具即动作空间"
+  },
+  {
+   "sets": [
+    "cli",
+    "rl"
+   ],
+   "label": "快照与批处理"
+  },
+  {
+   "sets": [
+    "mcp",
+    "cli",
+    "rl"
+   ],
+   "label": "统一 Evidence 契约"
+  }
+ ]
+}

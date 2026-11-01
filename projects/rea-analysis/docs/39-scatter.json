@@ -1,0 +1,67 @@
+{
+ "type": "scatter",
+ "title": "各目录：文件数 × 代码量",
+ "subtitle": "一个点一个顶层模块",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；domain 用 1190 个文件承载 30 万行核心，tests 用 2158 个文件写满 58 万行。",
+ "xLabel": "文件数",
+ "yLabel": "代码行数（千行）",
+ "zero": false,
+ "points": [
+  {
+   "label": "tests",
+   "x": 2158,
+   "y": 583.7
+  },
+  {
+   "label": "domain",
+   "x": 1190,
+   "y": 301.1,
+   "focal": true
+  },
+  {
+   "label": "application",
+   "x": 567,
+   "y": 158.3
+  },
+  {
+   "label": "scripts",
+   "x": 418,
+   "y": 87.9
+  },
+  {
+   "label": "browser",
+   "x": 194,
+   "y": 63
+  },
+  {
+   "label": "artifacts",
+   "x": 188,
+   "y": 59.9
+  },
+  {
+   "label": "native",
+   "x": 153,
+   "y": 53.3
+  },
+  {
+   "label": "server",
+   "x": 142,
+   "y": 20.5
+  },
+  {
+   "label": "process",
+   "x": 139,
+   "y": 42.6
+  },
+  {
+   "label": "ghidra",
+   "x": 97,
+   "y": 34.5
+  },
+  {
+   "label": "cli",
+   "x": 83,
+   "y": 14.2
+  }
+ ]
+}

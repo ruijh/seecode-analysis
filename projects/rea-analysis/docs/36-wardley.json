@@ -1,0 +1,92 @@
+{
+ "type": "wardley",
+ "title": "Wardley 演进图",
+ "subtitle": "Agent 逆向生态的战略坐标",
+ "caption": "位置为分析性判断；evo 左=创世 右=商品化，vis 上=用户可见 下=基础设施。",
+ "components": [
+  {
+   "id": "need",
+   "label": "看懂功能并复刻",
+   "evo": 0.5,
+   "vis": 0.95,
+   "anchor": true
+  },
+  {
+   "id": "agent",
+   "label": "Agent 编码助手",
+   "evo": 0.8,
+   "vis": 0.85
+  },
+  {
+   "id": "mcpstd",
+   "label": "MCP 协议",
+   "evo": 0.75,
+   "vis": 0.6
+  },
+  {
+   "id": "rea",
+   "label": "REA 工具面",
+   "evo": 0.55,
+   "vis": 0.7,
+   "focal": true
+  },
+  {
+   "id": "ev",
+   "label": "Evidence 契约",
+   "evo": 0.45,
+   "vis": 0.5
+  },
+  {
+   "id": "eng",
+   "label": "反编译引擎",
+   "evo": 0.3,
+   "vis": 0.35
+  },
+  {
+   "id": "rt",
+   "label": "运行时观测",
+   "evo": 0.4,
+   "vis": 0.3
+  },
+  {
+   "id": "tgt",
+   "label": "目标二进制",
+   "evo": 0.15,
+   "vis": 0.15
+  }
+ ],
+ "links": [
+  [
+   "need",
+   "agent"
+  ],
+  [
+   "agent",
+   "mcpstd"
+  ],
+  [
+   "mcpstd",
+   "rea"
+  ],
+  [
+   "rea",
+   "ev"
+  ],
+  [
+   "rea",
+   "eng"
+  ],
+  [
+   "rea",
+   "rt"
+  ],
+  [
+   "eng",
+   "tgt"
+  ],
+  [
+   "rt",
+   "tgt"
+  ]
+ ]
+}

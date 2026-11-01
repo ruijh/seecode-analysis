@@ -1,0 +1,66 @@
+{
+ "type": "dp-security-matrix",
+ "title": "副作用矩阵：每类分析碰什么",
+ "subtitle": "效果声明驱动的安全边界",
+ "caption": "等级 none<read<write；依据 docs/mcp-contracts.md 的 effect metadata（launchesProcess/writesFilesystem 等）：分析不执行目标应用代码。",
+ "rows": [
+  "内置静态格式",
+  "原生反编译桥",
+  "JS/Electron 静态",
+  "浏览器观测",
+  "ADB 设备",
+  "Frida 插桩"
+ ],
+ "cols": [
+  "读目标文件",
+  "启动自有进程",
+  "写文件系统",
+  "访问网络",
+  "执行目标代码"
+ ],
+ "cells": [
+  [
+   "read",
+   "none",
+   "none",
+   "none",
+   "none"
+  ],
+  [
+   "read",
+   "write",
+   "write",
+   "none",
+   "none"
+  ],
+  [
+   "read",
+   "write",
+   "write",
+   "none",
+   "none"
+  ],
+  [
+   "read",
+   "write",
+   "write",
+   "write",
+   "none"
+  ],
+  [
+   "read",
+   "write",
+   "write",
+   "write",
+   "none"
+  ],
+  [
+   "read",
+   "write",
+   "write",
+   "none",
+   "write"
+  ]
+ ],
+ "focal": "内置静态格式"
+}

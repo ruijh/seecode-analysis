@@ -4,7 +4,7 @@
 
 **在线浏览：<https://ruijh.github.io/seecode-analysis/>**
 
-## 当前子项目（5 个，250 张图）
+## 当前子项目（6 个，299 张图）
 
 | 子项目 | 分析对象 | 图表 |
 |---|---|---|
@@ -13,6 +13,7 @@
 | [cubesandbox-analysis](projects/cubesandbox-analysis/) | [TencentCloud/CubeSandbox](https://github.com/TencentCloud/CubeSandbox) | 47 |
 | [mission-control-analysis](projects/mission-control-analysis/) | [builderz-labs/mission-control](https://github.com/builderz-labs/mission-control) | 49 |
 | [dsh-superagent-prototype-analysis](projects/dsh-superagent-prototype-analysis/) | [deepseek-ai/dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) | 49 |
+| [rea-analysis](projects/rea-analysis/) | [morluto/rea](https://github.com/morluto/rea) | 49 |
 
 ## 目录结构
 

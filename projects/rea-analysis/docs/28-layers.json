@@ -1,0 +1,62 @@
+{
+ "type": "layers",
+ "title": "证据可信度七层",
+ "subtitle": "从原始字节到可携带结论",
+ "caption": "全部为仓库真实机制：SHA-256 锚定、codec 长度校验、target 一致性比对、retained 文本、bundle 导出。",
+ "layers": [
+  {
+   "label": "字节层",
+   "sub": "输入即真相",
+   "items": [
+    "整文件 SHA-256 流式哈希",
+    "选中载荷须 expected_sha256"
+   ]
+  },
+  {
+   "label": "解码层",
+   "sub": "有界解压",
+   "items": [
+    "声明长度先于解码校验",
+    "截断 MD5 核对（CCOB）"
+   ]
+  },
+  {
+   "label": "归一层",
+   "sub": "双源比对",
+   "items": [
+    "target vs payload_target",
+    "冲突保留双值 + partial"
+   ]
+  },
+  {
+   "label": "事实层",
+   "sub": "字段级选择",
+   "items": [
+    "inventory/对象/内核分页"
+   ]
+  },
+  {
+   "label": "引用层",
+   "sub": "可回溯",
+   "items": [
+    "file:line / 容器坐标",
+    "解码偏移≠物理偏移"
+   ]
+  },
+  {
+   "label": "证据层",
+   "sub": "一等公民",
+   "items": [
+    "Evidence id + 全文工件"
+   ]
+  },
+  {
+   "label": "交付层",
+   "sub": "可携带",
+   "items": [
+    "export_evidence_bundle",
+    "JSONL 分帧输出"
+   ]
+  }
+ ]
+}

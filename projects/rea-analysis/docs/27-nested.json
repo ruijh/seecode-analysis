@@ -1,0 +1,40 @@
+{
+ "type": "nested",
+ "title": "分析边界嵌套",
+ "subtitle": "一次工具调用要穿过的边界",
+ "caption": "边界为分析性描绘：依据 mcp-contracts.md 的 effect 声明、gpu-code-objects.md 的预算与准入语义。",
+ "budget": "faithful",
+ "root": {
+  "label": "你的机器",
+  "children": [
+   {
+    "label": "REA 进程",
+    "sub": "Node 22+ · 单活跃 inspection",
+    "children": [
+     {
+      "label": "admission 准入",
+      "sub": "512MiB 载荷 / 16MiB 保留",
+      "children": [
+       {
+        "label": "provider 桥",
+        "sub": "owned 子进程 · hopper_bridge.py",
+        "children": [
+         {
+          "label": "目标文件/设备",
+          "sub": "SHA-256 锚定 · 只读",
+          "children": [
+           {
+            "label": "Evidence",
+            "sub": "坐标与哈希回传，永不重读输入"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

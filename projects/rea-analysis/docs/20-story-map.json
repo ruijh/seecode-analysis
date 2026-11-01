@@ -1,0 +1,109 @@
+{
+ "type": "story-map",
+ "title": "产品故事图",
+ "subtitle": "主干活动 × 发布切片",
+ "caption": "切片为分析性归纳：已发布=v6.8.0 可验证能力，演进中=CHANGELOG/文档中仍在扩张的方向。",
+ "releases": [
+  "已发布 v6.8.0",
+  "演进中"
+ ],
+ "activities": [
+  {
+   "label": "看懂",
+   "focal": true,
+   "steps": [
+    {
+     "label": "静态格式",
+     "stories": {
+      "已发布 v6.8.0": [
+       "36 类目标 · 多数零依赖"
+      ],
+      "演进中": [
+       "更多压缩/表格式"
+      ]
+     }
+    },
+    {
+     "label": "反编译",
+     "stories": {
+      "已发布 v6.8.0": [
+       "Hopper/Ghidra/IDA/Kuna/JEB/Cutter"
+      ],
+      "演进中": [
+       "Windows Ghidra 转正"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "带证据",
+   "steps": [
+    {
+     "label": "证据链",
+     "stories": {
+      "已发布 v6.8.0": [
+       "file:line/坐标 + SHA-256"
+      ]
+     }
+    },
+    {
+     "label": "摘要",
+     "stories": {
+      "已发布 v6.8.0": [
+       "retained summaries + view 取页"
+      ],
+      "演进中": [
+       "更多可恢复上限配置"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "复刻",
+   "steps": [
+    {
+     "label": "实现",
+     "stories": {
+      "已发布 v6.8.0": [
+       "agent 按证据写实现"
+      ]
+     }
+    },
+    {
+     "label": "验证",
+     "stories": {
+      "已发布 v6.8.0": [
+       "run comparisons / conformance"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "规模化",
+   "steps": [
+    {
+     "label": "RL 环境",
+     "stories": {
+      "已发布 v6.8.0": [
+       "agentenv 构建与回放"
+      ]
+     }
+    },
+    {
+     "label": "批处理",
+     "stories": {
+      "已发布 v6.8.0": [
+       "JSONL 行输出"
+      ],
+      "演进中": [
+       "更多导出目标"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

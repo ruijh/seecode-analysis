@@ -1,0 +1,78 @@
+{
+ "type": "sequence-oauth",
+ "title": "npx rea-agents setup 时序",
+ "subtitle": "注册 MCP 的安全路径",
+ "caption": "依据 README 与 installation 文档：setup 会先备份已有配置；更新走 rea update 的校验流程。",
+ "evidence": [
+  {
+   "id": "qs",
+   "file": "README.md",
+   "line": 81
+  }
+ ],
+ "participants": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external"
+  },
+  {
+   "id": "setup",
+   "label": "setup CLI",
+   "kind": "focal"
+  },
+  {
+   "id": "cfg",
+   "label": "已有 Agent 配置"
+  },
+  {
+   "id": "agent",
+   "label": "Claude Code 等"
+  }
+ ],
+ "messages": [
+  [
+   "you",
+   "setup",
+   "npx rea-agents setup"
+  ],
+  [
+   "setup",
+   "you",
+   "列出支持的 Agent 候选"
+  ],
+  [
+   "you",
+   "setup",
+   "选择要注册的 Agent"
+  ],
+  [
+   "setup",
+   "cfg",
+   "读取现有 MCP 配置"
+  ],
+  [
+   "setup",
+   "cfg",
+   "写入备份（可恢复）"
+  ],
+  [
+   "setup",
+   "agent",
+   "注册 MCP server + 工作流说明"
+  ],
+  [
+   "setup",
+   "you",
+   "提示重启 Agent 生效"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "opt",
+   "label": "已有配置 → 先备份再改",
+   "from": 3,
+   "to": 5
+  }
+ ]
+}

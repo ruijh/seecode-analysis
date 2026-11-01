@@ -1,0 +1,172 @@
+{
+ "type": "db-schema",
+ "title": "REA 没有数据库：证据即数据",
+ "subtitle": "Evidence 工件 JSON 契约的关系化投影",
+ "caption": "REA 不落任何业务库（对照 README 全文）；下表为 Evidence/对象契约的字段投影，来源 docs/mcp-contracts.md 与 gpu-code-objects.md。",
+ "evidence": [
+  {
+   "id": "mc",
+   "file": "docs/mcp-contracts.md",
+   "line": 1740
+  }
+ ],
+ "nodes": [
+  {
+   "id": "e",
+   "label": "evidence",
+   "focal": true,
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK ev_…"
+    ],
+    [
+     "kind",
+     "TEXT",
+     ""
+    ],
+    [
+     "source",
+     "JSON",
+     "retained-evidence"
+    ],
+    [
+     "location",
+     "JSON",
+     "file:line|容器"
+    ],
+    [
+     "sha256",
+     "TEXT",
+     "输入锚"
+    ]
+   ]
+  },
+  {
+   "id": "o",
+   "label": "gpu_object",
+   "fields": [
+    [
+     "object_id",
+     "TEXT",
+     "PK 位置性"
+    ],
+    [
+     "target",
+     "TEXT",
+     "声明"
+    ],
+    [
+     "payload_target",
+     "TEXT",
+     "实测"
+    ],
+    [
+     "codec",
+     "TEXT",
+     "lz4/zstd/zlib"
+    ],
+    [
+     "consistency",
+     "TEXT",
+     "枚举"
+    ]
+   ]
+  },
+  {
+   "id": "p",
+   "label": "retained_ptx",
+   "fields": [
+    [
+     "evidence_id",
+     "TEXT",
+     "FK"
+    ],
+    [
+     "byte_length",
+     "INT",
+     ""
+    ],
+    [
+     "sha256",
+     "TEXT",
+     ""
+    ],
+    [
+     "offset/limit",
+     "INT",
+     "UTF-16"
+    ]
+   ]
+  },
+  {
+   "id": "s",
+   "label": "snapshot",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "allows_replay",
+     "BOOL",
+     ""
+    ],
+    [
+     "catalog_digest",
+     "TEXT",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "b",
+   "label": "bundle",
+   "fields": [
+    [
+     "evidence_ids",
+     "ARRAY",
+     ""
+    ],
+    [
+     "exported_at",
+     "TEXT",
+     ""
+    ],
+    [
+     "portable",
+     "BOOL",
+     ""
+    ]
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "p.evidence_id",
+   "e.id",
+   "",
+   "many-one"
+  ],
+  {
+   "from": "o.object_id",
+   "to": "e.location",
+   "label": "坐标引用",
+   "kind": "primary"
+  },
+  [
+   "b.evidence_ids",
+   "e.id",
+   "",
+   "many-one"
+  ],
+  [
+   "s.id",
+   "e.source",
+   "回放来源",
+   "many-one"
+  ]
+ ]
+}

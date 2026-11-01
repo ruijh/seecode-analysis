@@ -1,0 +1,101 @@
+{
+ "type": "state-lifecycle",
+ "title": "Provider 会话生命周期",
+ "subtitle": "外置引擎的启停与预算",
+ "caption": "依据 mcp-contracts.md 与 docs/cli.md：provider 可为已有安装，桥接进程按需启动；预算超限显式拒绝而非静默截断。",
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "abs",
+   "label": "未安装",
+   "sub": "setup 可代装 Hopper",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "ready",
+   "label": "ready",
+   "sub": "检测到安装",
+   "focal": true,
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "busy",
+   "label": "busy",
+   "sub": "单活跃 inspection",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "ref",
+   "label": "refused",
+   "sub": "预算超限显式拒绝",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "stop",
+   "label": "stopped",
+   "sub": "进程退出/超时",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "e",
+   "shape": "end",
+   "sub": "结果 + 证据",
+   "row": 1,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "abs",
+   "首次使用"
+  ],
+  [
+   "abs",
+   "ready",
+   "安装/检测到"
+  ],
+  {
+   "from": "ready",
+   "to": "busy",
+   "label": "受理调用",
+   "kind": "primary"
+  },
+  {
+   "from": "busy",
+   "to": "e",
+   "label": "返回证据",
+   "kind": "primary"
+  },
+  [
+   "busy",
+   "ready",
+   "释放并发位"
+  ],
+  [
+   "busy",
+   "ref",
+   "超预算"
+  ],
+  [
+   "ready",
+   "stop",
+   "启动超时"
+  ],
+  [
+   "stop",
+   "ready",
+   "重试（可调 REA_*_TIMEOUT）"
+  ]
+ ]
+}

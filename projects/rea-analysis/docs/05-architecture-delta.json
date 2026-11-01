@@ -1,0 +1,119 @@
+{
+ "type": "architecture-delta",
+ "title": "6.x 架构增量：摘要化与规模化",
+ "subtitle": "从\"完整输出\"走向\"保留事实 + 按需取用\"",
+ "caption": "依据 CHANGELOG 6.8.0 与 docs/mcp-contracts.md：analyze_function 默认改 retained summary；schema/输出均可压缩；新增 RL 环境与一批格式。",
+ "evidence": [
+  {
+   "id": "cl",
+   "file": "CHANGELOG.md",
+   "line": 3
+  }
+ ],
+ "nodes": [
+  {
+   "id": "base",
+   "label": "6.0 工具目录",
+   "sub": "全量 inline 输出",
+   "change": "changed",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "sum",
+   "label": "retained summaries",
+   "sub": "analyze_function 默认摘要",
+   "change": "added",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "view",
+   "label": "analysis view",
+   "sub": "按 collection/fields 取页",
+   "change": "added",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "in",
+   "label": "compact 输入 schema",
+   "sub": "REA_MCP_INPUT_SCHEMA_PROFILE",
+   "change": "added",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "out",
+   "label": "JSONL 行输出",
+   "sub": "--format jsonl 分帧",
+   "change": "added",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "env",
+   "label": "agentenv",
+   "sub": "从捕获/提示建 RL 环境",
+   "change": "added",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "fmt",
+   "label": "新格式族",
+   "sub": "GPU · BEAM · IL2CPP · Godot · PyInstaller · SEA",
+   "change": "added",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "ev",
+   "label": "Evidence 契约",
+   "sub": "可携带 bundle",
+   "change": "changed",
+   "row": 1,
+   "col": 4
+  }
+ ],
+ "edges": [
+  {
+   "from": "base",
+   "to": "sum",
+   "label": "默认摘要化",
+   "change": "added",
+   "kind": "primary"
+  },
+  {
+   "from": "sum",
+   "to": "view",
+   "change": "added"
+  },
+  {
+   "from": "in",
+   "to": "sum",
+   "label": "省上下文"
+  },
+  {
+   "from": "out",
+   "to": "base",
+   "label": "替代整文档"
+  },
+  {
+   "from": "env",
+   "to": "ev",
+   "change": "added"
+  },
+  {
+   "from": "fmt",
+   "to": "view",
+   "change": "added"
+  },
+  {
+   "from": "sum",
+   "to": "ev",
+   "label": "保留事实 16 MiB 上限"
+  }
+ ]
+}

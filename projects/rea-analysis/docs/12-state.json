@@ -1,0 +1,117 @@
+{
+ "type": "state",
+ "title": "载荷检查状态机",
+ "subtitle": "complete / partial / unexamined 是一等公民",
+ "caption": "依据 docs/gpu-code-objects.md 的覆盖度词汇：未选中≠不存在；冲突目标保留双值并标记 partial。",
+ "evidence": [
+  {
+   "id": "gpu",
+   "file": "docs/gpu-code-objects.md",
+   "line": 14
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "inv",
+   "label": "inventoried",
+   "sub": "清点完成",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "uns",
+   "label": "not-selected",
+   "sub": "在册未选",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "dec",
+   "label": "decoding",
+   "focal": true,
+   "sub": "预算内解码",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "ok",
+   "label": "complete",
+   "shape": "end",
+   "sub": "全覆盖",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "par",
+   "label": "partial",
+   "sub": "保留已知+局限",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "unsup",
+   "label": "unsupported",
+   "sub": "bitcode/旧压缩",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "bad",
+   "label": "malformed",
+   "sub": "损坏仍报告",
+   "row": 2,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "inv",
+   "inventory"
+  ],
+  {
+   "from": "inv",
+   "to": "uns",
+   "label": "未选中"
+  },
+  {
+   "from": "uns",
+   "to": "dec",
+   "label": "object_ids 选择",
+   "kind": "primary"
+  },
+  {
+   "from": "dec",
+   "to": "ok",
+   "label": "解码完成",
+   "kind": "primary"
+  },
+  {
+   "from": "dec",
+   "to": "par",
+   "label": "预算/格式限制"
+  },
+  {
+   "from": "dec",
+   "to": "unsup",
+   "label": "编解码器不支持"
+  },
+  {
+   "from": "dec",
+   "to": "bad",
+   "label": "解析失败"
+  },
+  {
+   "from": "inv",
+   "to": "dec",
+   "label": "整目录分析",
+   "kind": "primary"
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "type": "exploded",
+ "title": "拆开 rea-agents npm 包",
+ "subtitle": "42 个运行时依赖装进去什么",
+ "caption": "示意拆解：内容依据 package.json（bin: rea/rea-agents）、bridge/ 与 native/ 目录、setup 写入物。",
+ "parts": [
+  {
+   "label": "npm 包外壳",
+   "sub": "rea-agents · 42 deps",
+   "kind": "housing",
+   "w": 190,
+   "d": 340,
+   "t": 16,
+   "r": 20
+  },
+  {
+   "label": "bin 双入口",
+   "sub": "rea + rea-agents",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "domain+application",
+   "sub": "45.9 万行分析内核",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "contracts",
+   "sub": "约 240 操作的 schema",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "bridge 脚本",
+   "sub": "hopper/ghidra/cutter/pwndbg Python",
+   "w": 150,
+   "d": 60,
+   "t": 10,
+   "kind": "plate"
+  },
+  {
+   "label": "setup 工作流说明",
+   "sub": "写入 agent 的技能文件",
+   "w": 150,
+   "d": 60,
+   "t": 10,
+   "kind": "chip"
+  }
+ ]
+}

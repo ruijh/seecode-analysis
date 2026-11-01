@@ -1,0 +1,45 @@
+{
+ "type": "org-chart",
+ "title": "把 REA 当一家「逆向事务所」",
+ "subtitle": "组织架构即依赖结构",
+ "caption": "人员无关；角色划分依据 createServer 的装配关系与 provider 注册表。",
+ "budget": "faithful",
+ "root": {
+  "label": "你（委托人）",
+  "sub": "提出问题、验收复刻",
+  "children": [
+   {
+    "label": "项目经理",
+    "sub": "Application 工作流",
+    "children": [
+     {
+      "label": "规则库",
+      "sub": "Domain · 30.1 万行"
+     },
+     {
+      "label": "外聘专家团",
+      "sub": "Hopper/Ghidra/IDA/Kuna",
+      "children": [
+       {
+        "label": "翻译官",
+        "sub": "Python bridge 脚本"
+       }
+      ]
+     },
+     {
+      "label": "现场调查员",
+      "sub": "Browser/ADB/Frida 观测"
+     }
+    ]
+   },
+   {
+    "label": "档案管理员",
+    "sub": "Evidence：编号、坐标、哈希"
+   },
+   {
+    "label": "前台",
+    "sub": "MCP Server + CLI 双窗口"
+   }
+  ]
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "type": "sequence",
+ "title": "一次 MCP 调用的时序",
+ "subtitle": "从 tools/list 到带证据的结果",
+ "caption": "依据 createServer.ts 与 mcp-contracts.md：紧凑 schema 默认开启；结果先过准入与预算，证据按 id 可回读。",
+ "evidence": [
+  {
+   "id": "sv",
+   "file": "src/server/createServer.ts",
+   "line": 441
+  }
+ ],
+ "numbered": true,
+ "participants": [
+  {
+   "id": "ag",
+   "label": "AI Agent",
+   "kind": "external"
+  },
+  {
+   "id": "srv",
+   "label": "MCP Server"
+  },
+  {
+   "id": "adm",
+   "label": "Admission 准入"
+  },
+  {
+   "id": "app",
+   "label": "Application 工作流",
+   "kind": "focal"
+  },
+  {
+   "id": "prv",
+   "label": "Provider/Adapter"
+  },
+  {
+   "id": "ev",
+   "label": "Evidence"
+  }
+ ],
+ "messages": [
+  [
+   "ag",
+   "srv",
+   "tools/list（compact schema）"
+  ],
+  [
+   "ag",
+   "srv",
+   "调用 inspect_/analyze_*"
+  ],
+  [
+   "srv",
+   "adm",
+   "准入检查：单活跃 inspection"
+  ],
+  [
+   "adm",
+   "app",
+   "预算预留后放行"
+  ],
+  [
+   "app",
+   "prv",
+   "读取目标 / 启动桥接"
+  ],
+  [
+   "prv",
+   "app",
+   "inventory + 解码载荷"
+  ],
+  [
+   "app",
+   "ev",
+   "recordEvidence：file:line/坐标"
+  ],
+  [
+   "app",
+   "srv",
+   "结构化结果 + 证据 id"
+  ],
+  [
+   "srv",
+   "ag",
+   "返回（摘要 + 限制说明）"
+  ],
+  [
+   "ag",
+   "ev",
+   "inspect_analysis_view 取全文"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "opt",
+   "label": "未选载荷保持 not-selected",
+   "from": 8,
+   "to": 9
+  }
+ ]
+}

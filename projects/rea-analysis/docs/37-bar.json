@@ -1,0 +1,45 @@
+{
+ "type": "bar",
+ "orientation": "horizontal",
+ "title": "各模块代码量",
+ "subtitle": "find+cat 全量统计（ts/tsx/mjs/py/swift/java）",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；tests 比 domain 大近一倍——测试是这个仓库最厚的层。",
+ "unit": "千行",
+ "sort": "desc",
+ "focal": "tests",
+ "axis": "代码行数（千行）",
+ "data": [
+  [
+   "tests",
+   583.7
+  ],
+  [
+   "src/domain",
+   301.1
+  ],
+  [
+   "src/application",
+   158.3
+  ],
+  [
+   "scripts",
+   87.9
+  ],
+  [
+   "src/browser",
+   63
+  ],
+  [
+   "src/artifacts",
+   59.9
+  ],
+  [
+   "src/native",
+   53.3
+  ],
+  [
+   "src/process",
+   42.6
+  ]
+ ]
+}

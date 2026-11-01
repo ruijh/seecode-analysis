@@ -1,0 +1,127 @@
+{
+ "type": "dependency",
+ "dir": "TB",
+ "title": "模块依赖（自上而下）",
+ "subtitle": "入口 → 应用工作流 → 纯核心 → 接缝层",
+ "caption": "依赖方向依据 SC scan 的目录级 import 统计；composition 仅 1163 行却把 41 个文件全接起来——依赖注入根。",
+ "budget": "faithful",
+ "nodes": [
+  {
+   "id": "cli",
+   "label": "src/cli",
+   "sub": "83 文件 · 命令注册",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "srv",
+   "label": "src/server",
+   "sub": "142 文件 · MCP 外壳",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "comp",
+   "label": "src/composition",
+   "sub": "41 文件 · 1163 行 DI 根",
+   "row": 0,
+   "col": 4
+  },
+  {
+   "id": "app",
+   "label": "src/application",
+   "sub": "567 文件 · 工作流",
+   "focal": true,
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "dom",
+   "label": "src/domain",
+   "sub": "1190 文件 · 30.1 万行纯核心",
+   "focal": true,
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "ctr",
+   "label": "src/contracts",
+   "sub": "工具契约与 schema",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "art",
+   "label": "src/artifacts",
+   "sub": "证据与工件",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "prc",
+   "label": "src/process",
+   "sub": "进程/PTY 接缝",
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "prov",
+   "label": "providers",
+   "sub": "ghidra/hopper/ida/kuna/native…",
+   "row": 3,
+   "col": 4
+  }
+ ],
+ "edges": [
+  [
+   "cli",
+   "app"
+  ],
+  [
+   "srv",
+   "app",
+   "primary"
+  ],
+  [
+   "comp",
+   "app"
+  ],
+  {
+   "from": "app",
+   "to": "dom",
+   "kind": "primary"
+  },
+  [
+   "app",
+   "ctr"
+  ],
+  [
+   "app",
+   "art"
+  ],
+  [
+   "app",
+   "prc"
+  ],
+  [
+   "srv",
+   "dom"
+  ],
+  [
+   "cli",
+   "dom"
+  ],
+  [
+   "prov",
+   "dom"
+  ],
+  [
+   "art",
+   "dom"
+  ],
+  [
+   "ctr",
+   "dom"
+  ]
+ ]
+}

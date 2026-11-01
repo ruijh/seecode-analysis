@@ -1,0 +1,59 @@
+{
+ "type": "gantt",
+ "title": "版本演进甘特图",
+ "subtitle": "按 tag 时间划分四个阶段",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；阶段边界取自 git tag 的 creatordate。",
+ "today": "2026-11-01",
+ "tasks": [
+  {
+   "id": "a",
+   "label": "0.x → 1.0 首发冲刺",
+   "section": "2026-07 首发",
+   "start": "2026-07-12",
+   "end": "2026-07-14",
+   "done": true
+  },
+  {
+   "id": "b",
+   "label": "2.x 快速迭代",
+   "section": "2026-07 首发",
+   "start": "2026-07-14",
+   "end": "2026-07-25",
+   "done": true
+  },
+  {
+   "id": "c",
+   "label": "平台期：内功积累",
+   "section": "2026-08→09",
+   "start": "2026-08-01",
+   "end": "2026-09-30",
+   "done": true
+  },
+  {
+   "id": "d",
+   "label": "3.x：格式大扩张",
+   "section": "2026-10 爆发",
+   "start": "2026-10-01",
+   "end": "2026-10-07",
+   "done": true
+  },
+  {
+   "id": "e",
+   "label": "5.x–6.x：证据与规模化",
+   "section": "2026-10 爆发",
+   "start": "2026-10-08",
+   "end": "2026-10-31",
+   "done": true
+  }
+ ],
+ "milestones": [
+  {
+   "label": "1.0.0",
+   "date": "2026-07-13"
+  },
+  {
+   "label": "6.8.0",
+   "date": "2026-10-25"
+  }
+ ]
+}

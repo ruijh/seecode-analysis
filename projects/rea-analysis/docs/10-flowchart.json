@@ -1,0 +1,121 @@
+{
+ "type": "flowchart",
+ "title": "一次调查的决策树",
+ "subtitle": "REA 怎么选路径：目标 → 手段 → 证据",
+ "caption": "依据 README \"What you can analyze\" 表与 docs/cli.md 的 provider 选择逻辑归纳。",
+ "nodes": [
+  {
+   "id": "s",
+   "label": "拿到分析目标",
+   "shape": "terminal",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "d1",
+   "label": "格式是内置静态项？",
+   "shape": "decision",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "n1",
+   "label": "直接 inspect_*",
+   "sub": "零依赖：PE/ELF/GPU/IL2CPP…",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "d2",
+   "label": "需要原生伪代码？",
+   "shape": "decision",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "n2",
+   "label": "选 provider",
+   "sub": "Hopper/Ghidra/IDA/Kuna",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "d3",
+   "label": "要看运行时行为？",
+   "shape": "decision",
+   "row": 3,
+   "col": 1
+  },
+  {
+   "id": "n3",
+   "label": "运行时观测",
+   "sub": "browser/adb/frida/process",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "n4",
+   "label": "应用静态分析",
+   "sub": "analyze_javascript_application",
+   "focal": true,
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "e",
+   "label": "全部结论带 Evidence 返回",
+   "shape": "terminal",
+   "row": 4,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "d1"
+  ],
+  {
+   "from": "d1",
+   "to": "n1",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d1",
+   "to": "d2",
+   "label": "否"
+  },
+  {
+   "from": "d2",
+   "to": "n2",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d2",
+   "to": "d3",
+   "label": "否"
+  },
+  {
+   "from": "d3",
+   "to": "n3",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d3",
+   "to": "n4",
+   "label": "否",
+   "kind": "primary"
+  },
+  {
+   "from": "n1",
+   "to": "e"
+  },
+  {
+   "from": "n4",
+   "to": "e",
+   "label": "模块/IPC/边界"
+  }
+ ]
+}

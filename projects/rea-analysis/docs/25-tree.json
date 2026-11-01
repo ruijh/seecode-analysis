@@ -1,0 +1,54 @@
+{
+ "type": "tree",
+ "title": "仓库目录结构",
+ "subtitle": "6900+ 跟踪文件的分布",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）；括号内为文件数（find 统计 ts/tsx/mjs/py/swift/java）。",
+ "budget": "faithful",
+ "root": {
+  "label": "rea/",
+  "children": [
+   {
+    "label": "src/ (~6100)",
+    "sub": "分析本体",
+    "children": [
+     {
+      "label": "domain/ (1190)",
+      "sub": "30.1 万行纯核心"
+     },
+     {
+      "label": "application/ (567)",
+      "sub": "工作流编排"
+     },
+     {
+      "label": "providers/",
+      "sub": "ghidra 97 · native 153 · ida 38…"
+     },
+     {
+      "label": "server+cli (225)",
+      "sub": "MCP 与终端入口"
+     }
+    ]
+   },
+   {
+    "label": "tests/ (2158)",
+    "sub": "58.4 万行 · 比多数项目整个仓库还大"
+   },
+   {
+    "label": "scripts/ (418)",
+    "sub": "构建/验证/真实环境脚本"
+   },
+   {
+    "label": "docs/ (98)",
+    "sub": "每个目标类型一篇 guide"
+   },
+   {
+    "label": "bridge/ (36)",
+    "sub": "Hopper/Ghidra/Cutter/pwndbg Python 桥"
+   },
+   {
+    "label": "website/",
+    "sub": "rea.tools 官网"
+   }
+  ]
+ }
+}

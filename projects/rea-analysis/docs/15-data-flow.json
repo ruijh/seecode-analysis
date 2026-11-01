@@ -1,0 +1,113 @@
+{
+ "type": "data-flow",
+ "title": "证据是怎么流动的",
+ "subtitle": "一次读取，三重沉淀",
+ "caption": "依据 mcp-contracts.md 与 gpu-code-objects.md：解码产物可保留为带 SHA-256 的文本工件，历史页永不重读输入文件。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "gpu",
+   "file": "docs/gpu-code-objects.md",
+   "line": 150
+  }
+ ],
+ "nodes": [
+  {
+   "id": "in",
+   "label": "目标输入",
+   "sub": "文件/ASAR/捕获",
+   "kind": "input",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "hash",
+   "label": "SHA-256 锚定",
+   "sub": "变更即拒绝",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "inv",
+   "label": "inventory 清点",
+   "sub": "targets/objects/sections",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "dec",
+   "label": "载荷解码",
+   "sub": "lz4/zstd/zlib",
+   "focal": true,
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "ret",
+   "label": "保留工件",
+   "sub": "PTX 全文等 ≤16MiB",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "res",
+   "label": "结构化结果",
+   "sub": "字段级选择",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "ev",
+   "label": "Evidence id",
+   "sub": "可回读/可导出",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "ag",
+   "label": "Agent 消费",
+   "kind": "external",
+   "row": 2,
+   "col": 3
+  }
+ ],
+ "edges": [
+  {
+   "from": "in",
+   "to": "hash",
+   "label": "整文件流式哈希",
+   "kind": "primary"
+  },
+  [
+   "hash",
+   "inv"
+  ],
+  {
+   "from": "inv",
+   "to": "dec",
+   "label": "仅选中载荷",
+   "kind": "primary"
+  },
+  [
+   "dec",
+   "ret"
+  ],
+  [
+   "dec",
+   "res"
+  ],
+  [
+   "ret",
+   "ev"
+  ],
+  [
+   "res",
+   "ev"
+  ],
+  [
+   "ev",
+   "ag",
+   "摘要回传"
+  ]
+ ]
+}

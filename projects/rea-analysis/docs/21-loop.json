@@ -1,0 +1,30 @@
+{
+ "type": "loop",
+ "title": "证据驱动的调查飞轮",
+ "subtitle": "每一圈都把问题缩小一点",
+ "caption": "机制依据 README「How REA works」：返回的证据用于追问，直到能解释或复刻。",
+ "center": "证据闭环",
+ "centerSub": "ask → inspect → cite",
+ "steps": [
+  {
+   "label": "提出问题",
+   "sub": "这个功能怎么实现"
+  },
+  {
+   "label": "检查目标",
+   "sub": "inspect/analyze 工具"
+  },
+  {
+   "label": "沉淀证据",
+   "sub": "file:line + 字节坐标"
+  },
+  {
+   "label": "追问缩小范围",
+   "sub": "follow-up 调用"
+  },
+  {
+   "label": "解释并复刻",
+   "sub": "实现 + 对比测试"
+  }
+ ]
+}

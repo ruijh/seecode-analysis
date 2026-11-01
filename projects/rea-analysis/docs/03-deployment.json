@@ -1,0 +1,121 @@
+{
+ "type": "deployment",
+ "title": "跑在哪里：三种使用形态",
+ "subtitle": "MCP 注册 / 全局 CLI / agentenv RL 环境",
+ "caption": "依据 README Quick start 与 installation 文档：一条 npx 命令完成注册并备份已有配置；原生分析复用已装的 Hopper/Ghidra/IDA/Kuna。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "qs",
+   "file": "README.md",
+   "line": 81
+  }
+ ],
+ "groups": [
+  {
+   "id": "host",
+   "label": "你的机器（Node 22+）",
+   "style": "dashed"
+  },
+  {
+   "id": "ext",
+   "label": "外置工具（可选，用户自备）"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "AI Agent",
+   "sub": "Claude Code/Codex/Cursor…",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "mcp",
+   "label": "rea-agents MCP",
+   "sub": "npx rea-agents setup 注册",
+   "group": "host",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "cli",
+   "label": "rea CLI",
+   "sub": "npm i -g rea-agents",
+   "group": "host",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "env",
+   "label": "agentenv",
+   "sub": "RL 环境构建（6.8）",
+   "group": "host",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "prov",
+   "label": "反编译引擎",
+   "sub": "Hopper/Ghidra/IDA/Kuna",
+   "group": "ext",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "tools",
+   "label": "调用方工具",
+   "sub": "JADX · WABT · pwntools · tshark",
+   "group": "ext",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "tgt",
+   "label": "分析目标",
+   "sub": "本地路径/ASAR/APK/设备",
+   "kind": "external",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "agent",
+   "to": "mcp",
+   "label": "stdio/HTTP",
+   "kind": "primary"
+  },
+  [
+   "agent",
+   "cli",
+   "终端直用"
+  ],
+  [
+   "mcp",
+   "tgt",
+   "只读检查"
+  ],
+  [
+   "cli",
+   "tgt"
+  ],
+  [
+   "mcp",
+   "prov",
+   "按需启动"
+  ],
+  [
+   "cli",
+   "tools",
+   "调用"
+  ],
+  [
+   "env",
+   "mcp",
+   "工具即动作空间"
+  ]
+ ]
+}

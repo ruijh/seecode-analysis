@@ -1,0 +1,73 @@
+{
+ "type": "journey",
+ "title": "逆向新手的旅程",
+ "subtitle": "从\"看到好功能\"到\"我的项目里也有了\"",
+ "caption": "情绪得分为分析性推断；步骤均对应 README 与 docs 的真实入口。",
+ "stages": [
+  {
+   "label": "发现",
+   "steps": [
+    {
+     "label": "看到别人应用里的好功能",
+     "score": 1
+    },
+    {
+     "label": "想知道底层怎么实现",
+     "score": 0
+    }
+   ]
+  },
+  {
+   "label": "安装",
+   "steps": [
+    {
+     "label": "npx rea-agents setup 一条命令",
+     "score": 1
+    },
+    {
+     "label": "重启 agent 完成 MCP 注册",
+     "score": 0
+    }
+   ]
+  },
+  {
+   "label": "首查",
+   "steps": [
+    {
+     "label": "拖入目标路径直接提问",
+     "score": 1
+    },
+    {
+     "label": "inventory 给出候选与证据",
+     "score": 2
+    }
+   ]
+  },
+  {
+   "label": "深挖",
+   "steps": [
+    {
+     "label": "伪代码/汇编逐段读",
+     "score": 0
+    },
+    {
+     "label": "证据链交叉验证结论",
+     "score": 1
+    }
+   ]
+  },
+  {
+   "label": "复刻",
+   "steps": [
+    {
+     "label": "让 agent 按证据写实现",
+     "score": 1
+    },
+    {
+     "label": "与原行为对比测试通过",
+     "score": 2
+    }
+   ]
+  }
+ ]
+}

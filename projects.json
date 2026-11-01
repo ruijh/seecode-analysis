@@ -46,6 +46,15 @@
       "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/dsh-superagent-prototype-analysis",
       "description": "对 deepseek-ai/dsh-superagent-prototype（DSH 超级代理原型）的全景解读：六道准入闸、双会话执行、可唤醒的工单生命周期与 1:1 测试比。",
       "added": "2026-11-01"
+    },
+    {
+      "id": "rea-analysis",
+      "name": "REA (Reverse Engineer Anything)",
+      "upstream": "morluto/rea",
+      "upstreamUrl": "https://github.com/morluto/rea",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/rea-analysis",
+      "description": "对 morluto/rea（一个 MCP 打通二进制/应用/运行时逆向）的全景解读：18 工具家族约 240 操作、36 类分析目标、证据链架构与 162 万行里的 58 万行测试。",
+      "added": "2026-11-01"
     }
   ]
 }

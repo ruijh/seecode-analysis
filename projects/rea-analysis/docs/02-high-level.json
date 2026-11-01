@@ -1,0 +1,76 @@
+{
+ "type": "high-level",
+ "title": "REA 是什么",
+ "subtitle": "给非工程师的 30 秒版本",
+ "caption": "数据来源：github.com/morluto/rea（2026-11-01 本地完整克隆 + git/find 统计）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "sub": "看到一个好功能",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "rea",
+   "label": "REA",
+   "sub": "逆向翻译官",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "tgt",
+   "label": "目标应用",
+   "sub": "没有源码",
+   "kind": "external",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "ev",
+   "label": "证据链",
+   "sub": "file:line + 字节坐标",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "out",
+   "label": "复刻实现",
+   "sub": "在你的项目里",
+   "kind": "external",
+   "row": 2,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "rea",
+   "提问"
+  ],
+  {
+   "from": "rea",
+   "to": "tgt",
+   "label": "无源码检查",
+   "kind": "primary"
+  },
+  {
+   "from": "tgt",
+   "to": "ev",
+   "label": "留下证据"
+  },
+  {
+   "from": "ev",
+   "to": "rea",
+   "label": "交叉验证",
+   "kind": "primary"
+  },
+  [
+   "rea",
+   "out",
+   "解释并复刻"
+  ]
+ ]
+}
