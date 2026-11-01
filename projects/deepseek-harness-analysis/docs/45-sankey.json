@@ -1,0 +1,53 @@
+{
+ "type": "sankey",
+ "title": "5401 次提交去哪了",
+ "subtitle": "合并 vs 直接提交 → 变更类型",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "unit": "提交",
+ "links": [
+  [
+   "总提交",
+   "合并 PR",
+   894
+  ],
+  [
+   "总提交",
+   "直接提交",
+   4507,
+   true
+  ],
+  [
+   "直接提交",
+   "fix",
+   1525,
+   true
+  ],
+  [
+   "直接提交",
+   "test",
+   745
+  ],
+  [
+   "直接提交",
+   "docs",
+   444
+  ],
+  [
+   "直接提交",
+   "feat",
+   376
+  ],
+  [
+   "直接提交",
+   "refactor",
+   228
+  ],
+  [
+   "直接提交",
+   "其他",
+   1189
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

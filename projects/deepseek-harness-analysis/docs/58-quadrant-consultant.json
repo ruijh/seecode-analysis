@@ -1,0 +1,51 @@
+{
+ "type": "quadrant-consultant",
+ "title": "采用建议矩阵",
+ "subtitle": "按成熟度与价值分四档",
+ "caption": "建议为分析性观点。",
+ "x": {
+  "label": "成熟度",
+  "low": "早期",
+  "high": "成熟"
+ },
+ "y": {
+  "label": "对你的价值",
+  "low": "低",
+  "high": "高"
+ },
+ "quadrants": [
+  {
+   "label": "试点评估",
+   "items": [
+    "sdk 接入",
+    "subagent 委派",
+    "compaction 压缩"
+   ]
+  },
+  {
+   "label": "立即采用",
+   "items": [
+    "Web UI",
+    "core 会话/工具",
+    "DeepSeek 适配"
+   ]
+  },
+  {
+   "label": "暂不需要",
+   "items": [
+    "native/system",
+    "品牌包"
+   ]
+  },
+  {
+   "label": "观望实验",
+   "items": [
+    "forge/liveshare",
+    "cua 桌面操控",
+    "voice 语音"
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

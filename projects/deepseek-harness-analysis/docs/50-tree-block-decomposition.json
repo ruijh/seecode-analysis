@@ -1,0 +1,85 @@
+{
+ "type": "tree-block-decomposition",
+ "title": "packages 域分解",
+ "subtitle": "45 个域按职责归组（编号可引用）",
+ "caption": "分组为分析性归纳。",
+ "budget": "faithful",
+ "root": {
+  "label": "packages/",
+  "children": [
+   {
+    "label": "1 内核",
+    "children": [
+     {
+      "label": "1.1 core/agent-loop"
+     },
+     {
+      "label": "1.2 session"
+     },
+     {
+      "label": "1.3 llm 适配"
+     }
+    ]
+   },
+   {
+    "label": "2 体验",
+    "focal": true,
+    "children": [
+     {
+      "label": "2.1 client UI (69)"
+     },
+     {
+      "label": "2.2 web 服务"
+     },
+     {
+      "label": "2.3 api 网关 (10)"
+     }
+    ]
+   },
+   {
+    "label": "3 执行接缝",
+    "children": [
+     {
+      "label": "3.1 fs (8)"
+     },
+     {
+      "label": "3.2 shell (10)"
+     },
+     {
+      "label": "3.3 sandbox/subprocess"
+     },
+     {
+      "label": "3.4 terminal/lsp/pty"
+     }
+    ]
+   },
+   {
+    "label": "4 生态",
+    "children": [
+     {
+      "label": "4.1 mcp/acp"
+     },
+     {
+      "label": "4.2 sdk (3)"
+     },
+     {
+      "label": "4.3 typert (4)"
+     },
+     {
+      "label": "4.4 boot/bundle (12)"
+     }
+    ]
+   },
+   {
+    "label": "5 实验田",
+    "children": [
+     {
+      "label": "5.1 experimental (65)"
+     }
+    ]
+   }
+  ]
+ },
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

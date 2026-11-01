@@ -1,0 +1,100 @@
+{
+ "type": "tree",
+ "title": "仓库目录结构",
+ "subtitle": "monorepo 顶层与 packages 二级域",
+ "caption": "包数截至 2026-10-31。",
+ "budget": "faithful",
+ "root": {
+  "label": "deepseek-harness/",
+  "children": [
+   {
+    "label": "apps/ (5)",
+    "sub": "可安装应用",
+    "children": [
+     {
+      "label": "cli"
+     },
+     {
+      "label": "web"
+     },
+     {
+      "label": "desktop"
+     },
+     {
+      "label": "desktop-host"
+     },
+     {
+      "label": "+1 more",
+      "kind": "muted"
+     }
+    ]
+   },
+   {
+    "label": "packages/ (372)",
+    "focal": true,
+    "children": [
+     {
+      "label": "core/ (10)",
+      "sub": "内核"
+     },
+     {
+      "label": "client/ (69)",
+      "sub": "41 万行"
+     },
+     {
+      "label": "experimental/ (65)",
+      "sub": "25 万行"
+     },
+     {
+      "label": "session/ (22)"
+     },
+     {
+      "label": "llm/ (9)"
+     },
+     {
+      "label": "+40 域",
+      "kind": "muted"
+     }
+    ]
+   },
+   {
+    "label": "python/ + native/",
+    "sub": "SDK 与 Swift 原生",
+    "children": [
+     {
+      "label": "sdk"
+     },
+     {
+      "label": "sdk-runtime"
+     },
+     {
+      "label": "system (Swift)"
+     }
+    ]
+   },
+   {
+    "label": "docs/",
+    "children": [
+     {
+      "label": "cookbook"
+     },
+     {
+      "label": "subsystems"
+     },
+     {
+      "label": "+20 篇",
+      "kind": "muted"
+     }
+    ]
+   },
+   {
+    "label": "scripts/ (89k 行)"
+   },
+   {
+    "label": "website/ · benchmarks/"
+   }
+  ]
+ },
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

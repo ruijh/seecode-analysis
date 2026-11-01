@@ -1,0 +1,15 @@
+{
+  "type": "journey",
+  "title": "新用户旅程",
+  "eyebrow": "DEER-FLOW 全景解析 · 16/45",
+  "caption": "从 GitHub 路过到深度依赖：安装因 Docker 而轻松，模型配置是最大不确定性，跑通第一次长任务后进入能力复利区。",
+  "lang": "zh-CN",
+  "stages": [
+    {"label": "发现", "steps": [{"label": "刷到 Trending 第一", "score": 2, "note": "2026-02-28 登顶"}]},
+    {"label": "安装", "steps": [{"label": "make docker-start 一键起", "score": 2}]},
+    {"label": "配置", "steps": [{"label": "选模型填 Key", "score": -1, "note": "模型选择影响体验"}, {"label": "看文档理解概念", "score": 0}]},
+    {"label": "首跑", "steps": [{"label": "第一次深度研究", "score": 2, "focal": true}]},
+    {"label": "深用", "steps": [{"label": "技能+记忆成日常", "score": 2}]},
+    {"label": "扩展", "steps": [{"label": "自建技能/接 IM", "score": 1}]}
+  ]
+}

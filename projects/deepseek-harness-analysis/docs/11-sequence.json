@@ -1,0 +1,101 @@
+{
+ "type": "sequence",
+ "title": "一次对话回合的时序",
+ "subtitle": "从用户输入到工具执行再到流式回复",
+ "caption": "依据 docs/architecture.md「Turn flow」：step = 一次模型请求 + 它调用的工具。",
+ "numbered": true,
+ "participants": [
+  {
+   "id": "u",
+   "label": "浏览器",
+   "kind": "external"
+  },
+  {
+   "id": "srv",
+   "label": "Web 服务",
+   "focal": true
+  },
+  {
+   "id": "loop",
+   "label": "AgentLoop"
+  },
+  {
+   "id": "llm",
+   "label": "DeepSeek API",
+   "kind": "external"
+  },
+  {
+   "id": "sbx",
+   "label": "沙箱"
+  }
+ ],
+ "messages": [
+  [
+   "u",
+   "srv",
+   "发送消息"
+  ],
+  [
+   "srv",
+   "loop",
+   "turn/start"
+  ],
+  [
+   "loop",
+   "llm",
+   "流式请求（冻结历史）",
+   "primary"
+  ],
+  [
+   "llm",
+   "loop",
+   "assistant 流",
+   "reply"
+  ],
+  [
+   "loop",
+   "sbx",
+   "tool/call"
+  ],
+  [
+   "sbx",
+   "loop",
+   "tool/result",
+   "reply"
+  ],
+  [
+   "loop",
+   "llm",
+   "下一步请求",
+   "primary"
+  ],
+  [
+   "llm",
+   "loop",
+   "最终回复",
+   "reply"
+  ],
+  [
+   "loop",
+   "srv",
+   "会话事件",
+   "async"
+  ],
+  [
+   "srv",
+   "u",
+   "SSE 推送",
+   "reply"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "loop",
+   "label": "工具要求再请求",
+   "from": 4,
+   "to": 6
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

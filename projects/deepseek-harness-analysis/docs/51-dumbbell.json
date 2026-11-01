@@ -1,0 +1,52 @@
+{
+ "type": "dumbbell",
+ "title": "包数变迁：首提交 → 今天",
+ "subtitle": "2026-08-07 首次提交时的域 vs 现在",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）；首提交时域结构不同，仅对比同名域。",
+ "from": "8月7日",
+ "to": "10月31日",
+ "data": [
+  [
+   "client",
+   29,
+   69
+  ],
+  [
+   "core",
+   6,
+   10
+  ],
+  [
+   "util",
+   6,
+   21
+  ],
+  [
+   "host",
+   7,
+   9
+  ],
+  [
+   "fs",
+   7,
+   8
+  ],
+  [
+   "session",
+   0,
+   22
+  ],
+  [
+   "subagent",
+   11,
+   9
+  ],
+  [
+   "sdk",
+   6,
+   3
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

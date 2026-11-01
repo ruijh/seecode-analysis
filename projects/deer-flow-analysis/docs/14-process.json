@@ -1,0 +1,14 @@
+{
+  "type": "process",
+  "title": "5 分钟跑起来",
+  "eyebrow": "DEER-FLOW 全景解析 · 14/45",
+  "caption": "Docker 是推荐路径（Compose v2.24+）；config.yaml 填好 OpenAI 兼容模型的 Key；官方推荐 Doubao-Seed-2.0-Code、DeepSeek v3.2、Kimi 2.5。",
+  "lang": "zh-CN",
+  "steps": [
+    {"label": "克隆仓库", "sub": "git clone"},
+    {"label": "复制配置", "sub": "config.example.yaml → config.yaml"},
+    {"label": "拉沙箱镜像", "sub": "make docker-init"},
+    {"label": "一键启动", "sub": "make docker-start", "focal": true},
+    {"label": "打开 2026", "sub": "浏览器访问"}
+  ]
+}

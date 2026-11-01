@@ -1,0 +1,24 @@
+{
+ "type": "loop-terminal",
+ "title": "Agent 内循环",
+ "subtitle": "一次 step 内部的最小闭环",
+ "caption": "对应 agent-loop 的 step 定义：请求 → 工具 → 再请求。",
+ "center": "完成任务",
+ "steps": [
+  {
+   "label": "冻结历史"
+  },
+  {
+   "label": "流式请求",
+   "focal": true
+  },
+  {
+   "label": "调用工具"
+  },
+  {
+   "label": "回读结果"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

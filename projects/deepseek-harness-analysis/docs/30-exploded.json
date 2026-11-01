@@ -1,0 +1,57 @@
+{
+ "type": "exploded",
+ "title": "拆开 dsh 运行时",
+ "subtitle": "自下而上的五层实体化",
+ "caption": "示意拆解：每层对应真实包组。",
+ "parts": [
+  {
+   "label": "主机机壳",
+   "sub": "Node/Electron",
+   "kind": "housing",
+   "w": 170,
+   "d": 320,
+   "t": 18,
+   "r": 22
+  },
+  {
+   "label": "会话存储盘",
+   "sub": "JSONL+SQLite",
+   "kind": "battery",
+   "w": 130,
+   "d": 150,
+   "t": 10,
+   "y": 55
+  },
+  {
+   "label": "Agent Loop 主板",
+   "sub": "core 内核",
+   "kind": "board",
+   "w": 130,
+   "d": 120,
+   "t": 5,
+   "y": -70,
+   "focal": true
+  },
+  {
+   "label": "LLM 适配卡",
+   "sub": "多供应商",
+   "kind": "slab",
+   "w": 96,
+   "d": 64,
+   "t": 4,
+   "x": 70,
+   "y": -60
+  },
+  {
+   "label": "界面外壳",
+   "sub": "Web UI",
+   "kind": "display",
+   "w": 170,
+   "d": 320,
+   "t": 8,
+   "r": 22
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

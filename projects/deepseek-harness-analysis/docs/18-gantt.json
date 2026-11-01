@@ -1,0 +1,69 @@
+{
+ "type": "gantt",
+ "title": "开发阶段甘特图",
+ "subtitle": "按提交强度划分的三个阶段",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "today": "2026-10-31",
+ "tasks": [
+  {
+   "id": "f",
+   "label": "内核与脚手架",
+   "section": "打地基",
+   "start": "2026-08-07",
+   "end": "2026-08-31",
+   "done": true
+  },
+  {
+   "id": "c1",
+   "label": "core/session/llm 成型",
+   "section": "扩张",
+   "start": "2026-09-01",
+   "end": "2026-09-20",
+   "done": true
+  },
+  {
+   "id": "c2",
+   "label": "client 69 包铺开",
+   "section": "扩张",
+   "start": "2026-09-10",
+   "end": "2026-09-30",
+   "done": true
+  },
+  {
+   "id": "a1",
+   "label": "API 网关与远程访问",
+   "section": "提速",
+   "start": "2026-10-01",
+   "end": "2026-10-20",
+   "done": true,
+   "focal": true
+  },
+  {
+   "id": "a2",
+   "label": "实验特性潮",
+   "section": "提速",
+   "start": "2026-10-05",
+   "end": "2026-10-31"
+  },
+  {
+   "id": "a3",
+   "label": "0.2.1 发布线",
+   "section": "提速",
+   "start": "2026-10-25",
+   "end": "2026-10-31"
+  }
+ ],
+ "milestones": [
+  {
+   "label": "GitHub 公开",
+   "date": "2026-08-13"
+  },
+  {
+   "label": "0.2.1-rc.5",
+   "date": "2026-10-29",
+   "focal": true
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

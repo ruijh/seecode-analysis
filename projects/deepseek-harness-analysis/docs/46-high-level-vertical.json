@@ -1,0 +1,64 @@
+{
+ "type": "high-level-vertical",
+ "title": "dsh 是什么（纵向）",
+ "subtitle": "窄幅布局，自上而下",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "app",
+   "label": "dsh 应用",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "agent",
+   "label": "AI 助手",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "toolsk",
+   "label": "工具箱",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "pc",
+   "label": "你的电脑",
+   "kind": "store",
+   "row": 3,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "app",
+   "对话",
+   "primary"
+  ],
+  [
+   "app",
+   "agent"
+  ],
+  [
+   "agent",
+   "toolsk"
+  ],
+  [
+   "agent",
+   "pc",
+   "经工具读写"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

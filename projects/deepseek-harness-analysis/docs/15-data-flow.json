@@ -1,0 +1,108 @@
+{
+ "type": "data-flow",
+ "title": "会话事件的数据流",
+ "subtitle": "一次写入，多路消费",
+ "caption": "「模型可见即已记录」：回放/遥测/检索全部派生自同一份日志。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "log",
+   "file": "docs/architecture.md",
+   "line": 128
+  }
+ ],
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "Agent 事件",
+   "kind": "input",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "log",
+   "label": "会话日志",
+   "sub": "JSONL+zstd",
+   "kind": "store",
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "proj",
+   "label": "投影层",
+   "sub": "session-projection",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "ui",
+   "label": "客户端视图",
+   "sub": "snapshot()",
+   "kind": "external",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "search",
+   "label": "FTS 检索",
+   "sub": "sqlite 派生",
+   "kind": "store",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "otel",
+   "label": "OTel 遥测",
+   "kind": "external",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "exp",
+   "label": "导出/回放",
+   "kind": "external",
+   "row": 1,
+   "col": 4
+  }
+ ],
+ "edges": [
+  [
+   "agent",
+   "log",
+   "SessionEvent",
+   "primary"
+  ],
+  [
+   "log",
+   "proj",
+   "已提交事件",
+   "primary"
+  ],
+  [
+   "proj",
+   "ui",
+   "客户端快照",
+   "async"
+  ],
+  [
+   "proj",
+   "search",
+   "可检索文档"
+  ],
+  [
+   "log",
+   "otel",
+   "spans",
+   "async"
+  ],
+  [
+   "log",
+   "exp",
+   "转录",
+   "async"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

@@ -1,0 +1,55 @@
+{
+ "type": "streamgraph",
+ "title": "提交构成流",
+ "subtitle": "三个月的精力分配",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "x": [
+  "8月",
+  "9月",
+  "10月"
+ ],
+ "series": [
+  {
+   "name": "fix",
+   "values": [
+    64,
+    591,
+    870
+   ]
+  },
+  {
+   "name": "merge",
+   "values": [
+    59,
+    351,
+    484
+   ]
+  },
+  {
+   "name": "test",
+   "values": [
+    42,
+    256,
+    447
+   ]
+  },
+  {
+   "name": "feat",
+   "values": [
+    6,
+    130,
+    240
+   ]
+  },
+  {
+   "name": "docs",
+   "values": [
+    18,
+    156,
+    270
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

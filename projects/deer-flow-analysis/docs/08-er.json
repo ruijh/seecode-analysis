@@ -1,0 +1,26 @@
+{
+  "type": "er",
+  "title": "核心实体模型",
+  "eyebrow": "DEER-FLOW 全景解析 · 08/45",
+  "caption": "Thread 是中心实体：挂 Runs、Messages、定时任务与子代理结果。每个定时任务同时最多一个 active occurrence（uq_scheduled_task_run_active 约束）。",
+  "lang": "zh-CN",
+  "nodes": [
+    {"id": "users", "label": "User", "fields": ["id PK", "email UQ"], "row": 1, "col": 0},
+    {"id": "projects", "label": "Project", "fields": ["id PK", "owner_id FK", "name"], "row": 2, "col": 0},
+    {"id": "threads", "label": "Thread", "focal": true, "fields": ["id PK", "user_id FK", "project_id FK", "title"], "row": 1, "col": 1},
+    {"id": "runs", "label": "Run", "fields": ["id PK", "thread_id FK", "status"], "row": 0, "col": 2},
+    {"id": "messages", "label": "Message", "fields": ["id PK", "run_id FK", "role"], "row": 2, "col": 2},
+    {"id": "tasks", "label": "ScheduledTask", "fields": ["id PK", "thread_id FK", "cron", "enabled"], "row": 0, "col": 0},
+    {"id": "taskruns", "label": "ScheduledTaskRun", "fields": ["id PK", "task_id FK", "status UQ"], "row": 0, "col": 1},
+    {"id": "subres", "label": "SubagentResult", "fields": ["id PK", "run_id FK", "external_task_id", "token_usage"], "row": 1, "col": 2}
+  ],
+  "edges": [
+    ["users", "threads", "拥有", "one-many"],
+    ["projects", "threads", "归组", "one-many"],
+    ["threads", "runs", "承载", "one-many"],
+    ["runs", "messages", "产生", "one-many"],
+    ["threads", "tasks", "绑定", "one-many"],
+    ["tasks", "taskruns", "调度", "one-many"],
+    ["runs", "subres", "委派产出", "one-many"]
+  ]
+}

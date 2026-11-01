@@ -1,0 +1,24 @@
+{
+  "type": "uml-class",
+  "title": "运行时核心类",
+  "eyebrow": "DEER-FLOW 全景解析 · 07/45",
+  "caption": "Gateway 经 RunManager 启动 LeadAgent；LeadAgent 编排子代理与沙箱；StreamBridge 把运行事件转成 SSE。AioSandboxProvider 是 SandboxProvider 的 Docker 实现。",
+  "lang": "zh-CN",
+  "dir": "TB",
+  "nodes": [
+    {"id": "run", "label": "RunManager", "attrs": ["- runs: 运行注册表"], "methods": ["+ launch(thread)","- recover_leases()"], "row": 0, "col": 0},
+    {"id": "prov", "label": "SandboxProvider", "tag": "«interface»", "methods": ["+ start(thread_id)","+ exec(cmd)","+ teardown()"], "row": 0, "col": 2},
+    {"id": "bridge", "label": "StreamBridge", "methods": ["+ emit(event)","- batch_chunks()"], "row": 1, "col": 0},
+    {"id": "lead", "label": "LeadAgent", "methods": ["+ plan(task)","+ delegate(sub)"], "row": 1, "col": 1},
+    {"id": "aio", "label": "AioSandboxProvider", "sub": "Docker 实现", "methods": ["+ exec(cmd)"], "row": 1, "col": 2},
+    {"id": "subex", "label": "SubagentExecutor", "attrs": ["- execution_id: UUID"], "methods": ["+ execute_async()","+ cancel()"], "row": 2, "col": 1}
+  ],
+  "edges": [
+    ["run", "lead", "", "composes"],
+    ["run", "bridge", "SSE 输出", "assoc"],
+    ["lead", "subex", "", "composes"],
+    ["subex", "prov", "运行代码", "depends"],
+    ["lead", "prov", "工具执行", "depends"],
+    ["aio", "prov", "", "implements"]
+  ]
+}

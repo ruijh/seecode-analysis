@@ -1,0 +1,30 @@
+{
+  "type": "sequence",
+  "title": "一次研究运行的消息时序",
+  "eyebrow": "DEER-FLOW 全景解析 · 11/45",
+  "caption": "从提问到流式交付：Nginx 把 /api/langgraph/* 重写到 Gateway 原生路由，RunManager 经 run_agent() 驱动 LeadAgent，事件经 StreamBridge 以 SSE 逐帧回流前端。",
+  "lang": "zh-CN",
+  "numbered": true,
+  "participants": [
+    {"id": "u", "label": "用户", "kind": "external"},
+    {"id": "fe", "label": "前端", "sub": "Next.js"},
+    {"id": "nginx", "label": "Nginx", "sub": ":2026"},
+    {"id": "gw", "label": "Gateway", "sub": "RunManager", "focal": true},
+    {"id": "agent", "label": "LeadAgent", "sub": "LangGraph"},
+    {"id": "sbx", "label": "沙箱/工具", "kind": "external"}
+  ],
+  "messages": [
+    ["u", "fe", "输入问题"],
+    ["fe", "nginx", "POST /api/threads", "primary"],
+    ["nginx", "gw", "重写转发", "primary"],
+    ["gw", "gw", "RunManager 启动 run"],
+    ["gw", "agent", "run_agent()"],
+    ["agent", "agent", "规划 · 拆解"],
+    ["agent", "sbx", "执行代码/检索", "async"],
+    ["sbx", "agent", "结果 + 产物", "reply"],
+    ["agent", "gw", "状态事件流"],
+    ["gw", "nginx", "SSE 帧批次", "reply"],
+    ["nginx", "fe", "SSE 透传", "reply"],
+    ["fe", "u", "实时渲染", "reply"]
+  ]
+}

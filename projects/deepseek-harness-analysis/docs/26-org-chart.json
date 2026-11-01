@@ -1,0 +1,82 @@
+{
+ "type": "org-chart",
+ "title": "代码「组织架构」",
+ "subtitle": "把 372 个包当成团队来看",
+ "caption": "人员无关；分组按目录职责。67 位贡献者（GitHub 克隆统计）。",
+ "budget": "faithful",
+ "root": {
+  "label": "DeepSeek-AI",
+  "sub": "dsh 项目",
+  "children": [
+   {
+    "label": "平台内核",
+    "sub": "core+session+llm+boot",
+    "children": [
+     {
+      "label": "agent-loop",
+      "focal": true
+     },
+     {
+      "label": "session 格式"
+     },
+     {
+      "label": "适配器"
+     }
+    ]
+   },
+   {
+    "label": "客户端体验",
+    "sub": "client 域 69 包",
+    "children": [
+     {
+      "label": "ui-chat 3.9 万行"
+     },
+     {
+      "label": "ui-conversation"
+     },
+     {
+      "label": "primitives"
+     }
+    ]
+   },
+   {
+    "label": "执行与沙箱",
+    "sub": "fs/shell/sandbox 等",
+    "children": [
+     {
+      "label": "本地执行"
+     },
+     {
+      "label": "SSH 远程"
+     }
+    ]
+   },
+   {
+    "label": "实验创新",
+    "sub": "experimental 65 包",
+    "children": [
+     {
+      "label": "liveshare 5.6 万行"
+     },
+     {
+      "label": "forge/cua"
+     }
+    ]
+   },
+   {
+    "label": "工程效能",
+    "sub": "scripts+CI+测试",
+    "children": [
+     {
+      "label": "2020 测试文件"
+     },
+     {
+      "label": "31 条工作流"
+     }
+    ]
+   }
+  ]
+ },
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

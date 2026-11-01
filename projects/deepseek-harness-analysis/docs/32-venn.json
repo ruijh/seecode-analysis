@@ -1,0 +1,54 @@
+{
+ "type": "venn",
+ "title": "三种形态的能力重叠",
+ "subtitle": "同一内核的三张脸",
+ "caption": "形态=官方 profile：web / desktop(经 web) / sdk(含 headless、acp)。",
+ "sets": [
+  {
+   "id": "web",
+   "label": "Web 应用"
+  },
+  {
+   "id": "desk",
+   "label": "桌面应用"
+  },
+  {
+   "id": "sdk",
+   "label": "SDK/无头"
+  }
+ ],
+ "overlaps": [
+  {
+   "sets": [
+    "web",
+    "desk"
+   ],
+   "label": "浏览器界面"
+  },
+  {
+   "sets": [
+    "web",
+    "sdk"
+   ],
+   "label": "JSON-RPC 会话"
+  },
+  {
+   "sets": [
+    "desk",
+    "sdk"
+   ],
+   "label": "本地运行时"
+  },
+  {
+   "sets": [
+    "web",
+    "desk",
+    "sdk"
+   ],
+   "label": "Cordis 插件内核",
+   "focal": true
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

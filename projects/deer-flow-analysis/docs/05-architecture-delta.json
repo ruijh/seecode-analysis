@@ -1,0 +1,112 @@
+{
+  "type": "architecture-delta",
+  "title": "v1 → v2：从研究框架到 SuperAgent Harness",
+  "eyebrow": "DEER-FLOW 全景解析 · 05/45",
+  "caption": "2.0 是彻底重写，与 v1 零共享代码：v1 的深度研究流水线退役到 main-1.x 分支；研究降级为 deep-research 技能，harness 之上新增技能、记忆、子代理、沙箱四大底座。",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "nodes": [
+    {
+      "id": "old",
+      "label": "v1 深度研究流水线",
+      "sub": "Planner/Researcher/Reporter",
+      "change": "removed",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "ui",
+      "label": "对话界面",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "harness",
+      "label": "SuperAgent Harness",
+      "sub": "deerflow-harness",
+      "change": "added",
+      "focal": true,
+      "row": 2,
+      "col": 1
+    },
+    {
+      "id": "research",
+      "label": "深度研究",
+      "sub": "变为官方技能",
+      "change": "changed",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "skills",
+      "label": "技能系统",
+      "sub": "23 个官方技能",
+      "change": "added",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "id": "memory",
+      "label": "长期记忆",
+      "sub": "DeerMem",
+      "change": "added",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "subs",
+      "label": "子代理",
+      "sub": "并行委派",
+      "change": "added",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "id": "sbx",
+      "label": "沙箱",
+      "sub": "线程级隔离",
+      "change": "added",
+      "row": 4,
+      "col": 1
+    }
+  ],
+  "edges": [
+    {
+      "from": "old",
+      "to": "research",
+      "label": "能力继承"
+    },
+    {
+      "from": "ui",
+      "to": "harness",
+      "label": "统一入口",
+      "kind": "primary"
+    },
+    {
+      "from": "harness",
+      "to": "skills",
+      "kind": "primary"
+    },
+    {
+      "from": "harness",
+      "to": "memory",
+      "kind": "primary"
+    },
+    {
+      "from": "harness",
+      "to": "subs",
+      "kind": "primary"
+    },
+    {
+      "from": "harness",
+      "to": "sbx",
+      "kind": "primary"
+    },
+    {
+      "from": "harness",
+      "to": "research",
+      "label": "按需挂载",
+      "kind": "async"
+    }
+  ]
+}

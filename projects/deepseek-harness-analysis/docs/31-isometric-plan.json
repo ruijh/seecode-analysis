@@ -1,0 +1,135 @@
+{
+ "type": "isometric-plan",
+ "title": "仓库平面图",
+ "subtitle": "如果 monorepo 是一个园区",
+ "caption": "面积为 LOC 的示意比例；房间名=目录。",
+ "plate": {
+  "w": 940,
+  "d": 460
+ },
+ "rooms": [
+  {
+   "label": "core 车间",
+   "sub": "内核 5 万行",
+   "x": 0,
+   "y": 0,
+   "w": 220,
+   "d": 180,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "client 商圈",
+   "sub": "41 万行 · 69 包",
+   "x": 240,
+   "y": 0,
+   "w": 360,
+   "d": 180,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "experimental 实验田",
+   "sub": "25 万行 · 65 包",
+   "x": 620,
+   "y": 0,
+   "w": 300,
+   "d": 180,
+   "walls": true,
+   "door": "S",
+   "focal": true
+  },
+  {
+   "label": "apps 工坊",
+   "sub": "14.8 万行",
+   "x": 0,
+   "y": 210,
+   "w": 300,
+   "d": 200,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "docs 图书馆",
+   "sub": "4900 篇 md",
+   "x": 320,
+   "y": 210,
+   "w": 240,
+   "d": 200,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "scripts 传动房",
+   "sub": "8.9 万行",
+   "x": 580,
+   "y": 210,
+   "w": 180,
+   "d": 200,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "python 展亭",
+   "sub": "SDK",
+   "x": 780,
+   "y": 210,
+   "w": 140,
+   "d": 200,
+   "walls": true,
+   "door": "N"
+  }
+ ],
+ "boxes": [
+  {
+   "x": 60,
+   "y": 250,
+   "w": 60,
+   "d": 34,
+   "h": 12,
+   "kind": "desk"
+  },
+  {
+   "x": 150,
+   "y": 250,
+   "w": 60,
+   "d": 34,
+   "h": 12,
+   "kind": "desk"
+  },
+  {
+   "x": 400,
+   "y": 60,
+   "w": 50,
+   "d": 50,
+   "h": 8,
+   "kind": "table"
+  },
+  {
+   "x": 700,
+   "y": 120,
+   "w": 40,
+   "d": 40,
+   "h": 30,
+   "kind": "tree"
+  },
+  {
+   "x": 860,
+   "y": 60,
+   "w": 36,
+   "d": 36,
+   "h": 26,
+   "kind": "tree"
+  },
+  {
+   "x": 60,
+   "y": 360,
+   "w": 80,
+   "d": 30,
+   "h": 10,
+   "kind": "rack"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

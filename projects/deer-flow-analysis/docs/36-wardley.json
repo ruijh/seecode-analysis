@@ -1,0 +1,19 @@
+{
+  "type": "wardley",
+  "title": "Agent 技术栈演进图",
+  "eyebrow": "DEER-FLOW 全景解析 · 36/45",
+  "caption": "价值链上的位置：LLM API 与 LangGraph 已是商品/产品；harness 正从定制向产品移动（DeerFlow 的赌注）；技能生态仍在创世区，是差异化焦点。",
+  "lang": "zh-CN",
+  "components": [
+    {"id": "u", "label": "用户：完成长任务", "evo": 0.7, "vis": 1, "anchor": true},
+    {"id": "ui", "label": "对话界面", "evo": 0.85, "vis": 0.85},
+    {"id": "harness", "label": "SuperAgent Harness", "evo": 0.45, "vis": 0.7, "focal": true, "moveTo": 0.65},
+    {"id": "skill", "label": "技能生态", "evo": 0.25, "vis": 0.55},
+    {"id": "sub", "label": "子代理编排", "evo": 0.5, "vis": 0.5},
+    {"id": "mcp", "label": "MCP 工具协议", "evo": 0.7, "vis": 0.45},
+    {"id": "sbx", "label": "沙箱执行", "evo": 0.55, "vis": 0.35},
+    {"id": "lg", "label": "LangGraph/LangChain", "evo": 0.8, "vis": 0.25},
+    {"id": "llm", "label": "OpenAI 兼容 LLM", "evo": 0.95, "vis": 0.15}
+  ],
+  "links": [["u", "ui"], ["ui", "harness"], ["harness", "skill"], ["harness", "sub"], ["harness", "mcp"], ["harness", "sbx"], ["sub", "lg"], ["harness", "lg"], ["lg", "llm"]]
+}

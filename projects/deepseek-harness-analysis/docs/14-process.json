@@ -1,0 +1,31 @@
+{
+ "type": "process",
+ "title": "五步跑起来",
+ "subtitle": "从零到第一次对话",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "steps": [
+  {
+   "label": "装 Node.js",
+   "sub": "≥ 22 建议"
+  },
+  {
+   "label": "npx 启动",
+   "sub": "@deepseek-ai/dsh web",
+   "focal": true
+  },
+  {
+   "label": "打开页面",
+   "sub": "127.0.0.1:3080"
+  },
+  {
+   "label": "接入模型",
+   "sub": "DeepSeek 账号"
+  },
+  {
+   "label": "开始对话",
+   "sub": "工具自动就绪"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

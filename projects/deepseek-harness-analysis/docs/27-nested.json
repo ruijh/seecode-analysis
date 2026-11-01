@@ -1,0 +1,57 @@
+{
+ "type": "nested",
+ "title": "信任域嵌套",
+ "subtitle": "从你的电脑到沙箱写根",
+ "caption": "边界为分析性描绘：沙箱可指向远程 SSH 主机（fs/shell/subprocess 同步切换）。",
+ "budget": "faithful",
+ "root": {
+  "label": "你的电脑",
+  "children": [
+   {
+    "label": "浏览器标签页",
+    "children": [
+     {
+      "label": "Web UI",
+      "sub": "React"
+     }
+    ]
+   },
+   {
+    "label": "DSH 进程",
+    "focal": true,
+    "children": [
+     {
+      "label": "Agent 运行时"
+     },
+     {
+      "label": "会话存储",
+      "sub": "~/.dsh"
+     },
+     {
+      "label": "沙箱",
+      "sub": "写根约束",
+      "children": [
+       {
+        "label": "子进程"
+       },
+       {
+        "label": "PTY"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "凭证库",
+    "sub": "owner-only",
+    "children": [
+     {
+      "label": "账号令牌"
+     }
+    ]
+   }
+  ]
+ },
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

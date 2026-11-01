@@ -1,0 +1,24 @@
+{
+  "type": "high-level",
+  "title": "DeerFlow 是什么",
+  "eyebrow": "DEER-FLOW 全景解析 · 02/45",
+  "caption": "一句话：一个会研究、写代码、做内容的超级代理工作台——你下任务，它调用工具、在沙箱里干活，最后交付成果。",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "nodes": [
+    {"id": "user", "label": "你", "kind": "external", "row": 1, "col": 0},
+    {"id": "chat", "label": "对话入口", "sub": "网页 / IM", "row": 1, "col": 1},
+    {"id": "agent", "label": "DeerFlow 超级代理", "sub": "规划 · 协作 · 记忆", "focal": true, "row": 1, "col": 2},
+    {"id": "tools", "label": "万能工具箱", "sub": "搜索 · 技能 · MCP", "row": 0, "col": 3},
+    {"id": "sandbox", "label": "安全工作台", "sub": "沙箱里跑代码", "row": 2, "col": 3},
+    {"id": "out", "label": "交付成果", "sub": "报告 · PPT · 代码 · 视频", "kind": "external", "row": 1, "col": 4}
+  ],
+  "edges": [
+    ["user", "chat", "提任务", "primary"],
+    ["chat", "agent", "", "primary"],
+    ["agent", "tools", "取能力"],
+    ["agent", "sandbox", "干粗活"],
+    ["tools", "out", "", "primary"],
+    ["sandbox", "out", "产物"]
+  ]
+}

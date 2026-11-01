@@ -1,0 +1,28 @@
+{
+  "type": "data-flow",
+  "title": "上下文工程数据流",
+  "eyebrow": "DEER-FLOW 全景解析 · 15/45",
+  "caption": "多源输入经上下文组装（裁剪/压缩/引用）进入 Agent；沙箱产物与对话沉淀为 DeerMem 记忆与归档，再以报告、文件、IM 回复流出。",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "nodes": [
+    {"id": "ask", "label": "用户输入", "kind": "input", "row": 0, "col": 0},
+    {"id": "files", "label": "上传 · 检索", "sub": "RAGFlow/网络", "kind": "input", "row": 1, "col": 0},
+    {"id": "ctx", "label": "上下文组装", "sub": "压缩 · 引用 · 范围", "focal": true, "row": 0, "col": 1},
+    {"id": "agent", "label": "Agent 执行", "sub": "工具/子代理", "row": 0, "col": 2},
+    {"id": "art", "label": "沙箱产物", "sub": "文件/图表", "row": 1, "col": 2},
+    {"id": "mem", "label": "DeerMem 记忆", "kind": "store", "row": 1, "col": 3},
+    {"id": "report", "label": "报告交付", "kind": "external", "row": 0, "col": 3},
+    {"id": "im", "label": "IM 回复", "kind": "external", "row": 2, "col": 3}
+  ],
+  "edges": [
+    ["ask", "ctx", "消息", "primary"],
+    ["files", "ctx", "证据片段"],
+    ["ctx", "agent", "结构化上下文", "primary"],
+    ["agent", "art", "生成"],
+    ["agent", "report", "结论", "primary"],
+    ["art", "mem", "沉淀", "async"],
+    ["agent", "mem", "事实抽取", "async"],
+    ["agent", "im", "渠道回复", "async"]
+  ]
+}

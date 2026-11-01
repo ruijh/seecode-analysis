@@ -1,0 +1,23 @@
+{
+  "type": "scatter",
+  "title": "贡献者长尾曲线",
+  "eyebrow": "DEER-FLOW 全景解析 · 39/45",
+  "caption": "按提交排名画 Top12：MagicCube（610 次）一骑绝尘，第 2–4 名在 200–280 次量级，之后迅速滑入长尾——典型的高质地开源贡献结构。数据：GitHub Contributors API。",
+  "lang": "zh-CN",
+  "xLabel": "贡献排名",
+  "yLabel": "提交数",
+  "points": [
+    {"label": "MagicCube", "x": 1, "y": 610, "focal": true},
+    {"label": "WillemJiang", "x": 2, "y": 279},
+    {"label": "hetaoBackend", "x": 3, "y": 258},
+    {"label": "henry-byted", "x": 4, "y": 203},
+    {"label": "hyeonsang010716", "x": 5, "y": 140},
+    {"label": "AnnaSuSu", "x": 6, "y": 119},
+    {"label": "dependabot", "x": 7, "y": 108},
+    {"label": "LofiSu", "x": 8, "y": 100},
+    {"label": "ggnnggez", "x": 9, "y": 96},
+    {"label": "DaoyuanLi2816", "x": 10, "y": 84},
+    {"label": "RykerFeng", "x": 11, "y": 70},
+    {"label": "poijygfdyy", "x": 12, "y": 67}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "loop",
+  "title": "Agent 能力飞轮",
+  "eyebrow": "DEER-FLOW 全景解析 · 21/45",
+  "caption": "DeerFlow 的复利设计：任务执行沉淀记忆与技能，记忆让下次规划更准，技能让重复工作一次封装——用得越多越强。",
+  "lang": "zh-CN",
+  "center": "能力复利",
+  "centerSub": "越用越强",
+  "steps": [
+    "接收任务",
+    "规划拆解",
+    {"label": "沙箱执行", "sub": "产出与证据"},
+    {"label": "沉淀记忆", "sub": "DeerMem · 技能", "focal": true},
+    {"label": "下次更准", "sub": "上下文注入"}
+  ]
+}

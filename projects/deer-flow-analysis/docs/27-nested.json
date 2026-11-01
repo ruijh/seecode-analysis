@@ -1,0 +1,13 @@
+{
+  "type": "nested",
+  "title": "单机部署的隔离域",
+  "eyebrow": "DEER-FLOW 全景解析 · 27/45",
+  "caption": "一台 Docker 宿主机上的边界：应用栈三容器共享 compose 网络；沙箱按线程隔离并经网络代理出网；数据落在卷里；两个运行时配置文件读写权限刻意不同。",
+  "lang": "zh-CN",
+  "root": {"label": "Docker 宿主机", "sub": "Linux + Compose", "children": [
+    {"label": "应用网络", "children": ["nginx :2026", "gateway :8001", "frontend :3000"]},
+    {"label": "沙箱域", "children": [{"label": "每线程沙箱", "focal": true}, "network-proxy"]},
+    {"label": "持久卷", "children": ["Postgres", "工作区文件"]},
+    {"label": "运行时配置", "children": ["config.yaml 只读", "extensions_config.json 读写"]}
+  ]}
+}

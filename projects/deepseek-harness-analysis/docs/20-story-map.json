@@ -1,0 +1,123 @@
+{
+ "type": "story-map",
+ "title": "dsh 产品故事图",
+ "subtitle": "主干活动 × 发布切片",
+ "caption": "切片为分析性归纳：MVP=已发布形态，Next=仓库中可见的演进方向。",
+ "releases": [
+  "已发布",
+  "演进中"
+ ],
+ "activities": [
+  {
+   "label": "对话",
+   "focal": true,
+   "steps": [
+    {
+     "label": "发消息",
+     "stories": {
+      "已发布": [
+       "Web 聊天"
+      ],
+      "演进中": [
+       "语音输入"
+      ]
+     }
+    },
+    {
+     "label": "看过程",
+     "stories": {
+      "已发布": [
+       "轨迹流"
+      ],
+      "演进中": [
+       "CoT 翻译"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "执行",
+   "steps": [
+    {
+     "label": "跑命令",
+     "stories": {
+      "已发布": [
+       "bash/pwsh"
+      ],
+      "演进中": [
+       "持久终端"
+      ]
+     }
+    },
+    {
+     "label": "改代码",
+     "stories": {
+      "已发布": [
+       "fs 编辑"
+      ],
+      "演进中": [
+       "apply_patch"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "管理",
+   "steps": [
+    {
+     "label": "找历史",
+     "stories": {
+      "已发布": [
+       "会话列表"
+      ],
+      "演进中": [
+       "FTS 检索"
+      ]
+     }
+    },
+    {
+     "label": "定时任务",
+     "stories": {
+      "已发布": [
+       "schedule"
+      ],
+      "演进中": [
+       "事件触发"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "扩展",
+   "steps": [
+    {
+     "label": "装插件",
+     "stories": {
+      "已发布": [
+       "plugin_manager"
+      ],
+      "演进中": [
+       "市场推荐"
+      ]
+     }
+    },
+    {
+     "label": "多智能体",
+     "stories": {
+      "已发布": [
+       "subagent"
+      ],
+      "演进中": [
+       "Agent Teams"
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

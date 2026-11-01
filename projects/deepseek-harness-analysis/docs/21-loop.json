@@ -1,0 +1,29 @@
+{
+ "type": "loop",
+ "title": "生态飞轮",
+ "subtitle": "插件架构如何自我强化",
+ "caption": "机制依据 README 的 dsh-plugin 话题与插件市场设计。",
+ "center": "dsh 生态",
+ "centerSub": "372 个包",
+ "steps": [
+  {
+   "label": "插件更易写",
+   "sub": "接缝即扩展点"
+  },
+  {
+   "label": "产品更强",
+   "sub": "一切皆插件"
+  },
+  {
+   "label": "用户更多",
+   "sub": "26.7 万 star",
+   "focal": true
+  },
+  {
+   "label": "贡献更多",
+   "sub": "859 个已合并 PR"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

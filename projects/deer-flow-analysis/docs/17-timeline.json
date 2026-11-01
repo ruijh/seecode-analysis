@@ -1,0 +1,19 @@
+{
+  "type": "timeline",
+  "title": "项目里程碑",
+  "eyebrow": "DEER-FLOW 全景解析 · 17/45",
+  "caption": "2025-05 开源深度研究框架；2026-02-28 v2 预热登顶 GitHub Trending；此后三个月一个社区版的节奏：v2.0.0 → v2.1.0 → v2.2.0。数据：GitHub API。",
+  "lang": "zh-CN",
+  "events": [
+    {"date": "2025-05", "label": "仓库创建", "sub": "v1 开源"},
+    {"date": "2026-02", "label": "Trending 第一", "sub": "v2 发布", "focal": true},
+    {"date": "2026-06", "label": "v2.0.0", "sub": "正式版"},
+    {"date": "2026-09", "label": "v2.1.0", "sub": "调度器·认证"},
+    {"date": "2026-10", "label": "v2.2.0", "sub": "记忆·知识"},
+    {"date": "2026-10", "label": "84.7k stars", "when": "2026-10-31"}
+  ],
+  "periods": [
+    {"from": "2025-05", "to": "2026-02", "label": "v1 深度研究时代"},
+    {"from": "2026-02", "to": "2026-10", "label": "v2 SuperAgent Harness 时代"}
+  ]
+}

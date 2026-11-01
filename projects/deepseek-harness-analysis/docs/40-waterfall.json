@@ -1,0 +1,35 @@
+{
+ "type": "waterfall",
+ "title": "276 万行是怎么堆出来的",
+ "subtitle": "按语言累加",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "unit": "千行",
+ "steps": [
+  [
+   "TypeScript",
+   2232
+  ],
+  [
+   "TSX",
+   395
+  ],
+  [
+   "CSS",
+   77
+  ],
+  [
+   "Python",
+   22
+  ],
+  [
+   "Swift",
+   13
+  ],
+  [
+   "JavaScript",
+   12
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

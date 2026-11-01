@@ -1,0 +1,109 @@
+{
+ "type": "it-state",
+ "title": "子系统健康度",
+ "subtitle": "按目录归属与发布状态评估",
+ "caption": "状态为分析性判断：ok=主线稳定域；risk=快速变动；legacy=平台专用小体量。",
+ "budget": "faithful",
+ "nodes": [
+  {
+   "id": "core",
+   "label": "core 内核",
+   "sub": "10 包 · 5.0 万行",
+   "status": "ok",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "sess",
+   "label": "session 会话",
+   "sub": "22 包 · 5.2 万行",
+   "status": "ok",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "client",
+   "label": "client 界面",
+   "sub": "69 包 · 41 万行",
+   "status": "ok",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "api",
+   "label": "api 网关",
+   "sub": "10 包 · 6.8 万行",
+   "status": "ok",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "exp",
+   "label": "experimental",
+   "sub": "65 包 · 25 万行",
+   "status": "risk",
+   "focal": true,
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "py",
+   "label": "python SDK",
+   "sub": "0.9 万行",
+   "status": "risk",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "native",
+   "label": "native/system",
+   "sub": "Swift · 1.3 万行",
+   "status": "legacy",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "docs",
+   "label": "docs 文档",
+   "sub": "中英双语",
+   "status": "ok",
+   "row": 1,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "client",
+   "api",
+   "JSON-RPC"
+  ],
+  [
+   "api",
+   "core",
+   "事件与接缝"
+  ],
+  [
+   "core",
+   "sess",
+   "会话事件",
+   "primary"
+  ],
+  [
+   "exp",
+   "client",
+   "实验 UI"
+  ],
+  [
+   "exp",
+   "core",
+   "实验插件"
+  ],
+  [
+   "py",
+   "api",
+   "启动 sdk profile"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

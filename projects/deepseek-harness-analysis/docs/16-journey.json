@@ -1,0 +1,71 @@
+{
+ "type": "journey",
+ "title": "新用户旅程",
+ "subtitle": "从看到仓库到日常使用",
+ "caption": "情绪得分为分析性推断（star 数与 README 承诺来自真实数据）。",
+ "stages": [
+  {
+   "label": "发现",
+   "steps": [
+    {
+     "label": "刷到 26.7 万 star",
+     "score": 2
+    },
+    {
+     "label": "读 README「一切皆插件」",
+     "score": 1,
+     "note": "概念多，需要消化"
+    }
+   ]
+  },
+  {
+   "label": "安装",
+   "steps": [
+    {
+     "label": "npx 一条命令起 Web",
+     "score": 2,
+     "focal": true
+    },
+    {
+     "label": "等 pnpm build（源码路线）",
+     "score": -1,
+     "note": "大仓编译偏慢"
+    }
+   ]
+  },
+  {
+   "label": "上手",
+   "steps": [
+    {
+     "label": "浏览器自动打开",
+     "score": 2
+    },
+    {
+     "label": "接 DeepSeek 账号",
+     "score": 1
+    }
+   ]
+  },
+  {
+   "label": "日常",
+   "steps": [
+    {
+     "label": "对话 + 工具自动执行",
+     "score": 2
+    },
+    {
+     "label": "审批弹窗要学",
+     "score": -1
+    },
+    {
+     "label": "遇到兼容破坏",
+     "score": -2,
+     "pain": true,
+     "note": "developer preview 明示会有"
+    }
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

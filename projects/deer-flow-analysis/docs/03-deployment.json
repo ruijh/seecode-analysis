@@ -1,0 +1,30 @@
+{
+  "type": "deployment",
+  "title": "部署拓扑（Docker 单机栈）",
+  "eyebrow": "DEER-FLOW 全景解析 · 03/45",
+  "caption": "make up / docker compose 单机部署：Nginx 是唯一对外端口(默认 127.0.0.1:2026)；Gateway 内嵌代理运行时；Provisioner 仅在 K8s 沙箱模式下启用。来源：AGENTS.md、docker/docker-compose.yaml。",
+  "lang": "zh-CN",
+  "groups": [
+    {"id": "dock", "label": "Docker Compose 栈", "style": "dashed"},
+    {"id": "k8s", "label": "K8s 沙箱模式（可选）", "style": "dashed"}
+  ],
+  "nodes": [
+    {"id": "browser", "label": "浏览器", "kind": "external", "row": 0, "col": 0},
+    {"id": "nginx", "label": "Nginx", "sub": "nginx · :2026", "group": "dock", "row": 0, "col": 1},
+    {"id": "fe", "label": "Frontend", "sub": "Next.js · :3000", "group": "dock", "row": 1, "col": 1},
+    {"id": "gw", "label": "Gateway", "sub": "FastAPI · :8001", "focal": true, "group": "dock", "row": 0, "col": 2},
+    {"id": "pg", "label": "数据库", "sub": "Postgres / SQLite", "kind": "store", "group": "dock", "row": 1, "col": 2},
+    {"id": "sbx", "label": "沙箱容器", "sub": "每线程一个", "kind": "optional", "group": "dock", "row": 2, "col": 2},
+    {"id": "prov", "label": "Provisioner", "sub": ":8002", "kind": "optional", "group": "k8s", "row": 0, "col": 3},
+    {"id": "k8s", "label": "K8s 集群", "sub": "沙箱 Pod", "kind": "external", "group": "k8s", "row": 0, "col": 4}
+  ],
+  "edges": [
+    ["browser", "nginx", ":2026", "primary"],
+    ["nginx", "fe", "/ 静态"],
+    ["nginx", "gw", "/api/*", "primary"],
+    ["gw", "pg", "SQL"],
+    ["gw", "sbx", "执行任务"],
+    ["gw", "prov", "按需创建", "async"],
+    ["prov", "k8s", "拉起 Pod"]
+  ]
+}

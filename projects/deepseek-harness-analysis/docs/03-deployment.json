@@ -1,0 +1,161 @@
+{
+ "type": "deployment",
+ "title": "dsh 跑在哪里",
+ "subtitle": "五种官方运行形态与网络路径",
+ "caption": "依据 README、apps/desktop 与 .github/workflows（build-preview-cloudflare.yml 等）。",
+ "budget": "faithful",
+ "groups": [
+  {
+   "id": "local",
+   "label": "你的电脑",
+   "style": "dashed"
+  },
+  {
+   "id": "browser",
+   "label": "浏览器"
+  },
+  {
+   "id": "desk",
+   "label": "桌面应用"
+  },
+  {
+   "id": "remote",
+   "label": "远程主机",
+   "style": "dashed"
+  },
+  {
+   "id": "cloud",
+   "label": "云端"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "br",
+   "label": "Web 前端",
+   "sub": "React",
+   "group": "browser",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "srv",
+   "label": "dsh web 服务",
+   "sub": "Node · :3080",
+   "focal": true,
+   "group": "local",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "store",
+   "label": "会话存储",
+   "sub": "~/.dsh",
+   "kind": "store",
+   "group": "local",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "sbx",
+   "label": "沙箱子进程",
+   "sub": "fs/shell",
+   "kind": "security",
+   "group": "local",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "elec",
+   "label": "Electron 窗口",
+   "group": "desk",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "hostd",
+   "label": "Desktop Host",
+   "sub": "Node 模式",
+   "group": "desk",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "ssh",
+   "label": "SSH 主机",
+   "sub": "sandbox-ssh",
+   "kind": "external",
+   "group": "remote",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "pages",
+   "label": "文档/预览站",
+   "sub": "Cloudflare",
+   "kind": "external",
+   "group": "cloud",
+   "row": 0,
+   "col": 4
+  },
+  {
+   "id": "ci",
+   "label": "CI/发布",
+   "sub": "Gitea + GitHub",
+   "kind": "external",
+   "group": "cloud",
+   "row": 1,
+   "col": 4
+  }
+ ],
+ "edges": [
+  [
+   "br",
+   "srv",
+   "HTTP :3080",
+   "primary"
+  ],
+  [
+   "srv",
+   "store",
+   "追加日志"
+  ],
+  [
+   "srv",
+   "sbx",
+   "受控 spawn"
+  ],
+  [
+   "elec",
+   "hostd",
+   "Node IPC"
+  ],
+  [
+   "hostd",
+   "srv",
+   "同进程运行时"
+  ],
+  [
+   "sbx",
+   "ssh",
+   "SSH 执行"
+  ],
+  [
+   "srv",
+   "ssh",
+   "远程 fs"
+  ],
+  [
+   "ci",
+   "pages",
+   "发布"
+  ],
+  [
+   "ci",
+   "srv",
+   "npm 分发",
+   "async"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

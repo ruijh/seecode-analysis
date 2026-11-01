@@ -1,0 +1,95 @@
+{
+  "type": "flowchart",
+  "title": "Agent 主循环决策流",
+  "eyebrow": "DEER-FLOW 全景解析 · 10/45",
+  "caption": "LeadAgent 的通用工作循环：先判断信息是否足够，不够就检索/调工具/跑沙箱，产出后自评质量，最后交付并写入长期记忆。",
+  "lang": "zh-CN",
+  "nodes": [
+    {
+      "id": "s",
+      "label": "接收任务",
+      "shape": "terminal",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "id": "d1",
+      "label": "信息足够？",
+      "shape": "decision",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "research",
+      "label": "检索 · 工具 · 沙箱",
+      "sub": "可派发子代理",
+      "row": 2,
+      "col": 0
+    },
+    {
+      "id": "draft",
+      "label": "产出草稿",
+      "focal": true,
+      "row": 2,
+      "col": 1
+    },
+    {
+      "id": "d2",
+      "label": "质量达标？",
+      "shape": "decision",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "refine",
+      "label": "反思补充",
+      "kind": "muted",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "e",
+      "label": "交付 · 写入记忆",
+      "shape": "terminal",
+      "row": 4,
+      "col": 1
+    }
+  ],
+  "edges": [
+    [
+      "s",
+      "d1"
+    ],
+    {
+      "from": "d1",
+      "to": "research",
+      "label": "不够 · 带结果重评",
+      "both": true
+    },
+    [
+      "d1",
+      "draft",
+      "足够",
+      "primary"
+    ],
+    [
+      "draft",
+      "d2"
+    ],
+    [
+      "d2",
+      "refine",
+      "no"
+    ],
+    [
+      "refine",
+      "research"
+    ],
+    [
+      "d2",
+      "e",
+      "yes",
+      "primary"
+    ]
+  ]
+}

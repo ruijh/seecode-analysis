@@ -1,0 +1,60 @@
+{
+ "type": "dp-security-matrix",
+ "title": "权限矩阵：谁能碰什么",
+ "subtitle": "沙箱 + 审批双策略下的能力面",
+ "caption": "定性归纳自 docs/subsystems/approval.md 与 sandbox 包文档；等级：none < masked < read < write < admin。",
+ "rows": [
+  "用户",
+  "主 Agent",
+  "子代理",
+  "插件",
+  "Web 客户端"
+ ],
+ "cols": [
+  "工作区文件",
+  "Shell 执行",
+  "凭证",
+  "外部网络",
+  "会话日志"
+ ],
+ "cells": [
+  [
+   "write",
+   "write",
+   "admin",
+   "write",
+   "read"
+  ],
+  [
+   "write",
+   "write",
+   "none",
+   "read",
+   "write"
+  ],
+  [
+   "write",
+   "masked",
+   "none",
+   "masked",
+   "read"
+  ],
+  [
+   "read",
+   "masked",
+   "none",
+   "none",
+   "read"
+  ],
+  [
+   "read",
+   "none",
+   "none",
+   "none",
+   "read"
+  ]
+ ],
+ "focal": "子代理",
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

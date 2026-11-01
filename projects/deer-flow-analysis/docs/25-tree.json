@@ -1,0 +1,23 @@
+{
+  "type": "tree",
+  "title": "仓库结构",
+  "eyebrow": "DEER-FLOW 全景解析 · 25/45",
+  "caption": "monorepo 布局：backend 内部再分 app（网关）/packages（可发布包）；skills/public 收录 23 个官方技能；examples 是 14+ 个扩展样例。数据：仓库实测。",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "root": {"label": "deer-flow/", "children": [
+    {"label": "backend/", "children": [
+      {"label": "app/", "sub": "Gateway+渠道"},
+      {"label": "packages/", "sub": "harness·extension-api"},
+      {"label": "tests/", "sub": "四 worker 离线"}
+    ]},
+    {"label": "frontend/", "sub": "Next.js·pnpm"},
+    {"label": "skills/", "children": [
+      {"label": "deep-research", "sub": "官方技能"},
+      {"label": "ppt-generation", "sub": "官方技能"},
+      {"label": "+21 more", "kind": "muted"}
+    ]},
+    {"label": "examples/", "sub": "扩展样例 ×14"},
+    {"label": "docker/ docs/ scripts/", "sub": "基建与编排"}
+  ]}
+}

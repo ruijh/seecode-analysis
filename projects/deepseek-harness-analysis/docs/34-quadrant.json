@@ -1,0 +1,82 @@
+{
+ "type": "quadrant",
+ "title": "包域矩阵：变化速度 × 用户可见度",
+ "subtitle": "选依赖前先看位置",
+ "caption": "位置为分析性判断，依据 LOC/包数与发布形态。",
+ "x": {
+  "label": "变化速度",
+  "low": "缓",
+  "high": "快"
+ },
+ "y": {
+  "label": "用户可见度",
+  "low": "低",
+  "high": "高"
+ },
+ "quadrants": [
+  "趋稳可依赖",
+  "快速迭代·直面用户",
+  "稳定基座",
+  "底层仍在动"
+ ],
+ "items": [
+  {
+   "label": "client",
+   "x": 0.85,
+   "y": 0.95,
+   "focal": true
+  },
+  {
+   "label": "api 网关",
+   "x": 0.7,
+   "y": 0.72
+  },
+  {
+   "label": "experimental",
+   "x": 0.95,
+   "y": 0.55
+  },
+  {
+   "label": "core",
+   "x": 0.6,
+   "y": 0.62
+  },
+  {
+   "label": "session",
+   "x": 0.55,
+   "y": 0.5
+  },
+  {
+   "label": "llm",
+   "x": 0.65,
+   "y": 0.45
+  },
+  {
+   "label": "boot",
+   "x": 0.5,
+   "y": 0.3
+  },
+  {
+   "label": "fs/shell",
+   "x": 0.45,
+   "y": 0.28
+  },
+  {
+   "label": "sdk",
+   "x": 0.55,
+   "y": 0.38
+  },
+  {
+   "label": "util",
+   "x": 0.3,
+   "y": 0.12
+  },
+  {
+   "label": "typert",
+   "x": 0.4,
+   "y": 0.18
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

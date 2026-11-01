@@ -1,0 +1,28 @@
+{
+ "type": "funnel",
+ "title": "社区参与漏斗",
+ "subtitle": "从 star 到贡献者",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "levels": [
+  {
+   "label": "Star",
+   "value": 267275
+  },
+  {
+   "label": "Fork",
+   "value": 32407,
+   "focal": true
+  },
+  {
+   "label": "已合并 PR",
+   "value": 859,
+   "sub": "85 天"
+  },
+  {
+   "label": "贡献者",
+   "value": 67
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

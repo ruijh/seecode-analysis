@@ -1,0 +1,22 @@
+{
+  "type": "gantt",
+  "title": "2.x 研发节奏",
+  "eyebrow": "DEER-FLOW 全景解析 · 18/45",
+  "caption": "以发布日期为锚点的研发视图：v2 重写（2026 年初）→ v2.0.0 正式版 → v2.1 调度/认证 → v2.2 记忆/知识/渠道，当前进入 v2.2.x 修补与下一轮开发。数据：CHANGELOG 与发布日。",
+  "lang": "zh-CN",
+  "today": "2026-10-31",
+  "tasks": [
+    {"id": "rw", "label": "v2 地面重写", "section": "v2.0", "start": "2026-01-05", "end": "2026-02-28", "done": true},
+    {"id": "m1", "label": "里程碑 m0/m1", "section": "v2.0", "start": "2026-03-01", "end": "2026-05-31", "done": true},
+    {"id": "rc", "label": "RC 与正式版", "section": "v2.0", "start": "2026-06-01", "end": "2026-06-25", "done": true, "focal": true},
+    {"id": "sch", "label": "调度器 · 认证 · PAT", "section": "v2.1", "start": "2026-07-01", "end": "2026-09-24", "done": true},
+    {"id": "mem", "label": "DeerMem · 知识 · 渠道", "section": "v2.2", "start": "2026-09-25", "end": "2026-10-29", "done": true},
+    {"id": "patch", "label": "v2.2.x 修补", "section": "v2.2", "start": "2026-10-29", "days": 21},
+    {"id": "next", "label": "下一特性窗口", "section": "规划", "start": "2026-11-10", "days": 30}
+  ],
+  "milestones": [
+    {"label": "v2.0.0", "date": "2026-06-25"},
+    {"label": "v2.1.0", "date": "2026-09-24"},
+    {"label": "v2.2.0", "date": "2026-10-29", "focal": true}
+  ]
+}

@@ -1,0 +1,48 @@
+{
+ "type": "line",
+ "title": "每周提交数",
+ "subtitle": "2026 年第 31–43 周",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "unit": "提交",
+ "smooth": false,
+ "area": true,
+ "zero": false,
+ "x": [
+  "W31",
+  "W32",
+  "W33",
+  "W34",
+  "W35",
+  "W36",
+  "W37",
+  "W38",
+  "W39",
+  "W40",
+  "W41",
+  "W42",
+  "W43"
+ ],
+ "series": [
+  {
+   "name": "提交数",
+   "values": [
+    6,
+    null,
+    78,
+    183,
+    2,
+    33,
+    688,
+    870,
+    493,
+    581,
+    650,
+    1376,
+    441
+   ],
+   "focal": true
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

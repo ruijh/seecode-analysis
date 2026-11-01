@@ -1,0 +1,197 @@
+{
+ "type": "architecture",
+ "title": "dsh 总体架构：一切皆插件",
+ "subtitle": "应用壳 → 引导组合 → Agent 运行时 → 能力接缝 → 外部世界",
+ "caption": "结构依据 docs/architecture.md；Cordis 插件容器上所有组件可被配置替换。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "loop",
+   "file": "docs/architecture.md",
+   "line": 79
+  },
+  {
+   "id": "boot",
+   "file": "docs/architecture.md",
+   "line": 15
+  }
+ ],
+ "groups": [
+  {
+   "id": "apps",
+   "label": "apps 应用"
+  },
+  {
+   "id": "bootg",
+   "label": "boot 引导"
+  },
+  {
+   "id": "coreg",
+   "label": "core 运行时"
+  },
+  {
+   "id": "seamg",
+   "label": "能力接缝"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "user",
+   "label": "用户",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "cli",
+   "label": "dsh CLI",
+   "sub": "apps/cli",
+   "group": "apps",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "web",
+   "label": "Web UI",
+   "sub": "apps/web",
+   "group": "apps",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "desk",
+   "label": "桌面壳",
+   "sub": "Electron",
+   "group": "apps",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "boot",
+   "label": "Profile 组合",
+   "sub": "boot/app-boot",
+   "group": "bootg",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "loop",
+   "label": "Agent Loop",
+   "sub": "core/agent-loop",
+   "focal": true,
+   "group": "coreg",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "sess",
+   "label": "会话日志",
+   "sub": "JSONL+zstd",
+   "kind": "store",
+   "group": "coreg",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "tools",
+   "label": "工具注册表",
+   "sub": "core/tools",
+   "group": "coreg",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "llm",
+   "label": "LLM 适配",
+   "sub": "llm/llm",
+   "group": "seamg",
+   "row": 0,
+   "col": 4
+  },
+  {
+   "id": "sandbox",
+   "label": "fs/shell/沙箱",
+   "sub": "统一执行世界",
+   "group": "seamg",
+   "row": 2,
+   "col": 4
+  },
+  {
+   "id": "dsapi",
+   "label": "DeepSeek API",
+   "kind": "external",
+   "row": 0,
+   "col": 5
+  },
+  {
+   "id": "host",
+   "label": "本机执行",
+   "sub": "子进程/PTY",
+   "kind": "store",
+   "row": 2,
+   "col": 5
+  }
+ ],
+ "edges": [
+  [
+   "user",
+   "web",
+   "浏览器",
+   "primary"
+  ],
+  [
+   "cli",
+   "boot",
+   "选择 profile"
+  ],
+  [
+   "web",
+   "boot",
+   "启动"
+  ],
+  [
+   "desk",
+   "boot",
+   "Host 启动"
+  ],
+  [
+   "boot",
+   "loop",
+   "挂载插件"
+  ],
+  [
+   "loop",
+   "sess",
+   "追加事件"
+  ],
+  [
+   "loop",
+   "tools",
+   "发起调用"
+  ],
+  [
+   "loop",
+   "llm",
+   "流式请求",
+   "primary"
+  ],
+  [
+   "llm",
+   "dsapi",
+   "HTTPS",
+   "primary"
+  ],
+  [
+   "tools",
+   "sandbox",
+   "守卫流水线"
+  ],
+  [
+   "sandbox",
+   "host",
+   "spawn"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

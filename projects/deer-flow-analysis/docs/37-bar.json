@@ -1,0 +1,20 @@
+{
+  "type": "bar",
+  "title": "语言构成（GitHub Linguist 字节数）",
+  "eyebrow": "DEER-FLOW 全景解析 · 37/45",
+  "caption": "Python 以 37.0 MB 占 82%，是绝对的主体；TypeScript 6.4 MB 撑起 Next.js 前端；MDX 1.4 MB 是多语言文档站。数据：GitHub Languages API，2026-10-31。",
+  "lang": "zh-CN",
+  "orientation": "horizontal",
+  "sort": "desc",
+  "focal": "Python",
+  "unit": "MB",
+  "axis": "代码字节数（百万）",
+  "data": [
+    ["Python", 37.0],
+    ["TypeScript", 6.4],
+    ["MDX 文档", 1.4],
+    ["Shell", 0.21],
+    ["HTML", 0.19],
+    ["其他", 0.22]
+  ]
+}

@@ -1,0 +1,51 @@
+{
+ "type": "medallion",
+ "title": "会话数据的分层加工",
+ "subtitle": "原始事件 → 投影 → 智能视图",
+ "caption": "层名为数据平台类比；物品均取自仓库真实组件。",
+ "stages": [
+  {
+   "label": "事件源",
+   "plain": true,
+   "kind": "input",
+   "items": [
+    "agent/* 事件",
+    "tool/* 事件"
+   ]
+  },
+  {
+   "label": "原始层",
+   "items": [
+    "session.vN.jsonl",
+    "zstd 压缩"
+   ]
+  },
+  {
+   "label": "加工层",
+   "items": [
+    {
+     "id": "proj",
+     "label": "投影 snapshot"
+    },
+    {
+     "id": "fts",
+     "label": "FTS 索引"
+    }
+   ]
+  },
+  {
+   "label": "消费层",
+   "items": [
+    {
+     "label": "标题/统计",
+     "focal": true
+    },
+    {
+     "label": "回放 UI"
+    }
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

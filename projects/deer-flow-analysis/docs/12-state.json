@@ -1,0 +1,25 @@
+{
+  "type": "state",
+  "title": "定时任务运行（ScheduledTaskRun）状态机",
+  "eyebrow": "DEER-FLOW 全景解析 · 12/45",
+  "caption": "持久化队列：queued 行重启后仍在；只有租约在手的 launching 才能调 Gateway；冲突/租约过期会退回 queued；每任务同时仅允许一个 active occurrence。",
+  "lang": "zh-CN",
+  "nodes": [
+    {"id": "s", "shape": "start", "row": 0, "col": 0},
+    {"id": "queued", "label": "queued", "sub": "持久化排队", "row": 0, "col": 1},
+    {"id": "launching", "label": "launching", "sub": "租约认领", "row": 0, "col": 2},
+    {"id": "running", "label": "running", "focal": true, "row": 0, "col": 3},
+    {"id": "done", "label": "completed", "row": 0, "col": 4},
+    {"id": "failed", "label": "failed", "kind": "muted", "row": 1, "col": 3},
+    {"id": "cancel", "label": "cancelled", "kind": "muted", "row": 1, "col": 1}
+  ],
+  "edges": [
+    ["s", "queued", "cron 触发"],
+    ["queued", "launching", "认领 [预算未满]", "primary"],
+    ["launching", "running", "启动成功", "primary"],
+    ["running", "done", "执行完成", "primary"],
+    ["launching", "queued", "冲突/租约过期"],
+    ["running", "failed", "运行错误"],
+    ["queued", "cancel", "暂停/删除"]
+  ]
+}

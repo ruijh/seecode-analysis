@@ -1,0 +1,99 @@
+{
+ "type": "swimlane",
+ "title": "高危工具审批（跨职能）",
+ "subtitle": "策略、用户与沙箱之间的交接",
+ "caption": "沙箱策略与审批策略由 dsh-base 组合（docs/architecture.md）。",
+ "lanes": [
+  {
+   "id": "agent",
+   "label": "Agent"
+  },
+  {
+   "id": "pol",
+   "label": "策略层"
+  },
+  {
+   "id": "user",
+   "label": "用户"
+  },
+  {
+   "id": "sbx",
+   "label": "沙箱"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "call",
+   "label": "发起调用",
+   "lane": "agent",
+   "col": 0
+  },
+  {
+   "id": "chk",
+   "label": "策略匹配",
+   "lane": "pol",
+   "col": 1
+  },
+  {
+   "id": "risk",
+   "label": "越权?",
+   "shape": "decision",
+   "lane": "pol",
+   "col": 2
+  },
+  {
+   "id": "ask",
+   "label": "弹窗请示",
+   "lane": "user",
+   "col": 3
+  },
+  {
+   "id": "exec",
+   "label": "受限执行",
+   "lane": "sbx",
+   "col": 4,
+   "focal": true
+  },
+  {
+   "id": "res",
+   "label": "消费结果",
+   "shape": "terminal",
+   "lane": "agent",
+   "col": 5
+  }
+ ],
+ "edges": [
+  [
+   "call",
+   "chk"
+  ],
+  [
+   "chk",
+   "risk"
+  ],
+  [
+   "risk",
+   "ask",
+   "是"
+  ],
+  [
+   "risk",
+   "exec",
+   "否",
+   "primary"
+  ],
+  [
+   "ask",
+   "exec",
+   "批准"
+  ],
+  [
+   "exec",
+   "res",
+   "",
+   "primary"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

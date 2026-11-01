@@ -1,0 +1,25 @@
+{
+  "type": "isometric",
+  "title": "DeerFlow 工作台（实体化）",
+  "eyebrow": "DEER-FLOW 全景解析 · 29/45",
+  "caption": "把 harness 画成一张工位：主机是 Agent 大脑，机箱侧板是沙箱（代码在里面跑），桌边的柜子是长期记忆，显示器上是流式对话。",
+  "lang": "zh-CN",
+  "parts": [
+    {"label": "桌面", "sub": "工作区", "x": 0, "y": 0, "z": 60, "w": 170, "d": 95, "h": 8},
+    {"from": [-75, -38, 0], "to": [-75, -38, 60], "thick": 7, "tone": "dark"},
+    {"from": [75, -38, 0], "to": [75, -38, 60], "thick": 7, "tone": "dark"},
+    {"from": [-75, 38, 0], "to": [-75, 38, 60], "thick": 7, "tone": "dark"},
+    {"label": "桌腿", "from": [75, 38, 0], "to": [75, 38, 60], "thick": 7, "tone": "dark"},
+    {"label": "显示器", "sub": "流式对话 UI", "x": -38, "y": -20, "z": 78, "w": 46, "d": 6, "h": 30,
+     "side": [{"face": "left", "shape": "panel", "box": [0.08, 0.1, 0.92, 0.9], "tone": "dark"}]},
+    {"from": [-38, -18, 68], "to": [-38, -20, 78], "thick": 6, "tone": "dark"},
+    {"x": -38, "y": -20, "z": 66, "w": 22, "d": 14, "h": 3},
+    {"label": "Agent 主机", "sub": "harness 大脑", "x": 34, "y": -6, "z": 68, "w": 34, "d": 34, "h": 36, "focal": true,
+     "side": [{"face": "right", "shape": "lines", "box": [0.15, 0.12, 0.85, 0.9], "n": 6, "tone": "dark"}]},
+    {"label": "键盘", "x": -10, "y": 22, "z": 68, "w": 40, "d": 14, "h": 2, "r": 3,
+     "items": [{"box": [0.05, 0.15, 0.95, 0.85], "repeat": [10, 3], "h": 1.5, "tone": "dark"}]},
+    {"x": 22, "y": 26, "z": 68, "w": 9, "d": 13, "h": 3, "r": 4},
+    {"label": "记忆柜", "sub": "DeerMem", "x": 108, "y": 10, "z": 0, "w": 36, "d": 42, "h": 52,
+     "side": [{"face": "left", "shape": "lines", "box": [0.12, 0.5, 0.88, 0.95], "n": 2}]}
+  ]
+}

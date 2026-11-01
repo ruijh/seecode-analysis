@@ -1,0 +1,99 @@
+{
+ "type": "dp-integration",
+ "title": "遥测数据集成",
+ "subtitle": "OTel 贯穿主机与会话两层",
+ "caption": "依据 packages/telemetry/otel、host-product-telemetry-otel、session-telemetry-otel。",
+ "evidence": [
+  {
+   "id": "otel",
+   "file": "packages/telemetry/otel/README.md"
+  }
+ ],
+ "stages": [
+  {
+   "label": "来源",
+   "plain": true,
+   "kind": "external",
+   "items": [
+    {
+     "id": "sess",
+     "label": "会话事件"
+    },
+    {
+     "id": "prod",
+     "label": "产品使用"
+    },
+    {
+     "id": "perf",
+     "label": "性能基准"
+    }
+   ]
+  },
+  {
+   "label": "接入",
+   "items": [
+    {
+     "id": "sdk",
+     "label": "OTel SDK",
+     "sub": "dsh-otel"
+    }
+   ]
+  },
+  {
+   "label": "平台",
+   "items": [
+    {
+     "id": "coll",
+     "label": "收集层",
+     "focal": true,
+     "sub": "host + session"
+    }
+   ]
+  },
+  {
+   "label": "服务",
+   "plain": true,
+   "kind": "external",
+   "items": [
+    {
+     "id": "bk",
+     "label": "OTLP 后端"
+    },
+    {
+     "id": "bench",
+     "label": "基准报告"
+    }
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "sess",
+   "sdk"
+  ],
+  [
+   "prod",
+   "sdk"
+  ],
+  [
+   "sdk",
+   "coll",
+   "",
+   "primary"
+  ],
+  [
+   "coll",
+   "bk",
+   "",
+   "primary"
+  ],
+  [
+   "coll",
+   "bench",
+   "vitest.web.perf",
+   "primary"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

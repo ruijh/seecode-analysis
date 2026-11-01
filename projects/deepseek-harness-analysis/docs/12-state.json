@@ -1,0 +1,76 @@
+{
+ "type": "state",
+ "title": "后台任务（Job）状态机",
+ "subtitle": "bash/PTY 后台运行经 ctx.jobs 统一管理",
+ "caption": "依据 tool-jobs：job_list / job_output / job_kill 三件工具。",
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "q",
+   "label": "已注册",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "r",
+   "label": "运行中",
+   "focal": true,
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "done",
+   "label": "已完成",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "kill",
+   "label": "已终止",
+   "kind": "muted",
+   "row": 1,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "q",
+   "run_in_background"
+  ],
+  [
+   "q",
+   "r",
+   "启动",
+   "primary"
+  ],
+  [
+   "r",
+   "r",
+   "输出累积"
+  ],
+  [
+   "r",
+   "done",
+   "退出码 0",
+   "primary"
+  ],
+  [
+   "r",
+   "kill",
+   "job_kill"
+  ],
+  [
+   "done",
+   "done",
+   "通知注入"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

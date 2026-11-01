@@ -1,0 +1,16 @@
+{
+  "type": "treemap",
+  "title": "仓库面积图（按字节数）",
+  "eyebrow": "DEER-FLOW 全景解析 · 41/45",
+  "caption": "一块 45.4 MB 的代码大陆：Python 后端占八成，TS 前端约 14%，文档与胶水脚本只在边缘。数据：GitHub Languages API。",
+  "lang": "zh-CN",
+  "unit": "MB",
+  "focal": "Python 后端",
+  "data": [
+    {"label": "Python 后端", "value": 37.0, "focal": true},
+    {"label": "TypeScript 前端", "value": 6.4, "children": [["Next.js 应用", 5.5], ["支撑代码", 0.9]]},
+    {"label": "MDX 文档", "value": 1.4},
+    {"label": "Shell 脚本", "value": 0.21},
+    {"label": "样式与其他", "value": 0.4}
+  ]
+}

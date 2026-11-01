@@ -1,0 +1,29 @@
+{
+  "type": "dp-integration",
+  "title": "知识接入与引用管线",
+  "eyebrow": "DEER-FLOW 全景解析 · 23/45",
+  "caption": "三类只读检索工具共享同一准入/预算/引用契约（KNOWLEDGE.md）：Provider 返回统一 envelope，聊天与报告里渲染成可溯源引用。",
+  "lang": "zh-CN",
+  "stages": [
+    {"label": "知识源", "plain": true, "kind": "external", "items": [
+      {"id": "web", "label": "网络检索", "sub": "InfoQuest"},
+      {"id": "rag", "label": "RAGFlow", "sub": "私有知识"},
+      {"id": "graph", "label": "LightRAG", "sub": "实体图谱"}
+    ]},
+    {"label": "检索工具层", "items": [
+      {"id": "kt", "label": "knowledge_search", "sub": "共享范围准入"},
+      {"id": "et", "label": "entity_relations_search", "sub": "可选插件"}
+    ]},
+    {"label": "平台", "items": [{"id": "env", "label": "统一引用 envelope", "focal": true, "sub": "来源契约"}]},
+    {"label": "服务", "plain": true, "kind": "external", "items": ["聊天引用", "报告溯源"]}
+  ],
+  "edges": [
+    ["web", "kt"],
+    ["rag", "kt"],
+    ["graph", "et"],
+    ["kt", "env", "", "primary"],
+    ["et", "env", "", "primary"],
+    ["env", "stage3_0", "", "primary"],
+    ["env", "stage3_1"]
+  ]
+}

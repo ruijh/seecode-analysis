@@ -1,0 +1,29 @@
+{
+  "type": "architecture",
+  "title": "DeerFlow 总体架构",
+  "eyebrow": "DEER-FLOW 全景解析 · 01/45",
+  "caption": "四服务拓扑：Nginx(:2026) 统一入口 → Gateway(:8001, FastAPI + 内嵌 LangGraph 运行时) → harness 核心；沙箱、MCP、LLM API、持久层挂载在 harness 侧。来源：AGENTS.md Service Topology。",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "nodes": [
+    {"id": "fe", "label": "Web 前端", "sub": "Next.js", "kind": "external", "row": 0, "col": 0},
+    {"id": "im", "label": "IM 渠道", "sub": "Telegram/飞书/企微…", "kind": "external", "row": 2, "col": 0},
+    {"id": "nginx", "label": "Nginx 入口", "sub": ":2026 反向代理", "row": 1, "col": 1},
+    {"id": "gw", "label": "Gateway API", "sub": "FastAPI · :8001", "focal": true, "row": 1, "col": 2},
+    {"id": "harness", "label": "Harness 核心", "sub": "deerflow-harness", "row": 1, "col": 3},
+    {"id": "llm", "label": "LLM API", "sub": "OpenAI 兼容", "kind": "external", "row": 0, "col": 4},
+    {"id": "sbx", "label": "Docker 沙箱", "sub": "线程级隔离", "kind": "optional", "row": 1, "col": 4},
+    {"id": "mcp", "label": "MCP / 工具", "sub": "可扩展", "kind": "optional", "row": 2, "col": 4},
+    {"id": "db", "label": "持久层", "sub": "SQLite / Postgres", "kind": "store", "row": 2, "col": 3}
+  ],
+  "edges": [
+    ["fe", "nginx", "HTTPS", "primary"],
+    ["im", "nginx", "长轮询/WebSocket"],
+    ["nginx", "gw", "/api/* 重写", "primary"],
+    ["gw", "harness", "run_agent()"],
+    ["harness", "llm", "工具调用"],
+    ["harness", "sbx", "代码执行"],
+    ["harness", "mcp", "发现/调用"],
+    ["harness", "db", "检查点·状态"]
+  ]
+}

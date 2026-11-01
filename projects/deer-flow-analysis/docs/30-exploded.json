@@ -1,0 +1,14 @@
+{
+  "type": "exploded",
+  "title": "Harness 引擎拆解",
+  "eyebrow": "DEER-FLOW 全景解析 · 30/45",
+  "caption": "把 SuperAgent 当机器拆开：底座是 LangGraph 运行时与持久化，主板是 agents/runtime 核心代码（2556 个 py 文件里最重的两块），记忆条是 DeerMem，扩展卡是 MCP 与技能包。",
+  "lang": "zh-CN",
+  "parts": [
+    {"label": "底座", "sub": "运行时 + 持久层", "kind": "housing", "w": 250, "d": 170, "t": 20, "r": 12},
+    {"label": "主板", "sub": "agents · runtime", "kind": "board", "w": 210, "d": 130, "t": 5, "focal": true},
+    {"label": "记忆条", "sub": "DeerMem", "kind": "battery", "w": 150, "d": 60, "t": 10, "y": -55},
+    {"label": "扩展卡", "sub": "MCP · 技能", "kind": "cards", "w": 120, "d": 80, "t": 8, "y": 55},
+    {"label": "顶盖", "sub": "网关与流式接口", "kind": "lid", "w": 250, "d": 170, "t": 10, "r": 12}
+  ]
+}

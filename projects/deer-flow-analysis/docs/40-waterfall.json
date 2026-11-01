@@ -1,0 +1,18 @@
+{
+  "type": "waterfall",
+  "title": "Top15 贡献者提交累加",
+  "eyebrow": "DEER-FLOW 全景解析 · 40/45",
+  "caption": "前七位贡献者累加至 1,717 次提交，其余八位再补 592 次，Top15 合计约 2,309 次——占总提交量的重要份额，社区贡献远超公司围墙。数据：GitHub Contributors API。",
+  "lang": "zh-CN",
+  "unit": "commits",
+  "steps": [
+    {"label": "MagicCube", "value": 610, "focal": true},
+    ["WillemJiang", 279],
+    ["hetaoBackend", 258],
+    ["henry-byted", 203],
+    ["hyeonsang010716", 140],
+    ["AnnaSuSu", 119],
+    ["dependabot[bot]", 108],
+    ["其余 Top15", 592]
+  ]
+}

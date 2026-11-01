@@ -1,0 +1,117 @@
+{
+ "type": "db-schema",
+ "title": "会话检索索引（SQLite 派生库）",
+ "subtitle": "session-query-sqlite 的真实表结构（schema v8）",
+ "caption": "来源 packages/session-query/session-query-sqlite/src/schema.ts:106。库为可丢弃的只读检索模型。",
+ "evidence": [
+  {
+   "id": "ps",
+   "file": "packages/session-query/session-query-sqlite/src/schema.ts",
+   "line": 106
+  }
+ ],
+ "nodes": [
+  {
+   "id": "ps",
+   "label": "persisted_sessions",
+   "focal": true,
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "version",
+     "INTEGER",
+     ""
+    ],
+    [
+     "created_at",
+     "INTEGER",
+     ""
+    ],
+    [
+     "cwd",
+     "TEXT",
+     ""
+    ],
+    [
+     "parent_session",
+     "TEXT",
+     "FK"
+    ],
+    [
+     "agent_preset",
+     "TEXT",
+     ""
+    ],
+    [
+     "generation",
+     "INTEGER",
+     ""
+    ]
+   ],
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "pd",
+   "label": "persisted_docs",
+   "tag": "FTS5",
+   "fields": [
+    [
+     "text",
+     "TEXT",
+     ""
+    ],
+    [
+     "session_id",
+     "TEXT",
+     "FK"
+    ],
+    [
+     "seq",
+     "INTEGER",
+     ""
+    ]
+   ],
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "st",
+   "label": "search_state",
+   "fields": [
+    [
+     "singleton",
+     "INTEGER",
+     "PK"
+    ],
+    [
+     "global_generation",
+     "INTEGER",
+     ""
+    ]
+   ],
+   "row": 1,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "pd.session_id",
+   "ps.id",
+   "",
+   "many-one"
+  ],
+  [
+   "ps.parent_session",
+   "ps.id",
+   "派生自父会话",
+   "many-one"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

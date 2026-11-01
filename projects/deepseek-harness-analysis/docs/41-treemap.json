@@ -1,0 +1,69 @@
+{
+ "type": "treemap",
+ "title": "代码量构成",
+ "subtitle": "两级：区域 → 包域",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "unit": "千行",
+ "focal": "client",
+ "data": [
+  {
+   "label": "packages",
+   "children": [
+    [
+     "client",
+     410
+    ],
+    [
+     "experimental",
+     254
+    ],
+    [
+     "api",
+     68
+    ],
+    [
+     "session",
+     52
+    ],
+    [
+     "core",
+     50
+    ],
+    [
+     "llm",
+     41
+    ],
+    [
+     "subagent",
+     36
+    ],
+    [
+     "boot",
+     35
+    ],
+    [
+     "其他 40 域",
+     880
+    ]
+   ]
+  },
+  {
+   "label": "apps",
+   "value": 148
+  },
+  {
+   "label": "scripts",
+   "value": 89
+  },
+  {
+   "label": "python+native",
+   "value": 22
+  },
+  {
+   "label": "website+benchmarks",
+   "value": 10
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

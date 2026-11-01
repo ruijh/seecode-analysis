@@ -1,0 +1,15 @@
+{
+  "type": "layers",
+  "title": "技术栈分层",
+  "eyebrow": "DEER-FLOW 全景解析 · 28/45",
+  "caption": "六层栈：上三层面向用户，下三层是 agent 的肌肉和关节；harness 层是整个项目的心脏，也是可独立发布的包。",
+  "lang": "zh-CN",
+  "layers": [
+    {"label": "体验层", "sub": "人和 DeerFlow 见面的地方", "items": ["Web UI", "TUI 终端", "IM 渠道 ×9"]},
+    {"label": "接入层", "sub": "统一入口与 API", "items": ["Nginx :2026", "Gateway :8001", "SSE 流"]},
+    {"label": "智能体层", "sub": "LangGraph 运行时", "items": ["LeadAgent", "子代理", "调度器", "RunManager"], "focal": true},
+    {"label": "能力层", "sub": "开箱即用的超能力", "items": ["技能 ×23", "MCP 工具", "DeerMem 记忆", "RAG 检索"]},
+    {"label": "执行层", "sub": "真实世界副作用", "items": ["Docker 沙箱", "Provisioner/K8s"]},
+    {"label": "模型层", "sub": "任意 OpenAI 兼容 LLM", "items": ["Doubao", "DeepSeek", "Kimi", "GPT/CLAUDE…"]}
+  ]
+}

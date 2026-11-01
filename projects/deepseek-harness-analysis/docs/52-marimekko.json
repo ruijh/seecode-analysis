@@ -1,0 +1,146 @@
+{
+ "type": "marimekko",
+ "title": "大域的语言构成",
+ "subtitle": "宽度=总行数，分段=语言",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "columns": [
+  {
+   "label": "client",
+   "segments": [
+    [
+     "ts",
+     210112
+    ],
+    [
+     "tsx",
+     166536
+    ],
+    [
+     "css",
+     33800
+    ]
+   ]
+  },
+  {
+   "label": "experimental",
+   "segments": [
+    [
+     "ts",
+     207927
+    ],
+    [
+     "tsx",
+     27570
+    ],
+    [
+     "css",
+     18077
+    ]
+   ]
+  },
+  {
+   "label": "api",
+   "segments": [
+    [
+     "ts",
+     68146
+    ],
+    [
+     "tsx",
+     0
+    ],
+    [
+     "css",
+     0
+    ]
+   ]
+  },
+  {
+   "label": "session",
+   "segments": [
+    [
+     "ts",
+     51513
+    ],
+    [
+     "tsx",
+     347
+    ],
+    [
+     "css",
+     52
+    ]
+   ]
+  },
+  {
+   "label": "core",
+   "segments": [
+    [
+     "ts",
+     49471
+    ],
+    [
+     "tsx",
+     0
+    ],
+    [
+     "css",
+     39
+    ]
+   ]
+  },
+  {
+   "label": "llm",
+   "segments": [
+    [
+     "ts",
+     41486
+    ],
+    [
+     "tsx",
+     0
+    ],
+    [
+     "css",
+     0
+    ]
+   ]
+  },
+  {
+   "label": "subagent",
+   "segments": [
+    [
+     "ts",
+     36182
+    ],
+    [
+     "tsx",
+     0
+    ],
+    [
+     "css",
+     0
+    ]
+   ]
+  },
+  {
+   "label": "boot",
+   "segments": [
+    [
+     "ts",
+     35012
+    ],
+    [
+     "tsx",
+     0
+    ],
+    [
+     "css",
+     23
+    ]
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

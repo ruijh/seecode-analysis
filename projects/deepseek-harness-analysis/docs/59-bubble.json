@@ -1,0 +1,97 @@
+{
+ "type": "bubble",
+ "title": "大包画像：行数 × 依赖 × 文件",
+ "subtitle": "气泡面积=文件数",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "xLabel": "代码行（千）",
+ "yLabel": "运行依赖数",
+ "zero": false,
+ "points": [
+  {
+   "label": "liveshare",
+   "x": 56,
+   "y": 8,
+   "size": 235,
+   "focal": true
+  },
+  {
+   "label": "ui-chat",
+   "x": 39,
+   "y": 1,
+   "size": 184,
+   "focal": false
+  },
+  {
+   "label": "ui-conv",
+   "x": 37,
+   "y": 1,
+   "size": 153,
+   "focal": false
+  },
+  {
+   "label": "primitives",
+   "x": 32,
+   "y": 0,
+   "size": 238,
+   "focal": false
+  },
+  {
+   "label": "sess-ctrl",
+   "x": 30,
+   "y": 6,
+   "size": 95,
+   "focal": false
+  },
+  {
+   "label": "inspector",
+   "x": 25,
+   "y": 6,
+   "size": 198,
+   "focal": false
+  },
+  {
+   "label": "ww-runtime",
+   "x": 24,
+   "y": 11,
+   "size": 146,
+   "focal": false
+  },
+  {
+   "label": "ui-forge",
+   "x": 24,
+   "y": 6,
+   "size": 90,
+   "focal": false
+  },
+  {
+   "label": "trajectory",
+   "x": 21,
+   "y": 3,
+   "size": 57,
+   "focal": false
+  },
+  {
+   "label": "schedule",
+   "x": 20,
+   "y": 0,
+   "size": 80,
+   "focal": false
+  },
+  {
+   "label": "ui-workspace",
+   "x": 18,
+   "y": 0,
+   "size": 44,
+   "focal": false
+  },
+  {
+   "label": "gateway",
+   "x": 17,
+   "y": 5,
+   "size": 29,
+   "focal": false
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

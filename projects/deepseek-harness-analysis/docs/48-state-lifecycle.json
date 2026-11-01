@@ -1,0 +1,87 @@
+{
+ "type": "state-lifecycle",
+ "title": "会话文件生命周期",
+ "subtitle": "JSONL 世代（generation）只增不改",
+ "caption": "依据 docs/architecture.md「Session log」：已提交的世代路径永不改名/替换/删除。",
+ "evidence": [
+  {
+   "id": "mig",
+   "file": "docs/architecture.md",
+   "line": 126
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "c",
+   "label": "创建",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "open",
+   "label": "活跃写入",
+   "focal": true,
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "seal",
+   "label": "封存世代",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "mig",
+   "label": "迁移 vN→vN+1",
+   "kind": "muted",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "arch",
+   "label": "导出/回放",
+   "row": 0,
+   "col": 4
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "c"
+  ],
+  [
+   "c",
+   "open",
+   "写入事件",
+   "primary"
+  ],
+  [
+   "open",
+   "seal",
+   "turn 封口",
+   "primary"
+  ],
+  [
+   "seal",
+   "mig",
+   "格式升级"
+  ],
+  [
+   "mig",
+   "arch"
+  ],
+  [
+   "seal",
+   "arch",
+   "直接读取"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

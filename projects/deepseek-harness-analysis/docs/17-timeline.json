@@ -1,0 +1,60 @@
+{
+ "type": "timeline",
+ "title": "85 天从 0 到 7500+ PR",
+ "subtitle": "2026-08-07 首次提交至今",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）；PR 编号取自 git 合并记录。",
+ "events": [
+  {
+   "date": "2026-08-07",
+   "label": "首次提交"
+  },
+  {
+   "date": "2026-08-13",
+   "label": "GitHub 公开",
+   "focal": true
+  },
+  {
+   "date": "2026-09",
+   "label": "功能扩张",
+   "sub": "月 1984 提交"
+  },
+  {
+   "date": "2026-09-01",
+   "label": "流式嵌入决策",
+   "sub": "架构 ADR"
+  },
+  {
+   "date": "2026-10",
+   "label": "全面提速",
+   "sub": "月 3150 提交"
+  },
+  {
+   "date": "2026-10-29",
+   "label": "0.2.1-rc.5",
+   "focal": true
+  },
+  {
+   "date": "2026-10-30",
+   "label": "PR #7552 合并"
+  }
+ ],
+ "periods": [
+  {
+   "from": "2026-08",
+   "to": "2026-08",
+   "label": "打地基"
+  },
+  {
+   "from": "2026-09",
+   "to": "2026-09",
+   "label": "扩张"
+  },
+  {
+   "from": "2026-10",
+   "to": "2026-10",
+   "label": "提速"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

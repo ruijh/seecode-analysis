@@ -1,0 +1,23 @@
+{
+  "type": "isometric-plan",
+  "title": "单机部署平面图",
+  "eyebrow": "DEER-FLOW 全景解析 · 31/45",
+  "caption": "Compose 栈画成一层机房：入口机房(Nginx)迎客，前端机房与网关机房并肩，网关后门直通沙箱池，数据库独占机房落卷。",
+  "lang": "zh-CN",
+  "rooms": [
+    {"label": "Nginx 入口 :2026", "x": 0, "y": 0, "w": 140, "d": 120, "walls": true, "door": "S"},
+    {"label": "Frontend :3000", "x": 140, "y": 0, "w": 150, "d": 120, "walls": true, "door": "S"},
+    {"label": "Gateway :8001", "x": 290, "y": 0, "w": 170, "d": 130, "walls": true, "door": "S", "focal": true},
+    {"label": "数据库卷", "x": 460, "y": 0, "w": 110, "d": 130, "walls": true},
+    {"label": "沙箱池（每线程）", "x": 140, "y": 120, "w": 320, "d": 130, "walls": true, "door": "N"}
+  ],
+  "boxes": [
+    {"x": 40, "y": 40, "w": 40, "d": 30, "h": 14, "kind": "rack"},
+    {"x": 200, "y": 40, "w": 40, "d": 30, "h": 14, "kind": "rack"},
+    {"x": 350, "y": 40, "w": 40, "d": 30, "h": 16, "kind": "rack"},
+    {"x": 495, "y": 40, "w": 34, "d": 34, "h": 20, "kind": "vault"},
+    {"x": 220, "y": 170, "w": 36, "d": 26, "h": 10, "kind": "rack"},
+    {"x": 300, "y": 170, "w": 36, "d": 26, "h": 10, "kind": "rack"},
+    {"x": 380, "y": 170, "w": 36, "d": 26, "h": 10, "kind": "rack"}
+  ]
+}

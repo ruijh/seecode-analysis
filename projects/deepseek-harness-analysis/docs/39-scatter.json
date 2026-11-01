@@ -1,0 +1,74 @@
+{
+ "type": "scatter",
+ "title": "各域：包数 × 代码量",
+ "subtitle": "一个点一个 packages 域",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "xLabel": "包数",
+ "yLabel": "代码量（千行）",
+ "zero": false,
+ "points": [
+  {
+   "label": "client",
+   "x": 69,
+   "y": 410,
+   "focal": true
+  },
+  {
+   "label": "experimental",
+   "x": 65,
+   "y": 254
+  },
+  {
+   "label": "apps*",
+   "x": 5,
+   "y": 148
+  },
+  {
+   "label": "api",
+   "x": 10,
+   "y": 68
+  },
+  {
+   "label": "session",
+   "x": 22,
+   "y": 52
+  },
+  {
+   "label": "core",
+   "x": 10,
+   "y": 50
+  },
+  {
+   "label": "llm",
+   "x": 9,
+   "y": 41
+  },
+  {
+   "label": "subagent",
+   "x": 9,
+   "y": 36
+  },
+  {
+   "label": "util",
+   "x": 21,
+   "y": 15
+  },
+  {
+   "label": "host",
+   "x": 9,
+   "y": 10
+  },
+  {
+   "label": "fs",
+   "x": 8,
+   "y": 18
+  },
+  {
+   "label": "shell",
+   "x": 10,
+   "y": 16
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

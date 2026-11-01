@@ -1,0 +1,18 @@
+{
+  "type": "venn",
+  "title": "三大能力圈的交点",
+  "eyebrow": "DEER-FLOW 全景解析 · 32/45",
+  "caption": "社区用 v1 做研究、做管道、做幻灯片，让团队看清了本质：DeerFlow 不是研究工具，而是三者通吃的 harness——交点才是产品。",
+  "lang": "zh-CN",
+  "sets": [
+    {"id": "r", "label": "深度研究", "sub": "v1 的起点"},
+    {"id": "c", "label": "编码执行", "sub": "沙箱 + 子代理"},
+    {"id": "m", "label": "内容创作", "sub": "PPT/播客/视频"}
+  ],
+  "overlaps": [
+    {"sets": ["r", "c"], "label": "数据分析"},
+    {"sets": ["c", "m"], "label": "网页/视频"},
+    {"sets": ["r", "m"], "label": "报告写作"},
+    {"sets": ["r", "c", "m"], "label": "SuperAgent", "focal": true}
+  ]
+}

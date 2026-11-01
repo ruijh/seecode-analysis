@@ -1,0 +1,14 @@
+{
+  "type": "pyramid",
+  "title": "任务复杂度层级",
+  "eyebrow": "DEER-FLOW 全景解析 · 33/45",
+  "caption": "README 的定位：DeerFlow 面向顶部两层——几分钟到几小时的长时程任务，靠子代理和沙箱撑住；底层能力只是顺路兼容。",
+  "lang": "zh-CN",
+  "levels": [
+    {"label": "长时程自主任务", "sub": "分钟级～小时级", "focal": true},
+    {"label": "子代理并行协作", "sub": "拆解 + 委派"},
+    {"label": "工具 + 沙箱执行", "sub": "真实副作用"},
+    {"label": "检索增强生成", "sub": "RAG/网络"},
+    {"label": "单轮对话问答", "sub": "所有 agent 都会"}
+  ]
+}

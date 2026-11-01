@@ -1,0 +1,32 @@
+{
+  "type": "swimlane",
+  "title": "子代理委派：谁在哪一步",
+  "eyebrow": "DEER-FLOW 全景解析 · 13/45",
+  "caption": "主代理把可并行的子任务委派给 SubagentExecutor：子代理继承父检查点命名空间独立执行，tool_call_id 作为关联键回传结果与令牌用量。",
+  "lang": "zh-CN",
+  "lanes": [
+    {"id": "u", "label": "用户"},
+    {"id": "gw", "label": "Gateway"},
+    {"id": "lead", "label": "主代理"},
+    {"id": "sub", "label": "子代理"}
+  ],
+  "nodes": [
+    {"id": "ask", "label": "提出任务", "shape": "terminal", "lane": "u", "col": 0},
+    {"id": "boot", "label": "启动 run", "lane": "gw", "col": 1},
+    {"id": "plan", "label": "规划拆解", "lane": "lead", "col": 2},
+    {"id": "disp", "label": "派发子任务", "lane": "lead", "col": 3},
+    {"id": "exec", "label": "并行执行", "sub": "继承检查点", "focal": true, "lane": "sub", "col": 4},
+    {"id": "merge", "label": "汇总结果", "lane": "lead", "col": 5},
+    {"id": "stream", "label": "流式交付", "lane": "gw", "col": 6},
+    {"id": "view", "label": "查看成果", "shape": "terminal", "lane": "u", "col": 7}
+  ],
+  "edges": [
+    ["ask", "boot"],
+    ["boot", "plan"],
+    ["plan", "disp"],
+    ["disp", "exec"],
+    ["exec", "merge", "结果+令牌统计"],
+    ["merge", "stream"],
+    ["stream", "view", "", "primary"]
+  ]
+}

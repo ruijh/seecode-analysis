@@ -1,0 +1,21 @@
+{
+  "type": "sankey",
+  "title": "源码文件流量图（按文件数）",
+  "eyebrow": "DEER-FLOW 全景解析 · 45/45",
+  "caption": "4,062 个代码与文档文件的走向：Python 一分为四——测试 1,402 个竟占一半以上，harness 包 792 个是核心资产；TypeScript 近六成在前端 src。数据：git ls-files 实测。",
+  "lang": "zh-CN",
+  "unit": "文件",
+  "links": [
+    ["代码与文档", "Python", 2557],
+    ["代码与文档", "TypeScript/TSX", 1050],
+    ["代码与文档", "MD/MDX 文档", 455],
+    ["Python", "后端测试", 1402, true],
+    ["Python", "harness 包", 792],
+    ["Python", "Gateway/渠道", 157],
+    ["Python", "脚本与示例", 206],
+    ["TypeScript/TSX", "前端 src", 594],
+    ["TypeScript/TSX", "支撑代码", 456],
+    ["MD/MDX 文档", "AGENTS 指南", 59],
+    ["MD/MDX 文档", "手册与说明", 396]
+  ]
+}

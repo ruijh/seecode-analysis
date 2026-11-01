@@ -1,0 +1,42 @@
+{
+ "type": "fishbone",
+ "title": "根因分析：为什么会有兼容性破坏",
+ "subtitle": "README 明示 developer preview 阶段",
+ "caption": "原因为仓库可见事实的归纳。",
+ "effect": "兼容性破坏风险",
+ "categories": [
+  {
+   "label": "迭代节奏",
+   "focal": true,
+   "causes": [
+    "85 天 5401 提交",
+    "单周峰值 1376",
+    "rc 版本 5 连发"
+   ]
+  },
+  {
+   "label": "架构面",
+   "causes": [
+    "插件 API 面广",
+    "会话格式 v0→v4",
+    "事件契约演进"
+   ]
+  },
+  {
+   "label": "实验面积",
+   "causes": [
+    "65 实验包",
+    "webworker 私有预览"
+   ]
+  },
+  {
+   "label": "多端形态",
+   "causes": [
+    "5 种 profile",
+    "桌面/SSH 差异"
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

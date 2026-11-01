@@ -1,0 +1,113 @@
+{
+ "type": "flowchart",
+ "title": "工具调用守卫流水线",
+ "subtitle": "从模型发起到沙箱执行",
+ "caption": "依据 docs/tool-execution-pipeline.md 与 tools/pre-execute 事件瀑布。",
+ "evidence": [
+  {
+   "id": "pipe",
+   "file": "docs/tool-execution-pipeline.md"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "label": "模型发起 tool/call",
+   "shape": "terminal",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "pre",
+   "label": "pre-execute 校验",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "pol",
+   "label": "策略允许?",
+   "shape": "decision",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "rej",
+   "label": "返回拒绝结果",
+   "kind": "muted",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "appr",
+   "label": "需要审批?",
+   "shape": "decision",
+   "row": 3,
+   "col": 1
+  },
+  {
+   "id": "wait",
+   "label": "请示用户",
+   "shape": "io",
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "ok",
+   "label": "沙箱内执行",
+   "focal": true,
+   "row": 4,
+   "col": 1
+  },
+  {
+   "id": "res",
+   "label": "回写 tool/result",
+   "shape": "terminal",
+   "row": 5,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "pre"
+  ],
+  [
+   "pre",
+   "pol"
+  ],
+  [
+   "pol",
+   "rej",
+   "no"
+  ],
+  [
+   "pol",
+   "appr",
+   "yes",
+   "primary"
+  ],
+  [
+   "appr",
+   "wait",
+   "yes"
+  ],
+  [
+   "wait",
+   "ok",
+   "批准",
+   "primary"
+  ],
+  [
+   "appr",
+   "ok",
+   "免批",
+   "primary"
+  ],
+  [
+   "ok",
+   "res"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

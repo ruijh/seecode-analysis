@@ -1,0 +1,171 @@
+{
+  "type": "db-schema",
+  "title": "持久层物理表（节选）",
+  "eyebrow": "DEER-FLOW 全景解析 · 09/45",
+  "caption": "SQLAlchemy + Alembic 迁移管理；SQLite 用于单机、Postgres 用于多实例（多实例调度要求共享 Postgres + run_events.backend=db）。",
+  "lang": "zh-CN",
+  "nodes": [
+    {
+      "id": "users",
+      "label": "users",
+      "fields": [
+        [
+          "id",
+          "uuid",
+          "PK"
+        ],
+        [
+          "email",
+          "text",
+          "UQ"
+        ],
+        [
+          "created_at",
+          "timestamptz",
+          ""
+        ]
+      ],
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "threads",
+      "label": "threads",
+      "focal": true,
+      "fields": [
+        [
+          "id",
+          "uuid",
+          "PK"
+        ],
+        [
+          "user_id",
+          "uuid",
+          "FK"
+        ],
+        [
+          "project_id",
+          "uuid",
+          ""
+        ],
+        [
+          "title",
+          "text",
+          ""
+        ]
+      ],
+      "row": 0,
+      "col": 1
+    },
+    {
+      "id": "runs",
+      "label": "runs",
+      "fields": [
+        [
+          "id",
+          "uuid",
+          "PK"
+        ],
+        [
+          "thread_id",
+          "uuid",
+          "FK"
+        ],
+        [
+          "status",
+          "text",
+          ""
+        ],
+        [
+          "created_at",
+          "timestamptz",
+          ""
+        ]
+      ],
+      "row": 0,
+      "col": 2
+    },
+    {
+      "id": "tasks",
+      "label": "scheduled_tasks",
+      "fields": [
+        [
+          "id",
+          "uuid",
+          "PK"
+        ],
+        [
+          "thread_id",
+          "uuid",
+          "FK"
+        ],
+        [
+          "cron",
+          "text",
+          ""
+        ],
+        [
+          "enabled",
+          "bool",
+          ""
+        ]
+      ],
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "taskruns",
+      "label": "scheduled_task_runs",
+      "fields": [
+        [
+          "id",
+          "uuid",
+          "PK"
+        ],
+        [
+          "task_id",
+          "uuid",
+          "FK"
+        ],
+        [
+          "status",
+          "text",
+          ""
+        ],
+        [
+          "scheduled_for",
+          "timestamptz",
+          ""
+        ]
+      ],
+      "row": 2,
+      "col": 0
+    }
+  ],
+  "edges": [
+    [
+      "threads.user_id",
+      "users.id",
+      "",
+      "many-one"
+    ],
+    [
+      "runs.thread_id",
+      "threads.id",
+      "",
+      "many-one"
+    ],
+    [
+      "tasks.thread_id",
+      "threads.id",
+      "",
+      "many-one"
+    ],
+    [
+      "taskruns.task_id",
+      "tasks.id",
+      "",
+      "many-one"
+    ]
+  ]
+}

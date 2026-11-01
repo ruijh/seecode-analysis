@@ -1,0 +1,113 @@
+{
+ "type": "er",
+ "title": "会话领域模型",
+ "subtitle": "「模型可见即可回放」的事件溯源设计",
+ "caption": "概念模型，依据 docs/architecture.md「Turn flow / Session log」。每个 assistant/message 内嵌压缩流。",
+ "evidence": [
+  {
+   "id": "sess",
+   "file": "docs/architecture.md",
+   "line": 124
+  }
+ ],
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "Agent",
+   "fields": [
+    "id PK",
+    "model_selection"
+   ],
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "sess",
+   "label": "Session",
+   "focal": true,
+   "fields": [
+    "id PK",
+    "generation",
+    "format vN"
+   ],
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "turn",
+   "label": "Turn",
+   "fields": [
+    "id PK",
+    "session_id FK"
+   ],
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "step",
+   "label": "Step",
+   "fields": [
+    "id PK",
+    "turn_id FK"
+   ],
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "msg",
+   "label": "Message",
+   "fields": [
+    "seq PK",
+    "role",
+    "嵌入流"
+   ],
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "call",
+   "label": "ToolCall",
+   "fields": [
+    "id PK",
+    "step_id FK",
+    "结果"
+   ],
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "agent",
+   "sess",
+   "驱动",
+   "many-one"
+  ],
+  [
+   "sess",
+   "turn",
+   "包含",
+   "one-many"
+  ],
+  [
+   "turn",
+   "step",
+   "展开为",
+   "one-many"
+  ],
+  [
+   "step",
+   "call",
+   "发起",
+   "one-many"
+  ],
+  [
+   "sess",
+   "msg",
+   "追加",
+   "one-many"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

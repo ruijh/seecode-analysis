@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek Harness · 60 图全方位分析</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:#f6f7f9;color:#1a1d21}
+.dark-bg{background:#111418;color:#e8eaed}
+header{padding:48px 32px 24px;max-width:1280px;margin:0 auto}
+h1{font-size:28px;margin:0 0 8px}
+header p{margin:4px 0;color:#5c6470;font-size:14px;line-height:1.7}
+.stats{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0 8px}
+.stat{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:14px 18px;min-width:130px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:12px;color:#697180}
+section{max-width:1280px;margin:0 auto;padding:12px 32px}
+section h2{font-size:18px;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid #dfe3e8}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s}
+a.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,30,50,.1)}
+.thumb{aspect-ratio:16/9;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #eef0f3}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+.meta{padding:12px 14px 14px}
+.no{font-size:11px;color:#8a93a2;letter-spacing:.4px}
+.t{font-weight:600;font-size:14.5px;margin:3px 0 2px}
+.s{font-size:12px;color:#697180;line-height:1.5}
+.tag{display:inline-block;font-size:10.5px;background:#eef2ff;color:#3b5bdb;border-radius:6px;padding:1px 7px;margin-top:6px;font-family:ui-monospace,monospace}
+footer{max-width:1280px;margin:0 auto;padding:28px 32px 60px;color:#8a93a2;font-size:12.5px;line-height:1.8}
+@media(prefers-color-scheme:dark){body{background:#111418;color:#e8eaed}.stat,a.card{background:#1a1f26;border-color:#2a313b}.stat span,.s,header p{color:#9aa4b2}.no{color:#77808f}section h2{border-color:#2a313b}.thumb{background:#0d1013;border-color:#222833}.tag{background:#232c47;color:#93b0ff}}
+</style></head><body>
+<header>
+<h1>DeepSeek Harness（dsh）· 60 种图表全方位分析</h1>
+<p>对 <b>github.com/deepseek-ai/deepseek-harness</b> 的全景解读：45 种核心图表类型 + 15 种变体，每个图表回答一个关于这个仓库的问题。数据来自 2026-10-31 的本地克隆、完整 git 历史与 GitHub API。点击任意卡片打开可交互图表（悬停、动画回放、镜头追踪）。</p>
+<div class="stats">
+<div class="stat"><b>267,275</b><span>GitHub Stars</span></div>
+<div class="stat"><b>32,407</b><span>Forks</span></div>
+<div class="stat"><b>5,401</b><span>提交（85 天）</span></div>
+<div class="stat"><b>372</b><span>packages 包</span></div>
+<div class="stat"><b>276 万</b><span>代码行</span></div>
+<div class="stat"><b>60</b><span>分析图表</span></div>
+</div>
+</header><section><h2>系统结构</h2><div class="grid"><a class="card" href="01-architecture.html"><div class="thumb"><img loading="lazy" src="01-architecture.png" alt=""></div>
+<div class="meta"><div class="no">01 · architecture</div>
+<div class="t">dsh 总体架构：一切皆插件</div><div class="s">应用壳 → 引导组合 → Agent 运行时 → 能力接缝 → 外部世界</div><span class="tag">architecture</span></div></a><a class="card" href="02-high-level.html"><div class="thumb"><img loading="lazy" src="02-high-level.png" alt=""></div>
+<div class="meta"><div class="no">02 · high</div>
+<div class="t">dsh 是什么</div><div class="s">给非工程师的 30 秒版本</div><span class="tag">high-level</span></div></a><a class="card" href="46-high-level-vertical.html"><div class="thumb"><img loading="lazy" src="46-high-level-vertical.png" alt=""></div>
+<div class="meta"><div class="no">46 · high</div>
+<div class="t">dsh 是什么（纵向）</div><div class="s">窄幅布局，自上而下</div><span class="tag">high-level-vertical</span></div></a><a class="card" href="03-deployment.html"><div class="thumb"><img loading="lazy" src="03-deployment.png" alt=""></div>
+<div class="meta"><div class="no">03 · deployment</div>
+<div class="t">dsh 跑在哪里</div><div class="s">五种官方运行形态与网络路径</div><span class="tag">deployment</span></div></a><a class="card" href="04-dependency.html"><div class="thumb"><img loading="lazy" src="04-dependency.png" alt=""></div>
+<div class="meta"><div class="no">04 · dependency</div>
+<div class="t">关键包依赖（自上而下）</div><div class="s">入口 → 组合层 → 内核 → 接缝 → 共享</div><span class="tag">dependency</span></div></a><a class="card" href="05-architecture-delta.html"><div class="thumb"><img loading="lazy" src="05-architecture-delta.png" alt=""></div>
+<div class="meta"><div class="no">05 · architecture</div>
+<div class="t">变更好例子：Agent Teams（实验）</div><div class="s">在 dsh-base 旁挂载多智能体协作</div><span class="tag">architecture-delta</span></div></a><a class="card" href="06-it-state.html"><div class="thumb"><img loading="lazy" src="06-it-state.png" alt=""></div>
+<div class="meta"><div class="no">06 · it</div>
+<div class="t">子系统健康度</div><div class="s">按目录归属与发布状态评估</div><span class="tag">it-state</span></div></a><a class="card" href="07-uml-class.html"><div class="thumb"><img loading="lazy" src="07-uml-class.png" alt=""></div>
+<div class="meta"><div class="no">07 · uml</div>
+<div class="t">核心接口：Agent 与驱动</div><div class="s">Cordis 语境下的可替换设计</div><span class="tag">uml-class</span></div></a><a class="card" href="08-er.html"><div class="thumb"><img loading="lazy" src="08-er.png" alt=""></div>
+<div class="meta"><div class="no">08 · er</div>
+<div class="t">会话领域模型</div><div class="s">「模型可见即可回放」的事件溯源设计</div><span class="tag">er</span></div></a><a class="card" href="09-db-schema.html"><div class="thumb"><img loading="lazy" src="09-db-schema.png" alt=""></div>
+<div class="meta"><div class="no">09 · db</div>
+<div class="t">会话检索索引（SQLite 派生库）</div><div class="s">session-query-sqlite 的真实表结构（schema v8）</div><span class="tag">db-schema</span></div></a></div></section><section><h2>流程过程</h2><div class="grid"><a class="card" href="10-flowchart.html"><div class="thumb"><img loading="lazy" src="10-flowchart.png" alt=""></div>
+<div class="meta"><div class="no">10 · flowchart</div>
+<div class="t">工具调用守卫流水线</div><div class="s">从模型发起到沙箱执行</div><span class="tag">flowchart</span></div></a><a class="card" href="11-sequence.html"><div class="thumb"><img loading="lazy" src="11-sequence.png" alt=""></div>
+<div class="meta"><div class="no">11 · sequence</div>
+<div class="t">一次对话回合的时序</div><div class="s">从用户输入到工具执行再到流式回复</div><span class="tag">sequence</span></div></a><a class="card" href="47-sequence-oauth.html"><div class="thumb"><img loading="lazy" src="47-sequence-oauth.png" alt=""></div>
+<div class="meta"><div class="no">47 · sequence</div>
+<div class="t">DeepSeek 账号登录（推断）</div><div class="s">账号化模型接入的授权握手</div><span class="tag">sequence-oauth</span></div></a><a class="card" href="12-state.html"><div class="thumb"><img loading="lazy" src="12-state.png" alt=""></div>
+<div class="meta"><div class="no">12 · state</div>
+<div class="t">后台任务（Job）状态机</div><div class="s">bash/PTY 后台运行经 ctx.jobs 统一管理</div><span class="tag">state</span></div></a><a class="card" href="48-state-lifecycle.html"><div class="thumb"><img loading="lazy" src="48-state-lifecycle.png" alt=""></div>
+<div class="meta"><div class="no">48 · state</div>
+<div class="t">会话文件生命周期</div><div class="s">JSONL 世代（generation）只增不改</div><span class="tag">state-lifecycle</span></div></a><a class="card" href="13-swimlane.html"><div class="thumb"><img loading="lazy" src="13-swimlane.png" alt=""></div>
+<div class="meta"><div class="no">13 · swimlane</div>
+<div class="t">高危工具审批（跨职能）</div><div class="s">策略、用户与沙箱之间的交接</div><span class="tag">swimlane</span></div></a><a class="card" href="14-process.html"><div class="thumb"><img loading="lazy" src="14-process.png" alt=""></div>
+<div class="meta"><div class="no">14 · process</div>
+<div class="t">五步跑起来</div><div class="s">从零到第一次对话</div><span class="tag">process</span></div></a><a class="card" href="15-data-flow.html"><div class="thumb"><img loading="lazy" src="15-data-flow.png" alt=""></div>
+<div class="meta"><div class="no">15 · data</div>
+<div class="t">会话事件的数据流</div><div class="s">一次写入，多路消费</div><span class="tag">data-flow</span></div></a><a class="card" href="16-journey.html"><div class="thumb"><img loading="lazy" src="16-journey.png" alt=""></div>
+<div class="meta"><div class="no">16 · journey</div>
+<div class="t">新用户旅程</div><div class="s">从看到仓库到日常使用</div><span class="tag">journey</span></div></a><a class="card" href="17-timeline.html"><div class="thumb"><img loading="lazy" src="17-timeline.png" alt=""></div>
+<div class="meta"><div class="no">17 · timeline</div>
+<div class="t">85 天从 0 到 7500+ PR</div><div class="s">2026-08-07 首次提交至今</div><span class="tag">timeline</span></div></a><a class="card" href="18-gantt.html"><div class="thumb"><img loading="lazy" src="18-gantt.png" alt=""></div>
+<div class="meta"><div class="no">18 · gantt</div>
+<div class="t">开发阶段甘特图</div><div class="s">按提交强度划分的三个阶段</div><span class="tag">gantt</span></div></a><a class="card" href="19-kanban.html"><div class="thumb"><img loading="lazy" src="19-kanban.png" alt=""></div>
+<div class="meta"><div class="no">19 · kanban</div>
+<div class="t">实验特性看板</div><div class="s">65 个 experimental 包的成熟度速览</div><span class="tag">kanban</span></div></a><a class="card" href="20-story-map.html"><div class="thumb"><img loading="lazy" src="20-story-map.png" alt=""></div>
+<div class="meta"><div class="no">20 · story</div>
+<div class="t">dsh 产品故事图</div><div class="s">主干活动 × 发布切片</div><span class="tag">story-map</span></div></a><a class="card" href="21-loop.html"><div class="thumb"><img loading="lazy" src="21-loop.png" alt=""></div>
+<div class="meta"><div class="no">21 · loop</div>
+<div class="t">生态飞轮</div><div class="s">插件架构如何自我强化</div><span class="tag">loop</span></div></a><a class="card" href="49-loop-terminal.html"><div class="thumb"><img loading="lazy" src="49-loop-terminal.png" alt=""></div>
+<div class="meta"><div class="no">49 · loop</div>
+<div class="t">Agent 内循环</div><div class="s">一次 step 内部的最小闭环</div><span class="tag">loop-terminal</span></div></a></div></section><section><h2>数据平台</h2><div class="grid"><a class="card" href="22-medallion.html"><div class="thumb"><img loading="lazy" src="22-medallion.png" alt=""></div>
+<div class="meta"><div class="no">22 · medallion</div>
+<div class="t">会话数据的分层加工</div><div class="s">原始事件 → 投影 → 智能视图</div><span class="tag">medallion</span></div></a><a class="card" href="23-dp-integration.html"><div class="thumb"><img loading="lazy" src="23-dp-integration.png" alt=""></div>
+<div class="meta"><div class="no">23 · dp</div>
+<div class="t">遥测数据集成</div><div class="s">OTel 贯穿主机与会话两层</div><span class="tag">dp-integration</span></div></a><a class="card" href="24-dp-security-matrix.html"><div class="thumb"><img loading="lazy" src="24-dp-security-matrix.png" alt=""></div>
+<div class="meta"><div class="no">24 · dp</div>
+<div class="t">权限矩阵：谁能碰什么</div><div class="s">沙箱 + 审批双策略下的能力面</div><span class="tag">dp-security-matrix</span></div></a></div></section><section><h2>结构组织</h2><div class="grid"><a class="card" href="25-tree.html"><div class="thumb"><img loading="lazy" src="25-tree.png" alt=""></div>
+<div class="meta"><div class="no">25 · tree</div>
+<div class="t">仓库目录结构</div><div class="s">monorepo 顶层与 packages 二级域</div><span class="tag">tree</span></div></a><a class="card" href="50-tree-block-decomposition.html"><div class="thumb"><img loading="lazy" src="50-tree-block-decomposition.png" alt=""></div>
+<div class="meta"><div class="no">50 · tree</div>
+<div class="t">packages 域分解</div><div class="s">45 个域按职责归组（编号可引用）</div><span class="tag">tree-block-decomposition</span></div></a><a class="card" href="26-org-chart.html"><div class="thumb"><img loading="lazy" src="26-org-chart.png" alt=""></div>
+<div class="meta"><div class="no">26 · org</div>
+<div class="t">代码「组织架构」</div><div class="s">把 372 个包当成团队来看</div><span class="tag">org-chart</span></div></a><a class="card" href="27-nested.html"><div class="thumb"><img loading="lazy" src="27-nested.png" alt=""></div>
+<div class="meta"><div class="no">27 · nested</div>
+<div class="t">信任域嵌套</div><div class="s">从你的电脑到沙箱写根</div><span class="tag">nested</span></div></a><a class="card" href="28-layers.html"><div class="thumb"><img loading="lazy" src="28-layers.png" alt=""></div>
+<div class="meta"><div class="no">28 · layers</div>
+<div class="t">技术栈分层</div><div class="s">从界面到内核</div><span class="tag">layers</span></div></a><a class="card" href="29-isometric.html"><div class="thumb"><img loading="lazy" src="29-isometric.png" alt=""></div>
+<div class="meta"><div class="no">29 · isometric</div>
+<div class="t">一台 dsh 工作站</div><div class="s">把运行形态画成实物</div><span class="tag">isometric</span></div></a><a class="card" href="30-exploded.html"><div class="thumb"><img loading="lazy" src="30-exploded.png" alt=""></div>
+<div class="meta"><div class="no">30 · exploded</div>
+<div class="t">拆开 dsh 运行时</div><div class="s">自下而上的五层实体化</div><span class="tag">exploded</span></div></a><a class="card" href="31-isometric-plan.html"><div class="thumb"><img loading="lazy" src="31-isometric-plan.png" alt=""></div>
+<div class="meta"><div class="no">31 · isometric</div>
+<div class="t">仓库平面图</div><div class="s">如果 monorepo 是一个园区</div><span class="tag">isometric-plan</span></div></a><a class="card" href="32-venn.html"><div class="thumb"><img loading="lazy" src="32-venn.png" alt=""></div>
+<div class="meta"><div class="no">32 · venn</div>
+<div class="t">三种形态的能力重叠</div><div class="s">同一内核的三张脸</div><span class="tag">venn</span></div></a><a class="card" href="33-pyramid.html"><div class="thumb"><img loading="lazy" src="33-pyramid.png" alt=""></div>
+<div class="meta"><div class="no">33 · pyramid</div>
+<div class="t">稳定性金字塔</div><div class="s">越靠顶越稳，越靠底越新</div><span class="tag">pyramid</span></div></a><a class="card" href="57-funnel.html"><div class="thumb"><img loading="lazy" src="57-funnel.png" alt=""></div>
+<div class="meta"><div class="no">57 · funnel</div>
+<div class="t">社区参与漏斗</div><div class="s">从 star 到贡献者</div><span class="tag">funnel</span></div></a><a class="card" href="34-quadrant.html"><div class="thumb"><img loading="lazy" src="34-quadrant.png" alt=""></div>
+<div class="meta"><div class="no">34 · quadrant</div>
+<div class="t">包域矩阵：变化速度 × 用户可见度</div><div class="s">选依赖前先看位置</div><span class="tag">quadrant</span></div></a><a class="card" href="58-quadrant-consultant.html"><div class="thumb"><img loading="lazy" src="58-quadrant-consultant.png" alt=""></div>
+<div class="meta"><div class="no">58 · quadrant</div>
+<div class="t">采用建议矩阵</div><div class="s">按成熟度与价值分四档</div><span class="tag">quadrant-consultant</span></div></a><a class="card" href="35-fishbone.html"><div class="thumb"><img loading="lazy" src="35-fishbone.png" alt=""></div>
+<div class="meta"><div class="no">35 · fishbone</div>
+<div class="t">根因分析：为什么会有兼容性破坏</div><div class="s">README 明示 developer preview 阶段</div><span class="tag">fishbone</span></div></a><a class="card" href="36-wardley.html"><div class="thumb"><img loading="lazy" src="36-wardley.png" alt=""></div>
+<div class="meta"><div class="no">36 · wardley</div>
+<div class="t">Wardley 演进图</div><div class="s">dsh 战略坐标：自研 vs 借力</div><span class="tag">wardley</span></div></a></div></section><section><h2>数据图表</h2><div class="grid"><a class="card" href="37-bar.html"><div class="thumb"><img loading="lazy" src="37-bar.png" alt=""></div>
+<div class="meta"><div class="no">37 · bar</div>
+<div class="t">各域代码量 Top 12</div><div class="s">packages 下按域统计（含 ts/tsx/css）</div><span class="tag">bar</span></div></a><a class="card" href="51-dumbbell.html"><div class="thumb"><img loading="lazy" src="51-dumbbell.png" alt=""></div>
+<div class="meta"><div class="no">51 · dumbbell</div>
+<div class="t">包数变迁：首提交 → 今天</div><div class="s">2026-08-07 首次提交时的域 vs 现在</div><span class="tag">dumbbell</span></div></a><a class="card" href="52-marimekko.html"><div class="thumb"><img loading="lazy" src="52-marimekko.png" alt=""></div>
+<div class="meta"><div class="no">52 · marimekko</div>
+<div class="t">大域的语言构成</div><div class="s">宽度=总行数，分段=语言</div><span class="tag">marimekko</span></div></a><a class="card" href="38-line.html"><div class="thumb"><img loading="lazy" src="38-line.png" alt=""></div>
+<div class="meta"><div class="no">38 · line</div>
+<div class="t">每周提交数</div><div class="s">2026 年第 31–43 周</div><span class="tag">line</span></div></a><a class="card" href="53-slopegraph.html"><div class="thumb"><img loading="lazy" src="53-slopegraph.png" alt=""></div>
+<div class="meta"><div class="no">53 · slopegraph</div>
+<div class="t">提交类型：8月 → 10月</div><div class="s">哪个标签涨得最凶</div><span class="tag">slopegraph</span></div></a><a class="card" href="54-bump.html"><div class="thumb"><img loading="lazy" src="54-bump.png" alt=""></div>
+<div class="meta"><div class="no">54 · bump</div>
+<div class="t">提交类型排名变化</div><div class="s">feat 何时反超 refactor</div><span class="tag">bump</span></div></a><a class="card" href="55-streamgraph.html"><div class="thumb"><img loading="lazy" src="55-streamgraph.png" alt=""></div>
+<div class="meta"><div class="no">55 · streamgraph</div>
+<div class="t">提交构成流</div><div class="s">三个月的精力分配</div><span class="tag">streamgraph</span></div></a><a class="card" href="56-ridgeline.html"><div class="thumb"><img loading="lazy" src="56-ridgeline.png" alt=""></div>
+<div class="meta"><div class="no">56 · ridgeline</div>
+<div class="t">作息分布：工作日 vs 周末</div><div class="s">按小时（提交者本地时区）</div><span class="tag">ridgeline</span></div></a><a class="card" href="39-scatter.html"><div class="thumb"><img loading="lazy" src="39-scatter.png" alt=""></div>
+<div class="meta"><div class="no">39 · scatter</div>
+<div class="t">各域：包数 × 代码量</div><div class="s">一个点一个 packages 域</div><span class="tag">scatter</span></div></a><a class="card" href="59-bubble.html"><div class="thumb"><img loading="lazy" src="59-bubble.png" alt=""></div>
+<div class="meta"><div class="no">59 · bubble</div>
+<div class="t">大包画像：行数 × 依赖 × 文件</div><div class="s">气泡面积=文件数</div><span class="tag">bubble</span></div></a><a class="card" href="60-beeswarm.html"><div class="thumb"><img loading="lazy" src="60-beeswarm.png" alt=""></div>
+<div class="meta"><div class="no">60 · beeswarm</div>
+<div class="t">全部包的体量分布（128 个 ≥ 阈值）</div><div class="s">一个点一个包，按域分组</div><span class="tag">beeswarm</span></div></a><a class="card" href="40-waterfall.html"><div class="thumb"><img loading="lazy" src="40-waterfall.png" alt=""></div>
+<div class="meta"><div class="no">40 · waterfall</div>
+<div class="t">276 万行是怎么堆出来的</div><div class="s">按语言累加</div><span class="tag">waterfall</span></div></a><a class="card" href="41-treemap.html"><div class="thumb"><img loading="lazy" src="41-treemap.png" alt=""></div>
+<div class="meta"><div class="no">41 · treemap</div>
+<div class="t">代码量构成</div><div class="s">两级：区域 → 包域</div><span class="tag">treemap</span></div></a><a class="card" href="42-heatmap.html"><div class="thumb"><img loading="lazy" src="42-heatmap.png" alt=""></div>
+<div class="meta"><div class="no">42 · heatmap</div>
+<div class="t">提交热力图：星期 × 时段</div><div class="s">5401 次提交的作息（提交者本地时区）</div><span class="tag">heatmap</span></div></a><a class="card" href="43-radar.html"><div class="thumb"><img loading="lazy" src="43-radar.png" alt=""></div>
+<div class="meta"><div class="no">43 · radar</div>
+<div class="t">内核 vs 实验区画像</div><div class="s">六维相对评分（1–5，分析性）</div><span class="tag">radar</span></div></a><a class="card" href="44-polar.html"><div class="thumb"><img loading="lazy" src="44-polar.png" alt=""></div>
+<div class="meta"><div class="no">44 · polar</div>
+<div class="t">提交时刻的钟</div><div class="s">24 小时分布（提交者本地时区）</div><span class="tag">polar</span></div></a><a class="card" href="45-sankey.html"><div class="thumb"><img loading="lazy" src="45-sankey.png" alt=""></div>
+<div class="meta"><div class="no">45 · sankey</div>
+<div class="t">5401 次提交去哪了</div><div class="s">合并 vs 直接提交 → 变更类型</div><span class="tag">sankey</span></div></a></div></section><footer>生成方式：SeeCode 引擎渲染 · 图表数据除注明“分析性判断/推断”外均取自仓库真实统计（git 历史、LOC 扫描、GitHub API、package.json、docs/）。交互版为同名单独的 .html 文件，PNG 为静态快照。</footer>
+</body></html>

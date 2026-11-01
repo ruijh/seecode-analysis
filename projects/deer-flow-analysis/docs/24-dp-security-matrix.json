@@ -1,0 +1,16 @@
+{
+  "type": "dp-security-matrix",
+  "title": "角色 × 数据访问矩阵",
+  "eyebrow": "DEER-FLOW 全景解析 · 24/45",
+  "caption": "官方安全边界：config.yaml 只能运维改（插件列表会执行代码）；extensions_config.json 可由 Gateway 运行时写；扩展以 Gateway 权限运行，来源必须可信。",
+  "lang": "zh-CN",
+  "rows": ["普通用户", "管理员", "Gateway 进程", "扩展插件"],
+  "cols": ["对话线程", "config.yaml", "extensions_config", "沙箱文件", "凭据"],
+  "cells": [
+    ["read", "none", "none", "write", "none"],
+    ["read", "read", "write", "read", "read"],
+    ["write", "read", "write", "write", "write"],
+    ["read", "none", "read", "write", "masked"]
+  ],
+  "focal": "扩展插件"
+}

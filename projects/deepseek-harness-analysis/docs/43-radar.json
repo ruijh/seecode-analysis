@@ -1,0 +1,42 @@
+{
+ "type": "radar",
+ "title": "内核 vs 实验区画像",
+ "subtitle": "六维相对评分（1–5，分析性）",
+ "caption": "评分为依据仓库证据（测试密度、文档、迁移链、包龄）的相对判断。",
+ "axes": [
+  "文档完备",
+  "测试密度",
+  "接口稳定",
+  "生态接入",
+  "迭代速度",
+  "生产就绪"
+ ],
+ "max": 5,
+ "series": [
+  {
+   "name": "core 内核",
+   "values": [
+    5,
+    5,
+    4,
+    4,
+    3,
+    4
+   ],
+   "focal": true
+  },
+  {
+   "name": "experimental",
+   "values": [
+    2,
+    3,
+    1,
+    2,
+    5,
+    2
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

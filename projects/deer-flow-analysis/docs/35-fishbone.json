@@ -1,0 +1,14 @@
+{
+  "type": "fishbone",
+  "title": "为什么 Agent 总在长任务上翻车",
+  "eyebrow": "DEER-FLOW 全景解析 · 35/45",
+  "caption": "v1→v2 重写的问题定义：社区把 DeerFlow 推出研究场景后暴露的四类系统性短板，正好对应 v2 新增的四大底座。",
+  "lang": "zh-CN",
+  "effect": "长时程任务半途而废",
+  "categories": [
+    {"label": "上下文", "focal": true, "causes": ["窗口溢出", "缺压缩机制"]},
+    {"label": "记忆", "causes": ["跨会话失忆", "事实不沉淀"]},
+    {"label": "执行", "causes": ["无沙箱难验证", "工具调用不稳"]},
+    {"label": "编排", "causes": ["单循环串行阻塞", "无法委派"]}
+  ]
+}

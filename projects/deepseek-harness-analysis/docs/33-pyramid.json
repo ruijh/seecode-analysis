@@ -1,0 +1,35 @@
+{
+ "type": "pyramid",
+ "title": "稳定性金字塔",
+ "subtitle": "越靠顶越稳，越靠底越新",
+ "caption": "层数=包数（真实）；稳定性为分析性判断。",
+ "unit": "个包",
+ "levels": [
+  {
+   "label": "core 内核",
+   "value": 10,
+   "sub": "最稳",
+   "focal": true
+  },
+  {
+   "label": "boot/bundle 组合",
+   "value": 12
+  },
+  {
+   "label": "能力集成",
+   "value": 74,
+   "sub": "fs/shell/llm/session…"
+  },
+  {
+   "label": "client 体验",
+   "value": 69
+  },
+  {
+   "label": "experimental 前沿",
+   "value": 65,
+   "sub": "随时会变"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

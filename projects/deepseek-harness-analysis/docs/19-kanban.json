@@ -1,0 +1,89 @@
+{
+ "type": "kanban",
+ "title": "实验特性看板",
+ "subtitle": "65 个 experimental 包的成熟度速览",
+ "caption": "位置为分析性归纳：依据包名、README 与是否进入 docs/tool-catalog.md。",
+ "columns": [
+  {
+   "label": "探索中",
+   "cards": [
+    {
+     "label": "语音输入",
+     "tag": "voice"
+    },
+    {
+     "label": "思维链翻译",
+     "tag": "cot"
+    },
+    {
+     "label": "语音转文字",
+     "tag": "stt"
+    },
+    "+2 more"
+   ]
+  },
+  {
+   "label": "实验中",
+   "cards": [
+    {
+     "label": "Forge",
+     "tag": "forge",
+     "focal": true
+    },
+    {
+     "label": "LiveShare",
+     "sub": "5.6 万行"
+    },
+    {
+     "label": "Ralph 循环",
+     "tag": "loop"
+    },
+    {
+     "label": "Worktree",
+     "sub": "并行分支"
+    },
+    "+1 more"
+   ]
+  },
+  {
+   "label": "趋稳",
+   "cards": [
+    {
+     "label": "Computer Use",
+     "sub": "macOS 驱动"
+    },
+    {
+     "label": "Browser Use",
+     "sub": "Playwright/CDP"
+    },
+    {
+     "label": "Inspector",
+     "sub": "2.5 万行"
+    },
+    {
+     "label": "会话搜索",
+     "sub": "sqlite FTS"
+    }
+   ]
+  },
+  {
+   "label": "已见主线",
+   "cards": [
+    {
+     "label": "终端工具",
+     "sub": "进工具目录"
+    },
+    {
+     "label": "会话标题",
+     "sub": "session 域"
+    },
+    {
+     "label": "会话检索",
+     "sub": "独立域"
+    }
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

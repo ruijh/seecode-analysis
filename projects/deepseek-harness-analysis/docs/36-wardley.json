@@ -1,0 +1,99 @@
+{
+ "type": "wardley",
+ "title": "Wardley 演进图",
+ "subtitle": "dsh 战略坐标：自研 vs 借力",
+ "caption": "位置为分析性判断；evo 左=创世 右=商品化。",
+ "components": [
+  {
+   "id": "need",
+   "label": "可靠的自主编程",
+   "evo": 0.5,
+   "vis": 1,
+   "anchor": true
+  },
+  {
+   "id": "ui",
+   "label": "Web/桌面界面",
+   "evo": 0.55,
+   "vis": 0.8
+  },
+  {
+   "id": "loop",
+   "label": "Agent 循环",
+   "evo": 0.4,
+   "vis": 0.65,
+   "focal": true
+  },
+  {
+   "id": "cordis",
+   "label": "Cordis 插件内核",
+   "evo": 0.3,
+   "vis": 0.45,
+   "inertia": true
+  },
+  {
+   "id": "mcp",
+   "label": "MCP 协议",
+   "evo": 0.65,
+   "vis": 0.35,
+   "moveTo": 0.8
+  },
+  {
+   "id": "acp",
+   "label": "ACP 自动化协议",
+   "evo": 0.35,
+   "vis": 0.3,
+   "moveTo": 0.55
+  },
+  {
+   "id": "llm",
+   "label": "DeepSeek API",
+   "evo": 0.85,
+   "vis": 0.55
+  },
+  {
+   "id": "os",
+   "label": "OS 沙箱原语",
+   "evo": 0.9,
+   "vis": 0.15
+  },
+  {
+   "id": "npm",
+   "label": "npm 生态",
+   "evo": 0.95,
+   "vis": 0.3
+  }
+ ],
+ "links": [
+  [
+   "need",
+   "ui"
+  ],
+  [
+   "ui",
+   "loop"
+  ],
+  [
+   "loop",
+   "cordis"
+  ],
+  [
+   "loop",
+   "llm"
+  ],
+  [
+   "loop",
+   "mcp"
+  ],
+  [
+   "cordis",
+   "os"
+  ],
+  [
+   "cordis",
+   "npm"
+  ]
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

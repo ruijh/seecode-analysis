@@ -1,0 +1,25 @@
+{
+  "type": "kanban",
+  "title": "能力看板：v2.2.0 时点",
+  "eyebrow": "DEER-FLOW 全景解析 · 19/45",
+  "caption": "按官方 CHANGELOG 与 README 整理的能力成熟度：记忆、调度、渠道、技能均已交付；多实例与工作流扩展仍在推进。",
+  "lang": "zh-CN",
+  "columns": [
+    {"label": "已交付 v2.2.0", "cards": [
+      {"label": "长期记忆 DeerMem", "tag": "核心", "sub": "归档/压缩/淘汰", "focal": true},
+      {"label": "定时任务调度器", "sub": "cron · 多实例租约"},
+      {"label": "9 大 IM 渠道", "sub": "Telegram…Buzz"},
+      {"label": "23 个官方技能", "sub": "研究/PPT/播客…"},
+      {"label": "RAG 知识检索", "sub": "RAGFlow 等三类"}
+    ]},
+    {"label": "进行中", "wip": 3, "cards": [
+      {"label": "工作流扩展", "sub": "examples/workflows"},
+      {"label": "MCP 任务运行时", "sub": "持久化·死信"},
+      {"label": "知识平台策略", "sub": "空间/共享"}
+    ]},
+    {"label": "社区方向", "cards": [
+      {"label": "更多 Provider 接入", "sub": "检索/模型"},
+      {"label": "LLM Space 调试器", "sub": "姐妹项目"}
+    ]}
+  ]
+}

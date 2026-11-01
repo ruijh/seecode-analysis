@@ -1,0 +1,22 @@
+{
+  "type": "org-chart",
+  "title": "贡献者版图（Top 提交数）",
+  "eyebrow": "DEER-FLOW 全景解析 · 26/45",
+  "caption": "以提交数看贡献结构：MagicCube 一骑绝尘（610 次），核心四人组贡献了 Top15 的大头，dependabot 自动化提交 108 次，长尾由数百位社区成员补齐。数据：GitHub Contributors API。",
+  "lang": "zh-CN",
+  "root": {"label": "bytedance/deer-flow", "sub": "84.7k stars 社区", "children": [
+    {"label": "MagicCube", "sub": "610 commits", "focal": true},
+    {"label": "WillemJiang", "sub": "279 commits"},
+    {"label": "核心后端组", "children": [
+      {"label": "hetaoBackend", "sub": "258 commits"},
+      {"label": "henry-byted", "sub": "203 commits"}
+    ]},
+    {"label": "社区贡献者", "children": [
+      {"label": "hyeonsang010716", "sub": "140"},
+      {"label": "AnnaSuSu", "sub": "119"},
+      {"label": "LofiSu", "sub": "100"},
+      {"label": "dependabot[bot]", "sub": "108"},
+      {"label": "+数百位", "kind": "muted"}
+    ]}
+  ]}
+}

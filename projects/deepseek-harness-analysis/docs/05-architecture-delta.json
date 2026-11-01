@@ -1,0 +1,93 @@
+{
+ "type": "architecture-delta",
+ "title": "变更好例子：Agent Teams（实验）",
+ "subtitle": "在 dsh-base 旁挂载多智能体协作",
+ "caption": "experimental/agent-team 系列包；dsh-base 默认禁用，经 profile patch 启用。",
+ "evidence": [
+  {
+   "id": "team",
+   "file": "packages/experimental/agent-team/README.md"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "base",
+   "label": "dsh-base",
+   "sub": "bundle 首层",
+   "change": "changed",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "sub",
+   "label": "subagent 工具",
+   "sub": "既有委派",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "team",
+   "label": "agent-team",
+   "sub": "roster + 任务",
+   "change": "added",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "ttool",
+   "label": "team_* 九件工具",
+   "change": "added",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "ui",
+   "label": "client-ui-agent-team",
+   "change": "added",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "sess",
+   "label": "会话日志",
+   "sub": "持久名册",
+   "kind": "store",
+   "row": 1,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "base",
+   "sub"
+  ],
+  {
+   "from": "base",
+   "to": "team",
+   "label": "挂载",
+   "change": "added"
+  },
+  {
+   "from": "team",
+   "to": "ttool",
+   "label": "注册",
+   "change": "added",
+   "kind": "primary"
+  },
+  {
+   "from": "ui",
+   "to": "team",
+   "label": "观察",
+   "change": "added"
+  },
+  {
+   "from": "team",
+   "to": "sess",
+   "label": "持久化",
+   "change": "added"
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

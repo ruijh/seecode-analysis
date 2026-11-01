@@ -1,0 +1,21 @@
+{
+  "type": "dependency",
+  "title": "Harness / App 依赖边界",
+  "eyebrow": "DEER-FLOW 全景解析 · 04/45",
+  "caption": "铁律：app.* 可以 import deerflow.*，反向禁止——test_harness_boundary.py 在 CI 中强制执行。harness 是可独立发布的代理框架，app 只是它的一个使用者。",
+  "lang": "zh-CN",
+  "dir": "TB",
+  "nodes": [
+    {"id": "gwapp", "label": "app · Gateway", "sub": "FastAPI 路由/鉴权", "row": 0, "col": 0},
+    {"id": "channels", "label": "app · channels", "sub": "9 大 IM 渠道", "row": 0, "col": 1},
+    {"id": "harness", "label": "deerflow-harness", "sub": "agents · runtime · skills · sandbox", "focal": true, "row": 1, "col": 0},
+    {"id": "lg", "label": "LangGraph / LangChain", "kind": "muted", "row": 2, "col": 0},
+    {"id": "store", "label": "SQLAlchemy / Alembic", "kind": "muted", "row": 2, "col": 1}
+  ],
+  "edges": [
+    ["gwapp", "harness", "单向依赖", "primary"],
+    ["channels", "harness"],
+    ["harness", "lg", "图编排"],
+    ["harness", "store", "持久化"]
+  ]
+}

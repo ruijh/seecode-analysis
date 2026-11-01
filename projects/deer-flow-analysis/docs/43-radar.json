@@ -1,0 +1,14 @@
+{
+  "type": "radar",
+  "title": "能力画像：v2.2 vs v1 vs 对话助手",
+  "eyebrow": "DEER-FLOW 全景解析 · 43/45",
+  "caption": "主观评分（0–5）：v2 在代码执行与流程自动化上完成代际跨越，研究仍是看家本领；对话助手只覆盖最内圈。",
+  "lang": "zh-CN",
+  "max": 5,
+  "axes": ["深度研究", "代码执行", "内容生成", "流程自动化", "可扩展性", "企业集成"],
+  "series": [
+    {"name": "DeerFlow v2.2", "values": [5, 5, 4, 5, 5, 4], "focal": true},
+    {"name": "DeerFlow v1", "values": [4, 1, 2, 1, 2, 1]},
+    {"name": "典型对话助手", "values": [2, 1, 2, 1, 1, 1]}
+  ]
+}

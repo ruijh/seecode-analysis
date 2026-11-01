@@ -1,0 +1,13 @@
+{
+  "type": "medallion",
+  "title": "对话资产的分层沉淀",
+  "eyebrow": "DEER-FLOW 全景解析 · 22/45",
+  "caption": "用数仓分层类比 DeerFlow 的上下文资产流：原始对话/文件是青铜，压缩摘要与实体是白银，可复用的记忆事实、技能与报告是黄金。",
+  "lang": "zh-CN",
+  "stages": [
+    {"label": "来源", "plain": true, "kind": "input", "items": ["对话消息", "文件上传", "IM 消息"]},
+    {"label": "Bronze 原始", "items": ["raw_messages", "uploads"]},
+    {"label": "Silver 整理", "items": ["压缩摘要", "实体抽取", "检查点"]},
+    {"label": "Gold 资产", "items": [{"label": "记忆事实", "focal": true}, "技能产物", "研究报告"]}
+  ]
+}

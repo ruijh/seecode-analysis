@@ -1,0 +1,22 @@
+{
+  "type": "heatmap",
+  "title": "harness 子系统规模热力图",
+  "eyebrow": "DEER-FLOW 全景解析 · 42/45",
+  "caption": "实测三个维度：代码文件数、模块内文档数、测试引用数。config 被 517 个测试文件引用（配置是全局横切面），persistence 143 个文件最重，community 自带 16 篇文档最讲究。数据：仓库实测（2026-10-31）。",
+  "lang": "zh-CN",
+  "unit": "个",
+  "rows": ["persistence", "agents", "community", "config", "runtime", "skills", "tools", "sandbox", "mcp", "extensions"],
+  "cols": ["代码文件", "模块文档", "测试引用"],
+  "values": [
+    [143, 3, 253],
+    [122, 9, 308],
+    [89, 16, 136],
+    [65, 1, 517],
+    [59, 1, 273],
+    [49, 1, 114],
+    [25, 1, 121],
+    [24, 1, 220],
+    [23, 1, 71],
+    [22, 1, 81]
+  ]
+}

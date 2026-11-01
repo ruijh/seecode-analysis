@@ -1,6 +1,0 @@
-[submodule "projects/deepseek-harness-analysis"]
-	path = projects/deepseek-harness-analysis
-	url = https://github.com/ruijh/deepseek-harness-analysis
-[submodule "projects/deer-flow-analysis"]
-	path = projects/deer-flow-analysis
-	url = https://github.com/ruijh/deer-flow-analysis

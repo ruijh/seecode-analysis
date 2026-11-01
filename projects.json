@@ -7,7 +7,7 @@
       "name": "DeepSeek Harness",
       "upstream": "deepseek-ai/deepseek-harness",
       "upstreamUrl": "https://github.com/deepseek-ai/deepseek-harness",
-      "repoUrl": "https://github.com/ruijh/deepseek-harness-analysis",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/deepseek-harness-analysis",
       "description": "对 deepseek-ai/deepseek-harness 的全景解读，覆盖架构、部署、依赖与 UML 类结构。",
       "added": "2026-10-31"
     },
@@ -16,7 +16,7 @@
       "name": "DeerFlow",
       "upstream": "bytedance/deer-flow",
       "upstreamUrl": "https://github.com/bytedance/deer-flow",
-      "repoUrl": "https://github.com/ruijh/deer-flow-analysis",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/deer-flow-analysis",
       "description": "对 bytedance/deer-flow 深度研究框架的全景解读，45 种图表类型逐一覆盖。",
       "added": "2026-10-31"
     },

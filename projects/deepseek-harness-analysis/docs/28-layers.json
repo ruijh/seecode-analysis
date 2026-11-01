@@ -1,0 +1,57 @@
+{
+ "type": "layers",
+ "title": "技术栈分层",
+ "subtitle": "从界面到内核",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "layers": [
+  {
+   "label": "体验",
+   "sub": "用户所见",
+   "items": [
+    "Web UI",
+    "Desktop",
+    "CLI"
+   ]
+  },
+  {
+   "label": "协议",
+   "sub": "进程间与跨语言",
+   "items": [
+    "JSON-RPC",
+    "ACP",
+    "REST 网关"
+   ]
+  },
+  {
+   "label": "智能体",
+   "sub": "回合与工具编排",
+   "focal": true,
+   "items": [
+    "Agent Loop",
+    "会话日志",
+    "提示组装"
+   ]
+  },
+  {
+   "label": "能力接缝",
+   "sub": "可替换实现",
+   "items": [
+    "LLM 适配",
+    "fs/shell",
+    "沙箱",
+    "MCP"
+   ]
+  },
+  {
+   "label": "运行时",
+   "sub": "地基",
+   "items": [
+    "Cordis",
+    "Node.js",
+    "OS 原语"
+   ]
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

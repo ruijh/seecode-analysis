@@ -1,0 +1,779 @@
+{
+ "type": "beeswarm",
+ "title": "全部包的体量分布（128 个 ≥ 阈值）",
+ "subtitle": "一个点一个包，按域分组",
+ "caption": "数据来源：github.com/deepseek-ai/deepseek-harness（2026-10-31 本地克隆 + GitHub API）",
+ "xLabel": "代码行数（千）",
+ "points": [
+  {
+   "label": "",
+   "x": 56.4,
+   "group": "实验区",
+   "focal": true
+  },
+  {
+   "label": "",
+   "x": 38.8,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 37.2,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 32.2,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 30.5,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 25,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 24,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 23.6,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 20.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 19.9,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 17.9,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 17.4,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 17.3,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 16.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 16.4,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 15.6,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 15.3,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 15.3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 14.7,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 13.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 13.5,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 13.1,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 12.8,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 12.8,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 12.5,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 12.5,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 12.3,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 11.1,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10.9,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10.4,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 10,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 9.8,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 9.5,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 9,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 8.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 8.1,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 7.6,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 7.1,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.9,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.9,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.6,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.5,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.5,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.4,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6.3,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 6,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.8,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.6,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.5,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.4,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.4,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 5,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.8,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.8,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.7,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.5,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.4,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.3,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4.1,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 4,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.9,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.8,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.7,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.6,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.6,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.6,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.6,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.5,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.4,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.4,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.4,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.4,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.3,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.3,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.2,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3.2,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 3,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.9,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.9,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.9,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.9,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.8,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.8,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.8,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.7,
+   "group": "客户端",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.7,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.7,
+   "group": "内核",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.6,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.6,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.5,
+   "group": "实验区",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.5,
+   "group": "集成",
+   "focal": false
+  },
+  {
+   "label": "",
+   "x": 2.5,
+   "group": "集成",
+   "focal": false
+  }
+ ],
+ "lang": "zh-CN",
+ "eyebrow": "DeepSeek Harness · 全方位分析"
+}

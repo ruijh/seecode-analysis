@@ -1,0 +1,23 @@
+{
+  "type": "it-state",
+  "title": "版本与分支健康度（2026-10）",
+  "eyebrow": "DEER-FLOW 全景解析 · 06/45",
+  "caption": "当前格局：main 已到 v2.2.0（2026-10-29），v2.2.0-rc0 在路上；v1.x 分支仅维护不再演进；990 个 open issue 反映社区极高活跃度（84.7k stars）。",
+  "lang": "zh-CN",
+  "nodes": [
+    {"id": "main", "label": "main · v2.2.0", "sub": "2026-10-29 发布", "status": "ok", "focal": true, "row": 1, "col": 1},
+    {"id": "pypi", "label": "PyPI 包", "sub": "deerflow-harness", "status": "ok", "row": 0, "col": 2},
+    {"id": "docker", "label": "Docker 镜像栈", "sub": "compose v2.24+", "status": "ok", "row": 1, "col": 2},
+    {"id": "site", "label": "官网", "sub": "deerflow.tech", "status": "ok", "row": 2, "col": 2},
+    {"id": "b1x", "label": "main-1.x 分支", "sub": "v1 深度研究", "status": "legacy", "row": 0, "col": 0},
+    {"id": "issues", "label": "Issue 积压", "sub": "990 open", "status": "risk", "row": 2, "col": 0},
+    {"id": "llmspace", "label": "LLM Space", "sub": "姐妹项目·调试器", "status": "ok", "row": 0, "col": 1}
+  ],
+  "edges": [
+    ["issues", "main", "驱动迭代", "primary"],
+    ["main", "pypi", "发布"],
+    ["main", "docker", "构建"],
+    ["main", "site", "文档同步", "async"],
+    ["llmspace", "main", "运行观测", "async"]
+  ]
+}
