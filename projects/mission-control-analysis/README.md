@@ -2,7 +2,7 @@
 
 用 **45 种核心图表类型 + 4 种变体（共 49 张）** 对 [builderz-labs/mission-control](https://github.com/builderz-labs/mission-control) 的全景解读。
 
-**👉 在线浏览：<https://ruijh.github.io/mission-control-analysis/>**（每张图都是可交互 HTML：悬停、动画回放、镜头追踪）
+**👉 在线浏览：<https://ruijh.github.io/seecode-analysis/projects/mission-control-analysis/docs/index.html>**（每张图都是可交互 HTML：悬停、动画回放、镜头追踪）
 
 ## 一图速览
 

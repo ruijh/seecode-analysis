@@ -34,7 +34,7 @@
       "name": "Mission Control",
       "upstream": "builderz-labs/mission-control",
       "upstreamUrl": "https://github.com/builderz-labs/mission-control",
-      "repoUrl": "https://github.com/ruijh/mission-control-analysis",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/mission-control-analysis",
       "description": "对 builderz-labs/mission-control（自托管 AI Agent 控制平面）的全景解读：拉模式派发管线、九态任务状态机、253 端点与七层防御。",
       "added": "2026-11-01"
     },
