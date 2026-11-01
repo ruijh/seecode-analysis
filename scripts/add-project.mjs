@@ -1,19 +1,22 @@
 #!/usr/bin/env node
 // 把一份 SeeCode 分析仓库作为子项目加入本档案：
 //   node scripts/add-project.mjs <仓库地址> [显示名] [一句话描述]
-// 例：node scripts/add-project.mjs https://github.com/ruijh/lobehub-analysis LobeHub
-// 完成后自动提交并推送，GitHub Actions 会重新部署站点。
+// 默认以"完整子项目"方式并入：clone → 拷贝内容进 projects/<id>/ → 登记 projects.json → 构建验证 → 提交推送。
+// 如需保留 submodule 引用（不推荐），加 --submodule。
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, rm, cp } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const [url, name, description] = process.argv.slice(2);
+const asSubmodule = process.argv.includes('--submodule');
+const [url, name, description] = process.argv.slice(2).filter((a) => a !== '--submodule');
 
 if (!url) {
-  console.error('用法：node scripts/add-project.mjs <仓库地址> [显示名] [一句话描述]');
+  console.error('用法：node scripts/add-project.mjs <仓库地址> [显示名] [一句话描述] [--submodule]');
   process.exit(1);
 }
 if (!/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+(\.git)?$/.test(url)) {
@@ -24,9 +27,29 @@ if (!/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+(\.git)?$/.test(url)) {
 const id = path.basename(url, '.git');
 const repoPath = url.replace(/^https:\/\/github\.com\//, '').replace(/\.git$/, '');
 const displayName = name || id.replace(/-analysis$/, '');
+const dest = path.join(root, 'projects', id);
 
-console.log(`添加子项目 ${displayName}（${repoPath}）…`);
-execSync(`git submodule add "${url}" "projects/${id}"`, { cwd: root, stdio: 'inherit' });
+if (existsSync(dest)) {
+  console.error(`✗ projects/${id} 已存在`);
+  process.exit(1);
+}
+
+if (asSubmodule) {
+  console.log(`以 submodule 引用 ${repoPath}…`);
+  execSync(`git submodule add "${url}" "projects/${id}"`, { cwd: root, stdio: 'inherit' });
+} else {
+  console.log(`以完整子项目并入 ${repoPath}…`);
+  const tmp = await mkdtemp(path.join(tmpdir(), 'seecode-add-'));
+  try {
+    execSync(`git clone --depth 1 "${url}" "${tmp}/repo"`, { cwd: root, stdio: 'inherit' });
+    await cp(path.join(tmp, 'repo'), dest, {
+      recursive: true,
+      filter: (src) => !/(^|[\\/])\.git$|(^|[\\/])\.seecode$/.test(src),
+    });
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
+}
 
 const manifestPath = path.join(root, 'projects.json');
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
@@ -39,7 +62,7 @@ manifest.projects.push({
   name: displayName,
   upstream: repoPath.replace(/-analysis$/, ''),
   upstreamUrl: `https://github.com/${repoPath.replace(/-analysis$/, '')}`,
-  repoUrl: `https://github.com/${repoPath}`,
+  repoUrl: asSubmodule ? `https://github.com/${repoPath}` : `https://github.com/ruijh/seecode-analysis/tree/main/projects/${id}`,
   description: description || `SeeCode 全景图表分析。`,
   added: new Date().toISOString().slice(0, 10),
 });

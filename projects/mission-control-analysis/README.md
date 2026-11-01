@@ -43,10 +43,10 @@
 
 ## 复现
 
-图表由 SeeCode 引擎渲染；`docs/*.json` 即图表规格，`gen49.mjs` 为批量生成器。修改后重新渲染：
+图表由 SeeCode 引擎渲染；`docs/*.json` 即图表规格，`tools/gen49.mjs` 为批量生成器。修改后重新渲染：
 
 ```sh
-node gen49.mjs                          # 写入全部 spec 并渲染
+node tools/gen49.mjs                          # 写入全部 spec 并渲染
 SC export docs/01-architecture.html --formats png
 ```
 
