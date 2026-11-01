@@ -1,0 +1,565 @@
+{
+ "dur": 206.4,
+ "lines": [
+  {
+   "start": 0,
+   "at": 0.3,
+   "abs": 0.3,
+   "text": "给仓库发条消息：Issue、评论、群里 @ 一下。",
+   "gap": 3.7,
+   "chars": 25
+  },
+  {
+   "start": 0,
+   "at": 4,
+   "abs": 4,
+   "text": "被允许的请求，它接单开工——自己的会话、自己的 worktree。",
+   "gap": 3.6,
+   "chars": 33
+  },
+  {
+   "start": 0,
+   "at": 7.6,
+   "abs": 7.6,
+   "text": "交付 PR，结果回到你原来的对话。",
+   "gap": 3,
+   "chars": 17
+  },
+  {
+   "start": 0,
+   "at": 10.6,
+   "abs": 10.6,
+   "text": "这是 DeepSeek 开源的超级代理原型：dsh-superagent。",
+   "gap": 1.7,
+   "chars": 37
+  },
+  {
+   "start": 12,
+   "at": 0.3,
+   "abs": 12.3,
+   "text": "GitHub 与飞书两个 Source：gh cli 轮询、lark-cli 事件。",
+   "gap": 2.9,
+   "chars": 42
+  },
+  {
+   "start": 12,
+   "at": 3.2,
+   "abs": 15.2,
+   "text": "Engine 五个部件，经端口与适配器相连——src/core 零外部依赖。",
+   "gap": 3,
+   "chars": 38
+  },
+  {
+   "start": 12,
+   "at": 6.2,
+   "abs": 18.2,
+   "text": "状态全在 SQLite：JSON 文档 + Effects 持久队列，原子事务。",
+   "gap": 3,
+   "chars": 40
+  },
+  {
+   "start": 12,
+   "at": 9.2,
+   "abs": 21.2,
+   "text": "主会话评估路由，worker 每 Ticket 一个。",
+   "gap": 2.8,
+   "chars": 27
+  },
+  {
+   "start": 12,
+   "at": 12,
+   "abs": 24,
+   "text": "Outbox 幂等外发——回复回到原对话。",
+   "gap": 2.7,
+   "chars": 21
+  },
+  {
+   "start": 26.4,
+   "at": 0.3,
+   "abs": 26.7,
+   "text": "不改宿主一行代码。",
+   "gap": 1.5,
+   "chars": 9
+  },
+  {
+   "start": 26.4,
+   "at": 1.8,
+   "abs": 28.2,
+   "text": "一份 cordis.patch.yml：insert 挂进 dsh 宿主。",
+   "gap": 2.6,
+   "chars": 37
+  },
+  {
+   "start": 26.4,
+   "at": 4.4,
+   "abs": 30.8,
+   "text": "github-watch 上线，feishu-watch 默认关。",
+   "gap": 2.4,
+   "chars": 33
+  },
+  {
+   "start": 26.4,
+   "at": 6.8,
+   "abs": 33.2,
+   "text": "worker、router 两个 agent 预设一并注册。",
+   "gap": 3.1,
+   "chars": 30
+  },
+  {
+   "start": 36,
+   "at": 0.3,
+   "abs": 36.3,
+   "text": "部署要求只有一个：一个 tmux 会话。",
+   "gap": 1.6,
+   "chars": 20
+  },
+  {
+   "start": 36,
+   "at": 1.9,
+   "abs": 37.9,
+   "text": "没有 Docker，也没有 systemd。",
+   "gap": 2.2,
+   "chars": 22
+  },
+  {
+   "start": 36,
+   "at": 4.1,
+   "abs": 40.1,
+   "text": "sqlite 与 worktrees 都在 stateDir。",
+   "gap": 2.4,
+   "chars": 31
+  },
+  {
+   "start": 36,
+   "at": 6.5,
+   "abs": 42.5,
+   "text": "gh、lark 是普通子进程，退出码有巡检。",
+   "gap": 3.4,
+   "chars": 22
+  },
+  {
+   "start": 45.6,
+   "at": 0.3,
+   "abs": 45.9,
+   "text": "面板 26 个文件、编排 38 个，自上而下。",
+   "gap": 2.1,
+   "chars": 23
+  },
+  {
+   "start": 45.6,
+   "at": 2.4,
+   "abs": 48,
+   "text": "src/core 十五个文件：零外部依赖，端口向内、适配器向外。",
+   "gap": 2.4,
+   "chars": 32
+  },
+  {
+   "start": 45.6,
+   "at": 4.8,
+   "abs": 50.4,
+   "text": "第三方直接依赖只有两个：proper-lockfile 和 zod。",
+   "gap": 2.4,
+   "chars": 34
+  },
+  {
+   "start": 45.6,
+   "at": 7.2,
+   "abs": 52.8,
+   "text": "其余 24 个 peer 包，全部来自 @deepseek-ai。",
+   "gap": 2.4,
+   "chars": 33
+  },
+  {
+   "start": 45.6,
+   "at": 9.6,
+   "abs": 55.2,
+   "text": "tests 六十五个文件，与 app 并排侧挂。",
+   "gap": 2.7,
+   "chars": 24
+  },
+  {
+   "start": 57.6,
+   "at": 0.3,
+   "abs": 57.9,
+   "text": "不是每条消息都配得到回应。",
+   "gap": 2.3,
+   "chars": 13
+  },
+  {
+   "start": 57.6,
+   "at": 2.6,
+   "abs": 60.2,
+   "text": "去重 → scope → 订阅直达 / Eval 排队 → admission 表 → LLM 评估。",
+   "gap": 3.2,
+   "chars": 51
+  },
+  {
+   "start": 57.6,
+   "at": 5.8,
+   "abs": 63.4,
+   "text": "名单外的人 @ 它：默认被无视——admission 表默认 unlistedAddressed: ignore。",
+   "gap": 3.8,
+   "chars": 57
+  },
+  {
+   "start": 57.6,
+   "at": 9.6,
+   "abs": 67.2,
+   "text": "显式规则放行的消息，才变成 Trigger 事件。",
+   "gap": 5.1,
+   "chars": 25
+  },
+  {
+   "start": 72,
+   "at": 0.3,
+   "abs": 72.3,
+   "text": "explicit 裁决不经 LLM，直接签发 Mandate。",
+   "gap": 2.5,
+   "chars": 31
+  },
+  {
+   "start": 72,
+   "at": 2.8,
+   "abs": 74.8,
+   "text": "inferred 只有 auto 模式能 accept，否则只送候选卡。",
+   "gap": 2.6,
+   "chars": 36
+  },
+  {
+   "start": 72,
+   "at": 5.4,
+   "abs": 77.4,
+   "text": "observe 模式：先只记录 would-accept，不真放行。",
+   "gap": 2.8,
+   "chars": 34
+  },
+  {
+   "start": 72,
+   "at": 8.2,
+   "abs": 80.2,
+   "text": "ignore 会记下原因，但不回复。",
+   "gap": 4.1,
+   "chars": 18
+  },
+  {
+   "start": 84,
+   "at": 0.3,
+   "abs": 84.3,
+   "text": "宏观只有 open、ended 两个状态——阶段是派生视图，不是存储。",
+   "gap": 2.6,
+   "chars": 35
+  },
+  {
+   "start": 84,
+   "at": 2.9,
+   "abs": 86.9,
+   "text": "终态五值：completed、merged、closed、dropped、stopped。",
+   "gap": 2.8,
+   "chars": 45
+  },
+  {
+   "start": 84,
+   "at": 5.7,
+   "abs": 89.7,
+   "text": "最特别的是 wake：人在原线程追问，删除 ended。",
+   "gap": 2.8,
+   "chars": 28
+  },
+  {
+   "start": 84,
+   "at": 8.5,
+   "abs": 92.5,
+   "text": "已结束的工单当场复活，复用原 Mandate 再校验。",
+   "gap": 3.8,
+   "chars": 27
+  },
+  {
+   "start": 96,
+   "at": 0.3,
+   "abs": 96.3,
+   "text": "一个主脑，按单雇工。",
+   "gap": 1.9,
+   "chars": 10
+  },
+  {
+   "start": 96,
+   "at": 2.2,
+   "abs": 98.2,
+   "text": "主会话常驻：评估、路由、回复。",
+   "gap": 2.2,
+   "chars": 15
+  },
+  {
+   "start": 96,
+   "at": 4.4,
+   "abs": 100.4,
+   "text": "每个 Ticket 雇一个 worker，随单结束退役。",
+   "gap": 2.4,
+   "chars": 28
+  },
+  {
+   "start": 96,
+   "at": 6.8,
+   "abs": 102.8,
+   "text": "worktree 隔离，后台 30 分钟强制上限。",
+   "gap": 5.5,
+   "chars": 25
+  },
+  {
+   "start": 108,
+   "at": 0.3,
+   "abs": 108.3,
+   "text": "授权策略不是一次定死的。",
+   "gap": 1.9,
+   "chars": 12
+  },
+  {
+   "start": 108,
+   "at": 2.2,
+   "abs": 110.2,
+   "text": "observe 先行：只记录 would-accept，不真放行。",
+   "gap": 2.4,
+   "chars": 33
+  },
+  {
+   "start": 108,
+   "at": 4.6,
+   "abs": 112.6,
+   "text": "面板复盘、调整规则、再 auto 放行。",
+   "gap": 2.6,
+   "chars": 20
+  },
+  {
+   "start": 108,
+   "at": 7.2,
+   "abs": 115.2,
+   "text": "一个飞轮转下来，误伤越来越少。",
+   "gap": 5.1,
+   "chars": 15
+  },
+  {
+   "start": 120,
+   "at": 0.3,
+   "abs": 120.3,
+   "text": "全部状态只有一个 sqlite 文件。",
+   "gap": 1.9,
+   "chars": 19
+  },
+  {
+   "start": 120,
+   "at": 2.2,
+   "abs": 122.2,
+   "text": "九张表全是 key/value，业务字段整体存 JSON。",
+   "gap": 2.4,
+   "chars": 29
+  },
+  {
+   "start": 120,
+   "at": 4.6,
+   "abs": 124.6,
+   "text": "WAL 加 synchronous=FULL，单写者事务保证一致性。",
+   "gap": 2.6,
+   "chars": 34
+  },
+  {
+   "start": 120,
+   "at": 7.2,
+   "abs": 127.2,
+   "text": "Effects 是持久队列，Passes 每 2 秒泵一次。",
+   "gap": 5.1,
+   "chars": 30
+  },
+  {
+   "start": 132,
+   "at": 0.3,
+   "abs": 132.3,
+   "text": "四个主体，各自能碰什么，写在一张矩阵里。",
+   "gap": 2.3,
+   "chars": 20
+  },
+  {
+   "start": 132,
+   "at": 2.6,
+   "abs": 134.6,
+   "text": "worker 的 read 只限本 Ticket——sessions.ts 限流。",
+   "gap": 2.4,
+   "chars": 41
+  },
+  {
+   "start": 132,
+   "at": 5,
+   "abs": 137,
+   "text": "凭据一列，几乎全员 none。",
+   "gap": 2.4,
+   "chars": 15
+  },
+  {
+   "start": 132,
+   "at": 7.4,
+   "abs": 139.4,
+   "text": "面板读者就是同源运营者，可写设置。",
+   "gap": 4.9,
+   "chars": 17
+  },
+  {
+   "start": 144,
+   "at": 0.3,
+   "abs": 144.3,
+   "text": "全项目 32,714 行，不含锁文件。",
+   "gap": 1.9,
+   "chars": 19
+  },
+  {
+   "start": 144,
+   "at": 2.2,
+   "abs": 146.2,
+   "text": "源码 15,043，测试 14,960——几乎 1:1。",
+   "gap": 2.6,
+   "chars": 28
+  },
+  {
+   "start": 144,
+   "at": 4.8,
+   "abs": 148.8,
+   "text": "app 编排最大，core 内核两千行。",
+   "gap": 2.8,
+   "chars": 20
+  },
+  {
+   "start": 144,
+   "at": 7.6,
+   "abs": 151.6,
+   "text": "438 行提示词、15 个可版本化部件。",
+   "gap": 4.7,
+   "chars": 20
+  },
+  {
+   "start": 156,
+   "at": 0.3,
+   "abs": 156.3,
+   "text": "测试目录 65 个文件、1.5 万行，是全仓库最大的单一目录。",
+   "gap": 2.1,
+   "chars": 31
+  },
+  {
+   "start": 156,
+   "at": 2.4,
+   "abs": 158.4,
+   "text": "和业务源码几乎 1:1——测试即规格。",
+   "gap": 2.4,
+   "chars": 19
+  },
+  {
+   "start": 156,
+   "at": 4.8,
+   "abs": 160.8,
+   "text": "docs.spec 连文档与实现的一致性都校验。",
+   "gap": 2.2,
+   "chars": 24
+  },
+  {
+   "start": 156,
+   "at": 7,
+   "abs": 163,
+   "text": "改实现不改文档，测试直接红。",
+   "gap": 2.9,
+   "chars": 14
+  },
+  {
+   "start": 165.6,
+   "at": 0.3,
+   "abs": 165.9,
+   "text": "十五个提示词部件，效力分五级。",
+   "gap": 2.1,
+   "chars": 15
+  },
+  {
+   "start": 165.6,
+   "at": 2.4,
+   "abs": 168,
+   "text": "越靠近运行时事实，效力越高。",
+   "gap": 2.4,
+   "chars": 14
+  },
+  {
+   "start": 165.6,
+   "at": 4.8,
+   "abs": 170.4,
+   "text": "工具事实压过一切：模型先信工具。",
+   "gap": 2.6,
+   "chars": 16
+  },
+  {
+   "start": 165.6,
+   "at": 7.4,
+   "abs": 173,
+   "text": "policy 段随每次模型请求重新生成。",
+   "gap": 4.9,
+   "chars": 20
+  },
+  {
+   "start": 177.6,
+   "at": 0.3,
+   "abs": 177.9,
+   "text": "系统结构、流程过程、数据平台、结构组织、数据图表。",
+   "gap": 2.7,
+   "chars": 25
+  },
+  {
+   "start": 177.6,
+   "at": 3,
+   "abs": 180.6,
+   "text": "五个维度，四十九张图。",
+   "gap": 2.6,
+   "chars": 11
+  },
+  {
+   "start": 177.6,
+   "at": 5.6,
+   "abs": 183.2,
+   "text": "每张都是可交互 HTML：悬停、动画回放、镜头追踪。",
+   "gap": 3.4,
+   "chars": 26
+  },
+  {
+   "start": 177.6,
+   "at": 9,
+   "abs": 186.6,
+   "text": "在线目录：ruijh.github.io/dsh-superagent-prototype-analysis。",
+   "gap": 6.2,
+   "chars": 55
+  },
+  {
+   "start": 192,
+   "at": 0.8,
+   "abs": 192.8,
+   "text": "四个关键发现，贯穿全片。",
+   "gap": 3.6,
+   "chars": 12
+  },
+  {
+   "start": 192,
+   "at": 4.4,
+   "abs": 196.4,
+   "text": "两态工单 · 保守准入 · 双会话隔离 · 测试即规格。",
+   "gap": 4.4,
+   "chars": 28
+  },
+  {
+   "start": 192,
+   "at": 8.8,
+   "abs": 200.8,
+   "text": "49 张可交互图表：悬停、回放、镜头追踪。",
+   "gap": 3.2,
+   "chars": 21
+  },
+  {
+   "start": 192,
+   "at": 12,
+   "abs": 204,
+   "text": "SeeCode —— 把仓库读成一张图。",
+   "gap": 2.4,
+   "chars": 20
+  }
+ ]
+}

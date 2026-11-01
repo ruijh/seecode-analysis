@@ -2,7 +2,9 @@
 
 用 **45 种核心图表类型 + 4 种变体（共 49 张）** 对 [deepseek-ai/dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) 的全景解读。
 
-**👉 在线浏览：<https://ruijh.github.io/dsh-superagent-prototype-analysis/>**（每张图都是可交互 HTML：悬停、动画回放、镜头追踪）
+**👉 在线浏览：<https://ruijh.github.io/seecode-analysis/projects/dsh-superagent-prototype-analysis/>**（每张图都是可交互 HTML：悬停、动画回放、镜头追踪）
+
+**🎬 演示影片：<https://ruijh.github.io/seecode-analysis/projects/dsh-superagent-prototype-analysis/demo.html>**（3 分 26 秒动画宣传片：重点图先动画讲结论、再放大展示原图，配 MiniMax 语音旁白与实时合成配乐；`?t=秒` 可直达任意场景）
 
 ## 一图速览
 
