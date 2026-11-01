@@ -170,7 +170,7 @@ for (const p of manifest.projects) {
   }
   const outBase = path.join(dist, 'projects', p.id);
   await mkdir(path.join(outBase, 'docs'), { recursive: true });
-  const files = (await readdir(srcDocs)).filter((f) => f.endsWith('.html')).sort();
+  const files = (await readdir(srcDocs)).filter((f) => f.endsWith('.html') && f !== 'index.html').sort();
   const diagrams = [];
   for (const f of files) {
     await copyFile(path.join(srcDocs, f), path.join(outBase, 'docs', f));

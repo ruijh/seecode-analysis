@@ -18,12 +18,16 @@
 seecode-analysis/
 ├── index.html            ← 由构建脚本生成（门户首页）
 ├── projects.json         ← 子项目清单（站点数据的唯一来源）
-├── projects/<id>/        ← 各分析仓库，git submodule
+├── projects/
+│   ├── mission-control-analysis/   ← 完整子项目：内容直接并入本仓库
+│   └── (其它分析仓库)              ← git submodule 引用
 ├── scripts/
 │   ├── build-site.mjs    ← 构建：扫描子模块 docs/*.html → dist/
 │   └── add-project.mjs   ← 一键新增子项目
 └── .github/workflows/deploy.yml  ← push 即部署 GitHub Pages
 ```
+
+子项目有两种形态：**完整子项目**（内容并入，clone 即得，GitHub 上可直接浏览）和 **submodule**（引用独立仓库）。新增默认走 submodule（`add-project.mjs`）；要把某个 submodule 转为完整子项目：`git submodule deinit -f projects/<id> && git rm -f projects/<id>`，再把仓库内容拷入该目录即可，构建脚本无需改动。
 
 ## 新增一份分析
 
