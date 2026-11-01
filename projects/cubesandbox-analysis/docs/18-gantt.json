@@ -1,0 +1,23 @@
+{
+  "type": "gantt",
+  "title": "发布节奏（全部已交付）",
+  "subtitle": "每 2–5 周一个 minor 系列",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "tasks": [
+    { "id": "v1", "label": "v0.1.x 首发", "section": "2026 发布", "start": "2026-04-20", "end": "2026-05-07", "done": true },
+    { "id": "v2", "label": "v0.2.x", "section": "2026 发布", "start": "2026-05-07", "end": "2026-06-02", "done": true },
+    { "id": "v3", "label": "v0.3.x", "section": "2026 发布", "start": "2026-06-02", "end": "2026-06-14", "done": true },
+    { "id": "v4", "label": "v0.4.x", "section": "2026 发布", "start": "2026-06-14", "end": "2026-07-03", "done": true },
+    { "id": "v5", "label": "v0.5.x AutoPause/ARM64", "section": "2026 发布", "start": "2026-07-03", "end": "2026-07-24", "done": true },
+    { "id": "v6", "label": "v0.6.x K8s/Volume", "section": "2026 发布", "start": "2026-07-24", "end": "2026-08-28", "done": true },
+    { "id": "v7", "label": "v0.7.x 跨节点/CubeOps", "section": "2026 发布", "start": "2026-08-28", "end": "2026-10-12", "focal": true, "done": true }
+  ],
+  "milestones": [
+    { "label": "CubeBench v0.7.3 基准报告", "date": "2026-10-28", "focal": true }
+  ],
+  "evidence": [
+    { "id": "t0", "file": "docs/changelog/index.md" }
+  ]
+}

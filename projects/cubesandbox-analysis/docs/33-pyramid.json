@@ -1,0 +1,14 @@
+{
+  "type": "pyramid",
+  "title": "隔离强度金字塔",
+  "subtitle": "Cube 选了塔尖：硬件级、每沙箱独立内核",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "levels": [
+    { "label": "微 VM（KVM）", "sub": "每沙箱独立内核 · Cube 所在层", "focal": true },
+    { "label": "安全容器", "sub": "Kata / gVisor" },
+    { "label": "OCI 容器", "sub": "共享宿主内核" },
+    { "label": "进程沙箱", "sub": "namespace / seccomp" }
+  ]
+}

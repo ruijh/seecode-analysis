@@ -1,0 +1,15 @@
+{
+  "type": "layers",
+  "title": "技术栈分层",
+  "subtitle": "自上而下：越往下越接近硬件，越靠下越是自研",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "layers": [
+    { "label": "接入层", "items": ["Python/Node/Go SDK", "WebUI"] },
+    { "label": "API 层", "items": ["CubeAPI（E2B 兼容）", "CubeProxy 路由"] },
+    { "label": "编排层", "items": ["CubeMaster", "CubeOps", "lifecycle-manager"] },
+    { "label": "运行时层", "focal": true, "items": ["Cubelet", "CubeShim", "CubeHypervisor", "CubeCoW"] },
+    { "label": "内核 / 硬件层", "items": ["KVM", "eBPF/TC", "XFS reflink", "Intel VT-x"] }
+  ]
+}

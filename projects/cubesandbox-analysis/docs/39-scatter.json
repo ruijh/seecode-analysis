@@ -1,0 +1,20 @@
+{
+  "type": "scatter",
+  "variant": "bubble",
+  "title": "密度实验：存活沙箱 × 宿主内存",
+  "subtitle": "气泡大小 = 每 VM 摊销开销（MiB）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "xLabel": "存活沙箱数（台）",
+  "yLabel": "宿主已用内存 (MiB)",
+  "points": [
+    {"label":"基线","x":0,"y":19537},
+    {"label":"100 台","x":100,"y":21408,"size":18.7},
+    {"label":"200 台","x":200,"y":23806,"size":21.3},
+    {"label":"300 台","x":300,"y":26327,"size":22.6},
+    {"label":"400 台","x":400,"y":29009,"size":23.7},
+    {"label":"500 台","x":500,"y":31827,"size":24.6,"focal":true}
+  ],
+  "evidence": [{"id":"s0","file":"docs/blog/posts/2026-10-28-cubebench-073.md","note":"Live Sandboxes 内存表"}]
+}

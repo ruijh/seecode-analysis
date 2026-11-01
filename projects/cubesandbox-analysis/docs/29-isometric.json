@@ -1,0 +1,22 @@
+{
+  "type": "isometric",
+  "title": "一台 MicroVM 沙箱长什么样",
+  "subtitle": "独立内核 + 最小设备模型的 KVM 虚拟机",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "parts": [
+    { "x": 0, "y": 0, "z": 0, "w": 230, "d": 170, "h": 10, "r": 8 },
+    { "label": "Guest 内核", "sub": "每沙箱一份", "x": -55, "y": -38, "z": 14, "w": 82, "d": 56, "h": 24, "r": 6 },
+    { "label": "agent（VM 内）", "sub": "vsock RPC · exec/指标", "x": -55, "y": -38, "z": 38, "w": 28, "d": 22, "h": 9, "tone": "dark", "focal": true },
+    { "label": "rootfs 卷", "sub": "FICLONE 克隆自模板", "x": 48, "y": -40, "z": 14, "w": 52, "d": 52, "h": 16, "r": "round", "axis": "y" },
+    { "label": "内存快照", "sub": "restore 而非 boot", "x": 62, "y": 22, "z": 14, "w": 56, "d": 48, "h": 20, "r": 6 },
+    { "label": "vCPU ×2", "x": -16, "y": 38, "z": 14, "w": 22, "d": 22, "h": 10, "r": 3, "tone": "dark" },
+    { "x": 14, "y": 38, "z": 14, "w": 22, "d": 22, "h": 10, "r": 3, "tone": "dark" },
+    { "label": "vsock 通道", "sub": "宿主 ↔ VM 控制面", "from": [0, 78, 18], "to": [0, 78, 62], "thick": 6 },
+    { "label": "virtio-net → TAP", "sub": "每沙箱一块 TAP", "x": -75, "y": 58, "z": 14, "w": 46, "d": 26, "h": 8, "tone": "dark" }
+  ],
+  "evidence": [
+    { "id": "agent", "file": "agent/src/main.rs", "line": 284 }
+  ]
+}

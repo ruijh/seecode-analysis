@@ -1,0 +1,24 @@
+{
+  "type": "story-map",
+  "title": "用户故事地图",
+  "subtitle": "单机 MVP → 集群 → 跨节点平台 的能力切片",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "releases": ["单机 MVP", "集群", "跨节点平台"],
+  "activities": [
+    { "label": "创建", "steps": [
+      { "label": "建沙箱", "stories": { "单机 MVP": ["Sandbox.create(template)"], "集群": ["按资源调度选节点"], "跨节点平台": ["从快照创建 (preview)"] } },
+      { "label": "配置", "stories": { "单机 MVP": ["env/metadata/timeout"], "集群": ["模板别名"] } } ] },
+    { "label": "执行", "steps": [
+      { "label": "跑代码", "stories": { "单机 MVP": ["SDK exec"], "集群": ["Host/Path 路由访问服务"] } },
+      { "label": "挂存储", "stories": { "集群": ["Volume 插件框架"], "跨节点平台": ["S3 卷 (CubeS3lvol)"] } } ] },
+    { "label": "保活", "steps": [
+      { "label": "管生命周期", "stories": { "单机 MVP": ["kill/timeout"], "集群": ["AutoPause/Resume"], "跨节点平台": ["跨节点恢复"] } } ] },
+    { "label": "运维", "steps": [
+      { "label": "观测与操作", "stories": { "集群": ["WebUI · 资源指标"], "跨节点平台": ["cubeopscli · 多副本 CubeOps"] } } ] }
+  ],
+  "evidence": [
+    { "id": "a0", "file": "docs/guide/multi-node-deploy.md", "note": "集群与跨节点能力切片" }
+  ]
+}

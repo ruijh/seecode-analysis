@@ -1,0 +1,58 @@
+{
+  "type": "tree",
+  "title": "仓库模块地图（3987 个源文件）",
+  "subtitle": "Go 1578 · Rust 403 · Python 216 · TS 102",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "reveal",
+  "root": {
+    "label": "CubeSandbox/",
+    "sub": "RustVMM + KVM 沙箱服务",
+    "children": [
+      {
+        "label": "控制面",
+        "children": [
+          {"label":"CubeAPI","sub":"Rust · E2B 兼容网关","focal":true},
+          {"label":"CubeMaster","sub":"Go · 调度 / 事件"},
+          {"label":"CubeOps","sub":"Go · 节点运维 + WebUI"}
+        ]
+      },
+      {
+        "label": "节点数据面",
+        "children": [
+          {"label":"Cubelet","sub":"Go · 节点代理（最大模块）"},
+          {"label":"CubeShim","sub":"Rust · Shim v2"},
+          {"label":"hypervisor/","sub":"Rust · RustVMM + KVM"},
+          {"label":"CubeNet","sub":"Rust · eBPF 网络面"}
+        ]
+      },
+      {
+        "label": "存储与模板",
+        "children": [
+          {"label":"cubecow","sub":"Rust · FICLONE 卷引擎"},
+          {"label":"CubeS3lvol","sub":"S3 逻辑卷后端"},
+          {"label":"CubeTemplateCenter","sub":"模板构建 / 注册"}
+        ]
+      },
+      {
+        "label": "安全接入",
+        "children": [
+          {"label":"CubeProxy","sub":"OpenResty · Host/Path 路由"},
+          {"label":"CubeEgress","sub":"OpenResty · L7 出口审计"},
+          {"label":"cube-lifecycle-manager","sub":"Go · AutoPause 协调"}
+        ]
+      },
+      {"label":"Guest 内","children":[{"label":"agent + guest-init","sub":"Rust · VM 内代理与初始化"}]},
+      {
+        "label": "接口与共享",
+        "children": [
+          {"label":"sdk/","sub":"Python · Node · Go"},
+          {"label":"pkgs/","sub":"proto · cubedb · blobstore"},
+          {"label":"examples/ · tests/","sub":"E2E + 场景示例","kind":"muted"}
+        ]
+      }
+    ]
+  },
+  "evidence": [{"id":"root","file":"docs/architecture/overview.md","note":"组件职责与控制面/数据面划分"}]
+}

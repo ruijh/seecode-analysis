@@ -1,0 +1,72 @@
+{
+  "type": "deployment",
+  "title": "部署拓扑：单机到集群",
+  "subtitle": "端口与部署形态（来自 deploy/one-click 各 Dockerfile 与架构文档）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "trace",
+  "groups": [
+    {"id":"edge","label":"接入"},
+    {"id":"ctrl","label":"控制面（可多副本）","style":"dashed"},
+    {"id":"data","label":"计算节点 ×N"},
+    {"id":"infra","label":"共享设施"}
+  ],
+  "nodes": [
+    {"id":"client","label":"SDK / 浏览器","kind":"external","icon":"person","row":0,"col":0},
+    {"id":"proxy","label":"CubeProxy","sub":"OpenResty · :80/:443","group":"edge","row":0,"col":1},
+    {"id":"api","label":"CubeAPI","sub":"Rust · REST","group":"ctrl","row":0,"col":2},
+    {"id":"master","label":"CubeMaster","sub":"Go · :8089","group":"ctrl","row":0,"col":3},
+    {"id":"ops","label":"CubeOps","sub":"Go · :3010 · 多副本","group":"ctrl","row":1,"col":3},
+    {"id":"webui","label":"WebUI","sub":":12088 管理台","group":"ctrl","row":1,"col":2},
+    {
+      "id": "redis",
+      "label": "Redis",
+      "sub": "元数据 · 事件流",
+      "kind": "store",
+      "icon": "database",
+      "group": "infra",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "id": "mysql",
+      "label": "MySQL",
+      "sub": "cubedb 持久化",
+      "kind": "store",
+      "icon": "database",
+      "group": "infra",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "id": "s3",
+      "label": "S3 / JuiceFS",
+      "sub": "跨节点快照卷",
+      "kind": "store",
+      "icon": "cloud",
+      "group": "infra",
+      "row": 2,
+      "col": 1
+    },
+    {"id":"node","label":"计算节点","sub":"KVM 宿主 · Cubelet","group":"data","row":0,"col":4}
+  ],
+  "edges": [
+    ["client","proxy",":443 HTTPS","link"],
+    ["client","api","REST（SDK 指向）","primary"],
+    ["api","master","gRPC","primary"],
+    ["master","node","gRPC 下发","primary"],
+    ["proxy","node","路由到沙箱端口","link"],
+    ["master","redis","元数据/事件","async"],
+    ["ops","node","节点纳管"],
+    ["ops","mysql","持久化","async"],
+    ["master","mysql","规格/状态","async"],
+    ["node","s3","快照上传/拉取","async"]
+  ],
+  "evidence": [
+    {"id":"master","file":"deploy/one-click/CubeMaster/Dockerfile","note":"EXPOSE 8089"},
+    {"id":"ops","file":"deploy/one-click/CubeOps/Dockerfile","note":"EXPOSE 3010"},
+    {"id":"webui","file":"docs/guide/webui.md","note":"管理台 :12088"}
+  ],
+  "budget": "faithful"
+}

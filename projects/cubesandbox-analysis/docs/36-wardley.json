@@ -1,0 +1,25 @@
+{
+  "type": "wardley",
+  "title": "沙箱基础设施 Wardley 图",
+  "subtitle": "可见性 × 演化阶段：自研集中在左下，商品化组件在右侧",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "components": [
+    { "id": "app", "label": "AI Agent 应用", "evo": 0.7, "vis": 1, "anchor": true },
+    { "id": "api", "label": "沙箱 API（E2B 兼容）", "evo": 0.5, "vis": 0.8, "focal": true },
+    { "id": "exec", "label": "代码执行 / 文件", "evo": 0.65, "vis": 0.7 },
+    { "id": "tpl", "label": "模板 / 快照体系", "evo": 0.4, "vis": 0.55 },
+    { "id": "vm", "label": "微 VM 运行时", "evo": 0.35, "vis": 0.45 },
+    { "id": "net", "label": "eBPF 网络面", "evo": 0.25, "vis": 0.3 },
+    { "id": "sto", "label": "reflink / S3 存储", "evo": 0.5, "vis": 0.3 },
+    { "id": "k8s", "label": "K8s 编排", "evo": 0.85, "vis": 0.25 },
+    { "id": "kvm", "label": "KVM", "evo": 0.95, "vis": 0.15, "inertia": true },
+    { "id": "obj", "label": "对象存储", "evo": 0.9, "vis": 0.2 }
+  ],
+  "links": [
+    ["app", "api"], ["api", "exec"], ["api", "tpl"], ["api", "k8s"],
+    ["exec", "vm"], ["tpl", "vm"], ["vm", "net"], ["vm", "sto"],
+    ["net", "kvm"], ["sto", "obj"]
+  ]
+}

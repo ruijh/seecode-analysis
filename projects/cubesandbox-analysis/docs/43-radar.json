@@ -1,0 +1,15 @@
+{
+  "type": "radar",
+  "title": "能力雷达：Cube vs 同类",
+  "subtitle": "定性评估，5 = 最优（作者观点）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "max": 5,
+  "axes": ["启动速度", "隔离强度", "单机密度", "快照/回滚", "E2B 兼容", "自托管难度(易)"],
+  "series": [
+    { "name": "CubeSandbox", "values": [5, 5, 5, 5, 5, 4], "focal": true },
+    { "name": "Firecracker", "values": [4, 5, 4, 3, 1, 2] },
+    { "name": "Docker 容器", "values": [5, 2, 4, 2, 2, 5] }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "type": "dependency",
+  "title": "服务与共享库依赖",
+  "subtitle": "上层服务依赖底层 pkgs（Go module 边界）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "TB",
+  "motion": "trace",
+  "nodes": [
+    { "id": "api", "label": "CubeAPI", "row": 0, "col": 0 },
+    { "id": "master", "label": "CubeMaster", "row": 0, "col": 1 },
+    { "id": "cubelet", "label": "Cubelet", "row": 0, "col": 2 },
+    { "id": "ops", "label": "CubeOps", "row": 0, "col": 3 },
+    { "id": "proto", "label": "pkgs/proto", "sub": "gRPC 契约", "focal": true, "row": 1, "col": 1 },
+    { "id": "cubedb", "label": "pkgs/cubedb", "sub": "gorm · MySQL/PG", "kind": "store", "row": 2, "col": 0 },
+    { "id": "blobstore", "label": "pkgs/blobstore", "sub": "S3/对象存储", "kind": "store", "row": 2, "col": 2 },
+    { "id": "cubelog", "label": "pkgs/CubeLog", "sub": "结构化日志", "kind": "muted", "row": 3, "col": 1 }
+  ],
+  "edges": [
+    ["api", "proto", ""],
+    ["master", "proto", ""],
+    ["cubelet", "proto", ""],
+    ["ops", "proto", ""],
+    ["master", "cubedb", ""],
+    ["ops", "cubedb", ""],
+    ["cubelet", "blobstore", "快照/卷"],
+    ["api", "cubelog", ""],
+    ["master", "cubelog", ""],
+    ["cubelet", "cubelog", ""],
+    ["ops", "cubelog", ""]
+  ],
+  "evidence": [
+    { "id": "proto", "file": "pkgs/proto/go.mod", "note": "grpc + protobuf" },
+    { "id": "cubedb", "file": "pkgs/cubedb/go.mod", "note": "gorm + goose 迁移" },
+    { "id": "blobstore", "file": "pkgs/blobstore/go.mod" }
+  ]
+}

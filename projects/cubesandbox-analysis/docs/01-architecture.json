@@ -1,0 +1,42 @@
+{
+  "type": "architecture",
+  "title": "CubeSandbox 总体架构",
+  "subtitle": "AI Agent 微 VM 沙箱平台 · 控制面无状态 / 数据面节点本地",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "trace",
+  "groups": [
+    { "id": "ctrl", "label": "控制面（无状态，可水平扩展）" },
+    { "id": "node", "label": "计算节点（数据面）" },
+    { "id": "infra", "label": "共享设施" }
+  ],
+  "nodes": [
+    { "id": "client", "label": "客户端 / SDK", "sub": "Python · Node · Go", "kind": "external", "icon": "person", "row": 0, "col": 0 },
+    { "id": "api", "label": "CubeAPI", "sub": "Rust · Axum · E2B 兼容", "tag": "REST", "group": "ctrl", "row": 0, "col": 1 },
+    { "id": "master", "label": "CubeMaster", "sub": "Go · 集群调度", "tag": "gRPC", "group": "ctrl", "focal": true, "row": 0, "col": 2 },
+    { "id": "redis", "label": "Redis", "sub": "元数据 · 事件流 · 路由表", "kind": "store", "icon": "database", "group": "infra", "row": 1, "col": 2 },
+    { "id": "cubelet", "label": "Cubelet", "sub": "Go · 节点代理", "group": "node", "row": 0, "col": 3 },
+    { "id": "shim", "label": "CubeShim", "sub": "Rust · Shim v2", "group": "node", "row": 0, "col": 4 },
+    { "id": "hyp", "label": "CubeHypervisor", "sub": "RustVMM · KVM · Seccomp", "group": "node", "focal": true, "row": 0, "col": 5 },
+    { "id": "vm", "label": "MicroVM 沙箱", "sub": "独立内核 · <60ms 启动", "kind": "security", "icon": "lock", "group": "node", "row": 0, "col": 6 },
+    { "id": "proxy", "label": "CubeProxy", "sub": "OpenResty · 请求路由", "kind": "input", "group": "infra", "row": 1, "col": 5 }
+  ],
+  "edges": [
+    ["client", "api", "E2B 兼容 REST", "primary"],
+    ["api", "master", "gRPC", "primary"],
+    ["master", "cubelet", "gRPC CubeboxMgr", "primary"],
+    ["cubelet", "shim", "containerd Shim v2", "primary"],
+    ["shim", "hyp", "KVM API", "primary"],
+    ["hyp", "vm", "启动 / 快照恢复", "primary"],
+    ["master", "redis", "生命周期事件", "async"],
+    ["proxy", "redis", "路由表查询", "async"],
+    ["client", "proxy", "HTTP <端口>-<沙箱ID>.域名", "link"]
+  ],
+  "evidence": [
+    { "id": "api", "file": "CubeAPI/src/main.rs", "line": 123, "note": "Axum REST 网关入口" },
+    { "id": "master", "file": "CubeMaster/cmd/cubemaster/main.go", "line": 24, "note": "调度器入口；gRPC 契约见 pkgs/proto/services/cubebox/v1/cubebox.proto:17" },
+    { "id": "shim", "file": "CubeShim/README.md", "note": "containerd Shim v2 的 Rust 实现" },
+    { "id": "hyp", "file": "hypervisor/src/main.rs", "line": 760, "note": "VMM 进程入口" }
+  ]
+}

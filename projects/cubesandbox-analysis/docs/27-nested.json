@@ -1,0 +1,23 @@
+{
+  "type": "nested",
+  "title": "隔离作用域嵌套",
+  "subtitle": "从集群到沙箱进程的逐层包含",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "root": {
+    "label": "Cube 集群",
+    "children": [
+      { "label": "节点 A（KVM 宿主）", "children": [
+        { "label": "Cubelet（常驻）" },
+        { "label": "CubeVS / Egress（常驻）" },
+        { "label": "MicroVM 沙箱 #1", "focal": true, "children": [
+          { "label": "guest agent" },
+          { "label": "沙箱进程 / envd" } ] } ] },
+      { "label": "节点 B（KVM 宿主）", "children": [
+        { "label": "Cubelet（常驻）" },
+        { "label": "MicroVM 沙箱 #2" },
+        { "label": "MicroVM 沙箱 #3" } ] }
+    ]
+  }
+}

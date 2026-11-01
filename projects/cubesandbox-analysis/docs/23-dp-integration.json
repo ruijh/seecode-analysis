@@ -1,0 +1,35 @@
+{
+  "type": "dp-integration",
+  "title": "指标与日志接入链路",
+  "subtitle": "真实路径：agent/Cubelet → Redis 指标流 → CubeOps 聚合 → WebUI/CLI",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "stages": [
+    { "label": "来源", "plain": true, "kind": "external", "items": [
+      { "id": "agent", "label": "VM 内 agent" },
+      { "id": "node", "label": "Cubelet 节点指标" },
+      { "id": "egress", "label": "Egress 审计" } ] },
+    { "label": "采集", "items": [
+      { "id": "redis", "label": "Redis 指标流", "sub": "nodemetric" },
+      { "id": "jsonl", "label": "JSONL 落盘" } ] },
+    { "label": "平台", "items": [
+      { "id": "ops", "label": "CubeOps 聚合", "focal": true },
+      { "id": "db", "label": "MySQL 持久化" } ] },
+    { "label": "服务", "items": [
+      { "id": "webui", "label": "WebUI 控制台" },
+      { "id": "cli", "label": "cubeopscli" } ] }
+  ],
+  "edges": [
+    ["agent", "redis"],
+    ["node", "redis"],
+    ["redis", "ops", "", "primary"],
+    ["egress", "jsonl"],
+    ["ops", "db", "", "async"],
+    ["ops", "webui", "", "primary"],
+    ["ops", "cli"]
+  ],
+  "evidence": [
+    { "id": "redis", "file": "CubeOps/internal/nodemanagement/nodemetric/redis_metric.go", "line": 169, "note": "Redis 指标读取" }
+  ]
+}

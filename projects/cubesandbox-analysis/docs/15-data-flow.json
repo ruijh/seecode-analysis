@@ -1,0 +1,32 @@
+{
+  "type": "data-flow",
+  "title": "一次 exec 的数据流",
+  "subtitle": "代码如何进 VM、结果如何出来",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "nodes": [
+    { "id": "sdk", "label": "SDK exec 调用", "sub": "代码 / 命令", "kind": "input", "icon": "code", "row": 0, "col": 0 },
+    { "id": "api", "label": "CubeAPI", "sub": "鉴权 · 路由", "row": 0, "col": 1 },
+    { "id": "redis", "label": "Redis", "sub": "沙箱位置表", "kind": "store", "icon": "database", "row": 1, "col": 1 },
+    { "id": "cubelet", "label": "Cubelet", "sub": "定位本机沙箱", "row": 0, "col": 2 },
+    { "id": "vsock", "label": "vsock 通道", "sub": "宿主 ↔ VM", "kind": "muted", "row": 0, "col": 3 },
+    { "id": "agent", "label": "VM 内 agent", "sub": "Rust", "focal": true, "row": 0, "col": 4 },
+    { "id": "proc", "label": "沙箱进程", "sub": "fork 执行", "kind": "security", "row": 0, "col": 5 }
+  ],
+  "edges": [
+    ["sdk", "api", "exec 请求", "primary"],
+    ["api", "redis", "查路由"],
+    ["redis", "api", "node:port", "async"],
+    ["api", "cubelet", "gRPC Exec", "primary"],
+    ["cubelet", "vsock", "", "primary"],
+    ["vsock", "agent", "", "primary"],
+    ["agent", "proc", "启动进程", "primary"],
+    ["proc", "agent", "stdout / exit code", "async"],
+    ["agent", "sdk", "结果原路回传", "async"]
+  ],
+  "evidence": [
+    { "id": "agent", "file": "agent/src/main.rs", "line": 284, "note": "VM 内代理入口（rpc/console/metrics 模块）" },
+    { "id": "cubelet", "file": "pkgs/proto/services/cubebox/v1/cubebox.proto", "line": 21, "note": "rpc Exec" }
+  ]
+}

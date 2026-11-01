@@ -1,0 +1,19 @@
+{
+  "type": "quadrant",
+  "title": "沙箱技术选型对比",
+  "subtitle": "定性定位（作者观点，基于公开特性）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "x": { "label": "启动速度", "low": "慢", "high": "快" },
+  "y": { "label": "隔离强度", "low": "弱", "high": "强" },
+  "quadrants": ["快而弱 · 开发用", "快而强 · Agent 理想区", "慢而强 · 传统虚拟化", "慢而弱 · 避免"],
+  "items": [
+    { "label": "CubeSandbox", "x": 0.93, "y": 0.9, "focal": true },
+    { "label": "Firecracker", "x": 0.68, "y": 0.85 },
+    { "label": "QEMU 全量", "x": 0.12, "y": 0.88 },
+    { "label": "gVisor", "x": 0.6, "y": 0.55 },
+    { "label": "Docker", "x": 0.85, "y": 0.28 },
+    { "label": "进程沙箱", "x": 0.9, "y": 0.1 }
+  ]
+}

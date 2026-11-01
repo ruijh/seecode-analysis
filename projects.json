@@ -25,7 +25,7 @@
       "name": "CubeSandbox",
       "upstream": "TencentCloud/CubeSandbox",
       "upstreamUrl": "https://github.com/TencentCloud/CubeSandbox",
-      "repoUrl": "https://github.com/ruijh/cubesandbox-analysis",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/cubesandbox-analysis",
       "description": "对 TencentCloud/CubeSandbox 的全景解读，45 种核心图表类型加变体。",
       "added": "2026-11-01"
     },

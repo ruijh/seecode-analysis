@@ -1,0 +1,17 @@
+{
+  "type": "sankey",
+  "title": "宿主内存去向（500 台压测时）",
+  "subtitle": "375GiB 宿主：基线 19.5GiB + 500 台沙箱 12.3GiB",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "unit": "MiB",
+  "links": [["宿主 375GiB","系统基线",19537],["宿主 375GiB","500 台沙箱",12290,true],["宿主 375GiB","剩余余量",6573]],
+  "evidence": [
+    {
+      "id": "s0",
+      "file": "docs/blog/posts/2026-10-28-cubebench-073.md",
+      "note": "沙箱净增量 = 31827 − 19537 = 12290 MiB"
+    }
+  ]
+}

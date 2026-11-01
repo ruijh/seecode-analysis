@@ -1,0 +1,20 @@
+{
+  "type": "medallion",
+  "title": "沙箱遥测分层",
+  "subtitle": "审计与指标数据的 Bronze → Silver → Gold",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "stages": [
+    { "label": "来源", "plain": true, "kind": "input", "items": [
+      "Egress JSONL 审计", "agent 指标 (vsock)", "生命周期事件流" ] },
+    { "label": "Bronze", "items": [ "raw_audit", "raw_metrics" ] },
+    { "label": "Silver", "items": [ "sandbox_activity", "node_capacity" ] },
+    { "label": "Gold", "items": [
+      { "label": "安全审计报表", "focal": true },
+      "容量/成本看板" ] }
+  ],
+  "evidence": [
+    { "id": "s0", "file": "docs/guide/security-proxy.md", "note": "逐决策 JSONL 审计日志" }
+  ]
+}

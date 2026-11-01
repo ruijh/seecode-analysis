@@ -1,0 +1,25 @@
+{
+  "type": "heatmap",
+  "title": "模块 × 语言强度矩阵",
+  "subtitle": "源文件数：Go 服务与 Rust 运行时分工清晰",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "rows": ["Cubelet", "CubeMaster", "CubeOps", "hypervisor", "agent", "CubeShim", "CubeAPI", "sdk", "web", "examples"],
+  "cols": ["Go", "Rust", "Python", "TS/TSX"],
+  "values": [
+    [757, 0, 1, 0],
+    [436, 0, 0, 0],
+    [130, 0, 0, 0],
+    [0, 254, 2, 0],
+    [0, 53, 0, 0],
+    [0, 48, 0, 0],
+    [2, 31, 8, 0],
+    [27, 0, 19, 35],
+    [0, 0, 0, 67],
+    [32, 0, 81, 0]
+  ],
+  "evidence": [
+    { "id": "h0", "file": "find <module> -name '*.go' | wc -l", "note": "2026-11-01 实测统计" }
+  ]
+}

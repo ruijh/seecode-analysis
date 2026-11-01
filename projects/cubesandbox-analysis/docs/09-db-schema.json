@@ -1,0 +1,84 @@
+{
+  "type": "db-schema",
+  "title": "cubedb 核心表结构",
+  "subtitle": "来自真实迁移脚本（MySQL · goose）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "nodes": [
+    {
+      "id": "spec",
+      "label": "t_cube_sandbox_spec",
+      "focal": true,
+      "row": 0,
+      "col": 0,
+      "fields": [
+        ["id","bigint","PK"],
+        ["sandbox_id","varchar(128)","UQ"],
+        ["template_id","varchar(128)",""],
+        ["host_id","varchar(128)","FK"],
+        ["instance_type","varchar(64)",""],
+        ["request_json","mediumtext",""]
+      ]
+    },
+    {
+      "id": "host",
+      "label": "t_cube_host_info",
+      "row": 0,
+      "col": 1,
+      "fields": [
+        ["id","bigint","PK"],
+        ["ins_id","varchar(64)","UQ"],
+        ["ip","varchar(64)",""],
+        ["region","varchar(64)",""],
+        ["host_status","varchar(32)",""],
+        ["quota_mem_mb","bigint",""],
+        ["max_mvm_num","bigint",""]
+      ]
+    },
+    {
+      "id": "snapref",
+      "label": "t_cube_snapshot_runtime_ref",
+      "row": 0,
+      "col": 2,
+      "fields": [
+        ["id","bigint","PK"],
+        ["snapshot_id","varchar(128)",""],
+        ["sandbox_id","varchar(128)","FK"],
+        ["node_id","varchar(128)",""],
+        ["binding_type","varchar(64)",""]
+      ]
+    },
+    {
+      "id": "tpl",
+      "label": "t_agenthub_template",
+      "row": 1,
+      "col": 0,
+      "fields": [
+        ["id","bigint","PK"],
+        ["template_id","varchar(128)","UQ"],
+        ["name","varchar(255)",""],
+        ["source_snapshot_id","varchar(128)",""],
+        ["source_sandbox_id","varchar(128)",""],
+        ["recommended","tinyint(1)",""]
+      ]
+    }
+  ],
+  "edges": [
+    ["spec.host_id","host.ins_id","","many-one"],
+    ["snapref.sandbox_id","spec.sandbox_id","","many-one"],
+    ["tpl.source_sandbox_id","spec.sandbox_id","","many-one"]
+  ],
+  "evidence": [
+    {
+      "id": "spec",
+      "file": "pkgs/cubedb/migrate/migrations/mysql/0002_v0_2_2_to_head.sql",
+      "note": "CREATE TABLE t_cube_sandbox_spec"
+    },
+    {
+      "id": "host",
+      "file": "pkgs/cubedb/migrate/migrations/mysql/0001_baseline_v0_2_2.sql",
+      "note": "CREATE TABLE t_cube_host_info"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "architecture",
+  "title": "节点数据面：eBPF 网络 + reflink 存储",
+  "subtitle": "单节点内部 · 零 iptables / O(1) 快照克隆",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "trace",
+  "groups": [
+    { "id": "net", "label": "网络路径（CubeVS = CubeNet）" },
+    { "id": "sto", "label": "存储路径（CubeCoW）" }
+  ],
+  "nodes": [
+    { "id": "vm", "label": "MicroVM 沙箱", "sub": "每沙箱独立内核", "kind": "security", "icon": "lock", "group": "net", "row": 0, "col": 0 },
+    { "id": "cubevs", "label": "CubeVS", "sub": "eBPF · TC · 连接跟踪", "kind": "security", "group": "net", "focal": true, "row": 0, "col": 1 },
+    { "id": "egress", "label": "CubeEgress", "sub": "OpenResty · TPROXY · L7", "kind": "security", "group": "net", "row": 0, "col": 2 },
+    { "id": "net0", "label": "互联网", "kind": "external", "icon": "cloud", "group": "net", "row": 0, "col": 3 },
+    { "id": "cubelet", "label": "Cubelet", "sub": "卷与网络编排", "group": "sto", "row": 1, "col": 0 },
+    { "id": "containerd", "label": "containerd", "sub": "镜像拉取与存储", "kind": "backend", "group": "sto", "row": 2, "col": 0 },
+    { "id": "cow", "label": "CubeCoW", "sub": "Rust · FICLONE reflink", "group": "sto", "row": 1, "col": 1 },
+    { "id": "tpl", "label": "模板卷", "sub": "rootfs + 内存快照", "kind": "store", "icon": "database", "group": "sto", "row": 1, "col": 2 }
+  ],
+  "edges": [
+    ["vm", "cubevs", "TAP · from_cube(TC ingress)", "primary"],
+    ["cubevs", "egress", "TPROXY 劫持", "primary"],
+    ["egress", "net0", "域名白名单 · 凭据注入", "primary"],
+    ["cubevs", "net0", "SNAT / 端口映射", "muted"],
+    ["net0", "cubevs", "from_world 反向 NAT", "muted"],
+    ["cubelet", "cow", "rootfs / 内存卷操作", "default"],
+    ["cow", "tpl", "FICLONE 克隆 O(1)", "default"],
+    ["cubelet", "containerd", "拉取 OCI 镜像", "async"]
+  ],
+  "evidence": [
+    { "id": "cow", "file": "docs/architecture/juicefs-storage.md", "note": "跨节点卷后端；本地卷见 cubecow/（FICLONE reflink）" },
+    { "id": "cubevs", "file": "docs/architecture/network.md", "note": "from_cube / from_world / from_envoy 三个 BPF 程序" },
+    { "id": "egress", "file": "docs/guide/security-proxy.md", "note": "L7 域名过滤与凭据注入" }
+  ]
+}

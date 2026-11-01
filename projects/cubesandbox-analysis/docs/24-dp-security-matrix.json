@@ -1,0 +1,20 @@
+{
+  "type": "dp-security-matrix",
+  "title": "数据访问矩阵：谁能碰什么",
+  "subtitle": "凭据只存在于 Egress 注入层，永远不进沙箱和模型上下文",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "rows": ["Agent（LLM 进程）", "开发者", "平台运维", "安全审计员"],
+  "cols": ["沙箱内数据", "模板", "注入凭据", "出站审计", "节点指标"],
+  "cells": [
+    ["write", "read", "none", "none", "none"],
+    ["read", "write", "masked", "read", "read"],
+    ["none", "read", "none", "read", "admin"],
+    ["none", "none", "masked", "admin", "read"]
+  ],
+  "focal": "Agent（LLM 进程）",
+  "evidence": [
+    { "id": "cred", "file": "docs/architecture/overview.md", "note": "凭据经 header 改写注入，对沙箱与模型不可见" }
+  ]
+}

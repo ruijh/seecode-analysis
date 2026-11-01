@@ -1,0 +1,28 @@
+{
+  "type": "architecture-delta",
+  "title": "v0.7 变更：运维分离 + 跨节点快照",
+  "subtitle": "节点管理从 CubeMaster 剥离到 CubeOps；S3 后端让沙箱跨节点暂停/恢复",
+  "eyebrow": "TencentCloud/CubeSandbox · v0.7.0",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "trace",
+  "nodes": [
+    { "id": "api", "label": "CubeAPI", "row": 0, "col": 0 },
+    { "id": "master", "label": "CubeMaster", "sub": "只管调度", "change": "changed", "row": 0, "col": 1 },
+    { "id": "ops", "label": "CubeOps", "sub": "节点管理 · cubeopscli", "change": "added", "focal": true, "row": 1, "col": 1 },
+    { "id": "nodeA", "label": "节点 A · Cubelet", "sub": "暂停：上传快照", "row": 0, "col": 2 },
+    { "id": "nodeB", "label": "节点 B · Cubelet", "sub": "异地恢复", "change": "added", "row": 1, "col": 3 },
+    { "id": "s3", "label": "S3 快照库", "sub": "JuiceFS / CubeS3lvol", "kind": "store", "change": "added", "row": 0, "col": 3 }
+  ],
+  "edges": [
+    ["api", "master", ""],
+    ["master", "nodeA", "调度", "primary"],
+    ["master", "ops", "节点注册表", "async"],
+    ["ops", "nodeA", "纳管/运维"],
+    ["nodeA", "s3", "暂停：持久化", "primary"],
+    ["s3", "nodeB", "恢复：拉取快照", "primary"]
+  ],
+  "evidence": [
+    { "id": "ops", "file": "docs/changelog/v0.7.0.md", "note": "控制面与运维分离；跨节点 pause/resume (preview)" }
+  ]
+}

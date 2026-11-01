@@ -1,0 +1,29 @@
+{
+  "type": "journey",
+  "title": "AI 开发者的采用旅程",
+  "subtitle": "从读到 README 到生产省钱的情绪曲线",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "stages": [
+    { "label": "发现", "steps": [
+      { "label": "读到 60ms 冷启动", "score": 2 },
+      { "label": "看到 E2B 兼容徽章", "score": 1 } ] },
+    { "label": "部署", "steps": [
+      { "label": "一键脚本起控制面", "score": 1 },
+      { "label": "确认 KVM/嵌套虚拟化", "score": 0 },
+      { "label": "注册计算节点", "score": 1 } ] },
+    { "label": "建模板", "steps": [
+      { "label": "理解 rootfs+内存快照", "score": -1, "note": "新概念，首次有门槛" },
+      { "label": "第一次构建成功", "score": 2, "focal": true } ] },
+    { "label": "集成", "steps": [
+      { "label": "只换 API URL 两个环境变量", "score": 2 },
+      { "label": "跑通第一个 exec", "score": 2 } ] },
+    { "label": "生产", "steps": [
+      { "label": "AutoPause 省下空闲成本", "score": 2 },
+      { "label": "出站白名单拦住越权请求", "score": 1, "note": "被拦 = 策略生效" } ] }
+  ],
+  "evidence": [
+    { "id": "s0", "file": "docs/guide/quickstart.md", "note": "部署/模板/集成路径" }
+  ]
+}

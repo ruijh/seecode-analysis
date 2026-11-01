@@ -1,0 +1,17 @@
+{
+  "type": "exploded",
+  "title": "模板卷拆解",
+  "subtitle": "60ms 启动的秘密：四层盘 + 一次 restore",
+  "eyebrow": "TencentCloud/CubeSandbox · CubeCoW",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "parts": [
+    { "label": "模板 rootfs（只读基底）", "sub": "XFS reflink 共享 extents", "kind": "plate", "w": 260, "d": 180, "t": 16 },
+    { "label": "CoW 运行时层", "sub": "写入时才复制", "kind": "plate", "w": 236, "d": 164, "t": 10 },
+    { "label": "内存快照", "sub": "restore_vm() 毫秒恢复", "kind": "board", "w": 204, "d": 140, "t": 6, "focal": true },
+    { "label": "增量脏页", "sub": "快照只落盘变更页", "kind": "pcb", "w": 160, "d": 110, "t": 4 }
+  ],
+  "evidence": [
+    { "id": "p0", "file": "docs/architecture/overview.md", "note": "增量快照只写匿名脏页，其余与上级快照 reflink 共享" }
+  ]
+}

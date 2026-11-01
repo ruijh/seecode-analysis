@@ -1,0 +1,18 @@
+{
+  "type": "venn",
+  "title": "E2B 兼容性",
+  "subtitle": "语义兼容 + 原生扩展的交集",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "sets": [
+    { "id": "e2b", "label": "E2B SDK 语义", "sub": "create / exec / files / timeout" },
+    { "id": "cube", "label": "Cube 原生扩展", "sub": "跨节点快照 · egress 策略 · 卷插件" }
+  ],
+  "overlaps": [
+    { "sets": ["e2b", "cube"], "label": "兼容层：换 URL 即迁移", "focal": true }
+  ],
+  "evidence": [
+    { "id": "o0", "file": "docs/architecture/overview.md", "note": "替换 E2B 环境变量即可切换到 Cube Sandbox" }
+  ]
+}

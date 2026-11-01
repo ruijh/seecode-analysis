@@ -1,0 +1,31 @@
+{
+  "type": "state",
+  "title": "沙箱生命周期状态机",
+  "subtitle": "running ⇄ paused 经 pausing/resuming 瞬态 · AutoPause：空闲即暂停（零 CPU/内存），请求到来自动唤醒",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "nodes": [
+    {"id":"s","shape":"start","row":0,"col":0},
+    {"id":"running","label":"running","sub":"活跃 · 接受请求","focal":true,"row":0,"col":1},
+    {"id":"paused","label":"paused","sub":"快照落盘 · 零占用","row":0,"col":2},
+    {"id":"terminated","label":"terminated","sub":"不可恢复","kind":"muted","row":0,"col":3},
+    {"id":"e","shape":"end","row":0,"col":4}
+  ],
+  "edges": [
+    ["s","running","create(template)","primary"],
+    ["running","terminated","kill() · on_timeout=kill"],
+    ["paused","terminated","kill()（快照一并丢弃）"],
+    ["terminated","e","","primary"],
+    ["running","paused","空闲超时 · 打快照"],
+    ["paused","running","connect() / 新请求"]
+  ],
+  "evidence": [
+    {
+      "id": "running",
+      "file": "docs/guide/lifecycle.md",
+      "line": 8,
+      "note": "六状态模型：running/pausing/paused/resuming/terminated/unknown"
+    }
+  ]
+}

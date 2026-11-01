@@ -1,0 +1,20 @@
+{
+  "type": "pyramid",
+  "variant": "funnel",
+  "title": "创建请求漏斗（50 并发基准）",
+  "subtitle": "500 请求全链路零失败（CubeBench v0.7.3 · p95 121.9ms）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "unit": "req",
+  "levels": [
+    { "label": "发起请求", "value": 500 },
+    { "label": "调度受理", "value": 500 },
+    { "label": "卷克隆", "value": 500 },
+    { "label": "VM 恢复", "value": 500 },
+    { "label": "就绪可用", "value": 500, "focal": true }
+  ],
+  "evidence": [
+    { "id": "f0", "file": "docs/blog/posts/2026-10-28-cubebench-073.md", "note": "并发 50：Requests 500，全部成功" }
+  ]
+}

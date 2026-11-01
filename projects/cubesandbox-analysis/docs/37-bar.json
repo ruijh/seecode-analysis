@@ -1,0 +1,14 @@
+{
+  "type": "bar",
+  "title": "冷启动平均延迟 vs 并发",
+  "subtitle": "50 并发仍保持 92ms 均值 · p95 121.9ms · 裸金属",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "unit": "ms",
+  "axis": "创建一个 2vCPU/2GiB 沙箱的平均耗时",
+  "focal": "50 并发",
+  "sort": "asc",
+  "data": [["1 并发",41],["10 并发",47.9],["20 并发",56],["50 并发",92.4]],
+  "evidence": [{"id":"b0","file":"docs/blog/posts/2026-10-28-cubebench-073.md"}]
+}

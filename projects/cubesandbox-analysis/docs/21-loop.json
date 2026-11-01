@@ -1,0 +1,21 @@
+{
+  "type": "loop",
+  "title": "AutoPause 密度飞轮",
+  "subtitle": "空闲沙箱休眠如何转化为更高密度与更低成本",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "loop",
+  "center": "沙箱密度",
+  "centerSub": "台 / 节点",
+  "steps": [
+    { "label": "检测空闲", "sub": "timeout / lifecycle 策略" },
+    { "label": "快照暂停", "sub": "内存落盘 · 零 CPU/内存" },
+    { "label": "资源释放", "sub": "还给宿主" },
+    { "label": "密度提升", "focal": true, "sub": "500 台/节点 · 摊销 ~24.6MiB" },
+    { "label": "成本下降", "sub": "同样的机器承载更多 Agent" },
+    { "label": "承载更多负载", "sub": "更多沙箱进入循环" }
+  ],
+  "evidence": [
+    { "id": "s1", "file": "docs/blog/posts/2026-10-28-cubebench-073.md", "note": "500 台存活时每 VM 摊销 ~24.58MiB" }
+  ]
+}

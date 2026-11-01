@@ -1,0 +1,40 @@
+{
+  "type": "sequence",
+  "title": "Sandbox.create() 请求生命周期",
+  "subtitle": "E2B 兼容调用如何变成一台 <60ms 就绪的微 VM",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "numbered": true,
+  "motion": "trace",
+  "participants": [
+    { "id": "c", "label": "客户端 / SDK", "kind": "external", "icon": "person" },
+    { "id": "api", "label": "CubeAPI", "sub": "Rust", "focal": true },
+    { "id": "m", "label": "CubeMaster", "sub": "Go 调度" },
+    { "id": "l", "label": "Cubelet", "sub": "节点代理" },
+    { "id": "s", "label": "CubeShim", "sub": "Rust Shim v2" },
+    { "id": "h", "label": "CubeHypervisor", "sub": "RustVMM" }
+  ],
+  "messages": [
+    ["c", "api", "POST /sandboxes（E2B 兼容）", "primary"],
+    ["api", "m", "gRPC CreateSandbox", "primary"],
+    ["m", "m", "按资源 fit 选择目标节点"],
+    ["m", "l", "gRPC RunCubeSandbox", "primary"],
+    ["l", "l", "CubeCoW 克隆模板 rootfs + 内存卷"],
+    ["l", "s", "Shim v2 Create + Start", "primary"],
+    ["s", "h", "launch_vmm → restore_vm(内存快照)", "primary"],
+    ["h", "s", "VM 就绪 · vsock 监听", "reply"],
+    ["s", "l", "Task started", "reply"],
+    ["l", "m", "Sandbox running", "async"],
+    ["m", "api", "沙箱 ID + 元数据", "reply"],
+    ["api", "c", "201 { sandbox_id }", "reply"]
+  ],
+  "notes": [
+    { "at": 0, "over": ["api"], "text": "无状态网关：换掉 E2B 的 API URL 即可迁移" },
+    { "at": 9, "over": ["l"], "text": "随后 AddTAPDevice + 挂载 eBPF 过滤器，并把生命周期事件写入 Redis" }
+  ],
+  "evidence": [
+    { "id": "m", "file": "pkgs/proto/services/cubebox/v1/cubebox.proto", "line": 17, "note": "CubeboxMgr.Create / Destroy / Exec gRPC 契约" },
+    { "id": "h", "file": "hypervisor/src/main.rs", "line": 760 },
+    { "id": "l", "file": "Cubelet/services/cubebox", "note": "Cubelet 侧 cubebox 服务实现" }
+  ]
+}

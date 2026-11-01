@@ -1,0 +1,44 @@
+{
+  "type": "uml-class",
+  "title": "CubeCoW 存储引擎类模型",
+  "subtitle": "真实代码：trait Engine + ReflinkEngine/S3Engine 两实现",
+  "eyebrow": "TencentCloud/CubeSandbox · cubecow/",
+  "lang": "zh-CN",
+  "dir": "TB",
+  "motion": "reveal",
+  "nodes": [
+    {
+      "id": "engine", "label": "Engine", "tag": "«trait»", "row": 0, "col": 1,
+      "methods": ["create_volume()", "clone_volume()", "snapshot()", "delete_volume()"]
+    },
+    {
+      "id": "reflink", "label": "ReflinkEngine", "sub": "XFS FICLONE · 本地盘", "row": 1, "col": 0,
+      "methods": ["initialize()"]
+    },
+    {
+      "id": "s3", "label": "S3Engine", "sub": "对象存储后端 · 跨节点", "row": 1, "col": 2,
+      "methods": ["initialize()"]
+    },
+    {
+      "id": "volume", "label": "Volume", "row": 2, "col": 0,
+      "attrs": ["id: String", "size: u64", "backing: VolumeBlockInfo"]
+    },
+    {
+      "id": "snapshot", "label": "Snapshot", "focal": true, "row": 2, "col": 2,
+      "attrs": ["id: String", "parent", "dirty_pages(增量脏页)"]
+    }
+  ],
+  "edges": [
+    ["reflink", "engine", "", "implements"],
+    ["s3", "engine", "", "implements"],
+    ["reflink", "volume", "管理", "composes"],
+    ["s3", "snapshot", "持久化", "composes"],
+    ["volume", "snapshot", "派生", "assoc"]
+  ],
+  "evidence": [
+    { "id": "engine", "file": "cubecow/src/engine/engine.rs", "line": 36, "note": "pub trait Engine" },
+    { "id": "reflink", "file": "cubecow/src/engine/reflink.rs", "line": 116, "note": "pub struct ReflinkEngine" },
+    { "id": "s3", "file": "cubecow/src/engine/s3.rs", "line": 93, "note": "pub struct S3Engine" },
+    { "id": "volume", "file": "cubecow/src/lib.rs", "line": 53, "note": "pub struct Volume / Snapshot" }
+  ]
+}

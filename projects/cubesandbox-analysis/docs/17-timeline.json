@@ -1,0 +1,25 @@
+{
+  "type": "timeline",
+  "title": "2026 版本时间线",
+  "subtitle": "首季开源，半年 16 个版本（docs/changelog）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "events": [
+    { "date": "2026-04-20", "label": "v0.1.0 首发" },
+    { "date": "2026-05-07", "label": "v0.2.0" },
+    { "date": "2026-06-02", "label": "v0.3.0" },
+    { "date": "2026-06-14", "label": "v0.4.0" },
+    { "date": "2026-07-03", "label": "v0.5.0", "sub": "AutoPause · ARM64" },
+    { "date": "2026-07-24", "label": "v0.6.0", "sub": "K8s · Volume 框架" },
+    { "date": "2026-08-28", "label": "v0.7.0", "focal": true, "sub": "跨节点暂停恢复 · CubeOps" },
+    { "date": "2026-10-12", "label": "v0.7.3", "sub": "CubeBench 基准报告" }
+  ],
+  "periods": [
+    { "from": "2026-04", "to": "2026-06", "label": "快速迭代期" },
+    { "from": "2026-07", "to": "2026-10", "label": "平台化期" }
+  ],
+  "evidence": [
+    { "id": "e0", "file": "docs/changelog/index.md", "note": "全部版本与日期" }
+  ]
+}

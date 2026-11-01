@@ -1,0 +1,33 @@
+{
+  "type": "it-state",
+  "title": "组件运行态全景",
+  "subtitle": "已验证能力为 ok；preview/实验特性标为 risk，未启用路径标为 legacy",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "LR",
+  "motion": "reveal",
+  "nodes": [
+    { "id": "api", "label": "CubeAPI", "sub": "E2B 兼容 REST", "status": "ok", "row": 0, "col": 0 },
+    { "id": "master", "label": "CubeMaster", "sub": ":8089 调度", "status": "ok", "row": 0, "col": 1 },
+    { "id": "cubelet", "label": "Cubelet", "sub": "节点代理", "status": "ok", "focal": true, "row": 0, "col": 2 },
+    { "id": "ops", "label": "CubeOps", "sub": ":3010 · v0.7 新增", "status": "ok", "row": 1, "col": 1 },
+    { "id": "redis", "label": "Redis", "sub": "元数据/事件", "status": "ok", "kind": "store", "row": 1, "col": 2 },
+    { "id": "s3", "label": "S3 跨节点卷", "sub": "v0.7 preview", "status": "risk", "kind": "store", "row": 2, "col": 2 },
+    { "id": "tdx", "label": "TDX 机密 VM", "sub": "特性门控 · 实验性", "status": "risk", "row": 2, "col": 3 },
+    { "id": "mshv", "label": "MSHV 路径", "sub": "Hypervisor 抽象 · 未启用", "status": "legacy", "row": 2, "col": 4 },
+    { "id": "webui", "label": "WebUI", "sub": ":12088", "status": "ok", "row": 1, "col": 0 },
+    { "id": "proxy", "label": "CubeProxy", "sub": "Host/Path 路由", "status": "ok", "row": 0, "col": 3 }
+  ],
+  "edges": [
+    ["api", "master", "gRPC"],
+    ["master", "cubelet", "gRPC"],
+    ["master", "redis", "事件流", "async"],
+    ["cubelet", "s3", "快照读写", "async"],
+    ["master", "proxy", "路由元数据", "async"],
+    ["webui", "api", "REST"]
+  ],
+  "evidence": [
+    { "id": "mshv", "file": "hypervisor/Cargo.toml", "note": "mshv/tdx 特性存在于依赖中，官方支持矩阵仅 KVM" },
+    { "id": "s3", "file": "docs/changelog/v0.7.0.md", "note": "跨节点 pause/resume 标注 preview" }
+  ]
+}

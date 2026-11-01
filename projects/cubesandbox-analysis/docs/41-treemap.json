@@ -1,0 +1,20 @@
+{
+  "type": "treemap",
+  "title": "代码构成（按语言）",
+  "subtitle": "3987 个源文件 · 安全关键路径全在 Rust",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "unit": "文件",
+  "focal": "Rust",
+  "data": [
+    ["Go", 1578],
+    ["Rust", 403],
+    ["Python", 216],
+    ["TypeScript", 102],
+    ["JavaScript", 13]
+  ],
+  "evidence": [
+    { "id": "t0", "file": "SC scan CubeSandbox", "note": "2026-11-01 扫描结果" }
+  ]
+}

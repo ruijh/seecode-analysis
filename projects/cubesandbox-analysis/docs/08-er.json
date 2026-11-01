@@ -1,0 +1,25 @@
+{
+  "type": "er",
+  "title": "领域实体关系",
+  "subtitle": "模板 → 沙箱 → 快照 的核心领域模型",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "nodes": [
+    { "id": "tpl", "label": "Template 模板", "fields": ["template_id PK", "alias UQ", "base_image", "status"], "row": 0, "col": 0 },
+    { "id": "sbx", "label": "Sandbox 沙箱", "focal": true, "fields": ["sandbox_id PK", "template_id FK", "state", "timeout", "metadata"], "row": 0, "col": 1 },
+    { "id": "snap", "label": "Snapshot 快照", "fields": ["snapshot_id PK", "sandbox_id FK", "kind(memory+fs)", "created_at"], "row": 0, "col": 2 },
+    { "id": "node", "label": "Node 节点", "fields": ["node_id PK", "region", "zone", "quota_cpu", "host_status"], "row": 1, "col": 1 },
+    { "id": "usr", "label": "User 用户", "fields": ["user_id PK", "api_key UQ"], "row": 1, "col": 0 }
+  ],
+  "edges": [
+    ["tpl", "sbx", "实例化", "one-many"],
+    ["sbx", "snap", "创建", "one-many"],
+    ["node", "sbx", "承载", "one-many"],
+    ["usr", "sbx", "拥有", "one-many"]
+  ],
+  "evidence": [
+    { "id": "sbx", "file": "pkgs/cubedb/migrate/migrations/mysql/0002_v0_2_2_to_head.sql", "note": "t_cube_sandbox_spec: sandbox_id/template_id/host_id" },
+    { "id": "tpl", "file": "docs/changelog/v0.6.0.md", "note": "v0.6 模板别名" }
+  ]
+}

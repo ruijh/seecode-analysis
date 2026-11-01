@@ -1,0 +1,27 @@
+{
+  "type": "kanban",
+  "title": "Roadmap 看板",
+  "subtitle": "来自 docs/guide/roadmap.md 的真实条目",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "columns": [
+    { "label": "已交付 · v0.7", "cards": [
+      { "label": "跨节点暂停/恢复", "tag": "preview" },
+      "CubeOps 运维分离",
+      "S3 快照后端" ] },
+    { "label": "近期（Coming Soon）", "cards": [
+      { "label": "跨节点性能优化", "focal": true, "tag": "P1" },
+      { "label": "E2B API 完全兼容", "tag": "P1" } ] },
+    { "label": "规划中", "cards": [
+      "沙箱故障自愈",
+      "调度增强：亲和/优先级",
+      "S3 成本与延迟优化",
+      "仅文件系统快照" ] },
+    { "label": "探索", "cards": [
+      { "label": "GPU 沙箱", "tag": "高呼声" } ] }
+  ],
+  "evidence": [
+    { "id": "c0", "file": "docs/guide/roadmap.md" }
+  ]
+}

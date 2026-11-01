@@ -1,0 +1,27 @@
+{
+  "type": "polar",
+  "title": "模块规模一览",
+  "subtitle": "各目录源文件数",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "center": "文件数",
+  "focal": "Cubelet",
+  "data": [
+    ["Cubelet", 758],
+    ["CubeMaster", 436],
+    ["hypervisor", 256],
+    ["CubeOps", 130],
+    ["examples", 116],
+    ["tests", 97],
+    ["pkgs", 83],
+    ["sdk", 81],
+    ["web", 71],
+    ["agent", 53],
+    ["CubeShim", 48],
+    ["TemplateCenter", 41]
+  ],
+  "evidence": [
+    { "id": "p0", "file": "SC scan CubeSandbox", "note": "modules[].files" }
+  ]
+}

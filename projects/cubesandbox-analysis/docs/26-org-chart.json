@@ -1,0 +1,31 @@
+{
+  "type": "org-chart",
+  "title": "组件\"组织架构\"：谁管谁",
+  "subtitle": "按编排/管理关系画的组织图",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "dir": "TB",
+  "motion": "reveal",
+  "root": {
+    "label": "CubeSandbox 平台",
+    "children": [
+      { "label": "控制面分部", "children": [
+        { "label": "CubeAPI", "sub": "流量入口" },
+        { "label": "CubeMaster", "sub": "调度中枢" },
+        { "label": "CubeOps", "sub": "节点运维" } ] },
+      { "label": "计算节点分部", "children": [
+        { "label": "Cubelet", "sub": "节点主管", "focal": true, "children": [
+          { "label": "CubeShim", "sub": "运行时桥" },
+          { "label": "CubeHypervisor", "sub": "微 VM" },
+          { "label": "CubeCoW", "sub": "存储引擎" },
+          { "label": "CubeVS", "sub": "eBPF 网络" } ] } ] },
+      { "label": "安全接入分部", "children": [
+        { "label": "CubeProxy", "sub": "请求路由" },
+        { "label": "CubeEgress", "sub": "出口网关" },
+        { "label": "cube-lifecycle-manager", "sub": "AutoPause 协调" } ] },
+      { "label": "Guest 分部", "children": [
+        { "label": "agent", "sub": "VM 内代理" },
+        { "label": "guest-init", "sub": "初始化" } ] }
+    ]
+  }
+}

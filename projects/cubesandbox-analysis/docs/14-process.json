@@ -1,0 +1,18 @@
+{
+  "type": "process",
+  "title": "从零到第一个沙箱",
+  "subtitle": "Quickstart 主线路径",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "step",
+  "steps": [
+    { "label": "部署控制面", "sub": "一键脚本 / K8s / Terraform" },
+    { "label": "接入计算节点", "sub": "KVM 宿主 + Cubelet" },
+    { "label": "构建模板", "sub": "镜像 → rootfs + 快照" },
+    { "label": "创建沙箱", "focal": true, "sub": "Sandbox.create() · E2B 兼容" },
+    { "label": "执行代码", "sub": "SDK exec / HTTP 服务" }
+  ],
+  "evidence": [
+    { "id": "s0", "file": "docs/guide/quickstart.md" }
+  ]
+}

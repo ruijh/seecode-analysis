@@ -1,0 +1,21 @@
+{
+  "type": "high-level",
+  "title": "CubeSandbox 是什么",
+  "subtitle": "给 AI Agent 用的\"临时电脑\"服务",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "nodes": [
+    { "id": "app", "label": "AI Agent 应用", "sub": "编码助手 · 浏览器操作 · 数据分析", "kind": "external", "icon": "person", "row": 0, "col": 0 },
+    { "id": "cube", "label": "CubeSandbox", "sub": "按需创建 · 用完即弃", "focal": true, "icon": "server", "row": 0, "col": 1 },
+    { "id": "safe", "label": "跑得放心", "sub": "出问题也伤不到宿主机", "kind": "security", "icon": "lock", "row": 0, "col": 2 },
+    { "id": "fast", "label": "秒开秒用", "sub": "几十毫秒就绪", "row": 1, "col": 2 },
+    { "id": "cheap", "label": "闲时不花钱", "sub": "自动休眠 · 零占用", "kind": "muted", "row": 2, "col": 2 }
+  ],
+  "edges": [
+    ["app", "cube", "要一台临时电脑", "primary"],
+    ["cube", "safe", "", "primary"],
+    ["cube", "fast"],
+    ["cube", "cheap"]
+  ]
+}

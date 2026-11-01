@@ -1,0 +1,19 @@
+{
+  "type": "line",
+  "title": "每 VM 摊销内存开销",
+  "subtitle": "沙箱越多摊销越高，但 500 台时仍仅 ~24.6MiB/台",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "unit": "MiB",
+  "zero": false,
+  "x": ["100 台","200 台","300 台","400 台","500 台"],
+  "series": [{"name":"每 VM 摊销开销","values":[18.71,21.34,22.63,23.68,24.58],"focal":true}],
+  "evidence": [
+    {
+      "id": "l0",
+      "file": "docs/blog/posts/2026-10-28-cubebench-073.md",
+      "note": "Per-VM Amortized Overhead 列"
+    }
+  ]
+}

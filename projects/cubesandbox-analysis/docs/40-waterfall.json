@@ -1,0 +1,11 @@
+{
+  "type": "waterfall",
+  "title": "500 台沙箱的内存账本",
+  "subtitle": "从基线 19.5GiB 到 31.8GiB：每 100 台只增加 1.8–2.8GiB",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "unit": "MiB",
+  "steps": [["宿主基线",19537],["+100 台",1871],["+200 台",2398],["+300 台",2521],["+400 台",2682],["+500 台",2818]],
+  "evidence": [{"id":"w0","file":"docs/blog/posts/2026-10-28-cubebench-073.md","note":"相邻行 Used Memory 差值"}]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "flowchart",
+  "title": "CubeEgress 出站决策",
+  "subtitle": "TPROXY 劫持后的每个出站请求都要过这道门",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "nodes": [
+    { "id": "s", "label": "沙箱出站请求", "shape": "terminal", "row": 0, "col": 1 },
+    { "id": "d1", "label": "SNI/Host 在白名单？", "shape": "decision", "row": 1, "col": 1 },
+    { "id": "deny", "label": "拒绝并告警", "kind": "muted", "row": 1, "col": 0 },
+    { "id": "inject", "label": "注入凭据请求头", "focal": true, "shape": "box", "row": 2, "col": 1 },
+    { "id": "audit", "label": "写 JSONL 审计日志", "shape": "box", "row": 3, "col": 1 },
+    { "id": "fwd", "label": "转发目标服务", "shape": "terminal", "row": 4, "col": 1 }
+  ],
+  "edges": [
+    ["s", "d1"],
+    ["d1", "deny", "no"],
+    ["d1", "inject", "yes", "primary"],
+    ["inject", "audit"],
+    ["deny", "audit", "记录"],
+    ["audit", "fwd", "", "primary"]
+  ],
+  "evidence": [
+    { "id": "inject", "file": "docs/guide/security-proxy.md", "note": "凭据注入 + 按域名放行 + JSONL 审计" }
+  ]
+}

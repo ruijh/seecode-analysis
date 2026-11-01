@@ -1,0 +1,27 @@
+{
+  "type": "isometric-plan",
+  "title": "计算节点平面布局",
+  "subtitle": "一台 KVM 宿主上的功能分区",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "reveal",
+  "rooms": [
+    { "label": "系统 / 控制面", "x": 0, "y": 0, "w": 200, "d": 130, "walls": true, "door": "S", "step": 1 },
+    { "label": "CubeVS 网络区", "x": 210, "y": 0, "w": 150, "d": 130, "step": 2 },
+    { "label": "镜像仓库", "x": 380, "y": 0, "w": 110, "d": 130, "step": 2 },
+    { "label": "VM 池（高密度）", "x": 0, "y": 150, "w": 290, "d": 200, "walls": true, "door": "N", "focal": true, "step": 3 },
+    { "label": "CubeEgress 出口", "x": 310, "y": 150, "w": 140, "d": 120, "walls": true, "door": "W", "step": 4 }
+  ],
+  "boxes": [
+    { "x": 30, "y": 185, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 110, "y": 185, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 190, "y": 185, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 30, "y": 265, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 110, "y": 265, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 190, "y": 265, "w": 54, "d": 42, "h": 26, "kind": "rack", "step": 4 },
+    { "x": 405, "y": 30, "w": 60, "d": 44, "h": 20, "kind": "rack", "label": "containerd", "step": 2 }
+  ],
+  "evidence": [
+    { "id": "b6", "file": "docs/architecture/overview.md", "note": "containerd 负责镜像拉取，CubeShim 注册为 Shim v2 运行时" }
+  ]
+}

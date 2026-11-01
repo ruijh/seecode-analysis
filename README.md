@@ -8,9 +8,10 @@
 
 | 子项目 | 分析对象 | 图表 |
 |---|---|---|
-| [deepseek-harness-analysis](https://github.com/ruijh/deepseek-harness-analysis) | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 61 |
-| [deer-flow-analysis](https://github.com/ruijh/deer-flow-analysis) | [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | 46 |
-| [cubesandbox-analysis](https://github.com/ruijh/cubesandbox-analysis) | [TencentCloud/CubeSandbox](https://github.com/TencentCloud/CubeSandbox) | 48 |
+| [deepseek-harness-analysis](https://github.com/ruijh/deepseek-harness-analysis) | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 60 |
+| [deer-flow-analysis](https://github.com/ruijh/deer-flow-analysis) | [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | 45 |
+| [cubesandbox-analysis](projects/cubesandbox-analysis/)（完整子项目） | [TencentCloud/CubeSandbox](https://github.com/TencentCloud/CubeSandbox) | 47 |
+| [mission-control-analysis](projects/mission-control-analysis/)（完整子项目） | [builderz-labs/mission-control](https://github.com/builderz-labs/mission-control) | 49 |
 
 ## 目录结构
 

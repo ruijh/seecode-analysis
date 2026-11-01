@@ -1,0 +1,19 @@
+{
+  "type": "fishbone",
+  "title": "并发下冷启动劣化的根因假设",
+  "subtitle": "基于 CubeBench v0.7.3：p95 52.3ms（1 并发）→ 121.9ms（50 并发）",
+  "eyebrow": "TencentCloud/CubeSandbox",
+  "lang": "zh-CN",
+  "motion": "trace",
+  "effect": "50 并发 p95 冷启动 > 120ms",
+  "categories": [
+    { "label": "调度", "focal": true, "causes": ["并发创建挤同一节点", "配额/校验串行化"] },
+    { "label": "存储", "causes": ["reflink 克隆 IO 放大", "快照页回读"] },
+    { "label": "宿主", "causes": ["双路 NUMA 跨节点访问", "内存带宽争用"] },
+    { "label": "网络", "causes": ["TAP/eBPF 批量挂载"] },
+    { "label": "模板", "causes": ["快照体积影响 restore"] }
+  ],
+  "evidence": [
+    { "id": "e0", "file": "docs/blog/posts/2026-10-28-cubebench-073.md", "note": "并发 1→50 的 p95 数据" }
+  ]
+}
