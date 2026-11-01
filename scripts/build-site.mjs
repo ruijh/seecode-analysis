@@ -178,6 +178,12 @@ for (const p of manifest.projects) {
     const m = html.match(/<title>([^<]*)<\/title>/i);
     diagrams.push({ file: f, title: m ? m[1].trim() : f.replace(/\.html$/, '') });
   }
+  // 画廊页（docs/index.html）的缩略图引用同名 PNG，一并拷贝
+  for (const f of (await readdir(srcDocs)).filter((f) => f.endsWith('.png'))) {
+    await copyFile(path.join(srcDocs, f), path.join(outBase, 'docs', f));
+  }
+  const gallery = path.join(srcDocs, 'index.html');
+  if (existsSync(gallery)) await copyFile(gallery, path.join(outBase, 'docs', 'index.html'));
   await writeFile(path.join(outBase, 'index.html'), projectPage(p, diagrams, manifest));
   built.push({ ...p, count: diagrams.length });
   console.log(`✓ ${p.id}: ${diagrams.length} 张图`);
