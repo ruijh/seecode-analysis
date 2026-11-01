@@ -53,7 +53,7 @@ body.noui #bar{display:none}
   <p>监听 GitHub / 飞书 → 策略授权 → 开 Ticket → Agent 会话执行 → 回复原对话。基于 SeeCode 49 张分析图（结构 / 流程 / 数据 / 组织 / 度量），每张图：先动画讲结论，再放大看原树。</p>
   <button id="go" type="button">▶ 开始播放（音效 · MiniMax 语音旁白）</button>
   <small><span id="durLen"></span> · 画面与音效由代码实时生成（Canvas 2D + Web Audio）· 图表以官方导出 PNG 截图嵌入 · 语音旁白由 MiniMax TTS 预生成<br>
-    需与同目录图表 PNG 一起部署 · 在线交互版：<code>ruijh.github.io/dsh-superagent-prototype-analysis</code><br>
+    需与同目录图表 PNG 一起部署 · 在线交互版：<code>ruijh.github.io/seecode-analysis/projects/dsh-superagent-prototype-analysis</code><br>
     <kbd>空格</kbd> 暂停 · <kbd>←</kbd><kbd>→</kbd> 快退/快进 5 秒 · <kbd>[</kbd><kbd>]</kbd> 切换章节 · <kbd>F</kbd> 全屏 · <kbd>M</kbd> 静音</small>
 </div>
 
@@ -940,7 +940,7 @@ winScene({ch:'04 · 代码与测试',title:'提示词效力金字塔 · 工具�
 /* ---------- 15 五维度 · 49 图全景 ---------- */
 S({ch:'05 · 全景',title:'五个维度 · 四十九张图',trans:['wipe',.9],
   music:[['groove','C'],['groove','Am'],['drive','F'],['drive','G'],['build','Am'],['build','F']],
-  subs:[{at:.3,text:'系统结构、流程过程、数据平台、结构组织、数据图表。'},{at:3.0,text:'五个维度，四十九张图。'},{at:5.6,text:'每张都是可交互 HTML：悬停、动画回放、镜头追踪。'},{at:9.0,text:'在线目录：ruijh.github.io/dsh-superagent-prototype-analysis。'}],
+  subs:[{at:.3,text:'系统结构、流程过程、数据平台、结构组织、数据图表。'},{at:3.0,text:'五个维度，四十九张图。'},{at:5.6,text:'每张都是可交互 HTML：悬停、动画回放、镜头追踪。'},{at:9.0,text:'在线目录：ruijh.github.io/seecode-analysis。'}],
   sfx:[[.2,'whoosh'],[3.0,'chime'],[6.2,'whoosh'],[12.6,'sparkle']],
   draw(g,t,s){
     bg(g,'#071026','#0b1742');dotGrid(g,t,.4);
@@ -1006,7 +1006,7 @@ S({ch:'终章',title:'一个仓库，装下一支队伍',tb:0,trans:['iris',.9],
     if(t>8.8){
       const a=inv(8.8,9.4,t);
       pill(g,'上游 github.com/deepseek-ai/dsh-superagent-prototype',560,940,{size:16,a,bg:'rgba(8,20,48,.92)',bd:'rgba(125,211,252,.5)',c:'#bae6fd'});
-      pill(g,'在线 49 图 · ruijh.github.io/dsh-superagent-prototype-analysis',1360,940,{size:16,a,bg:'rgba(8,40,60,.92)',bd:'rgba(34,211,238,.55)',c:'#a5f3fc'});
+      pill(g,'在线 49 图 · ruijh.github.io/seecode-analysis',1360,940,{size:16,a,bg:'rgba(8,40,60,.92)',bd:'rgba(34,211,238,.55)',c:'#a5f3fc'});
     }
     [[11.2,300,260,['#22d3ee','#60a5fa','#fff']],[11.8,1620,240,['#34d399','#22d3ee','#fff']],[12.6,360,760,['#fbbf24','#67e8f9','#fff']],[13.4,1560,720,['#818cf8','#22d3ee','#fff']]].forEach(([t0,x,y,cols])=>burst(g,x,y,t,t0,26,240,cols,{life:2.4,size:9}));
     const T0=s.tt0||s.dur;if(t>T0-1){g.fillStyle=`rgba(4,10,30,${inv(T0-1,T0,t)})`;g.fillRect(0,0,W,H);}
