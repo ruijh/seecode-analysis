@@ -51,8 +51,8 @@ body.noui #bar{display:none}
 <div id="start">
   <h1><span>dsh-superagent</span><br>一个仓库的超级代理 · SeeCode 分析演示</h1>
   <p>监听 GitHub / 飞书 → 策略授权 → 开 Ticket → Agent 会话执行 → 回复原对话。基于 SeeCode 49 张分析图（结构 / 流程 / 数据 / 组织 / 度量），每张图：先动画讲结论，再放大看原树。</p>
-  <button id="go" type="button">▶ 开始播放（配乐 · 音效 · MiniMax 语音旁白）</button>
-  <small><span id="durLen"></span> · 画面与配乐由代码实时生成（Canvas 2D + Web Audio）· 图表以官方导出 PNG 截图嵌入 · 语音旁白由 MiniMax TTS 预生成<br>
+  <button id="go" type="button">▶ 开始播放（音效 · MiniMax 语音旁白）</button>
+  <small><span id="durLen"></span> · 画面与音效由代码实时生成（Canvas 2D + Web Audio）· 图表以官方导出 PNG 截图嵌入 · 语音旁白由 MiniMax TTS 预生成<br>
     需与同目录图表 PNG 一起部署 · 在线交互版：<code>ruijh.github.io/dsh-superagent-prototype-analysis</code><br>
     <kbd>空格</kbd> 暂停 · <kbd>←</kbd><kbd>→</kbd> 快退/快进 5 秒 · <kbd>[</kbd><kbd>]</kbd> 切换章节 · <kbd>F</kbd> 全屏 · <kbd>M</kbd> 静音</small>
 </div>
@@ -1212,7 +1212,8 @@ function genBar(b,st,cn,li,mel){
   }
   if(mel)mel(t0,mel);
 }
-SCN.forEach(s=>{s.music.forEach(([st,cn,mel],li)=>genBar(s.bar0+li,st,cn,li,mel));
+const MUSIC=new URLSearchParams(location.search).get('music')==='1'; // 背景音乐会盖过旁白，默认关闭；?music=1 可恢复
+SCN.forEach(s=>{if(MUSIC)s.music.forEach(([st,cn,mel],li)=>genBar(s.bar0+li,st,cn,li,mel));
   (s.sfx||[]).forEach(([a,n,arg])=>at(s.start+a/(s.tt||1),w=>{if(SFX[n])SFX[n](w,arg);}));});
 EV.sort((a,b)=>a.t-b.t);
 
