@@ -1,0 +1,118 @@
+{
+ "type": "deployment",
+ "title": "跑在哪里：单进程 tmux",
+ "subtitle": "dsh --profile superagent 一个常驻进程",
+ "caption": "docs/006：无 Docker/systemd；scripts/dsh-superagent（Python）管理 tmux 会话与退出码巡检。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "dep",
+   "file": "docs/006-deployment.md",
+   "line": 7
+  },
+  {
+   "id": "svc",
+   "file": "scripts/dsh-superagent",
+   "line": 1
+  }
+ ],
+ "groups": [
+  {
+   "id": "host",
+   "label": "宿主机",
+   "style": "dashed"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "op",
+   "label": "运营者",
+   "kind": "external",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "tmux",
+   "label": "tmux: dsh-superagent",
+   "group": "host",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "dsh",
+   "label": "dsh --profile superagent",
+   "sub": "bundle patch 注入",
+   "group": "host",
+   "focal": true,
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "state",
+   "label": "stateDir",
+   "sub": "sqlite + work/",
+   "kind": "store",
+   "group": "host",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "web",
+   "label": "面板端口",
+   "sub": "webserver 配置",
+   "group": "host",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "ghc",
+   "label": "gh cli",
+   "sub": "子进程",
+   "group": "host",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "lark",
+   "label": "lark-cli",
+   "sub": "事件子进程",
+   "group": "host",
+   "row": 3,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "op",
+   "to": "web",
+   "label": "浏览器",
+   "kind": "primary"
+  },
+  {
+   "from": "tmux",
+   "to": "dsh",
+   "label": "常驻",
+   "kind": "primary"
+  },
+  [
+   "dsh",
+   "state",
+   "状态"
+  ],
+  [
+   "dsh",
+   "ghc",
+   "轮询通知"
+  ],
+  [
+   "dsh",
+   "lark",
+   "实时事件"
+  ],
+  [
+   "web",
+   "dsh",
+   "同源 API"
+  ]
+ ]
+}

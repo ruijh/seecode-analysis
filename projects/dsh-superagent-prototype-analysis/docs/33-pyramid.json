@@ -1,0 +1,32 @@
+{
+ "type": "pyramid",
+ "title": "提示词效力金字塔",
+ "subtitle": "冲突时谁说了算",
+ "caption": "docs/004-prompts.md:65-71 的效力排序；policy 段随每次模型请求重新生成。",
+ "unit": "阶",
+ "levels": [
+  {
+   "label": "工具事实",
+   "value": 1,
+   "sub": "最高效力",
+   "focal": true
+  },
+  {
+   "label": "内置段",
+   "value": 2
+  },
+  {
+   "label": "matched rules",
+   "value": 3
+  },
+  {
+   "label": "团队段",
+   "sub": "communication/delivery/scope",
+   "value": 4
+  },
+  {
+   "label": "外部文本",
+   "value": 5
+  }
+ ]
+}

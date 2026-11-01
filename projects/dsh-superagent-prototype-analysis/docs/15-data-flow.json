@@ -1,0 +1,110 @@
+{
+ "type": "data-flow",
+ "title": "运行数据的数据流",
+ "subtitle": "一次写入，三路消费",
+ "caption": "notifications/IM 事件归一化为 Trigger 后全部经 SQLite 单写者；Outbox 幂等外发，面板只读快照。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "outbox",
+   "file": "src/core/replies.ts",
+   "line": 36
+  }
+ ],
+ "nodes": [
+  {
+   "id": "gh2",
+   "label": "GitHub 通知/CI",
+   "kind": "input",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "lark",
+   "label": "飞书事件/回填",
+   "kind": "input",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "trig",
+   "label": "Trigger 归一化",
+   "sub": "确定性 ID",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "db3",
+   "label": "SQLite",
+   "sub": "trigger/ticket/effect…",
+   "kind": "store",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "ob",
+   "label": "Outbox",
+   "sub": "按序退避",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "reply",
+   "label": "回到 GitHub/飞书",
+   "kind": "external",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "snap",
+   "label": "视图快照",
+   "sub": "views/*.ts",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "panel2",
+   "label": "面板 5s 轮询",
+   "kind": "external",
+   "focal": true,
+   "row": 0,
+   "col": 3
+  }
+ ],
+ "edges": [
+  [
+   "gh2",
+   "trig"
+  ],
+  [
+   "lark",
+   "trig"
+  ],
+  {
+   "from": "trig",
+   "to": "db3",
+   "label": "原子写入",
+   "kind": "primary"
+  },
+  [
+   "db3",
+   "ob",
+   "待发回复"
+  ],
+  {
+   "from": "ob",
+   "to": "reply",
+   "kind": "primary"
+  },
+  [
+   "db3",
+   "snap"
+  ],
+  {
+   "from": "snap",
+   "to": "panel2",
+   "label": "GET /orchestrator/api",
+   "kind": "primary"
+  }
+ ]
+}

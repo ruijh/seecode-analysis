@@ -1,0 +1,82 @@
+{
+ "type": "isometric",
+ "title": "一台超级代理工作站",
+ "subtitle": "把部署形态画成实物",
+ "caption": "示意：显示器=面板 6 Tab，主机=tmux 常驻进程，外接盒=gh/lark CLI，文件柜=stateDir（sqlite+worktrees）。",
+ "parts": [
+  {
+   "label": "桌面板",
+   "x": 0,
+   "y": 40,
+   "z": 0,
+   "w": 320,
+   "d": 200,
+   "h": 10,
+   "r": 4
+  },
+  {
+   "label": "显示器（面板）",
+   "x": 40,
+   "y": 0,
+   "z": 10,
+   "w": 180,
+   "d": 10,
+   "h": 110,
+   "r": 3,
+   "kind": "screen"
+  },
+  {
+   "label": "显示器支架",
+   "x": 120,
+   "y": 20,
+   "z": 10,
+   "w": 14,
+   "d": 10,
+   "h": 40
+  },
+  {
+   "label": "主机（tmux 常驻）",
+   "x": 60,
+   "y": 70,
+   "z": 10,
+   "w": 120,
+   "d": 70,
+   "h": 46,
+   "r": 4,
+   "kind": "housing"
+  },
+  {
+   "label": "stateDir 文件柜",
+   "sub": "sqlite+worktrees",
+   "x": 200,
+   "y": 120,
+   "z": 10,
+   "w": 60,
+   "d": 44,
+   "h": 26,
+   "kind": "vault"
+  },
+  {
+   "label": "gh / lark 外接盒",
+   "sub": "CLI 子进程",
+   "x": 250,
+   "y": 60,
+   "z": 10,
+   "w": 60,
+   "d": 44,
+   "h": 30,
+   "kind": "terminal"
+  },
+  {
+   "label": "键盘（SETUP 问答）",
+   "x": 60,
+   "y": 160,
+   "z": 10,
+   "w": 110,
+   "d": 30,
+   "h": 6,
+   "r": 2,
+   "kind": "keys"
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "type": "tree",
+ "title": "仓库目录结构",
+ "subtitle": "216 个文件的分布",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；括号内为行数。",
+ "budget": "faithful",
+ "root": {
+  "label": "dsh-superagent/",
+  "children": [
+   {
+    "label": "src/",
+    "sub": "应用本体",
+    "children": [
+     {
+      "label": "app/ (5292)",
+      "sub": "编排：评估/工具/视图"
+     },
+     {
+      "label": "client/ (4419)",
+      "sub": "面板 6 Tab"
+     },
+     {
+      "label": "core/ (2088)",
+      "sub": "领域内核·零依赖"
+     },
+     {
+      "label": "sources/ (2059)",
+      "sub": "GitHub/飞书接入"
+     },
+     {
+      "label": "executor/ (838)",
+      "sub": "DSH 双会话执行"
+     },
+     {
+      "label": "infra/ (347)",
+      "sub": "gh/lark/git 封装"
+     }
+    ]
+   },
+   {
+    "label": "tests/ (14960)",
+    "sub": "59 spec + fixtures"
+   },
+   {
+    "label": "docs/ (1973)",
+    "sub": "000-008 按序阅读"
+   },
+   {
+    "label": "prompts/ (438)",
+    "sub": "15 部件 + team 三段"
+   },
+   {
+    "label": "skills/ scripts/ locale/",
+    "sub": "SKILL·服务·文案"
+   }
+  ]
+ }
+}

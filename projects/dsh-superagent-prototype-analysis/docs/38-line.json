@@ -1,0 +1,38 @@
+{
+ "type": "line",
+ "title": "文档厚度曲线",
+ "subtitle": "9 篇编号文档的行数（阅读顺序）",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；007 架构篇与 008 手册篇占全部文档的一半以上。",
+ "unit": "行",
+ "smooth": false,
+ "area": true,
+ "zero": false,
+ "x": [
+  "000",
+  "001",
+  "002",
+  "003",
+  "004",
+  "005",
+  "006",
+  "007",
+  "008"
+ ],
+ "series": [
+  {
+   "name": "行数",
+   "values": [
+    33,
+    112,
+    155,
+    203,
+    96,
+    58,
+    274,
+    617,
+    425
+   ],
+   "focal": true
+  }
+ ]
+}

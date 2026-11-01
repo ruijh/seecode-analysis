@@ -1,0 +1,37 @@
+{
+ "type": "waterfall",
+ "title": "3.3 万行是怎么堆出来的",
+ "subtitle": "测试与源码几乎等量",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；不含锁文件。",
+ "unit": "行",
+ "steps": [
+  [
+   "tests/",
+   14960
+  ],
+  [
+   "src/app",
+   5292
+  ],
+  [
+   "src/client",
+   4419
+  ],
+  [
+   "src/core",
+   2088
+  ],
+  [
+   "src/sources",
+   2059
+  ],
+  [
+   "docs/",
+   1973
+  ],
+  [
+   "其余目录",
+   1923
+  ]
+ ]
+}

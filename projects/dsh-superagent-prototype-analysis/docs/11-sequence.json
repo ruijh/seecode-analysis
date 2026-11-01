@@ -1,0 +1,102 @@
+{
+ "type": "sequence",
+ "title": "一次请求的时序",
+ "subtitle": "从 @提到 PR 回来",
+ "caption": "依据 engine.ts、evals.ts 与 executor/dsh.ts：Effects 持久队列 + Passes 2s 泵驱动。",
+ "evidence": [
+  {
+   "id": "pump",
+   "file": "src/app/passes.ts",
+   "line": 28
+  }
+ ],
+ "numbered": true,
+ "participants": [
+  {
+   "id": "hu",
+   "label": "请求者",
+   "kind": "external"
+  },
+  {
+   "id": "src",
+   "label": "Source watcher"
+  },
+  {
+   "id": "eng",
+   "label": "Engine",
+   "kind": "focal"
+  },
+  {
+   "id": "orch",
+   "label": "主会话"
+  },
+  {
+   "id": "wrk",
+   "label": "Worker 会话"
+  },
+  {
+   "id": "out",
+   "label": "Outbox"
+  }
+ ],
+ "messages": [
+  [
+   "hu",
+   "src",
+   "@superagent 修一下这个 issue"
+  ],
+  [
+   "src",
+   "eng",
+   "Trigger（去重后）"
+  ],
+  [
+   "eng",
+   "eng",
+   "Eval 入队 → Passes 泵出"
+  ],
+  [
+   "eng",
+   "orch",
+   "候选卡（deadline 内）"
+  ],
+  [
+   "orch",
+   "eng",
+   "eval_decide: accept + Mandate"
+  ],
+  [
+   "eng",
+   "out",
+   "确认回复（幂等）"
+  ],
+  [
+   "eng",
+   "wrk",
+   "Assignment：prepare worktree + 新会话"
+  ],
+  [
+   "wrk",
+   "wrk",
+   "后台干活（30 分钟上限）"
+  ],
+  [
+   "wrk",
+   "eng",
+   "report: ready + PR"
+  ],
+  [
+   "eng",
+   "out",
+   "result 回复 → 原对话"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "loop",
+   "label": "Passes 每 2s 泵",
+   "from": 2,
+   "to": 3
+  }
+ ]
+}

@@ -1,0 +1,168 @@
+{
+ "type": "db-schema",
+ "title": "orchestrator.sqlite 真实表结构",
+ "subtitle": "JSON 文档仓储：9 张表全是 key/value",
+ "caption": "src/app/store.ts:64-86：WAL + synchronous=FULL；业务字段整体存 value TEXT(JSON)，单写者事务保证一致性。",
+ "evidence": [
+  {
+   "id": "store",
+   "file": "src/app/store.ts",
+   "line": 64
+  }
+ ],
+ "nodes": [
+  {
+   "id": "trigger",
+   "label": "trigger",
+   "focal": true,
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "value",
+     "JSON",
+     ""
+    ],
+    [
+     "at",
+     "TEXT",
+     "idx"
+    ]
+   ]
+  },
+  {
+   "id": "thread",
+   "label": "thread",
+   "fields": [
+    [
+     "key",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "value",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "ticket",
+   "label": "ticket",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "value",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "decision",
+   "label": "decision",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "thread",
+     "TEXT",
+     "idx"
+    ],
+    [
+     "value",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "outbox",
+   "label": "outbox",
+   "fields": [
+    [
+     "id",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "value",
+     "JSON",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "effect",
+   "label": "effect",
+   "fields": [
+    [
+     "kind",
+     "TEXT",
+     "idx"
+    ],
+    [
+     "key",
+     "TEXT",
+     ""
+    ],
+    [
+     "due",
+     "INT",
+     "idx"
+    ],
+    [
+     "seq",
+     "INT",
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "kv",
+   "label": "kv",
+   "fields": [
+    [
+     "key",
+     "TEXT",
+     "PK"
+    ],
+    [
+     "value",
+     "TEXT",
+     ""
+    ]
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "from": "decision.thread",
+   "to": "thread.key",
+   "label": "逻辑关联",
+   "kind": "primary"
+  },
+  [
+   "effect.kind",
+   "effect.due",
+   "泵扫描序",
+   "many-one"
+  ],
+  [
+   "trigger.at",
+   "trigger.id",
+   "时间索引",
+   "many-one"
+  ]
+ ]
+}

@@ -1,0 +1,81 @@
+{
+ "type": "sequence-oauth",
+ "title": "授权裁决时序",
+ "subtitle": "admission 门 → 显式直通 / LLM 评估",
+ "caption": "依据 policy.ts:191-211 gate：explicit 不经 LLM 直接签发 Mandate；inferred 仅 auto 模式可 accept。",
+ "evidence": [
+  {
+   "id": "gate2",
+   "file": "src/policy.ts",
+   "line": 191
+  }
+ ],
+ "participants": [
+  {
+   "id": "src",
+   "label": "Source"
+  },
+  {
+   "id": "eng",
+   "label": "Engine"
+  },
+  {
+   "id": "gate",
+   "label": "admission 门",
+   "kind": "focal"
+  },
+  {
+   "id": "llm",
+   "label": "主会话"
+  },
+  {
+   "id": "tk",
+   "label": "Tickets"
+  }
+ ],
+ "messages": [
+  [
+   "src",
+   "eng",
+   "Trigger（actor/human/addressed）"
+  ],
+  [
+   "eng",
+   "gate",
+   "名单内？addressed？表格格？"
+  ],
+  [
+   "gate",
+   "eng",
+   "explicit → 直接签 Mandate"
+  ],
+  [
+   "eng",
+   "tk",
+   "创建 Ticket + 确认回复"
+  ],
+  [
+   "gate",
+   "llm",
+   "inferred + auto → 送候选卡"
+  ],
+  [
+   "llm",
+   "eng",
+   "eval_decide: accept/reopen/ignore"
+  ],
+  [
+   "eng",
+   "eng",
+   "ignore 记录原因，不回复"
+  ]
+ ],
+ "fragments": [
+  {
+   "kind": "opt",
+   "label": "observe 模式：只记 would-accept",
+   "from": 4,
+   "to": 6
+  }
+ ]
+}

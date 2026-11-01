@@ -1,0 +1,54 @@
+{
+ "type": "layers",
+ "title": "分层架构",
+ "subtitle": "docs/007 的五层依赖规则",
+ "caption": "全部为仓库真实分层：core 零外部依赖，端口向内、适配器向外，每状态单写者。",
+ "layers": [
+  {
+   "label": "接入层",
+   "sub": "监听世界",
+   "items": [
+    "github-watch",
+    "feishu-watch",
+    "面板路由"
+   ]
+  },
+  {
+   "label": "内核层",
+   "sub": "纯领域",
+   "items": [
+    "Engine + 5 parts",
+    "model/ports"
+   ]
+  },
+  {
+   "label": "端口层",
+   "sub": "五个接口",
+   "items": [
+    "Repositories",
+    "Policy",
+    "Assessor",
+    "Executor",
+    "Outbox"
+   ]
+  },
+  {
+   "label": "适配层",
+   "sub": "连到 DSH",
+   "items": [
+    "SQLite store",
+    "MasterAssessor",
+    "DshExecutor"
+   ]
+  },
+  {
+   "label": "设施层",
+   "sub": "进程与 CLI",
+   "items": [
+    "gh/lark/git 封装",
+    "Effects 队列",
+    "proper-lockfile"
+   ]
+  }
+ ]
+}

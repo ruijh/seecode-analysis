@@ -1,0 +1,34 @@
+{
+ "type": "medallion",
+ "title": "事件数据的分层加工",
+ "subtitle": "原始消息 → 归一化 Trigger → 决策记录",
+ "caption": "层名为数据平台类比；物品均取自仓库真实组件（github-trigger.ts、store.ts、views/*.ts）。",
+ "stages": [
+  {
+   "label": "原始层",
+   "plain": true,
+   "kind": "input",
+   "items": [
+    "GitHub notifications",
+    "lark 事件流",
+    "CI 状态"
+   ]
+  },
+  {
+   "label": "结构层",
+   "items": [
+    "Trigger 确定性 ID",
+    "Thread 关联/去重",
+    "Evaluation/Decision 记录"
+   ]
+  },
+  {
+   "label": "应用层",
+   "items": [
+    "面板快照视图",
+    "Outbox 幂等回复",
+    "回合审计"
+   ]
+  }
+ ]
+}

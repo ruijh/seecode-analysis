@@ -1,0 +1,93 @@
+{
+ "type": "state-lifecycle",
+ "title": "Worker 会话生命周期",
+ "subtitle": "ensure 创建/复用，外部删除则重建",
+ "caption": "依据 executor/dsh.ts：回合结束 idle 结算后台；重启经 resume + RECOVERY_NOTE 续跑。",
+ "evidence": [
+  {
+   "id": "resume",
+   "file": "src/executor/dsh.ts",
+   "line": 524
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "create",
+   "label": "sessions.ensure",
+   "sub": "worker-<ticketId>",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "run",
+   "label": "running",
+   "sub": "assignment 投递",
+   "focal": true,
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "idle",
+   "label": "idle",
+   "sub": "结算后台/报 waiting",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "gone",
+   "label": "被外部删除",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "end",
+   "shape": "end",
+   "sub": "shutdown 保留 inbox",
+   "row": 1,
+   "col": 0
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "create"
+  ],
+  {
+   "from": "create",
+   "to": "run",
+   "kind": "primary"
+  },
+  {
+   "from": "run",
+   "to": "idle",
+   "label": "回合结束",
+   "kind": "primary"
+  },
+  {
+   "from": "idle",
+   "to": "run",
+   "label": "新输入 steer"
+  },
+  {
+   "from": "gone",
+   "to": "create",
+   "label": "重建"
+  },
+  {
+   "from": "idle",
+   "to": "end",
+   "label": "stop/shutdown"
+  },
+  {
+   "from": "run",
+   "to": "end",
+   "label": "宿主重启 → resume"
+  }
+ ]
+}

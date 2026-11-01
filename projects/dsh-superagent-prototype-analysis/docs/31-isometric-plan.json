@@ -1,0 +1,111 @@
+{
+ "type": "isometric-plan",
+ "title": "代码平面图",
+ "subtitle": "如果 src 是一个园区",
+ "caption": "面积为行数的示意比例；tests 演武场比全部业务代码还大（14960 行 vs 15043 行）。",
+ "plate": {
+  "w": 980,
+  "d": 500
+ },
+ "rooms": [
+  {
+   "label": "tests 演武场",
+   "sub": "14960 行 · 59 spec",
+   "x": 20,
+   "y": 20,
+   "w": 340,
+   "d": 280,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "app 调度室",
+   "sub": "5292 行",
+   "x": 380,
+   "y": 20,
+   "w": 240,
+   "d": 180,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "client 展厅",
+   "sub": "4419 行 · 6 Tab",
+   "x": 640,
+   "y": 20,
+   "w": 230,
+   "d": 160,
+   "walls": true,
+   "door": "S"
+  },
+  {
+   "label": "core 内务房",
+   "sub": "2088 行 · 零依赖",
+   "x": 380,
+   "y": 220,
+   "w": 160,
+   "d": 150,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "sources 门房",
+   "sub": "2059 行",
+   "x": 560,
+   "y": 220,
+   "w": 160,
+   "d": 150,
+   "walls": true,
+   "door": "N"
+  },
+  {
+   "label": "docs 图书室",
+   "sub": "1973 行 · 9 篇",
+   "x": 740,
+   "y": 200,
+   "w": 220,
+   "d": 130,
+   "walls": true,
+   "door": "W"
+  },
+  {
+   "label": "executor 机房",
+   "sub": "838 行",
+   "x": 740,
+   "y": 350,
+   "w": 130,
+   "d": 110,
+   "walls": true,
+   "door": "N"
+  }
+ ],
+ "boxes": [
+  {
+   "x": 60,
+   "y": 340,
+   "w": 70,
+   "d": 40,
+   "h": 14,
+   "kind": "desk",
+   "label": "Engine"
+  },
+  {
+   "x": 160,
+   "y": 340,
+   "w": 70,
+   "d": 40,
+   "h": 14,
+   "kind": "rack",
+   "label": "Effects"
+  },
+  {
+   "x": 260,
+   "y": 340,
+   "w": 60,
+   "d": 40,
+   "h": 14,
+   "kind": "screen",
+   "label": "Passes"
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "type": "swimlane",
+ "title": "一次工单的全流程（跨职能）",
+ "subtitle": "人只说一句话，中间全自动",
+ "caption": "docs/003 阶段表 + executor/dsh.ts 启动链；人的追问随时可插入。",
+ "budget": "faithful",
+ "lanes": [
+  {
+   "id": "req",
+   "label": "请求者"
+  },
+  {
+   "id": "src",
+   "label": "Source/Intake"
+  },
+  {
+   "id": "orch",
+   "label": "主会话"
+  },
+  {
+   "id": "wrk",
+   "label": "Worker 会话"
+  },
+  {
+   "id": "gh",
+   "label": "GitHub 仓库"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "ask",
+   "label": "@提需求",
+   "lane": "req",
+   "col": 0
+  },
+  {
+   "id": "dedup",
+   "label": "去重/准入",
+   "lane": "src",
+   "col": 1
+  },
+  {
+   "id": "judge",
+   "label": "评估 accept",
+   "lane": "orch",
+   "col": 2,
+   "focal": true
+  },
+  {
+   "id": "ack",
+   "label": "确认回复",
+   "lane": "src",
+   "col": 3
+  },
+  {
+   "id": "prep",
+   "label": "worktree + 会话",
+   "lane": "wrk",
+   "col": 4
+  },
+  {
+   "id": "code",
+   "label": "后台干活",
+   "lane": "wrk",
+   "col": 5
+  },
+  {
+   "id": "push",
+   "label": "开 PR",
+   "lane": "gh",
+   "col": 6
+  },
+  {
+   "id": "res",
+   "label": "result 通知",
+   "lane": "req",
+   "col": 7
+  }
+ ],
+ "edges": [
+  [
+   "ask",
+   "dedup"
+  ],
+  {
+   "from": "dedup",
+   "to": "judge",
+   "kind": "primary"
+  },
+  [
+   "judge",
+   "ack"
+  ],
+  {
+   "from": "judge",
+   "to": "prep",
+   "kind": "primary"
+  },
+  [
+   "prep",
+   "code"
+  ],
+  [
+   "code",
+   "push"
+  ],
+  [
+   "push",
+   "res"
+  ]
+ ]
+}

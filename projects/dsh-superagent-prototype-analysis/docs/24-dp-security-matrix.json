@@ -1,0 +1,50 @@
+{
+ "type": "dp-security-matrix",
+ "title": "访问矩阵：四个主体碰什么",
+ "subtitle": "会话隔离是硬边界",
+ "caption": "等级：none < read < write；worker 的 read 工具仅限本 Ticket（sessions.ts 限流），面板读者=同源运营者。",
+ "rows": [
+  "主会话",
+  "worker 会话",
+  "面板读者",
+  "Source 插件"
+ ],
+ "cols": [
+  "Trigger 原文",
+  "Thread 上下文",
+  "SQLite 状态",
+  "Policy/设置",
+  "凭据"
+ ],
+ "cells": [
+  [
+   "read",
+   "read",
+   "write",
+   "write",
+   "none"
+  ],
+  [
+   "none",
+   "read",
+   "none",
+   "none",
+   "none"
+  ],
+  [
+   "read",
+   "read",
+   "read",
+   "write",
+   "none"
+  ],
+  [
+   "write",
+   "read",
+   "none",
+   "read",
+   "none"
+  ]
+ ],
+ "focal": "worker 会话"
+}

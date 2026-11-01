@@ -1,0 +1,99 @@
+{
+ "type": "story-map",
+ "title": "产品故事图",
+ "subtitle": "主干活动 × 实现切片",
+ "caption": "切片依据 README：已实现=本原型可验证；论文方向=《Exploring Super-agent Design》所述未实现部分。",
+ "releases": [
+  "已实现",
+  "论文方向"
+ ],
+ "activities": [
+  {
+   "label": "听",
+   "focal": true,
+   "steps": [
+    {
+     "label": "GitHub 轮询",
+     "stories": {
+      "已实现": [
+       "notifications + 仓库流 + CI"
+      ],
+      "论文方向": [
+       "更多 Source"
+      ]
+     }
+    },
+    {
+     "label": "飞书接入",
+     "stories": {
+      "已实现": [
+       "事件 + 60s 回填"
+      ],
+      "论文方向": [
+       "跨源身份映射"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "断",
+   "steps": [
+    {
+     "label": "admission 表",
+     "stories": {
+      "已实现": [
+       "三格默认值可配"
+      ],
+      "论文方向": [
+       "自主学习规则"
+      ]
+     }
+    },
+    {
+     "label": "主会话评估",
+     "stories": {
+      "已实现": [
+       "候选卡 + deadline"
+      ],
+      "论文方向": [
+       "更强规划"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "干",
+   "steps": [
+    {
+     "label": "每单一会话",
+     "stories": {
+      "已实现": [
+       "worktree 隔离 + 槽位"
+      ],
+      "论文方向": [
+       "多仓协同"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "label": "说",
+   "steps": [
+    {
+     "label": "四种回复目的",
+     "stories": {
+      "已实现": [
+       "ack/answer/result/attention"
+      ],
+      "论文方向": [
+       "主动汇报节奏"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

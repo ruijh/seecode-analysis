@@ -1,0 +1,45 @@
+{
+ "type": "treemap",
+ "title": "24 个 peer 依赖的构成",
+ "subtitle": "package.json 依赖全景",
+ "caption": "来源 package.json：直接第三方只有 proper-lockfile 与 zod；peer 24 个全部 @deepseek-ai/*。",
+ "unit": "个",
+ "focal": "peer @deepseek-ai/*",
+ "data": [
+  {
+   "label": "peer 内部包",
+   "children": [
+    [
+     "peer @deepseek-ai/*",
+     24
+    ]
+   ]
+  },
+  {
+   "label": "devDependencies",
+   "children": [
+    [
+     "dev @deepseek-ai/*",
+     25
+    ],
+    [
+     "dev 第三方",
+     11
+    ]
+   ]
+  },
+  {
+   "label": "dependencies",
+   "children": [
+    [
+     "proper-lockfile",
+     1
+    ],
+    [
+     "zod",
+     1
+    ]
+   ]
+  }
+ ]
+}

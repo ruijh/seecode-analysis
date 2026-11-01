@@ -1,0 +1,44 @@
+{
+ "type": "heatmap",
+ "title": "准入强度矩阵",
+ "subtitle": "admission 默认表 + 恒定规则（数值：explicit=2 / inferred=1 / ignore=0）",
+ "caption": "依据 admission.ts:21 默认值与 docs/002：名单内人+addressed 恒为 explicit（不在表内）；其余默认偏保守，表格可配。",
+ "rows": [
+  "名单内的人",
+  "名单外的人",
+  "名单内 bot",
+  "其它 bot/CI"
+ ],
+ "cols": [
+  "@提及",
+  "私聊/定向",
+  "工单追问",
+  "无关消息"
+ ],
+ "values": [
+  [
+   2,
+   2,
+   2,
+   1
+  ],
+  [
+   0,
+   0,
+   1,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0
+  ]
+ ]
+}

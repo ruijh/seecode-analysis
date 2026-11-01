@@ -1,0 +1,54 @@
+{
+ "type": "exploded",
+ "title": "拆开 bundle 发布物",
+ "subtitle": "package.json files 白名单的全部家当",
+ "caption": "示意拆解：依据 package.json \"files\" 与 tsdown 双产物（ESM node + CJS browser）。",
+ "parts": [
+  {
+   "label": "发布外壳",
+   "sub": "lib/ + 白名单",
+   "kind": "housing",
+   "w": 190,
+   "d": 340,
+   "t": 16,
+   "r": 20
+  },
+  {
+   "label": "三个 ESM 入口",
+   "sub": "index + 两 watch + dts",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "client.js",
+   "sub": "CJS 浏览器包",
+   "w": 150,
+   "d": 60,
+   "t": 12
+  },
+  {
+   "label": "cordis.patch.yml",
+   "sub": "挂载清单",
+   "w": 150,
+   "d": 60,
+   "t": 10,
+   "kind": "plate"
+  },
+  {
+   "label": "prompts/ skills/",
+   "sub": "提示词与技能",
+   "w": 150,
+   "d": 60,
+   "t": 10
+  },
+  {
+   "label": "locale/",
+   "sub": "en/zh 文案",
+   "w": 150,
+   "d": 60,
+   "t": 8,
+   "kind": "chip"
+  }
+ ]
+}

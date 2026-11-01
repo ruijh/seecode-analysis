@@ -1,0 +1,73 @@
+{
+ "type": "journey",
+ "title": "运营者旅程",
+ "subtitle": "从装好到放心托管一个仓库",
+ "caption": "情绪得分为分析性推断；阶段对应 docs/000 的运维建议（窄名单起步、observe 先行）。",
+ "stages": [
+  {
+   "label": "安装",
+   "steps": [
+    {
+     "label": "代理带着走 SETUP.md",
+     "score": 1
+    },
+    {
+     "label": "profile + tmux 起服务",
+     "score": 0
+    }
+   ]
+  },
+  {
+   "label": "试运行",
+   "steps": [
+    {
+     "label": "off/observe 模式只看不干",
+     "score": 1
+    },
+    {
+     "label": "面板读 would-accept 记录",
+     "score": 2
+    }
+   ]
+  },
+  {
+   "label": "授权",
+   "steps": [
+    {
+     "label": "写规则、收紧 admission 表",
+     "score": 0
+    },
+    {
+     "label": "切 auto 放行第一批",
+     "score": -1
+    }
+   ]
+  },
+  {
+   "label": "托管",
+   "steps": [
+    {
+     "label": "只看“待人”清单",
+     "score": 2
+    },
+    {
+     "label": "被追问唤醒或 stop",
+     "score": 1
+    }
+   ]
+  },
+  {
+   "label": "复盘",
+   "steps": [
+    {
+     "label": "rejected 原因读一遍",
+     "score": -1
+    },
+    {
+     "label": "调 prompts/policy 版本",
+     "score": 1
+    }
+   ]
+  }
+ ]
+}

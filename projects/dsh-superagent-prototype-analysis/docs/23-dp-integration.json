@@ -1,0 +1,101 @@
+{
+ "type": "dp-integration",
+ "title": "多源事件集成",
+ "subtitle": "两种通道汇入一个单写者平台",
+ "caption": "依据 sources/kind.ts 契约与 docs/008：新 Source 只需实现 schema/channel/policy 等八件套。",
+ "evidence": [
+  {
+   "id": "kind",
+   "file": "src/sources/kind.ts",
+   "line": 85
+  }
+ ],
+ "stages": [
+  {
+   "label": "来源",
+   "plain": true,
+   "kind": "external",
+   "items": [
+    {
+     "id": "ghe",
+     "label": "GitHub 通知/CI"
+    },
+    {
+     "id": "fse",
+     "label": "飞书事件"
+    }
+   ]
+  },
+  {
+   "label": "接入",
+   "items": [
+    {
+     "id": "norm",
+     "label": "Trigger 归一化"
+    },
+    {
+     "id": "poll",
+     "label": "14 天轮询视野"
+    }
+   ]
+  },
+  {
+   "label": "平台",
+   "items": [
+    {
+     "id": "sq",
+     "label": "SQLite 单写者"
+    },
+    {
+     "id": "fx",
+     "label": "Effects 队列"
+    }
+   ]
+  },
+  {
+   "label": "消费",
+   "items": [
+    {
+     "id": "pn",
+     "label": "面板轮询"
+    },
+    {
+     "id": "rp",
+     "label": "Outbox 回复"
+    }
+   ]
+  }
+ ],
+ "edges": [
+  [
+   "ghe",
+   "norm"
+  ],
+  [
+   "fse",
+   "norm"
+  ],
+  {
+   "from": "norm",
+   "to": "sq",
+   "kind": "primary"
+  },
+  [
+   "norm",
+   "fx"
+  ],
+  [
+   "sq",
+   "pn"
+  ],
+  [
+   "sq",
+   "rp"
+  ],
+  {
+   "from": "fx",
+   "to": "rp",
+   "kind": "primary"
+  }
+ ]
+}

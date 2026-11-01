@@ -1,0 +1,85 @@
+{
+ "type": "high-level-vertical",
+ "title": "dsh-superagent 是什么（纵向）",
+ "subtitle": "窄幅布局，自上而下",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "sa",
+   "label": "超级代理",
+   "sub": "听·断·干·说",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "listen",
+   "label": "听",
+   "sub": "GitHub/飞书 Source",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "judge",
+   "label": "断",
+   "sub": "Policy + 主会话",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "work",
+   "label": "干",
+   "sub": "worker 会话/worktree",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "reply",
+   "label": "回复",
+   "sub": "ack/answer/result",
+   "row": 3,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "sa",
+   "一句话需求"
+  ],
+  {
+   "from": "sa",
+   "to": "listen",
+   "kind": "primary"
+  },
+  {
+   "from": "listen",
+   "to": "judge",
+   "kind": "primary"
+  },
+  {
+   "from": "judge",
+   "to": "work",
+   "label": "accept",
+   "kind": "primary"
+  },
+  {
+   "from": "work",
+   "to": "reply",
+   "label": "PR",
+   "kind": "primary"
+  },
+  {
+   "from": "reply",
+   "to": "you",
+   "label": "回到原对话"
+  }
+ ]
+}

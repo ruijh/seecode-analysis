@@ -1,0 +1,73 @@
+{
+ "type": "kanban",
+ "title": "执行阶段看板",
+ "subtitle": "面板把 Ticket 归入的stage 分类",
+ "caption": "列名为 docs/003-execution.md:9-19 的真实 stage；面板按 person/working/idle/ended 聚合（core/stage.ts）。",
+ "columns": [
+  {
+   "label": "person",
+   "cards": [
+    {
+     "label": "等人处理",
+     "tag": "优先"
+    },
+    {
+     "label": "blocked / failed",
+     "tag": "停自动投递"
+    }
+   ]
+  },
+  {
+   "label": "working",
+   "cards": [
+    {
+     "label": "会话回合进行中",
+     "tag": "占槽"
+    },
+    {
+     "label": "后台 job ≤30 分钟",
+     "tag": "上限"
+    }
+   ]
+  },
+  {
+   "label": "queued",
+   "cards": [
+    {
+     "label": "launch/delivery 排队",
+     "tag": "Effects"
+    },
+    {
+     "label": "槽满等待",
+     "tag": "WorkerSlots"
+    }
+   ]
+  },
+  {
+   "label": "review / answer",
+   "cards": [
+    {
+     "label": "ready 待核对",
+     "tag": "delivery"
+    },
+    {
+     "label": "等 worker 回答",
+     "tag": "answer"
+    }
+   ]
+  },
+  {
+   "label": "ended",
+   "cards": [
+    {
+     "label": "completed/merged/…",
+     "tag": "executor"
+    },
+    {
+     "label": "stopped",
+     "tag": "human"
+    }
+   ]
+  }
+ ]
+}

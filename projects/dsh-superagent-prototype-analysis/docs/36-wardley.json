@@ -1,0 +1,92 @@
+{
+ "type": "wardley",
+ "title": "Wardley 演进图",
+ "subtitle": "超级代理在 agent 生态的位置",
+ "caption": "位置为分析性判断；evo 左=创世 右=商品化，vis 上=用户可见 下=基础设施。",
+ "components": [
+  {
+   "id": "need",
+   "label": "少占注意力地干完活",
+   "evo": 0.5,
+   "vis": 0.95,
+   "anchor": true
+  },
+  {
+   "id": "sa2",
+   "label": "超级代理编排",
+   "evo": 0.32,
+   "vis": 0.7,
+   "focal": true
+  },
+  {
+   "id": "dsha",
+   "label": "编码代理（DSH）",
+   "evo": 0.45,
+   "vis": 0.6
+  },
+  {
+   "id": "policy",
+   "label": "策略授权面",
+   "evo": 0.28,
+   "vis": 0.45
+  },
+  {
+   "id": "panelx",
+   "label": "注意力面板",
+   "evo": 0.4,
+   "vis": 0.8
+  },
+  {
+   "id": "ci",
+   "label": "CI/自动化",
+   "evo": 0.8,
+   "vis": 0.5
+  },
+  {
+   "id": "llm",
+   "label": "LLM API",
+   "evo": 0.85,
+   "vis": 0.2
+  },
+  {
+   "id": "git",
+   "label": "Git/GitHub",
+   "evo": 0.95,
+   "vis": 0.35
+  }
+ ],
+ "links": [
+  [
+   "need",
+   "sa2"
+  ],
+  [
+   "sa2",
+   "dsha"
+  ],
+  [
+   "sa2",
+   "policy"
+  ],
+  [
+   "sa2",
+   "panelx"
+  ],
+  [
+   "dsha",
+   "llm"
+  ],
+  [
+   "dsha",
+   "git"
+  ],
+  [
+   "policy",
+   "ci"
+  ],
+  [
+   "sa2",
+   "ci"
+  ]
+ ]
+}

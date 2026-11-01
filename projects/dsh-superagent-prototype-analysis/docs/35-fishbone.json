@@ -1,0 +1,45 @@
+{
+ "type": "fishbone",
+ "title": "根因分析：什么会浪费团队注意力",
+ "subtitle": "哲学红线与代码里的五道防线",
+ "caption": "原因为仓库可见事实的归纳：每一类风险都有对应防御点（括号内）。",
+ "effect": "无效打扰（哲学红线）",
+ "categories": [
+  {
+   "label": "准入太宽",
+   "focal": true,
+   "causes": [
+    "admission 默认仅三格可调",
+    "名单混入 bot（machineGate 拦）"
+   ]
+  },
+  {
+   "label": "自触发",
+   "causes": [
+    "跳过自己的评论（github.ts:227）",
+    "丢弃自身飞书消息"
+   ]
+  },
+  {
+   "label": "重复打扰",
+   "causes": [
+    "确定性 ID 去重",
+    "Outbox/ack 幂等"
+   ]
+  },
+  {
+   "label": "评估卡壳",
+   "causes": [
+    "deadline 重排 ≤2 次",
+    "超时记 unavailable"
+   ]
+  },
+  {
+   "label": "规则含糊",
+   "causes": [
+    "noRuleMatched → 安静 ignore",
+    "提示词：拿不准不问人"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "type": "quadrant",
+ "title": "面板导航矩阵：使用频率 × 决策影响",
+ "subtitle": "6 个 Tab 的心智图",
+ "caption": "位置为分析性判断；面板为 docs/005 的 Overview/Source/Trigger/Eval/Execution/Settings + 记录页。",
+ "x": {
+  "label": "使用频率",
+  "low": "低",
+  "high": "高"
+ },
+ "y": {
+  "label": "决策影响",
+  "low": "低",
+  "high": "高"
+ },
+ "quadrants": [
+  "谨慎操作",
+  "高频关键",
+  "随用随查",
+  "日常驾驶舱"
+ ],
+ "items": [
+  {
+   "label": "Overview",
+   "x": 0.9,
+   "y": 0.2,
+   "focal": true
+  },
+  {
+   "label": "Threads",
+   "x": 0.8,
+   "y": 0.35
+  },
+  {
+   "label": "Tickets",
+   "x": 0.7,
+   "y": 0.55
+  },
+  {
+   "label": "Evals",
+   "x": 0.45,
+   "y": 0.75
+  },
+  {
+   "label": "Sources",
+   "x": 0.25,
+   "y": 0.5
+  },
+  {
+   "label": "Settings",
+   "x": 0.2,
+   "y": 0.85
+  },
+  {
+   "label": "Prompts",
+   "x": 0.35,
+   "y": 0.8
+  }
+ ]
+}

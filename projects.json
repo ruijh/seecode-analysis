@@ -37,6 +37,15 @@
       "repoUrl": "https://github.com/ruijh/mission-control-analysis",
       "description": "对 builderz-labs/mission-control（自托管 AI Agent 控制平面）的全景解读：拉模式派发管线、九态任务状态机、253 端点与七层防御。",
       "added": "2026-11-01"
+    },
+    {
+      "id": "dsh-superagent-prototype-analysis",
+      "name": "dsh Superagent",
+      "upstream": "ruijh/dsh-superagent-prototype",
+      "upstreamUrl": "https://github.com/ruijh/dsh-superagent-prototype",
+      "repoUrl": "https://github.com/ruijh/seecode-analysis/tree/main/projects/dsh-superagent-prototype-analysis",
+      "description": "对 deepseek-ai/dsh-superagent-prototype（DSH 超级代理原型）的全景解读：六道准入闸、双会话执行、可唤醒的工单生命周期与 1:1 测试比。",
+      "added": "2026-11-01"
     }
   ]
 }

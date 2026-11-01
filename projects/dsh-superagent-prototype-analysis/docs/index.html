@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>dsh-superagent · 49 图全方位分析</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;margin:0;background:#f6f7f9;color:#1a1d21}
+header{padding:48px 32px 24px;max-width:1280px;margin:0 auto}
+h1{font-size:28px;margin:0 0 8px}
+header p{margin:4px 0;color:#5c6470;font-size:14px;line-height:1.7}
+.stats{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0 8px}
+.stat{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:14px 18px;min-width:130px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:12px;color:#697180}
+section{max-width:1280px;margin:0 auto;padding:12px 32px}
+section h2{font-size:18px;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid #dfe3e8}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s}
+a.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,30,50,.1)}
+.thumb{aspect-ratio:16/9;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #eef0f3}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+.meta{padding:12px 14px 14px}
+.no{font-size:11px;color:#8a93a2;letter-spacing:.4px}
+.t{font-weight:600;font-size:14.5px;margin:3px 0 2px}
+.s{font-size:12px;color:#697180;line-height:1.5}
+.tag{display:inline-block;font-size:10.5px;background:#eef2ff;color:#3b5bdb;border-radius:6px;padding:1px 7px;margin-top:6px;font-family:ui-monospace,monospace}
+footer{max-width:1280px;margin:0 auto;padding:28px 32px 60px;color:#8a93a2;font-size:12.5px;line-height:1.8}
+footer a{color:inherit}
+@media(prefers-color-scheme:dark){body{background:#111418;color:#e8eaed}.stat,a.card{background:#1a1f26;border-color:#2a313b}.stat span,.s,header p{color:#9aa4b2}.no{color:#77808f}section h2{border-color:#2a313b}.thumb{background:#0d1013;border-color:#222833}.tag{background:#232c47;color:#93b0ff}}
+</style></head><body>
+<header>
+<h1>dsh-superagent · 49 种图表全方位分析</h1>
+<p>对 <b>github.com/deepseek-ai/dsh-superagent-prototype</b> 的全景解读：45 种核心图表类型 + 4 种变体，每个图表回答一个关于这个仓库的问题。数据来自 2026-11-01 的本地克隆、docs/000-008 九篇编号文档与四路代码深读（上游为单次 squash 发布，无 git 历史图表）。点击任意卡片打开可交互图表（悬停、动画回放、镜头追踪）。</p>
+<div class="stats">
+<div class="stat"><b>1</b><span>提交（squash 发布）</span></div>
+<div class="stat"><b>3.3 万</b><span>总行数</span></div>
+<div class="stat"><b>15.0k</b><span>测试行数 ≈ 源码</span></div>
+<div class="stat"><b>2</b><span>直接第三方依赖</span></div>
+<div class="stat"><b>9</b><span>编号文档</span></div>
+<div class="stat"><b>49</b><span>分析图表</span></div>
+</div>
+</header>
+<section><h2>系统结构</h2><div class="grid"><a class="card" href="01-architecture.html"><div class="thumb"><img loading="lazy" src="01-architecture.png" alt=""></div>
+<div class="meta"><div class="no">01 · architecture</div>
+<div class="t">总体架构：一个仓库的超级代理</div><div class="s">GitHub/飞书 → Engine 五部件 → 双会话执行 → 回复原对话</div><span class="tag">architecture</span></div></a><a class="card" href="02-high-level.html"><div class="thumb"><img loading="lazy" src="02-high-level.png" alt=""></div>
+<div class="meta"><div class="no">02 · high-level</div>
+<div class="t">dsh-superagent 是什么</div><div class="s">给非工程师的 30 秒版本</div><span class="tag">high-level</span></div></a><a class="card" href="03-deployment.html"><div class="thumb"><img loading="lazy" src="03-deployment.png" alt=""></div>
+<div class="meta"><div class="no">03 · deployment</div>
+<div class="t">跑在哪里：单进程 tmux</div><div class="s">dsh --profile superagent 一个常驻进程</div><span class="tag">deployment</span></div></a><a class="card" href="04-dependency.html"><div class="thumb"><img loading="lazy" src="04-dependency.png" alt=""></div>
+<div class="meta"><div class="no">04 · dependency</div>
+<div class="t">模块依赖（自上而下）</div><div class="s">client/app/sources → core 内核 → 端口与基础设施</div><span class="tag">dependency</span></div></a><a class="card" href="05-architecture-delta.html"><div class="thumb"><img loading="lazy" src="05-architecture-delta.png" alt=""></div>
+<div class="meta"><div class="no">05 · architecture-delta</div>
+<div class="t">架构增量：挂进 DSH 宿主</div><div class="s">一个 bundle patch 注入三个插件与两个预设</div><span class="tag">architecture-delta</span></div></a><a class="card" href="06-it-state.html"><div class="thumb"><img loading="lazy" src="06-it-state.png" alt=""></div>
+<div class="meta"><div class="no">06 · it-state</div>
+<div class="t">子系统健康度</div><div class="s">研究原型的成熟度地图</div><span class="tag">it-state</span></div></a><a class="card" href="07-uml-class.html"><div class="thumb"><img loading="lazy" src="07-uml-class.png" alt=""></div>
+<div class="meta"><div class="no">07 · uml-class</div>
+<div class="t">核心接口：Engine 与端口</div><div class="s">五个 EnginePart、五个端口、两个适配器</div><span class="tag">uml-class</span></div></a><a class="card" href="08-er.html"><div class="thumb"><img loading="lazy" src="08-er.png" alt=""></div>
+<div class="meta"><div class="no">08 · er</div>
+<div class="t">领域模型：从 Trigger 到 Assignment</div><div class="s">概念最少化的数据流</div><span class="tag">er</span></div></a><a class="card" href="09-db-schema.html"><div class="thumb"><img loading="lazy" src="09-db-schema.png" alt=""></div>
+<div class="meta"><div class="no">09 · db-schema</div>
+<div class="t">orchestrator.sqlite 真实表结构</div><div class="s">JSON 文档仓储：9 张表全是 key/value</div><span class="tag">db-schema</span></div></a><a class="card" href="46-high-level-vertical.html"><div class="thumb"><img loading="lazy" src="46-high-level-vertical.png" alt=""></div>
+<div class="meta"><div class="no">46 · high-level-vertical</div>
+<div class="t">dsh-superagent 是什么（纵向）</div><div class="s">窄幅布局，自上而下</div><span class="tag">high-level-vertical</span></div></a></div></section>
+<section><h2>流程过程</h2><div class="grid"><a class="card" href="10-flowchart.html"><div class="thumb"><img loading="lazy" src="10-flowchart.png" alt=""></div>
+<div class="meta"><div class="no">10 · flowchart</div>
+<div class="t">一条消息的准入决策流</div><div class="s">从 Trigger 到 Ticket 的六道闸</div><span class="tag">flowchart</span></div></a><a class="card" href="11-sequence.html"><div class="thumb"><img loading="lazy" src="11-sequence.png" alt=""></div>
+<div class="meta"><div class="no">11 · sequence</div>
+<div class="t">一次请求的时序</div><div class="s">从 @提到 PR 回来</div><span class="tag">sequence</span></div></a><a class="card" href="12-state.html"><div class="thumb"><img loading="lazy" src="12-state.png" alt=""></div>
+<div class="meta"><div class="no">12 · state</div>
+<div class="t">Ticket 生命周期</div><div class="s">宏观两态，终态五值，可被人的消息唤醒</div><span class="tag">state</span></div></a><a class="card" href="13-swimlane.html"><div class="thumb"><img loading="lazy" src="13-swimlane.png" alt=""></div>
+<div class="meta"><div class="no">13 · swimlane</div>
+<div class="t">一次工单的全流程（跨职能）</div><div class="s">人只说一句话，中间全自动</div><span class="tag">swimlane</span></div></a><a class="card" href="14-process.html"><div class="thumb"><img loading="lazy" src="14-process.png" alt=""></div>
+<div class="meta"><div class="no">14 · process</div>
+<div class="t">五步装起来</div><div class="s">SETUP.md：让编码代理带着你装</div><span class="tag">process</span></div></a><a class="card" href="15-data-flow.html"><div class="thumb"><img loading="lazy" src="15-data-flow.png" alt=""></div>
+<div class="meta"><div class="no">15 · data-flow</div>
+<div class="t">运行数据的数据流</div><div class="s">一次写入，三路消费</div><span class="tag">data-flow</span></div></a><a class="card" href="16-journey.html"><div class="thumb"><img loading="lazy" src="16-journey.png" alt=""></div>
+<div class="meta"><div class="no">16 · journey</div>
+<div class="t">运营者旅程</div><div class="s">从装好到放心托管一个仓库</div><span class="tag">journey</span></div></a><a class="card" href="17-timeline.html"><div class="thumb"><img loading="lazy" src="17-timeline.png" alt=""></div>
+<div class="meta"><div class="no">17 · timeline</div>
+<div class="t">从内部原型到公开发布</div><div class="s">单次 squash 发布的研究原型</div><span class="tag">timeline</span></div></a><a class="card" href="18-gantt.html"><div class="thumb"><img loading="lazy" src="18-gantt.png" alt=""></div>
+<div class="meta"><div class="no">18 · gantt</div>
+<div class="t">发布阶段甘特图</div><div class="s">单提交仓库的三段式生命周期</div><span class="tag">gantt</span></div></a><a class="card" href="19-kanban.html"><div class="thumb"><img loading="lazy" src="19-kanban.png" alt=""></div>
+<div class="meta"><div class="no">19 · kanban</div>
+<div class="t">执行阶段看板</div><div class="s">面板把 Ticket 归入的stage 分类</div><span class="tag">kanban</span></div></a><a class="card" href="20-story-map.html"><div class="thumb"><img loading="lazy" src="20-story-map.png" alt=""></div>
+<div class="meta"><div class="no">20 · story-map</div>
+<div class="t">产品故事图</div><div class="s">主干活动 × 实现切片</div><span class="tag">story-map</span></div></a><a class="card" href="21-loop.html"><div class="thumb"><img loading="lazy" src="21-loop.png" alt=""></div>
+<div class="meta"><div class="no">21 · loop</div>
+<div class="t">Policy 调优飞轮</div><div class="s">observe → 复盘 → 放宽 → 复盘</div><span class="tag">loop</span></div></a><a class="card" href="47-sequence-oauth.html"><div class="thumb"><img loading="lazy" src="47-sequence-oauth.png" alt=""></div>
+<div class="meta"><div class="no">47 · sequence-oauth</div>
+<div class="t">授权裁决时序</div><div class="s">admission 门 → 显式直通 / LLM 评估</div><span class="tag">sequence-oauth</span></div></a><a class="card" href="48-state-lifecycle.html"><div class="thumb"><img loading="lazy" src="48-state-lifecycle.png" alt=""></div>
+<div class="meta"><div class="no">48 · state-lifecycle</div>
+<div class="t">Worker 会话生命周期</div><div class="s">ensure 创建/复用，外部删除则重建</div><span class="tag">state-lifecycle</span></div></a></div></section>
+<section><h2>数据平台</h2><div class="grid"><a class="card" href="22-medallion.html"><div class="thumb"><img loading="lazy" src="22-medallion.png" alt=""></div>
+<div class="meta"><div class="no">22 · medallion</div>
+<div class="t">事件数据的分层加工</div><div class="s">原始消息 → 归一化 Trigger → 决策记录</div><span class="tag">medallion</span></div></a><a class="card" href="23-dp-integration.html"><div class="thumb"><img loading="lazy" src="23-dp-integration.png" alt=""></div>
+<div class="meta"><div class="no">23 · dp-integration</div>
+<div class="t">多源事件集成</div><div class="s">两种通道汇入一个单写者平台</div><span class="tag">dp-integration</span></div></a><a class="card" href="24-dp-security-matrix.html"><div class="thumb"><img loading="lazy" src="24-dp-security-matrix.png" alt=""></div>
+<div class="meta"><div class="no">24 · dp-security-matrix</div>
+<div class="t">访问矩阵：四个主体碰什么</div><div class="s">会话隔离是硬边界</div><span class="tag">dp-security-matrix</span></div></a></div></section>
+<section><h2>结构组织</h2><div class="grid"><a class="card" href="25-tree.html"><div class="thumb"><img loading="lazy" src="25-tree.png" alt=""></div>
+<div class="meta"><div class="no">25 · tree</div>
+<div class="t">仓库目录结构</div><div class="s">216 个文件的分布</div><span class="tag">tree</span></div></a><a class="card" href="26-org-chart.html"><div class="thumb"><img loading="lazy" src="26-org-chart.png" alt=""></div>
+<div class="meta"><div class="no">26 · org-chart</div>
+<div class="t">会话「组织架构」</div><div class="s">一个主脑，按单雇工</div><span class="tag">org-chart</span></div></a><a class="card" href="27-nested.html"><div class="thumb"><img loading="lazy" src="27-nested.png" alt=""></div>
+<div class="meta"><div class="no">27 · nested</div>
+<div class="t">执行隔离嵌套</div><div class="s">从宿主到一次后台 job</div><span class="tag">nested</span></div></a><a class="card" href="28-layers.html"><div class="thumb"><img loading="lazy" src="28-layers.png" alt=""></div>
+<div class="meta"><div class="no">28 · layers</div>
+<div class="t">分层架构</div><div class="s">docs/007 的五层依赖规则</div><span class="tag">layers</span></div></a><a class="card" href="29-isometric.html"><div class="thumb"><img loading="lazy" src="29-isometric.png" alt=""></div>
+<div class="meta"><div class="no">29 · isometric</div>
+<div class="t">一台超级代理工作站</div><div class="s">把部署形态画成实物</div><span class="tag">isometric</span></div></a><a class="card" href="30-exploded.html"><div class="thumb"><img loading="lazy" src="30-exploded.png" alt=""></div>
+<div class="meta"><div class="no">30 · exploded</div>
+<div class="t">拆开 bundle 发布物</div><div class="s">package.json files 白名单的全部家当</div><span class="tag">exploded</span></div></a><a class="card" href="31-isometric-plan.html"><div class="thumb"><img loading="lazy" src="31-isometric-plan.png" alt=""></div>
+<div class="meta"><div class="no">31 · isometric-plan</div>
+<div class="t">代码平面图</div><div class="s">如果 src 是一个园区</div><span class="tag">isometric-plan</span></div></a><a class="card" href="32-venn.html"><div class="thumb"><img loading="lazy" src="32-venn.png" alt=""></div>
+<div class="meta"><div class="no">32 · venn</div>
+<div class="t">什么消息会被理</div><div class="s">三个条件的交集决定授权强度</div><span class="tag">venn</span></div></a><a class="card" href="33-pyramid.html"><div class="thumb"><img loading="lazy" src="33-pyramid.png" alt=""></div>
+<div class="meta"><div class="no">33 · pyramid</div>
+<div class="t">提示词效力金字塔</div><div class="s">冲突时谁说了算</div><span class="tag">pyramid</span></div></a><a class="card" href="34-quadrant.html"><div class="thumb"><img loading="lazy" src="34-quadrant.png" alt=""></div>
+<div class="meta"><div class="no">34 · quadrant</div>
+<div class="t">面板导航矩阵：使用频率 × 决策影响</div><div class="s">6 个 Tab 的心智图</div><span class="tag">quadrant</span></div></a><a class="card" href="35-fishbone.html"><div class="thumb"><img loading="lazy" src="35-fishbone.png" alt=""></div>
+<div class="meta"><div class="no">35 · fishbone</div>
+<div class="t">根因分析：什么会浪费团队注意力</div><div class="s">哲学红线与代码里的五道防线</div><span class="tag">fishbone</span></div></a><a class="card" href="36-wardley.html"><div class="thumb"><img loading="lazy" src="36-wardley.png" alt=""></div>
+<div class="meta"><div class="no">36 · wardley</div>
+<div class="t">Wardley 演进图</div><div class="s">超级代理在 agent 生态的位置</div><span class="tag">wardley</span></div></a></div></section>
+<section><h2>数据图表</h2><div class="grid"><a class="card" href="37-bar.html"><div class="thumb"><img loading="lazy" src="37-bar.png" alt=""></div>
+<div class="meta"><div class="no">37 · bar</div>
+<div class="t">各目录代码量 Top 10</div><div class="s">wc -l 全量统计</div><span class="tag">bar</span></div></a><a class="card" href="38-line.html"><div class="thumb"><img loading="lazy" src="38-line.png" alt=""></div>
+<div class="meta"><div class="no">38 · line</div>
+<div class="t">文档厚度曲线</div><div class="s">9 篇编号文档的行数（阅读顺序）</div><span class="tag">line</span></div></a><a class="card" href="39-scatter.html"><div class="thumb"><img loading="lazy" src="39-scatter.png" alt=""></div>
+<div class="meta"><div class="no">39 · scatter</div>
+<div class="t">各目录：文件数 × 代码量</div><div class="s">一个点一个顶层目录</div><span class="tag">scatter</span></div></a><a class="card" href="40-waterfall.html"><div class="thumb"><img loading="lazy" src="40-waterfall.png" alt=""></div>
+<div class="meta"><div class="no">40 · waterfall</div>
+<div class="t">3.3 万行是怎么堆出来的</div><div class="s">测试与源码几乎等量</div><span class="tag">waterfall</span></div></a><a class="card" href="41-treemap.html"><div class="thumb"><img loading="lazy" src="41-treemap.png" alt=""></div>
+<div class="meta"><div class="no">41 · treemap</div>
+<div class="t">24 个 peer 依赖的构成</div><div class="s">package.json 依赖全景</div><span class="tag">treemap</span></div></a><a class="card" href="42-heatmap.html"><div class="thumb"><img loading="lazy" src="42-heatmap.png" alt=""></div>
+<div class="meta"><div class="no">42 · heatmap</div>
+<div class="t">准入强度矩阵</div><div class="s">admission 默认表 + 恒定规则（数值：explicit=2 / inferred=1 / ignore=0）</div><span class="tag">heatmap</span></div></a><a class="card" href="43-radar.html"><div class="thumb"><img loading="lazy" src="43-radar.png" alt=""></div>
+<div class="meta"><div class="no">43 · radar</div>
+<div class="t">工程化画像</div><div class="s">对照典型研究原型的六维评估（1–5，分析性）</div><span class="tag">radar</span></div></a><a class="card" href="44-polar.html"><div class="thumb"><img loading="lazy" src="44-polar.png" alt=""></div>
+<div class="meta"><div class="no">44 · polar</div>
+<div class="t">文档阅读罗盘</div><div class="s">9 篇编号文档按阅读顺序排钟面，扇长=行数</div><span class="tag">polar</span></div></a><a class="card" href="45-sankey.html"><div class="thumb"><img loading="lazy" src="45-sankey.png" alt=""></div>
+<div class="meta"><div class="no">45 · sankey</div>
+<div class="t">3.3 万行去哪了</div><div class="s">源码 / 测试 / 文档的构成</div><span class="tag">sankey</span></div></a><a class="card" href="49-funnel.html"><div class="thumb"><img loading="lazy" src="49-funnel.png" alt=""></div>
+<div class="meta"><div class="no">49 · funnel</div>
+<div class="t">消息 → 工单的筛选漏斗</div><div class="s">以 100 条消息为例的示意流量</div><span class="tag">funnel</span></div></a></div></section>
+<footer>图表由 SeeCode 渲染；<code>docs/*.json</code> 即图表规格，<code>tools/gen49.mjs</code> 为批量生成器。分析合集索引：<a href="https://ruijh.github.io/seecode-analysis/">seecode-analysis</a>。</footer>
+</body></html>

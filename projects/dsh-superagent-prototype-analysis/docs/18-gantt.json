@@ -1,0 +1,39 @@
+{
+ "type": "gantt",
+ "title": "发布阶段甘特图",
+ "subtitle": "单提交仓库的三段式生命周期",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；内部孵化区间无 git 证据，日期为推断（虚线段）。",
+ "today": "2026-11-01",
+ "tasks": [
+  {
+   "id": "a",
+   "label": "内部孵化与日常打磨",
+   "section": "发布前",
+   "start": "2026-09-01",
+   "end": "2026-10-30",
+   "done": true
+  },
+  {
+   "id": "b",
+   "label": "脱敏整理 + docs 000-008",
+   "section": "发布前",
+   "start": "2026-10-15",
+   "end": "2026-10-31",
+   "done": true
+  },
+  {
+   "id": "c",
+   "label": "公开原型维护",
+   "section": "发布后",
+   "start": "2026-10-31",
+   "end": "2026-12-31",
+   "done": false
+  }
+ ],
+ "milestones": [
+  {
+   "label": "v0.1.0 发布",
+   "date": "2026-10-31"
+  }
+ ]
+}

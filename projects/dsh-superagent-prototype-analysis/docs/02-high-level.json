@@ -1,0 +1,73 @@
+{
+ "type": "high-level",
+ "title": "dsh-superagent 是什么",
+ "subtitle": "给非工程师的 30 秒版本",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；研究原型，非官方产品。",
+ "nodes": [
+  {
+   "id": "you",
+   "label": "你",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "chat",
+   "label": "GitHub / 飞书",
+   "sub": "issue · 评论 · 群聊",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "agent",
+   "label": "超级代理",
+   "sub": " listens & works",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "repo",
+   "label": "你的仓库",
+   "sub": "自己的会话与目录",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "pr",
+   "label": "PR / 回复",
+   "sub": "出现在原对话",
+   "row": 1,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "you",
+   "chat",
+   "说一句活儿"
+  ],
+  {
+   "from": "chat",
+   "to": "agent",
+   "label": "被允许的请求",
+   "kind": "primary"
+  },
+  {
+   "from": "agent",
+   "to": "repo",
+   "label": "开工",
+   "kind": "primary"
+  },
+  {
+   "from": "repo",
+   "to": "pr",
+   "label": "交付"
+  },
+  [
+   "pr",
+   "you",
+   "通知你"
+  ]
+ ]
+}

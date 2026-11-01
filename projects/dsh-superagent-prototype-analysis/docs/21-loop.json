@@ -1,0 +1,30 @@
+{
+ "type": "loop",
+ "title": "Policy 调优飞轮",
+ "subtitle": "observe → 复盘 → 放宽 → 复盘",
+ "caption": "docs/000 运维建议 + policy.ts observe 模式：先只记录 would-accept，人工复核后再放行。",
+ "center": "授权边界",
+ "centerSub": "policyVersion",
+ "steps": [
+  {
+   "label": "observe 记录",
+   "sub": "would-accept"
+  },
+  {
+   "label": "面板复盘",
+   "sub": "Evaluation 列表"
+  },
+  {
+   "label": "调整规则",
+   "sub": "policy_sync / settings"
+  },
+  {
+   "label": "auto 放行",
+   "sub": "inferred 可 accept"
+  },
+  {
+   "label": "结果回流",
+   "sub": "rejected 原因"
+  }
+ ]
+}

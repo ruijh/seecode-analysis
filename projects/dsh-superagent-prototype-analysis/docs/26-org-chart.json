@@ -1,0 +1,39 @@
+{
+ "type": "org-chart",
+ "title": "会话「组织架构」",
+ "subtitle": "一个主脑，按单雇工",
+ "caption": "依据 app/runtime.ts:104 与 executor/dsh.ts:24：主会话常驻，worker 每单一个、随单存亡。",
+ "budget": "faithful",
+ "root": {
+  "label": "DSH 宿主",
+  "sub": "profile: superagent",
+  "children": [
+   {
+    "label": "主会话 orchestrator",
+    "sub": "评估·路由·回复",
+    "children": [
+     {
+      "label": "worker-<ticketId>",
+      "sub": "每 Ticket 一个"
+     },
+     {
+      "label": "worker-<ticketId>",
+      "sub": "随单结束退役"
+     },
+     {
+      "label": "子代理",
+      "sub": "随回合起止"
+     }
+    ]
+   },
+   {
+    "label": "Source 插件",
+    "sub": "github / feishu watch"
+   },
+   {
+    "label": "Passes 泵",
+    "sub": "2s 扫 Effects"
+   }
+  ]
+ }
+}

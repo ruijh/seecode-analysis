@@ -1,0 +1,142 @@
+{
+ "type": "architecture",
+ "title": "总体架构：一个仓库的超级代理",
+ "subtitle": "GitHub/飞书 → Engine 五部件 → 双会话执行 → 回复原对话",
+ "caption": "docs/007：src/core 零外部依赖，五个 EnginePart 经端口与适配器相连；Passes 每 2s 泵一次 Effects 持久队列。",
+ "budget": "faithful",
+ "evidence": [
+  {
+   "id": "arch",
+   "file": "docs/007-architecture.md",
+   "line": 9
+  },
+  {
+   "id": "pump",
+   "file": "src/app/passes.ts",
+   "line": 28
+  }
+ ],
+ "nodes": [
+  {
+   "id": "user",
+   "label": "团队成员",
+   "kind": "external",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "gh",
+   "label": "GitHub Source",
+   "sub": "gh cli 轮询",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "fs",
+   "label": "飞书 Source",
+   "sub": "lark-cli 事件",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "engine",
+   "label": "Engine",
+   "sub": "5 个 EnginePart",
+   "focal": true,
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "store",
+   "label": "SQLite",
+   "sub": "JSON 文档 + Effects",
+   "kind": "store",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "orch",
+   "label": "主会话",
+   "sub": "评估·路由·回复",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "worker",
+   "label": "Worker 会话",
+   "sub": "每 Ticket 一个",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "out",
+   "label": "Outbox",
+   "sub": "幂等回复",
+   "row": 1,
+   "col": 4
+  },
+  {
+   "id": "panel",
+   "label": "Web 面板",
+   "sub": "HTTP 轮询 5s",
+   "row": 0,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "gh",
+   "to": "engine",
+   "label": "Trigger",
+   "kind": "primary"
+  },
+  {
+   "from": "fs",
+   "to": "engine",
+   "label": "Trigger",
+   "kind": "primary"
+  },
+  [
+   "engine",
+   "store",
+   "原子事务"
+  ],
+  {
+   "from": "engine",
+   "to": "orch",
+   "label": "评估卡片"
+  },
+  [
+   "orch",
+   "engine",
+   "Decision"
+  ],
+  {
+   "from": "engine",
+   "to": "worker",
+   "label": "Assignment",
+   "kind": "primary"
+  },
+  [
+   "worker",
+   "engine",
+   "Report"
+  ],
+  {
+   "from": "engine",
+   "to": "out",
+   "label": "Replies"
+  },
+  {
+   "from": "out",
+   "to": "user",
+   "label": "回到原对话",
+   "kind": "primary"
+  },
+  [
+   "panel",
+   "engine",
+   "轮询"
+  ]
+ ]
+}

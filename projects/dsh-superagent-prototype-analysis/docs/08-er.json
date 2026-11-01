@@ -1,0 +1,143 @@
+{
+ "type": "er",
+ "title": "领域模型：从 Trigger 到 Assignment",
+ "subtitle": "概念最少化的数据流",
+ "caption": "docs/001-domain.md:7-19 与 src/core/model.ts；Ticket 终态只有 ended，outcome 五值。",
+ "evidence": [
+  {
+   "id": "model",
+   "file": "src/core/model.ts",
+   "line": 23
+  }
+ ],
+ "nodes": [
+  {
+   "id": "trig",
+   "label": "Trigger",
+   "fields": [
+    "id PK",
+    "actor",
+    "human",
+    "addressed",
+    "text",
+    "channel"
+   ],
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "thread",
+   "label": "Thread",
+   "fields": [
+    "key PK",
+    "subscriptions",
+    "correlated"
+   ],
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "eval",
+   "label": "Evaluation",
+   "fields": [
+    "id PK",
+    "deadline",
+    "requeues≤2"
+   ],
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "dec",
+   "label": "Decision",
+   "fields": [
+    "id PK",
+    "kind",
+    "rationale"
+   ],
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "man",
+   "label": "Mandate",
+   "fields": [
+    "strength",
+    "policyVersion",
+    "basis"
+   ],
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "ticket",
+   "label": "Ticket",
+   "fields": [
+    "id PK",
+    "ended",
+    "outcome",
+    "follows"
+   ],
+   "focal": true,
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "asg",
+   "label": "Assignment",
+   "fields": [
+    "id PK",
+    "state",
+    "report"
+   ]
+  },
+  {
+   "id": "reply",
+   "label": "Reply",
+   "fields": [
+    "purpose",
+    "idempotencyKey"
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "from": "trig",
+   "to": "thread",
+   "label": "归属",
+   "kind": "primary"
+  },
+  {
+   "from": "thread",
+   "to": "eval",
+   "label": "排队",
+   "kind": "primary"
+  },
+  [
+   "eval",
+   "dec",
+   "裁决"
+  ],
+  [
+   "dec",
+   "man",
+   "accept 时签发"
+  ],
+  {
+   "from": "man",
+   "to": "ticket",
+   "label": "创建",
+   "kind": "primary"
+  },
+  [
+   "ticket",
+   "asg",
+   "1:N"
+  ],
+  [
+   "ticket",
+   "reply",
+   "确认/结果"
+  ]
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "type": "process",
+ "title": "五步装起来",
+ "subtitle": "SETUP.md：让编码代理带着你装",
+ "caption": "README/SETUP.md：问答一次一步，先只读不改；装完从 observe 模式起步。",
+ "steps": [
+  {
+   "label": "叫来你的代理",
+   "sub": "“读 SETUP.md 和我一起装”"
+  },
+  {
+   "label": "建 DSH profile",
+   "sub": "stateDir + bundle patch"
+  },
+  {
+   "label": "接 GitHub",
+   "sub": "gh cli 授权 + 仓库名单"
+  },
+  {
+   "label": "接飞书（可选）",
+   "sub": "lark-cli 事件订阅"
+  },
+  {
+   "label": "起 tmux 服务",
+   "sub": "scripts/dsh-superagent start"
+  }
+ ]
+}

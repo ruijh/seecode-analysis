@@ -1,0 +1,46 @@
+{
+ "type": "nested",
+ "title": "执行隔离嵌套",
+ "subtitle": "从宿主到一次后台 job",
+ "caption": "边界为分析性描绘：worktree 名=短名+ticketId 前 12 位（dsh.ts:97-111），后台工作 30 分钟强制上限。",
+ "budget": "faithful",
+ "root": {
+  "label": "宿主机",
+  "children": [
+   {
+    "label": "dsh profile: superagent",
+    "sub": "tmux 常驻",
+    "children": [
+     {
+      "label": "bundle 插件进程",
+      "sub": "Engine + Sources",
+      "children": [
+       {
+        "label": "stateDir",
+        "sub": "sqlite + Effects",
+        "children": [
+         {
+          "label": "executionRoot",
+          "sub": "prepare 一次性",
+          "children": [
+           {
+            "label": "worktree/<name>-<id12>",
+            "sub": "每 Ticket 一棵",
+            "children": [
+             {
+              "label": "worker 会话回合",
+              "sub": "后台 job ≤30min"
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

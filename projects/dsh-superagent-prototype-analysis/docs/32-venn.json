@@ -1,0 +1,51 @@
+{
+ "type": "venn",
+ "title": "什么消息会被理",
+ "subtitle": "三个条件的交集决定授权强度",
+ "caption": "依据 docs/002 与 admission.ts 默认表：名单内+addressed 恒为 explicit（不在表内），默认其余偏保守。",
+ "sets": [
+  {
+   "id": "listed",
+   "label": "名单内的人"
+  },
+  {
+   "id": "addr",
+   "label": "@提及 / 私聊"
+  },
+  {
+   "id": "thread",
+   "label": "已有工单的 Thread"
+  }
+ ],
+ "overlaps": [
+  {
+   "sets": [
+    "listed",
+    "addr"
+   ],
+   "label": "explicit 恒定"
+  },
+  {
+   "sets": [
+    "listed",
+    "thread"
+   ],
+   "label": "explicit 追问"
+  },
+  {
+   "sets": [
+    "addr",
+    "thread"
+   ],
+   "label": "inferred（默认）"
+  },
+  {
+   "sets": [
+    "listed",
+    "addr",
+    "thread"
+   ],
+   "label": "explicit"
+  }
+ ]
+}

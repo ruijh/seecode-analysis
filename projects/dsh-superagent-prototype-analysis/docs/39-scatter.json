@@ -1,0 +1,57 @@
+{
+ "type": "scatter",
+ "title": "各目录：文件数 × 代码量",
+ "subtitle": "一个点一个顶层目录",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；tests 用 65 个文件承载 1.5 万行，是最大的单一目录。",
+ "xLabel": "文件数",
+ "yLabel": "代码行数（千行）",
+ "zero": false,
+ "points": [
+  {
+   "label": "tests",
+   "x": 65,
+   "y": 15,
+   "focal": true
+  },
+  {
+   "label": "src/app",
+   "x": 38,
+   "y": 5.3
+  },
+  {
+   "label": "src/client",
+   "x": 27,
+   "y": 4.4
+  },
+  {
+   "label": "src/core",
+   "x": 15,
+   "y": 2.1
+  },
+  {
+   "label": "src/sources",
+   "x": 16,
+   "y": 2.1
+  },
+  {
+   "label": "docs",
+   "x": 9,
+   "y": 2
+  },
+  {
+   "label": "prompts",
+   "x": 15,
+   "y": 0.4
+  },
+  {
+   "label": "src/infra",
+   "x": 5,
+   "y": 0.3
+  },
+  {
+   "label": "src/executor",
+   "x": 2,
+   "y": 0.8
+  }
+ ]
+}

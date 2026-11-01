@@ -1,0 +1,53 @@
+{
+ "type": "bar",
+ "orientation": "horizontal",
+ "title": "各目录代码量 Top 10",
+ "subtitle": "wc -l 全量统计",
+ "caption": "数据来源：github.com/deepseek-ai/dsh-superagent-prototype（2026-11-01 本地克隆 + 代码深读）；测试代码（15.0 千行）几乎等于全部业务源码之和（15.0 千行）。",
+ "unit": "千行",
+ "sort": "desc",
+ "focal": "tests/",
+ "axis": "代码行数（千行）",
+ "data": [
+  [
+   "tests/",
+   15
+  ],
+  [
+   "src/app",
+   5.3
+  ],
+  [
+   "src/client",
+   4.4
+  ],
+  [
+   "src/core",
+   2.1
+  ],
+  [
+   "src/sources",
+   2.1
+  ],
+  [
+   "docs/",
+   2
+  ],
+  [
+   "src/executor",
+   0.8
+  ],
+  [
+   "prompts/",
+   0.4
+  ],
+  [
+   "src/infra",
+   0.3
+  ],
+  [
+   "scripts/",
+   0.3
+  ]
+ ]
+}

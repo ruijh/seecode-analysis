@@ -1,0 +1,106 @@
+{
+ "type": "state",
+ "title": "Ticket 生命周期",
+ "subtitle": "宏观两态，终态五值，可被人的消息唤醒",
+ "caption": "model.ts:277-308 与 tickets.ts：ended 只有 executor/human 两种 endBy；wake 复用原 Mandate 需 revalidate。",
+ "evidence": [
+  {
+   "id": "wake",
+   "file": "src/core/tickets.ts",
+   "line": 252
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "shape": "start",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "open",
+   "label": "open（live）",
+   "sub": "assignments 推进",
+   "focal": true,
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "exec",
+   "label": "endBy executor",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "done",
+   "shape": "end",
+   "sub": "completed/merged/closed/dropped",
+   "row": 1,
+   "col": 3
+  },
+  {
+   "id": "human",
+   "label": "endBy human",
+   "sub": "stop 工具",
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "stop",
+   "shape": "end",
+   "sub": "stopped",
+   "row": 2,
+   "col": 3
+  },
+  {
+   "id": "wake",
+   "label": "wake：删除 ended",
+   "sub": "explicit 消息 + revalidate",
+   "row": 2,
+   "col": 1
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "open",
+   "accept 建单"
+  ],
+  {
+   "from": "open",
+   "to": "exec",
+   "label": "report ready/dropped",
+   "kind": "primary"
+  },
+  {
+   "from": "exec",
+   "to": "done",
+   "kind": "primary"
+  },
+  {
+   "from": "open",
+   "to": "human",
+   "label": "orchestrator stop"
+  },
+  {
+   "from": "human",
+   "to": "stop"
+  },
+  {
+   "from": "wake",
+   "to": "open",
+   "label": "复活",
+   "kind": "primary"
+  },
+  {
+   "from": "done",
+   "to": "wake",
+   "label": "人在原线程追问"
+  },
+  {
+   "from": "stop",
+   "to": "wake",
+   "label": "人在原线程追问"
+  }
+ ]
+}

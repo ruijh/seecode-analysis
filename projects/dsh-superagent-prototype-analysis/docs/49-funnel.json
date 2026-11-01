@@ -1,0 +1,28 @@
+{
+ "type": "funnel",
+ "title": "消息 → 工单的筛选漏斗",
+ "subtitle": "以 100 条消息为例的示意流量",
+ "caption": "数值为示意；每一层的过滤机制都是真实的：去重/scope → 订阅直达/Eval → admission 表 → LLM accept。",
+ "levels": [
+  {
+   "label": "到达消息",
+   "value": 100
+  },
+  {
+   "label": "过 scope+去重",
+   "value": 70
+  },
+  {
+   "label": "进入 Eval（无订阅）",
+   "value": 30
+  },
+  {
+   "label": "admission 通过",
+   "value": 15
+  },
+  {
+   "label": "LLM accept → Ticket",
+   "value": 8
+  }
+ ]
+}

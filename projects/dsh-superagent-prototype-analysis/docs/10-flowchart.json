@@ -1,0 +1,124 @@
+{
+ "type": "flowchart",
+ "title": "一条消息的准入决策流",
+ "subtitle": "从 Trigger 到 Ticket 的六道闸",
+ "caption": "依据 intake.ts 与 policy.ts gate：去重 → scope → 订阅直达/Eval 排队 → admission 表 → LLM 评估。",
+ "evidence": [
+  {
+   "id": "gate",
+   "file": "src/policy.ts",
+   "line": 191
+  },
+  {
+   "id": "intake",
+   "file": "src/core/intake.ts",
+   "line": 16
+  }
+ ],
+ "nodes": [
+  {
+   "id": "s",
+   "label": "Trigger 到达",
+   "shape": "terminal",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "d1",
+   "label": "重复 / scope 外？",
+   "shape": "decision",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "n1",
+   "label": "丢弃（duplicate/filtered）",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "d2",
+   "label": "已有订阅 Ticket？",
+   "shape": "decision",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "n2",
+   "label": "直达该 Ticket（fan-out）",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "d3",
+   "label": "admission 表判定",
+   "shape": "decision",
+   "row": 3,
+   "col": 1
+  },
+  {
+   "id": "n3",
+   "label": "ignore（记录原因）",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "n4",
+   "label": "Eval 排队 → 主会话评估",
+   "focal": true,
+   "row": 3,
+   "col": 2
+  },
+  {
+   "id": "e",
+   "label": "accept → Mandate → Ticket",
+   "shape": "terminal",
+   "row": 4,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "s",
+   "d1"
+  ],
+  {
+   "from": "d1",
+   "to": "n1",
+   "label": "是"
+  },
+  {
+   "from": "d1",
+   "to": "d2",
+   "label": "否"
+  },
+  {
+   "from": "d2",
+   "to": "n2",
+   "label": "是",
+   "kind": "primary"
+  },
+  {
+   "from": "d2",
+   "to": "d3",
+   "label": "否"
+  },
+  {
+   "from": "d3",
+   "to": "n3",
+   "label": "ignore"
+  },
+  {
+   "from": "d3",
+   "to": "n4",
+   "label": "explicit/inferred",
+   "kind": "primary"
+  },
+  {
+   "from": "n4",
+   "to": "e",
+   "label": "accept",
+   "kind": "primary"
+  }
+ ]
+}

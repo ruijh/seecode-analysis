@@ -1,0 +1,106 @@
+{
+ "type": "architecture-delta",
+ "title": "架构增量：挂进 DSH 宿主",
+ "subtitle": "一个 bundle patch 注入三个插件与两个预设",
+ "caption": "cordis.patch.yml：insert dsh-superagent / github-watch（feishu-watch 默认 disabled）+ worker/router 两个 agent 预设。",
+ "evidence": [
+  {
+   "id": "patch",
+   "file": "cordis.patch.yml",
+   "line": 4
+  }
+ ],
+ "nodes": [
+  {
+   "id": "base",
+   "label": "DSH 宿主",
+   "sub": "dsh ^0.2.1-alpha.2",
+   "change": "changed",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "sa",
+   "label": "dsh-superagent 插件",
+   "sub": "Engine + 面板",
+   "change": "added",
+   "focal": true,
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "gw",
+   "label": "github-watch",
+   "sub": "gh cli 轮询",
+   "change": "added",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "fw",
+   "label": "feishu-watch",
+   "sub": "默认 disabled",
+   "change": "added",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "preset",
+   "label": "worker/router 预设",
+   "sub": "shell 5s 转后台",
+   "change": "added",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "db",
+   "label": "orchestrator.sqlite",
+   "kind": "store",
+   "change": "added",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "web",
+   "label": "/orchestrator/api",
+   "sub": "面板路由",
+   "change": "added",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "from": "base",
+   "to": "sa",
+   "label": "patch 挂载",
+   "change": "added",
+   "kind": "primary"
+  },
+  {
+   "from": "sa",
+   "to": "gw",
+   "change": "added"
+  },
+  {
+   "from": "sa",
+   "to": "fw",
+   "change": "added"
+  },
+  {
+   "from": "sa",
+   "to": "preset",
+   "change": "added"
+  },
+  {
+   "from": "sa",
+   "to": "db",
+   "change": "added"
+  },
+  {
+   "from": "sa",
+   "to": "web",
+   "change": "added"
+  }
+ ]
+}

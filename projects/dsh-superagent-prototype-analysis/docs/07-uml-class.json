@@ -1,0 +1,109 @@
+{
+ "type": "uml-class",
+ "dir": "TB",
+ "title": "核心接口：Engine 与端口",
+ "subtitle": "五个 EnginePart、五个端口、两个适配器",
+ "caption": "依据 src/core/engine.ts:24、ports.ts 与 app/assessment.ts:89、executor/dsh.ts。",
+ "evidence": [
+  {
+   "id": "ports",
+   "file": "src/core/ports.ts",
+   "line": 17
+  }
+ ],
+ "nodes": [
+  {
+   "id": "engine",
+   "label": "Engine",
+   "tag": "«事务入口»",
+   "focal": true,
+   "methods": [
+    "receive()",
+    "evaluateDue()",
+    "decide()",
+    "report()"
+   ],
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "part",
+   "label": "EnginePart",
+   "tag": "«基类»",
+   "methods": [
+    "intake",
+    "evals",
+    "tickets",
+    "assignments",
+    "replies"
+   ],
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "assessor",
+   "label": "Assessor",
+   "tag": "«端口»",
+   "methods": [
+    "request(card)"
+   ],
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "executor",
+   "label": "Executor",
+   "tag": "«端口»",
+   "methods": [
+    "start(assignment)"
+   ],
+   "row": 2,
+   "col": 2
+  },
+  {
+   "id": "master",
+   "label": "MasterAssessor",
+   "tag": "主会话",
+   "row": 3,
+   "col": 0
+  },
+  {
+   "id": "dsh",
+   "label": "DshExecutor",
+   "tag": "双会话",
+   "row": 3,
+   "col": 2
+  }
+ ],
+ "edges": [
+  [
+   "engine",
+   "part",
+   "持有"
+  ],
+  {
+   "from": "engine",
+   "to": "assessor",
+   "label": "评估",
+   "kind": "primary"
+  },
+  {
+   "from": "engine",
+   "to": "executor",
+   "label": "派工",
+   "kind": "primary"
+  },
+  [
+   "master",
+   "assessor",
+   "",
+   "implements"
+  ],
+  [
+   "dsh",
+   "executor",
+   "",
+   "implements"
+  ]
+ ]
+}
